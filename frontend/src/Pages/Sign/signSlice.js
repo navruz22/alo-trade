@@ -6,14 +6,14 @@ import Api from "../../Config/Api";
 //   universalToast,
 // } from "../../Components/ToastMessages/ToastMessages";
 
-const bcryptjs = require("bcryptjs");
+// const bcryptjs = require("bcryptjs");
 
-const handleChooseTypeOfUser = (type) => {
-  const types = ["Admin", "Director", "Seller"];
-  let userType = null;
-  types.forEach((t) => (bcryptjs.compareSync(t, type) ? (userType = t) : null));
-  return userType;
-};
+// const handleChooseTypeOfUser = (type) => {
+//   const types = ["Admin", "Director", "Seller"];
+//   let userType = null;
+//   types.forEach((t) => (bcryptjs.compareSync(t, type) ? (userType = t) : null));
+//   return userType;
+// };
 
 export const signIn = createAsyncThunk(
   "login/signIn",
@@ -71,21 +71,21 @@ const slice = createSlice({
   },
   reducers: {
     logIn: (state, { payload: { user, market } }) => {
-      let type = handleChooseTypeOfUser(user.type);
-      if (type) {
-        state.logged = true;
-        state.user = {
-          ...user,
-          type: type,
-        };
-        state.market = market;
-      } else {
-        localStorage.removeItem("userData");
-        state.logged = false;
-        state.user = null;
-        state.market = null;
-        state.error = "Invalid user type";
-      }
+      // let type = handleChooseTypeOfUser(user.type);
+      // if (type) {
+      //   state.logged = true;
+      //   state.user = {
+      //     ...user,
+      //     type: type,
+      //   };
+      //   state.market = market;
+      // } else {
+      //   localStorage.removeItem("userData");
+      //   state.logged = false;
+      //   state.user = null;
+      //   state.market = null;
+      //   state.error = "Invalid user type";
+      // }
     },
     logOut: (state, { payload }) => {
       localStorage.removeItem("userData");
@@ -107,7 +107,7 @@ const slice = createSlice({
       state.logged = true;
       state.user = {
         ...payload.user,
-        type: handleChooseTypeOfUser(payload.user.type),
+        // type: handleChooseTypeOfUser(payload.user.type),
       };
       state.market = payload.market;
       localStorage.setItem("userData", JSON.stringify(payload));

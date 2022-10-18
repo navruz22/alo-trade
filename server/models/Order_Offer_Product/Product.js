@@ -1,7 +1,6 @@
 const { Schema, model, Joi } = require("../../packages");
 
-const Order = new Schema({
-  user: { type: Schema.Types.ObjectId, ref: "User" },
+const product = new Schema({
   organization: { type: Schema.Types.ObjectId, ref: "Organization" },
   region: { type: Schema.Types.ObjectId, ref: "Region" },
   district: { type: Schema.Types.ObjectId, ref: "District" },
@@ -9,12 +8,12 @@ const Order = new Schema({
   subcategory: { type: Schema.Types.ObjectId, ref: "Subcategory" },
   title: { type: String, required: true },
   images: [{ type: String }],
-  offers: [{ type: Schema.Types.ObjectId, ref: "Offer" }],
+  price: { type: Number, required: true },
+  isArchive: { type: Boolean, default: false },
 });
 
-const validateOrder = (order) => {
+const validateProduct = (order) => {
   const schema = Joi.object({
-    user: Joi.string(),
     organization: Joi.string(),
     region: Joi.string(),
     district: Joi.string(),
@@ -22,10 +21,11 @@ const validateOrder = (order) => {
     subcategory: Joi.string().required(),
     title: Joi.string().required(),
     images: Joi.array(),
+    price: Joi.number().required(),
   });
 
   return schema.validate(order);
 };
 
-module.exports.validateOrder = validateOrder;
-module.exports.Order = model("Order", Order);
+module.exports.validateProduct = validateProduct;
+module.exports.Product = model("Product", product);

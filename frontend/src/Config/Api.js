@@ -1,9 +1,9 @@
 import axios from "axios";
 import Store from "./store";
 // import {logOut} from '../Pages/Sign/loginSlice'
-
+const baseURL = process.env.REACT_APP_API_URL;
 const instance = axios.create({
-  baseURL: `http://localhost:8801/api`,
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   },

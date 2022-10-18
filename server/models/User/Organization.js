@@ -1,4 +1,4 @@
-const { Schema, model, Joi } = require("../packages");
+const { Schema, model, Joi } = require("../../packages");
 
 const organization = new Schema(
   {

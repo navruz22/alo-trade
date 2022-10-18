@@ -1,31 +1,25 @@
 const { Schema, model, Joi } = require("../../packages");
 
-const Order = new Schema({
+const offer = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "User" },
   organization: { type: Schema.Types.ObjectId, ref: "Organization" },
-  region: { type: Schema.Types.ObjectId, ref: "Region" },
-  district: { type: Schema.Types.ObjectId, ref: "District" },
-  category: { type: Schema.Types.ObjectId, ref: "Category" },
-  subcategory: { type: Schema.Types.ObjectId, ref: "Subcategory" },
   title: { type: String, required: true },
   images: [{ type: String }],
-  offers: [{ type: Schema.Types.ObjectId, ref: "Offer" }],
+  offer: { type: Schema.Types.ObjectId, ref: "Order", required: true },
+  isArchive: { type: Boolean, default: false },
 });
 
-const validateOrder = (order) => {
+const validateOffer = (offer) => {
   const schema = Joi.object({
     user: Joi.string(),
     organization: Joi.string(),
-    region: Joi.string(),
-    district: Joi.string(),
-    category: Joi.string().required(),
-    subcategory: Joi.string().required(),
     title: Joi.string().required(),
     images: Joi.array(),
+    order: Joi.string().required(),
   });
 
-  return schema.validate(order);
+  return schema.validate(offer);
 };
 
-module.exports.validateOrder = validateOrder;
-module.exports.Order = model("Order", Order);
+module.exports.validateOffer = validateOffer;
+module.exports.Offer = model("Offer", offer);

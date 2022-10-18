@@ -1,17 +1,19 @@
 const { Schema, model, Joi } = require("../../packages");
 
-const region = new Schema({
+const districts = new Schema({
   name: { type: String, required: true },
-  districts: [{ type: Schema.Types.ObjectId, ref: "District" }],
+  region: { type: Schema.Types.ObjectId, ref: "Region" },
+  isArchive: { type: Boolean, default: false },
 });
 
-const validateRegion = (region) => {
+const validateDistrict = (district) => {
   const schema = Joi.object({
     name: Joi.string().required(),
+    region: Joi.string().required(),
   });
 
-  return schema.validate(region);
+  return schema.validate(district);
 };
 
-module.exports.validateRegion = validateRegion;
-module.exports.Region = model("Region", region);
+module.exports.validateDistrict = validateDistrict;
+module.exports.District = model("District", districts);
