@@ -7,6 +7,7 @@ const { Subcategory } = require("./Category/Subcategory");
 const { Product } = require("./Order_Offer_Product/Product");
 const { Order } = require("./Order_Offer_Product/Order");
 const { Offer } = require("./Order_Offer_Product/Offer");
+const { Admin } = require("./User/Admin");
 
 module.exports = {
   User,
@@ -18,4 +19,5 @@ module.exports = {
   Product,
   Order,
   Offer,
+  Admin,
 };

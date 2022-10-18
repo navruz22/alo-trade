@@ -7,6 +7,7 @@ const { validateSubcategory } = require("./Category/Subcategory");
 const { validateProduct } = require("./Order_Offer_Product/Product");
 const { validateOrder } = require("./Order_Offer_Product/Order");
 const { validateOffer } = require("./Order_Offer_Product/Offer");
+const { validateAdmin } = require("./User/Admin");
 
 module.exports = {
   validateUserSignIn,
@@ -19,4 +20,5 @@ module.exports = {
   validateProduct,
   validateOrder,
   validateOffer,
+  validateAdmin,
 };

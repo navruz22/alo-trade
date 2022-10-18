@@ -11,6 +11,7 @@ const user = new Schema(
     organization: { type: Schema.Types.ObjectId, ref: "Organization" },
     region: { type: Schema.Types.ObjectId, ref: "Region" },
     district: { type: Schema.Types.ObjectId, ref: "District" },
+    isAdmin: { type: Boolean, default: false },
     isArchive: { type: Boolean, default: false },
   },
   {

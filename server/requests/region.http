@@ -1,0 +1,38 @@
+
+### create a new Region
+POST http://localhost:8080/api/address/region/create
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNGViYTBjYjM2OTliZmFmZTQzNTkwYSIsImlhdCI6MTY2NjEwMzkxMSwiZXhwIjoxNjY2MTQ3MTExfQ.Fe-GVcAzpghnrEAtHu6we8Phm1G2Io0Uugtig9l8xK4
+
+{
+  "name": "Toshkent shahari"
+}
+
+### update Region
+PUT http://localhost:8080/api/address/region/update
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNGViYTBjYjM2OTliZmFmZTQzNTkwYSIsImlhdCI6MTY2NjEwMzkxMSwiZXhwIjoxNjY2MTQ3MTExfQ.Fe-GVcAzpghnrEAtHu6we8Phm1G2Io0Uugtig9l8xK4
+
+{
+  "name": "Navoi",
+  "_id": "634ebe8dcba05372abd00d12"
+}
+
+### delete Region
+DELETE http://localhost:8080/api/address/region/delete
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNGViYTBjYjM2OTliZmFmZTQzNTkwYSIsImlhdCI6MTY2NjEwMzkxMSwiZXhwIjoxNjY2MTQ3MTExfQ.Fe-GVcAzpghnrEAtHu6we8Phm1G2Io0Uugtig9l8xK4
+
+{
+  "_id": "634ebe8dcba05372abd00d12"
+}
+
+### get all Regions
+GET http://localhost:8080/api/address/region/getall
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNGViYTBjYjM2OTliZmFmZTQzNTkwYSIsImlhdCI6MTY2NjEwMzkxMSwiZXhwIjoxNjY2MTQ3MTExfQ.Fe-GVcAzpghnrEAtHu6we8Phm1G2Io0Uugtig9l8xK4
+
