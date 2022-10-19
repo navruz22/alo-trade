@@ -6,4 +6,5 @@ module.exports.routers = (app) => {
   app.use("/api/upload", require("./fileUpload/fileUpload"));
   app.use("/api/address", require("./address/router"));
   app.use("/api/admin", require("./admin/router"));
+  app.use("/api/user", require("./user/router"));
 };
