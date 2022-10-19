@@ -18,7 +18,7 @@ const auth = require("./../../middleware/auth.middleware");
 router.post("/region/create", auth, createRegion);
 router.put("/region/update", auth, updateRegion);
 router.delete("/region/delete", deleteRegion);
-router.get("/region/getall", auth, getRegions);
+router.get("/region/getall", getRegions);
 
 // Districts
 router.post("/district/create", auth, createDistrict);

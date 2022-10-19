@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import loginReducer from "../Pages/Sign/signSlice";
+import signReducer from "../Pages/Sign/signSlice";
+import regionsReducer from "../Pages/Address/regionsSlice.js";
 
 export default configureStore({
   devTools: process.env.NODE_ENV === "development",
   reducer: {
-    login: loginReducer,
+    login: signReducer,
+    regions: regionsReducer,
   },
 });

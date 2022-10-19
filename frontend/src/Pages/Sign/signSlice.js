@@ -1,47 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Api from "../../Config/Api";
-// import {
-//   successEditProfile,
-//   successLoggedIn,
-//   universalToast,
-// } from "../../Components/ToastMessages/ToastMessages";
+import { universalToast } from "../../Components/ToastMessages/ToastMessages";
 
-// const bcryptjs = require("bcryptjs");
-
-// const handleChooseTypeOfUser = (type) => {
-//   const types = ["Admin", "Director", "Seller"];
-//   let userType = null;
-//   types.forEach((t) => (bcryptjs.compareSync(t, type) ? (userType = t) : null));
-//   return userType;
-// };
+export const signUp = createAsyncThunk(
+  "login/signUp",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/user/signup", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const signIn = createAsyncThunk(
   "login/signIn",
   async (body = {}, { rejectWithValue }) => {
     try {
-      const {
-        data: { token, user, market },
-      } = await Api.post("/user/login", body);
-      return {
-        token: token,
-        user: user,
-        market: market,
-      };
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
-
-export const editProfileImage = createAsyncThunk(
-  "login/editProfileImage",
-  async (body, { rejectWithValue }) => {
-    try {
-      const { data } = await Api.post("/upload", body, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const { data } = await Api.post("/user/signin", body);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -49,11 +26,11 @@ export const editProfileImage = createAsyncThunk(
   }
 );
 
-export const editUser = createAsyncThunk(
-  "login/editUser",
-  async (body, { rejectWithValue }) => {
+export const getUser = createAsyncThunk(
+  "login/getUser",
+  async (body = {}, { rejectWithValue }) => {
     try {
-      const { data } = await Api.post("/user/edit", body);
+      const { data } = await Api.post("/user/getuserbyid", body);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -61,85 +38,70 @@ export const editUser = createAsyncThunk(
   }
 );
 
-const slice = createSlice({
+const signSlice = createSlice({
   name: "login",
   initialState: {
     user: null,
-    token: false,
+    logged: false,
     loading: false,
     error: null,
   },
   reducers: {
-    logIn: (state, { payload: { user, market } }) => {
-      // let type = handleChooseTypeOfUser(user.type);
-      // if (type) {
-      //   state.logged = true;
-      //   state.user = {
-      //     ...user,
-      //     type: type,
-      //   };
-      //   state.market = market;
-      // } else {
-      //   localStorage.removeItem("userData");
-      //   state.logged = false;
-      //   state.user = null;
-      //   state.market = null;
-      //   state.error = "Invalid user type";
-      // }
-    },
-    logOut: (state, { payload }) => {
-      localStorage.removeItem("userData");
+    logOut: (state) => {
       state.logged = false;
       state.user = null;
-      state.market = null;
-      state.error = payload;
+      state.loading = false;
+      state.error = null;
+      localStorage.removeItem("_grecaptcha");
     },
     clearError: (state) => {
       state.error = null;
     },
   },
   extraReducers: {
+    [signUp.pending]: (state) => {
+      state.loading = true;
+    },
+    [signUp.fulfilled]: (state, { payload: { token, user } }) => {
+      state.loading = false;
+      state.logged = true;
+      state.user = user;
+      localStorage.setItem("_grecaptcha", JSON.stringify(token));
+    },
+    [signUp.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+      universalToast(payload, "error");
+    },
     [signIn.pending]: (state) => {
       state.loading = true;
     },
-    [signIn.fulfilled]: (state, { payload }) => {
+    [signIn.fulfilled]: (state, { payload: { token, user } }) => {
       state.loading = false;
       state.logged = true;
-      state.user = {
-        ...payload.user,
-        // type: handleChooseTypeOfUser(payload.user.type),
-      };
-      state.market = payload.market;
-      localStorage.setItem("userData", JSON.stringify(payload));
-      // successLoggedIn();
+      state.user = user;
+      localStorage.setItem("_grecaptcha", JSON.stringify(token));
     },
     [signIn.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      universalToast(payload, "error");
     },
-    [editProfileImage.rejected]: (state, { payload }) => {
-      // universalToast(payload, "error");
-    },
-    [editUser.pending]: (state) => {
+    [getUser.pending]: (state) => {
       state.loading = true;
     },
-    [editUser.fulfilled]: (state, { payload }) => {
-      const prevUser = JSON.parse(localStorage.getItem("userData"));
-      const newUser = {
-        ...prevUser,
-        user: payload,
-      };
-      localStorage.setItem("userData", JSON.stringify(newUser));
+    [getUser.fulfilled]: (state, { payload }) => {
       state.loading = false;
       state.user = payload;
-      // successEditProfile();
+      state.logged = true;
     },
-    [editUser.rejected]: (state, { payload }) => {
+    [getUser.rejected]: (state, { payload }) => {
       state.loading = false;
-      // universalToast(payload, "error");
+      state.error = payload;
+      universalToast(payload, "error");
     },
   },
 });
 
-export const { logOut, logIn, clearError } = slice.actions;
-export default slice.reducer;
+export const { clearError, logOut } = signSlice.actions;
+export default signSlice.reducer;

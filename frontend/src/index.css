@@ -2,3 +2,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+input::-webkit-input-placeholder:after /* Only for Chrome */
+{
+    color:red;
+    content:"*";
+}

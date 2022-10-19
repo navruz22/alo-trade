@@ -1,7 +1,8 @@
 import axios from "axios";
 import Store from "./store";
-// import {logOut} from '../Pages/Sign/loginSlice'
-const baseURL = process.env.REACT_APP_API_URL;
+import { logOut } from "../Pages/Sign/signSlice";
+const baseURL =
+  process.env.REACT_APP_API_ENDPOINT || "http://localhost:8080/api";
 const instance = axios.create({
   baseURL,
   headers: {
@@ -11,25 +12,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
-    const { market, user } = Store.getState().login;
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    if (userData) {
-      const { token } = userData;
+    const token = JSON.parse(localStorage.getItem("_grecaptcha"));
+    if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    if (market && config.headers["Content-Type"] !== "multipart/form-data") {
-      config.data = {
-        ...config.data,
-        market: market._id,
-      };
-    } else if (
-      user?.type === "Admin" &&
-      config.headers["Content-Type"] !== "multipart/form-data"
-    ) {
-      config.data = {
-        ...config.data,
-        administrator: user._id,
-      };
     }
     return config;
   },
@@ -43,8 +28,8 @@ instance.interceptors.response.use(
     if (!status) {
       return Promise.reject({ message: "Internet mavjud emas" });
     } else if (status === 401) {
-      localStorage.removeItem("useData");
-      // Store.dispatch(logOut(data?.error || data?.message));
+      localStorage.removeItem("_grecaptcha");
+      Store.dispatch(logOut(data?.error || data?.message));
     } else if (status === 404) {
       return Promise.reject("Bunday manzil mavjud emas !");
     } else {

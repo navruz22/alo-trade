@@ -9,6 +9,7 @@ const SelectInput = ({
   label,
   placeholder,
   value,
+  name,
 }) => {
   return (
     <div className="grow">
@@ -20,10 +21,10 @@ const SelectInput = ({
         </label>
       )}
       <Select
+        name={name}
         onChange={onSelect}
         styles={CustomStyle}
         value={value}
-        defaultValue={""}
         options={options}
         isDisabled={isDisabled}
         placeholder={placeholder}

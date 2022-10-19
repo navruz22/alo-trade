@@ -82,7 +82,18 @@ const getRegions = async (req, res) => {
     const regions = await Region.find({ isArchive: false })
       .sort("name")
       .select("name districts")
-      .populate({ path: "districts", select: "name" });
+      .populate({ path: "districts", select: "name" })
+      .then((regions) =>
+        map(regions, (region) => {
+          return {
+            label: region.name,
+            value: region._id,
+            districts: map(region.districts, (district) => {
+              return { label: district.name, value: district._id };
+            }),
+          };
+        })
+      );
     res.send(regions);
   } catch (error) {
     res.status(501).json({ error: "Serverda xatolik yuz berdi..." });

@@ -9,7 +9,9 @@ const Input = ({
   margin,
   onChange,
   onKeyUp,
-  defaultValue = "",
+  name,
+  required = false,
+  isDisabled,
 }) => {
   const [showPassword, setShowPassword] = useState(type === "password");
   const [inputType, setInputType] = useState(type);
@@ -26,21 +28,20 @@ const Input = ({
       )}
       <div className="w-full relative">
         <input
+          disabled={isDisabled}
+          required={required}
+          name={name}
           onKeyUp={onKeyUp}
           onChange={onChange}
           value={value}
-          defaultValue={defaultValue}
           type={inputType}
           placeholder={placeholder}
           className="w-full text-sm  bg-white outline-0 py-[.425rem] px-3 rounded border my-0 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {type === "password" && (
-          <button
-            onClick={changeShowPassword}
-            className="absolute right-3 top-2"
-          >
+          <span onClick={changeShowPassword} className="absolute right-3 top-2">
             {showPassword ? <IoEyeOffOutline /> : <IoEyeOutline />}
-          </button>
+          </span>
         )}
       </div>
     </div>

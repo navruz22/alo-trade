@@ -38,6 +38,13 @@ const createUser = async (req, res) => {
         }
         return res.status(200).json({
           token,
+          user: {
+            firstname: newUser.firstname,
+            lastname: newUser.lastname,
+            phone: newUser.phone,
+            image: newUser.image,
+            _id: newUser._id,
+          },
         });
       }
     );
@@ -101,14 +108,13 @@ const updateUser = async (req, res) => {
     await user.save();
 
     res.status(200).json({
-      _id,
-      firstname,
-      lastname,
-      email,
-      phone,
-      image,
-      region,
-      district,
+      user: {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        phone: user.phone,
+        image: user.image,
+        _id: user._id,
+      },
     });
   } catch (error) {
     res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
@@ -146,4 +152,43 @@ const deleteUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, updateUser, getUserById, deleteUser };
+const signInUser = async (req, res) => {
+  try {
+    const { phone, password } = req.body;
+    const user = await User.findOne({ phone });
+    if (!user) {
+      return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Parol noto'g'ri" });
+    }
+    jwt.sign({ id: user._id }, config.get("JWT_SECRET"), {}, (err, token) => {
+      if (err) {
+        return res.status(400).json({
+          error: err.message,
+        });
+      }
+      return res.status(200).json({
+        token,
+        user: {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          phone: user.phone,
+          image: user.image,
+          _id: user._id,
+        },
+      });
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
+  }
+};
+
+module.exports = {
+  createUser,
+  updateUser,
+  getUserById,
+  deleteUser,
+  signInUser,
+};
