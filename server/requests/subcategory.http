@@ -1,0 +1,20 @@
+### create  Subcategory
+POST http://localhost:8080/api/category/subcategory/create
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGZjZDAzOWE2YmNhMDhiNDNkYjFlNyIsImlhdCI6MTY2NjIzNDg0MX0.ZYGI21umV4C6j43ixu1Jj3NFtWz1EL9zAS3142HwxLg
+
+{
+  "name": "Smartfon",
+  "category": "634fdf98caba8aa6d10b7ae5"
+}
+
+### get Subcategories by category
+POST http://localhost:8080/api/category/subcategories/getbycategory
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGZjZDAzOWE2YmNhMDhiNDNkYjFlNyIsImlhdCI6MTY2NjIzNDg0MX0.ZYGI21umV4C6j43ixu1Jj3NFtWz1EL9zAS3142HwxLg
+
+{
+  "category": "634fdf98caba8aa6d10b7ae5"
+}

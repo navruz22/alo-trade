@@ -10,7 +10,7 @@ const category = new Schema({
 const validateCategory = (category) => {
   const schema = Joi.object({
     name: Joi.string().required(),
-    image: Joi.string().allow("").optional(),
+    image: Joi.string(),
     subcategories: Joi.array(),
   });
 

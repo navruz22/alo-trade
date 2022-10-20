@@ -57,7 +57,6 @@ const updateDistrict = async (req, res) => {
 
     res.send(district);
   } catch (error) {
-    console.log(error);
     res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
   }
 };

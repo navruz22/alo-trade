@@ -7,4 +7,5 @@ module.exports.routers = (app) => {
   app.use("/api/address", require("./address/router"));
   app.use("/api/admin", require("./admin/router"));
   app.use("/api/user", require("./user/router"));
+  app.use("/api/category", require("./category/router"));
 };
