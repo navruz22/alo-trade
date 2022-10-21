@@ -6,7 +6,7 @@ const Button = ({ title, link }) => {
     <div className="w-full my-2">
       <Link
         to={link}
-        className="bg-blue-500 hover:bg-blue-600 block  w-full text-white py-1 font-semibold rounded text-center"
+        className="bg-blue-500 hover:bg-blue-600 block  w-full text-white-900 py-1 font-semibold rounded text-center"
       >
         {title}
       </Link>

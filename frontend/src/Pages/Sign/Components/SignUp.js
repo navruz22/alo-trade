@@ -4,15 +4,23 @@ import UserRegister from "../../../Components/Sign/UserRegister";
 import BusinessmanRegister from "../../../Components/Sign/BusinessmanRegister";
 import { useDispatch, useSelector } from "react-redux";
 import { clearError, getAllregions } from "../../Address/regionsSlice";
-import { capitalize } from "lodash";
-import { signUp } from "../signSlice";
+import { capitalize, filter, forEach, map, some } from "lodash";
+import { signUpOrganization, signUpUser } from "../signSlice";
 import { checkHandler } from "../constants";
+import {
+  getAllCategories,
+  clearErrorCategories,
+} from "../../Category/categorySlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const { regions, error: errorRegion } = useSelector((state) => state.regions);
+  const { categoriesWithSubcategories, error: errorCategories } = useSelector(
+    (state) => state.categories
+  );
   const { loading } = useSelector((state) => state.login);
-  const [url, setUrl] = useState("sign-up");
+  const href = window.location.href.split("/");
+  const [url, setUrl] = useState(href[href.length - 1]);
   const changeUrl = (e) => {
     setUrl(e.target.name);
   };
@@ -26,9 +34,26 @@ const SignUp = () => {
   const [region, setRegion] = useState("");
   const [district, setDistrict] = useState("");
   const [districts, setDistricts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [subcategories, setSubcategories] = useState([]);
+  const [allSubcategories, setAllSubcategories] = useState([]);
+  const [name, setName] = useState("Alo24");
+
+  const clearDatas = () => {
+    setFirstname("");
+    setLastname("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setPhone("");
+    setRegion("");
+    setDistrict("");
+    setCategories([]);
+    setSubcategories([]);
+    setName("");
+  };
 
   const changeHandler = (e) => {
-    e.preventDefault();
     const name = e.target.name;
     const value = e.target.value.trim();
     name === "firstname" && setFirstname(capitalize(value));
@@ -38,6 +63,7 @@ const SignUp = () => {
     name === "confirmPassword" && setConfirmPassword(value);
     name === "district" && setDistrict(value);
     name === "phone" && setPhone(value);
+    name === "name" && setName(value.toUpperCase());
   };
 
   const selectRegion = (e) => {
@@ -49,10 +75,28 @@ const SignUp = () => {
     setDistrict(e);
   };
 
+  const filterSubcategory = (categories) => {
+    const filterSubcategory = filter(subcategories, (subcategory) =>
+      some(categories, ["value", subcategory.category])
+    );
+    setSubcategories(filterSubcategory);
+  };
+
+  const selectCategory = (e) => {
+    setCategories(e);
+    let subCategories = [];
+    forEach(e, (category) => subCategories.push(...category.subcategories));
+    setAllSubcategories(subCategories);
+    filterSubcategory(e);
+  };
+
+  const selectSubcategory = (e) => {
+    setSubcategories(e);
+  };
+
   const enterHandler = (e) => {
     e.preventDefault();
-    if (e.key === "Enter") {
-    }
+    e.key === "Enter" && submitHandler();
   };
 
   const submitHandler = () => {
@@ -60,18 +104,43 @@ const SignUp = () => {
       firstname,
       lastname,
       password,
-      confirmPassword,
       phone: "+" + phone,
       region: region.value,
       district: district.value,
-      email: email || undefined,
     };
-    const check = checkHandler({ ...data });
-    delete data.confirmPassword;
-    if (email === "") {
-      delete data.email;
+    const check = checkHandler({
+      ...data,
+      url,
+      categories,
+      subcategories,
+      name,
+      email,
+      confirmPassword,
+    });
+    if (email !== "") {
+      data.email = email;
     }
-    check && dispatch(signUp({ ...data }));
+    check && createHandler(data);
+  };
+
+  const createHandler = (data) => {
+    const Categories = map(categories, (category) => category.value);
+    const subCategories = map(
+      subcategories,
+      (subcategory) => subcategory.value
+    );
+    dispatch(
+      url === "sign-up"
+        ? signUpUser({ ...data })
+        : signUpOrganization({
+            ...data,
+            categories: Categories,
+            subcategories: subCategories,
+            name,
+          })
+    ).then(({ error }) => {
+      if (!error) clearDatas();
+    });
   };
 
   useEffect(() => {
@@ -82,18 +151,26 @@ const SignUp = () => {
     errorRegion && dispatch(clearError());
   }, [errorRegion, dispatch]);
 
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    errorCategories && dispatch(clearErrorCategories());
+  }, [dispatch, errorCategories]);
+
   return (
-    <div className="w-full h-screen bg-[#EFF2F5] flex flex-col ">
+    <div className="w-full h-screen bg-[#EFF2F5] flex flex-col overflow-scroll">
       <div className="container m-auto">
         <div className="container m-auto flex lg:flex-row">
           <div className="lg:w-1/2  hidden lg:block">
-            <div className="flex flex-col items-center justify-center h-full">
+            <div className="flex flex-col items-center justify-center h-full text-neutral-700">
               <Link
                 onClick={changeUrl}
                 name="sign-up"
                 to="/sign-up"
-                className={`font-semibold text-xl cursor-pointer text-center py-2 px-4 my-3 w-full ${
-                  url === "sign-up" && "bg-white shadow"
+                className={`font-semibold text-xl cursor-pointer text-center py-2 px-4 my-3 w-full  ${
+                  url === "sign-up" && "bg-white-900 shadow"
                 } `}
               >
                 Buyurtmachi
@@ -103,7 +180,7 @@ const SignUp = () => {
                 name="business"
                 to="/sign-up/business"
                 className={`font-semibold text-xl cursor-pointer text-center py-2 px-4 my-3 w-full  ${
-                  url === "business" && "bg-white shadow"
+                  url === "business" && "bg-white-900 shadow"
                 }`}
               >
                 Tadbirkor
@@ -156,6 +233,13 @@ const SignUp = () => {
                     enterHandler={enterHandler}
                     submitHandler={submitHandler}
                     loading={loading}
+                    categoriesWithSubcategories={categoriesWithSubcategories}
+                    categories={categories}
+                    selectCategory={selectCategory}
+                    subcategories={subcategories}
+                    allSubcategories={allSubcategories}
+                    selectSubcategory={selectSubcategory}
+                    name={name}
                   />
                 }
               />
@@ -164,7 +248,7 @@ const SignUp = () => {
           </div>
         </div>
       </div>
-      <div className="bottom-0 bg-white w-full">
+      <div className="bottom-0 bg-white-900 w-full">
         <div className="container m-auto text-center">
           By{" "}
           <Link

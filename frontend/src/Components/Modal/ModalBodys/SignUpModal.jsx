@@ -34,14 +34,14 @@ const SignUpModal = ({}) => {
     <div className="overflow-scroll">
       <h3 className="font-semibold text-xl p-0 pl-4">Ro'yxatdan o'tish</h3>
       <hr />
-      <form className="flex flex-col items-center justify-center h-full bg-white px-3 py-2 rounded">
+      <form className="flex flex-col items-center justify-center h-full bg-white-900 px-3 py-2 rounded">
         <div className="flex w-full">
           <Input placeholder="Ismingiz" margin={"mr-3"} />
           <Input placeholder="Familiyangiz" />
         </div>
         <Input placeholder="Telefon raqam yoki email" />
         <div className="w-full">
-          <p className="text-gray-500 text-sm">Manzilingiz</p>
+          <p className="text-neutral-500 text-sm">Manzilingiz</p>
           <div className="flex w-full">
             <div className="mr-2 w-full">
               <SelectInput placeholder={"viloyat"} options={regions} />

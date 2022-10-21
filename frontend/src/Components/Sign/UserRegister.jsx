@@ -23,12 +23,12 @@ const UserRegister = ({
   loading,
 }) => {
   return (
-    <div className="bg-white rounded ">
+    <div className="bg-white-900 rounded ">
       <div className="px-16 py-5">
-        <h1 className="font-bold text-center py-4 text-xl">
+        <h1 className="font-bold text-center py-4 text-xl text-neutral-700">
           Foydalanuvchi sifatida ro'yxatda o'tish
         </h1>
-        <div className="flex flex-row ">
+        <div className="flex flex-row">
           <Input
             isDisabled={loading}
             placeholder="Ism*"

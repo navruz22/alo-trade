@@ -1,4 +1,14 @@
 
+@font-face {
+    font-family: 'AmazonEmber';
+    src: local('AmazonEmber'), url("assets/fonts/AmazonEmber.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: 'AmazonEmberBold';
+    src: local('AmazonEmberBold'), url("assets/fonts/AmazonEmberBold.ttf") format('truetype');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -8,6 +8,10 @@ export const checkHandler = ({
   phone,
   region,
   district,
+  url,
+  categories,
+  subcategories,
+  name,
 }) => {
   if (firstname.length < 1) {
     universalToast("Ismingizni kiriting", "warning");
@@ -17,7 +21,7 @@ export const checkHandler = ({
     universalToast("Familiyangizni kiritilmadi", "warning");
     return false;
   }
-  if (phone.length < 13) {
+  if (phone.length !== 13) {
     universalToast("Telefon raqamni to'liq kiriting", "warning");
     return false;
   }
@@ -40,5 +44,24 @@ export const checkHandler = ({
     universalToast("Parollar mos kelmadi", "warning");
     return false;
   }
+
+  if (url === "business") {
+    if (name === "") {
+      universalToast("Tashkilotingiz nomini kiriting", "warning");
+      return false;
+    }
+    if (categories.length === 0) {
+      universalToast(
+        "Xizmat ko'rsatish kategoriyalaringizni kiriting",
+        "warning"
+      );
+      return false;
+    }
+    if (subcategories.length === 0) {
+      universalToast("Kategoriya turlarini kiriting", "warning");
+      return false;
+    }
+  }
+
   return true;
 };

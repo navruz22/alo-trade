@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Input from "../../../Components/Inputs/Input";
 import Button from "../../../Components/Buttons/Button";
 import LabelButton from "../../../Components/Buttons/LabelButton";
-import image from "../../../images/login.png";
+import image from "../../../assets/images/login.png";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../signSlice";
 
@@ -46,7 +46,7 @@ const SignIn = () => {
             </div>
           </div>
           <div className="lg:w-1/2 w-full">
-            <div className="flex flex-col items-center justify-center h-full bg-white px-10 py-5 rounded mx-20 shadow shadow-xl">
+            <div className="flex flex-col items-center justify-center h-full bg-white-900 px-10 py-5 rounded mx-20 shadow shadow-xl">
               <Input
                 isDisabled={loading}
                 placeholder="+998 97 366 62 21"
@@ -81,7 +81,7 @@ const SignIn = () => {
           </div>
         </div>
       </div>
-      <div className="bottom-0 bg-white w-full">
+      <div className="bottom-0 bg-white-900 w-full">
         <div className="container m-auto text-center">
           By{" "}
           <Link

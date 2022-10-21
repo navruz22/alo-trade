@@ -6,7 +6,7 @@ const Button = ({ title, onClick, isDisabled }) => {
       <button
         disabled={isDisabled}
         onClick={onClick}
-        className="bg-blue-500 hover:bg-blue-600 block  w-full text-white py-1 font-semibold rounded"
+        className="bg-blue-500 hover:bg-blue-500 block  w-full text-white-900 py-1 font-semibold rounded"
       >
         {title}
       </button>

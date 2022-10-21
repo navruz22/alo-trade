@@ -22,11 +22,13 @@ const Input = ({
   };
 
   return (
-    <div className={`py-2 w-full flex flex-col ${margin}`}>
+    <div className={`py-2 w-full flex flex-col text-neutral-700 ${margin}`}>
       {label && (
-        <label className="text-gray-500 font-semibold text-sm">{label}</label>
+        <label className="text-neutral-500 font-semibold text-sm">
+          {label}
+        </label>
       )}
-      <div className="w-full relative">
+      <div className="w-full relative text-neutral-700">
         <input
           disabled={isDisabled}
           required={required}
@@ -36,7 +38,7 @@ const Input = ({
           value={value}
           type={inputType}
           placeholder={placeholder}
-          className="w-full text-sm  bg-white outline-0 py-[.425rem] px-3 rounded border my-0 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full text-neutral-600 text-sm  bg-white-900 outline-0 py-[.425rem] px-3 rounded border my-0 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         />
         {type === "password" && (
           <span onClick={changeShowPassword} className="absolute right-3 top-2">

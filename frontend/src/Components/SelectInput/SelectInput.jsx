@@ -10,6 +10,8 @@ const SelectInput = ({
   placeholder,
   value,
   name,
+  isMulti = false,
+  closeMenuOnSelect = true,
 }) => {
   return (
     <div className="grow">
@@ -32,6 +34,8 @@ const SelectInput = ({
           IndicatorSeparator: () => null,
           DropdownIndicator: DropdownIcon,
         }}
+        isMulti={isMulti}
+        closeMenuOnSelect={closeMenuOnSelect}
       />
     </div>
   );
