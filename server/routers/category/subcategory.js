@@ -36,7 +36,7 @@ const createSubcategory = async (req, res) => {
     categoryy.subcategories.push(newSubcategory._id);
     await categoryy.save();
 
-    res.status(201).json({ newSubcategory });
+    res.status(201).json(newSubcategory);
   } catch (err) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
@@ -56,7 +56,7 @@ const getSubcategories = async (req, res) => {
       "name image"
     );
 
-    res.status(200).json({ subcategories });
+    res.status(200).json(subcategories);
   } catch (err) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }

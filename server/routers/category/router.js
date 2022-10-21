@@ -14,7 +14,7 @@ router.post("/create", auth, createCategory);
 router.put("/update", auth, updateCategory);
 router.delete("/delete", auth, deleteCategory);
 router.get("/get", auth, getCategories);
-router.get("/getwithsubcategories", auth, getCategoriesWithSubcategories);
+router.get("/getwithsubcategories", getCategoriesWithSubcategories);
 
 // Subcategory
 router.post("/subcategory/create", createSubcategory);

@@ -1,5 +1,6 @@
 const { Category } = require("../../models/models");
 const { validateCategory } = require("../../models/validators");
+const { map } = require("lodash");
 
 const createCategory = async (req, res) => {
   try {
@@ -11,7 +12,7 @@ const createCategory = async (req, res) => {
     }
 
     const category = await Category.findOne({ name });
-    if (!category) {
+    if (category) {
       return res
         .status(400)
         .json({ message: `${name} kategoriyasi avval yaratilgan` });
@@ -20,7 +21,7 @@ const createCategory = async (req, res) => {
     const newCategory = new Category({ name, image });
     await newCategory.save();
 
-    res.status(201).json({ newCategory });
+    res.status(201).json(newCategory);
   } catch (err) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
@@ -44,7 +45,7 @@ const updateCategory = async (req, res) => {
     category.image = image;
     await category.save();
 
-    res.status(200).json({ category });
+    res.status(200).json(category);
   } catch (err) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
@@ -62,7 +63,7 @@ const deleteCategory = async (req, res) => {
     category.isArchive = true;
     await category.save();
 
-    res.status(200).json({ category });
+    res.status(200).json(category);
   } catch (err) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
@@ -71,7 +72,7 @@ const deleteCategory = async (req, res) => {
 const getCategories = async (req, res) => {
   try {
     const categories = await Category.find().select("name image");
-    res.status(200).json({ categories });
+    res.status(200).json(categories);
   } catch (err) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
@@ -81,8 +82,23 @@ const getCategoriesWithSubcategories = async (req, res) => {
   try {
     const categories = await Category.find()
       .select("name image")
-      .populate("subcategories", "name");
-    res.status(200).json({ categories });
+      .populate("subcategories", "name")
+      .then((categories) =>
+        map(categories, (category) => {
+          return {
+            label: category.name,
+            value: category._id,
+            subcategories: map(category.subcategories, (subcategory) => {
+              return {
+                label: subcategory.name,
+                value: subcategory._id,
+                category: category._id,
+              };
+            }),
+          };
+        })
+      );
+    res.status(200).json(categories);
   } catch (err) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }

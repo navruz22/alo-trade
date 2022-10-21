@@ -4,12 +4,13 @@ const organization = new Schema(
   {
     email: { type: String, email: true, lowercase: true },
     images: [{ type: String }],
-    phone: { type: String, unique: true },
-    User: { type: Schema.Types.ObjectId, ref: "User" },
-    Region: { type: Schema.Types.ObjectId, ref: "Region" },
-    District: { type: Schema.Types.ObjectId, ref: "District" },
+    phone: { type: String, unique: true, min: 13 },
+    user: { type: Schema.Types.ObjectId, ref: "User" },
+    region: { type: Schema.Types.ObjectId, ref: "Region" },
+    district: { type: Schema.Types.ObjectId, ref: "District" },
     isArchive: { type: Boolean, default: false },
-    category: { type: Schema.Types.String, default: "Category" },
+    categories: [{ type: Schema.Types.ObjectId, ref: "Category" }],
+    subcategories: [{ type: Schema.Types.ObjectId, ref: "Subcategory" }],
   },
   {
     timestamps: true,
@@ -22,6 +23,8 @@ function validateOrganization(organization) {
     phone: Joi.string().required(),
     email: Joi.string(),
     image: Joi.array(),
+    categories: Joi.array().required(),
+    subcategories: Joi.array().required(),
   });
 
   return schema.validate(organization);

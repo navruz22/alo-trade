@@ -5,7 +5,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGZjZDAzOWE2YmNhMDhiNDNkYjFlNyIsImlhdCI6MTY2NjE3NzM0OX0.IgrNqw0u7JJaZyKa_BLdKHsTE0net-LYVcoMjajX62g
 
 {
-  "name": "Telefonlar"
+  "name": "Transport"
 }
 
 ### update Category

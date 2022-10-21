@@ -44,6 +44,7 @@ const createUser = async (req, res) => {
             phone: newUser.phone,
             image: newUser.image,
             _id: newUser._id,
+            type: "user",
           },
         });
       }
@@ -121,6 +122,26 @@ const updateUser = async (req, res) => {
   }
 };
 
+const getUserType = async (req, res) => {
+  try {
+    const { id } = req.user;
+    const user = await User.findById(id).select("-password");
+    if (!user) {
+      return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
+    }
+    res.status(200).json({
+      firstname: user.firstname,
+      lastname: user.lastname,
+      phone: user.phone,
+      image: user.image,
+      _id: user._id,
+      type: user.organization ? "organization" : "user",
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
+  }
+};
+
 const getUserById = async (req, res) => {
   try {
     const { id } = req.user;
@@ -177,6 +198,7 @@ const signInUser = async (req, res) => {
           phone: user.phone,
           image: user.image,
           _id: user._id,
+          type: user.organization ? "organization" : "user",
         },
       });
     });
@@ -191,4 +213,5 @@ module.exports = {
   getUserById,
   deleteUser,
   signInUser,
+  getUserType,
 };
