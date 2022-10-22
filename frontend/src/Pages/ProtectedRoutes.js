@@ -5,6 +5,10 @@ import { Navigate, Route } from "react-router-dom";
 const AdminReport = lazy(() => import("./Admin/Admin"));
 const OrganizationReport = lazy(() => import("./Organization/Organization"));
 
+const otherRoutes = {
+  path: "*",
+  element: <Navigate to={"/"} replace={true} />,
+};
 // user pages
 const UserReport = lazy(() => import("./User/User"));
 const OrdersReport = lazy(() => import("./User/Orders/Orders"));
@@ -22,6 +26,7 @@ const organizationRoutes = [
     path: "/",
     element: <OrganizationReport />,
   },
+  otherRoutes,
 ];
 const userRoutes = [
   {
@@ -45,19 +50,17 @@ const userRoutes = [
     element: <OrganizationsReport />,
   },
   {
-    path: "/profile",
+    path: "/profile/*",
     element: <ProfileReport />,
   },
-  {
-    path: "*",
-    element: <Navigate to={"/"} replace={true} />,
-  },
+  otherRoutes,
 ];
 const adminRoutes = [
   {
     path: "/",
     element: <AdminReport />,
   },
+  otherRoutes,
 ];
 
 const chooseRoute = (type) => {

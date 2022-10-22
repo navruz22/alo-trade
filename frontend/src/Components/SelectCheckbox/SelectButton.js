@@ -1,7 +1,7 @@
 import React from "react";
-import { IoChevronDownOutline } from "react-icons/io5";
+import { IoChevronDownOutline, IoChevronUpOutline } from "react-icons/io5";
 
-const SelectButton = ({ data, onClick }) => {
+const SelectButton = ({ data, onClick, currentId }) => {
   return (
     <button
       className="w-full flex pl-2 items-center text-neutral-600 justify-between hover:bg-gray-200 "
@@ -10,7 +10,11 @@ const SelectButton = ({ data, onClick }) => {
     >
       <span className="text-left pointer-events-none ">{data.label}</span>{" "}
       <span className="mt-1 px-5 pointer-events-none  ">
-        <IoChevronDownOutline />
+        {currentId === data.value ? (
+          <IoChevronUpOutline />
+        ) : (
+          <IoChevronDownOutline />
+        )}
       </span>
     </button>
   );

@@ -8,8 +8,10 @@ const { Product } = require("./Order_Offer_Product/Product");
 const { Order } = require("./Order_Offer_Product/Order");
 const { Offer } = require("./Order_Offer_Product/Offer");
 const { Admin } = require("./User/Admin");
+const { TradeType } = require("./Trade/TradeType");
 
 module.exports = {
+  TradeType,
   User,
   Subcategory,
   Category,

@@ -8,4 +8,5 @@ module.exports.routers = (app) => {
   app.use("/api/admin", require("./admin/router"));
   app.use("/api/user", require("./user/router"));
   app.use("/api/category", require("./category/router"));
+  app.use("/api/trade", require("./trade/router"));
 };

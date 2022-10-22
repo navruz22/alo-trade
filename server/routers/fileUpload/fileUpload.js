@@ -89,7 +89,7 @@ router.get("/", (req, res) => {
 
 router.post("/", upload.single("file"), (req, res) => {
   res.send(
-    config.get("baseUrl") + "/" + "api/upload/file/" + req.file.filename
+    config.get("base_url") + "/" + "api/upload/file/" + req.file.filename
   );
 });
 

@@ -3,6 +3,8 @@ import Input from "../Inputs/Input";
 import Button from "../Buttons/Button";
 import LabelButton from "../Buttons/LabelButton";
 import SelectInput from "../SelectInput/SelectInput";
+import { map, uniqueId } from "lodash";
+import Checkbox from "../CheckboxList/Checkbox";
 
 const BusinessmanRegister = ({
   categoriesWithSubcategories,
@@ -28,6 +30,9 @@ const BusinessmanRegister = ({
   allSubcategories,
   selectSubcategory,
   name,
+  tradetypes,
+  changeTradeTypes,
+  tradeTypes,
 }) => {
   return (
     <div className="bg-white-900 rounded ">
@@ -57,36 +62,51 @@ const BusinessmanRegister = ({
             onKeyUp={enterHandler}
           />
         </div>
-        <Input
-          isDisabled={loading}
-          placeholder="Telefon raqam*"
-          type="number"
-          value={phone}
-          onChange={changeHandler}
-          name="phone"
-          required={true}
-          onKeyUp={enterHandler}
-        />
-        <Input
-          isDisabled={loading}
-          placeholder="Parol"
-          type="password"
-          value={password}
-          onChange={changeHandler}
-          name="password"
-          required={true}
-          onKeyUp={enterHandler}
-        />
-        <Input
-          isDisabled={loading}
-          placeholder="Parolni tasdiqlang"
-          type="password"
-          value={confirmPassword}
-          onChange={changeHandler}
-          name={"confirmPassword"}
-          required={true}
-          onKeyUp={enterHandler}
-        />
+        <div className="flex flex-row">
+          <Input
+            margin="mr-3"
+            isDisabled={loading}
+            placeholder="Telefon raqam*"
+            type="number"
+            value={phone}
+            onChange={changeHandler}
+            name="phone"
+            required={true}
+            onKeyUp={enterHandler}
+          />
+          <Input
+            isDisabled={loading}
+            placeholder="Email"
+            type="email"
+            value={email}
+            onChange={changeHandler}
+            name="email"
+            onKeyUp={enterHandler}
+          />
+        </div>
+        <div className="flex flex-grow">
+          <Input
+            margin="mr-3"
+            isDisabled={loading}
+            placeholder="Parol"
+            type="password"
+            value={password}
+            onChange={changeHandler}
+            name="password"
+            required={true}
+            onKeyUp={enterHandler}
+          />
+          <Input
+            isDisabled={loading}
+            placeholder="Parolni tasdiqlang"
+            type="password"
+            value={confirmPassword}
+            onChange={changeHandler}
+            name={"confirmPassword"}
+            required={true}
+            onKeyUp={enterHandler}
+          />
+        </div>
         <br />
         <p className="text-neutral-500 text-sm">Tashkilot ma'lumotlari</p>
         <Input
@@ -98,15 +118,7 @@ const BusinessmanRegister = ({
           required={true}
           onKeyUp={enterHandler}
         />
-        <Input
-          isDisabled={loading}
-          placeholder="Email"
-          type="email"
-          value={email}
-          onChange={changeHandler}
-          name="email"
-          onKeyUp={enterHandler}
-        />
+
         <div className="flex flex-row w-full mb-2">
           <div className="w-full mr-3">
             <SelectInput
@@ -127,6 +139,21 @@ const BusinessmanRegister = ({
               name={"district"}
               isDisabled={districts.length === 0 || loading}
             />
+          </div>
+        </div>
+        <div className="mb-2">
+          <h1 className="text-sm text-neutral-500 mt-4">
+            Savdo turingizni tanlang
+          </h1>
+          <div className="grid grid-cols-2">
+            {map(tradetypes, (data) => (
+              <Checkbox
+                key={uniqueId("tradeType")}
+                data={data}
+                onChange={changeTradeTypes}
+                checked={tradeTypes.some((item) => item === data.value)}
+              />
+            ))}
           </div>
         </div>
         <div className="flex flex-row w-full">

@@ -45,7 +45,7 @@ export const navs = [
 
 export const toggleMenu = (logOut, closeMenu) => [
   {
-    link: "/profile",
+    link: "/profile/user",
     icon: <IoPersonOutline />,
     title: "Profile",
     onClick: closeMenu,

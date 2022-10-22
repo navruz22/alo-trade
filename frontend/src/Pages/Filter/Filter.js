@@ -2,12 +2,12 @@ import React from "react";
 import CheckboxList from "../../Components/CheckboxList/CheckboxList";
 import SelectCheckbox from "../../Components/SelectCheckbox/SelectCheckbox";
 
-const Filter = ({ categories, regions }) => {
+const Filter = ({ categories, regions, tradeTypes }) => {
   return (
     <div className="w-1/3 min-w-[300px] max-w-[400px] h-screen overflow-scroll border-r shadow">
       <div className="p-4">
         <h1 className="font-amazonbold text-xl tracking-widest ">Filter</h1>
-        <CheckboxList />
+        <CheckboxList list={tradeTypes} headerText="Savdo turi" />
         <SelectCheckbox
           headerText={"Kategoriyalar"}
           datas={categories}

@@ -1,11 +1,6 @@
-import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import React from "react";
 
 const User = () => {
-  const [visible, setVisible] = useState(true);
-  const changeVisible = () => {
-    setVisible(!visible);
-  };
   return (
     <div className="w-full flex flex-row">
       <div className="w-full">Body</div>

@@ -3,7 +3,7 @@ import { Link, Navigate, Outlet, Route, Routes } from "react-router-dom";
 import UserRegister from "../../../Components/Sign/UserRegister";
 import BusinessmanRegister from "../../../Components/Sign/BusinessmanRegister";
 import { useDispatch, useSelector } from "react-redux";
-import { clearError, getAllregions } from "../../Address/regionsSlice";
+import { clearError, getAllregions } from "../../Filter/regionsSlice";
 import { capitalize, filter, forEach, map, some } from "lodash";
 import { signUpOrganization, signUpUser } from "../signSlice";
 import { checkHandler } from "../constants";
@@ -11,6 +11,7 @@ import {
   getAllCategories,
   clearErrorCategories,
 } from "../../Category/categorySlice";
+import { getTradeTypes } from "../../Filter/tradeSlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const SignUp = () => {
     (state) => state.categories
   );
   const { loading } = useSelector((state) => state.login);
+  const { tradetypes } = useSelector((state) => state.trade);
   const href = window.location.href.split("/");
   const [url, setUrl] = useState(href[href.length - 1]);
   const changeUrl = (e) => {
@@ -38,6 +40,7 @@ const SignUp = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [allSubcategories, setAllSubcategories] = useState([]);
   const [name, setName] = useState("Alo24");
+  const [tradeTypes, setTradeTypes] = useState([]);
 
   const clearDatas = () => {
     setFirstname("");
@@ -94,6 +97,15 @@ const SignUp = () => {
     setSubcategories(e);
   };
 
+  const changeTradeTypes = (e) => {
+    const value = e.target.value;
+    const checked = e.target.checked;
+    const filtered = filter(tradeTypes, (tradeType) => tradeType !== value);
+    checked
+      ? setTradeTypes([...filtered, value])
+      : setTradeTypes([...filtered]);
+  };
+
   const enterHandler = (e) => {
     e.preventDefault();
     e.key === "Enter" && submitHandler();
@@ -116,6 +128,7 @@ const SignUp = () => {
       name,
       email,
       confirmPassword,
+      tradeTypes,
     });
     if (email !== "") {
       data.email = email;
@@ -137,6 +150,7 @@ const SignUp = () => {
             categories: Categories,
             subcategories: subCategories,
             name,
+            tradetypes: tradeTypes,
           })
     ).then(({ error }) => {
       if (!error) clearDatas();
@@ -145,6 +159,7 @@ const SignUp = () => {
 
   useEffect(() => {
     dispatch(getAllregions());
+    dispatch(getTradeTypes());
   }, [dispatch]);
 
   useEffect(() => {
@@ -240,6 +255,9 @@ const SignUp = () => {
                     allSubcategories={allSubcategories}
                     selectSubcategory={selectSubcategory}
                     name={name}
+                    tradetypes={tradetypes}
+                    changeTradeTypes={changeTradeTypes}
+                    tradeTypes={tradeTypes}
                   />
                 }
               />

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-// import { logOut } from "../Sign/signSlice";
 import LoginButton from "../../Components/Buttons/LoginButton";
 import Logo from "../../Components/Logo/Logo";
 import Menu from "../../Components/Navbar/Menu";

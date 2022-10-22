@@ -18,6 +18,7 @@ const createOrganization = async (req, res) => {
       phone,
       categories,
       subcategories,
+      tradetypes,
     } = req.body;
 
     const { error } = validateUserSignUp({
@@ -82,6 +83,9 @@ const createOrganization = async (req, res) => {
       categories,
       subcategories,
       user: newUser._id,
+      region,
+      district,
+      tradetypes,
     });
     await newOrganization.save();
 
@@ -114,7 +118,6 @@ const createOrganization = async (req, res) => {
       }
     );
   } catch (e) {
-    console.log(e);
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
 };

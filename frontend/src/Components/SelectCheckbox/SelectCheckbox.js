@@ -16,7 +16,11 @@ const SelectCheckbox = ({ datas, property, headerText }) => {
       <div className="overflow-scroll max-h-[500px]">
         {map(datas, (data, index) => (
           <div key={uniqueId("selectButton")}>
-            <SelectButton data={data} onClick={changeHandler} />
+            <SelectButton
+              data={data}
+              onClick={changeHandler}
+              currentId={currentId}
+            />
 
             <div
               className={`pl-3 transition-all ease-in-out duration-300 ${

@@ -38,6 +38,22 @@ export const signIn = createAsyncThunk(
   }
 );
 
+export const editProfileImage = createAsyncThunk(
+  "login/editProfileImage",
+  async (body, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/upload", body, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const getUser = createAsyncThunk(
   "login/getUser",
   async (body = {}, { rejectWithValue }) => {

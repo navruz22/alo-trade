@@ -8,8 +8,10 @@ const { validateProduct } = require("./Order_Offer_Product/Product");
 const { validateOrder } = require("./Order_Offer_Product/Order");
 const { validateOffer } = require("./Order_Offer_Product/Offer");
 const { validateAdmin } = require("./User/Admin");
+const { validateTradeType } = require("./Trade/TradeType");
 
 module.exports = {
+  validateTradeType,
   validateUserSignIn,
   validateUserSignUp,
   validateOrganization,

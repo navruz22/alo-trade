@@ -11,6 +11,7 @@ const organization = new Schema(
     isArchive: { type: Boolean, default: false },
     categories: [{ type: Schema.Types.ObjectId, ref: "Category" }],
     subcategories: [{ type: Schema.Types.ObjectId, ref: "Subcategory" }],
+    tradetypes: [{ type: Schema.Types.ObjectId, ref: "TradeType" }],
   },
   {
     timestamps: true,

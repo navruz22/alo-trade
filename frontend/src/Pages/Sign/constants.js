@@ -12,6 +12,7 @@ export const checkHandler = ({
   categories,
   subcategories,
   name,
+  tradeTypes,
 }) => {
   if (firstname.length < 1) {
     universalToast("Ismingizni kiriting", "warning");
@@ -59,6 +60,10 @@ export const checkHandler = ({
     }
     if (subcategories.length === 0) {
       universalToast("Kategoriya turlarini kiriting", "warning");
+      return false;
+    }
+    if (tradeTypes.length === 0) {
+      universalToast("Savdo turlari tanlanmagan", "warning");
       return false;
     }
   }
