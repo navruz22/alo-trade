@@ -13,18 +13,19 @@ const PageRoutes = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { user } = useSelector((state) => state.login);
+  const { userData } = useSelector((state) => state.login);
   const { categoriesWithSubcategories: categories } = useSelector(
     (state) => state.categories
   );
   const { tradetypes } = useSelector((state) => state.trade);
   const { regions } = useSelector((state) => state.regions);
-  const [type, setType] = useState(user.type);
+  const [type, setType] = useState(userData?.user?.type);
   const [pathName, setPathName] = useState(location.pathname.split("/")[1]);
 
   useEffect(() => {
-    setType(user.type);
-  }, [user]);
+    const { user } = userData;
+    setType(user?.type);
+  }, [userData]);
 
   useEffect(() => {
     dispatch(getTradeTypes());

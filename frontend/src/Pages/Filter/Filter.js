@@ -18,11 +18,6 @@ const Filter = ({ categories, regions, tradeTypes }) => {
           datas={regions}
           property="districts"
         />
-        <SelectCheckbox
-          headerText={"Viloyatlar"}
-          datas={regions}
-          property="districts"
-        />
       </div>
     </div>
   );

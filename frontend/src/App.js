@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "./Components/Loader/Loader";
-import { getUserType } from "./Pages/Sign/signSlice";
+import { getUser } from "./Pages/Sign/signSlice";
 
 // pages
 const Login = lazy(() => import("./Pages/Sign/Sign"));
@@ -14,7 +14,7 @@ function App() {
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("_grecaptcha"));
     if (token) {
-      dispatch(getUserType());
+      dispatch(getUser());
     }
   }, [dispatch]);
 

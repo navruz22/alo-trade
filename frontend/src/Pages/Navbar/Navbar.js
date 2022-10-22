@@ -14,7 +14,7 @@ const Navbar = () => {
   const changeHandler = () => {
     setNavbarExpended(!navbarExpended);
   };
-  const { user } = useSelector((state) => state.login);
+  const { userData } = useSelector((state) => state.login);
   const closeHandler = () => {
     dispatch(logOut());
     setNavbarExpended(false);
@@ -28,9 +28,9 @@ const Navbar = () => {
         <Outlet />
         <Menu navs={navs} />
         <div className="">
-          {user ? (
+          {userData ? (
             <UserProfile
-              user={user}
+              user={userData.user}
               toggleMenu={toggle}
               navbarExpended={navbarExpended}
               changeHandler={changeHandler}

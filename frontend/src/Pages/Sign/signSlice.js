@@ -26,6 +26,19 @@ export const signUpOrganization = createAsyncThunk(
   }
 );
 
+export const updateOrganization = createAsyncThunk(
+  "login/updateOrganization",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      console.log(body);
+      const { data } = await Api.put("/user/organization/update", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const signIn = createAsyncThunk(
   "login/signIn",
   async (body = {}, { rejectWithValue }) => {
@@ -66,11 +79,23 @@ export const getUser = createAsyncThunk(
   }
 );
 
-export const getUserType = createAsyncThunk(
-  "login/getUserType",
+export const updateUser = createAsyncThunk(
+  "login/updateUser",
   async (body = {}, { rejectWithValue }) => {
     try {
-      const { data } = await Api.post("/user/getusertype", body);
+      const { data } = await Api.put("/user/update", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const updatePassword = createAsyncThunk(
+  "login/updatePassword",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.put("/user/updatepassword", body);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -85,15 +110,17 @@ const signSlice = createSlice({
     logged: false,
     loading: false,
     error: null,
-    userData: null,
+    userData: {
+      user: null,
+      organization: null,
+    },
   },
   reducers: {
     logOut: (state) => {
       state.logged = false;
-      state.user = null;
       state.loading = false;
       state.error = null;
-      state.userData = null;
+      state.userData = { user: null, organization: null };
       localStorage.removeItem("_grecaptcha");
     },
     clearError: (state) => {
@@ -107,7 +134,7 @@ const signSlice = createSlice({
     [signUpUser.fulfilled]: (state, { payload: { token, user } }) => {
       state.loading = false;
       state.logged = true;
-      state.user = user;
+      state.userData = user;
       localStorage.setItem("_grecaptcha", JSON.stringify(token));
     },
     [signUpUser.rejected]: (state, { payload }) => {
@@ -118,10 +145,13 @@ const signSlice = createSlice({
     [signUpOrganization.pending]: (state) => {
       state.loading = true;
     },
-    [signUpOrganization.fulfilled]: (state, { payload: { token, user } }) => {
+    [signUpOrganization.fulfilled]: (
+      state,
+      { payload: { token, user, organization } }
+    ) => {
       state.loading = false;
       state.logged = true;
-      state.user = user;
+      state.userData = { user, organization };
       localStorage.setItem("_grecaptcha", JSON.stringify(token));
     },
     [signUpOrganization.rejected]: (state, { payload }) => {
@@ -132,10 +162,10 @@ const signSlice = createSlice({
     [signIn.pending]: (state) => {
       state.loading = true;
     },
-    [signIn.fulfilled]: (state, { payload: { token, user } }) => {
+    [signIn.fulfilled]: (state, { payload: { token, user, organization } }) => {
       state.loading = false;
       state.logged = true;
-      state.user = user;
+      state.userData = { user, organization };
       localStorage.setItem("_grecaptcha", JSON.stringify(token));
     },
     [signIn.rejected]: (state, { payload }) => {
@@ -156,17 +186,43 @@ const signSlice = createSlice({
       state.error = payload;
       universalToast(payload, "error");
     },
-    [getUserType.pending]: (state) => {
+    [updateUser.pending]: (state) => {
       state.loading = true;
     },
-    [getUserType.fulfilled]: (state, { payload }) => {
+    [updateUser.fulfilled]: (state, { payload: { user } }) => {
       state.loading = false;
-      state.user = payload;
-      state.logged = true;
+      state.userData.user = user;
+      universalToast("Foydalanuvchi ma'lumotlari yangilandi", "success");
     },
-    [getUserType.rejected]: (state, { payload }) => {
+    [updateUser.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      universalToast(payload, "error");
+    },
+    [updatePassword.pending]: (state) => {
+      state.loading = true;
+    },
+    [updatePassword.fulfilled]: (state, { payload: { message } }) => {
+      state.loading = false;
+      universalToast(message, "success");
+    },
+    [updatePassword.rejected]: (state, { payload }) => {
+      state.loading = false;
+      universalToast(payload, "error");
+    },
+    [updateOrganization.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateOrganization.fulfilled]: (state, { payload: { organization } }) => {
+      state.loading = false;
+      state.userData.organization = organization;
+      universalToast(
+        "Tashkilot muvaffaqqiyatli ma'lumotlari tahrirlandi! ",
+        "success"
+      );
+    },
+    [updateOrganization.rejected]: (state, { payload }) => {
+      state.loading = false;
       universalToast(payload, "error");
     },
   },

@@ -2,9 +2,8 @@ import React from "react";
 import Input from "../../Inputs/Input";
 import Button from "../../Buttons/Button";
 import SelectInput from "../../SelectInput/SelectInput";
-import { range, map } from "lodash";
 
-const SignUpModal = ({}) => {
+const SignUpModal = () => {
   const regions = [
     { label: "Andijon", value: "Andijon" },
     { label: "Buxoro", value: "Buxoro" },

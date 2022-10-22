@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { map, uniqueId } from "lodash";
-import { routes } from "../../Pages/User/Profile/constants";
 
 const ProfileRoutes = ({ routes }) => {
   return (

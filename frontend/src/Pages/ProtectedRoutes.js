@@ -64,21 +64,22 @@ const adminRoutes = [
 ];
 
 const chooseRoute = (type) => {
-  switch (type) {
-    case "organization":
-      return organizationRoutes;
-    case "user":
-      return userRoutes;
-    case "admin":
-      return adminRoutes;
-    default:
-      return [
-        {
-          path: "/",
-          element: <h1>Sahifa mavjud emas</h1>,
-        },
-      ];
-  }
+  return userRoutes;
+  // switch (type) {
+  //   case "organization":
+  //     return organizationRoutes;
+  //   case "user":
+  //     return userRoutes;
+  //   case "admin":
+  //     return adminRoutes;
+  //   default:
+  //     return [
+  //       {
+  //         path: "/",
+  //         element: <h1>Sahifa mavjud emas</h1>,
+  //       },
+  //     ];
+  // }
 };
 
 const protectedRoutes = (type) => {
