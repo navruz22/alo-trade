@@ -3,10 +3,10 @@
 POST http://localhost:8080/api/address/region/create
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNGViYTBjYjM2OTliZmFmZTQzNTkwYSIsImlhdCI6MTY2NjEwMzkxMSwiZXhwIjoxNjY2MTQ3MTExfQ.Fe-GVcAzpghnrEAtHu6we8Phm1G2Io0Uugtig9l8xK4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNTNiNGNmZDllMjE2NmFiYzE1ZTUxNiIsImlhdCI6MTY2NjQzMDE1OSwiZXhwIjoxNjY2NDczMzU5fQ.NyyNor4Qob3KYFWdJoB09tGTilLcF_kvwj73U7wIvQU
 
 {
-  "name": "Toshkent shahari"
+  "name": "Navoiy viloyati"
 }
 
 ### update Region

@@ -2,10 +2,10 @@
 POST http://localhost:8080/api/category/create
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGZjZDAzOWE2YmNhMDhiNDNkYjFlNyIsImlhdCI6MTY2NjE3NzM0OX0.IgrNqw0u7JJaZyKa_BLdKHsTE0net-LYVcoMjajX62g
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNTNiNGNmZDllMjE2NmFiYzE1ZTUxNiIsImlhdCI6MTY2NjQzMDI1NywiZXhwIjoxNjY2NDczNDU3fQ.FT4QJevdIumcUd8zOjNqT4kP6_rp0GdvcbaxCxCWLj4
 
 {
-  "name": "Transport"
+  "name": "Yer mulk"
 }
 
 ### update Category

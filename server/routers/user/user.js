@@ -1,6 +1,7 @@
 const { User } = require("../../models/models");
 const { validateUserSignUp } = require("../../models/validators");
 const { bcrypt, jwt, config } = require("../../packages");
+const { getOrganizationById, getUserById } = require("./constants");
 
 const createUser = async (req, res) => {
   try {
@@ -26,6 +27,11 @@ const createUser = async (req, res) => {
     });
     await newUser.save();
 
+    const userData = await getUserById(newUser.id);
+    const organization =
+      userData.organization &&
+      (await getOrganizationById(userData.organization));
+
     jwt.sign(
       { id: newUser._id },
       config.get("JWT_SECRET"),
@@ -38,14 +44,8 @@ const createUser = async (req, res) => {
         }
         return res.status(200).json({
           token,
-          user: {
-            firstname: newUser.firstname,
-            lastname: newUser.lastname,
-            phone: newUser.phone,
-            image: newUser.image,
-            _id: newUser._id,
-            type: "user",
-          },
+          user: { ...userData },
+          organization,
         });
       }
     );
@@ -57,7 +57,6 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const {
-      _id,
       firstname,
       lastname,
       image,
@@ -68,11 +67,11 @@ const updateUser = async (req, res) => {
       password,
       newPassword,
     } = req.body;
-    const user = await User.findById(_id);
+    const { id } = req.user;
+    const user = await User.findById(id);
     if (!user) {
       return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
     }
-
     user.firstname = firstname || user.firstname;
     user.lastname = lastname || user.lastname;
     user.image = image || user.image;
@@ -81,16 +80,16 @@ const updateUser = async (req, res) => {
 
     if (email) {
       const userEmail = await User.findOne({ email });
-      if (userEmail && userEmail._id.toString() !== _id) {
+      if (userEmail && userEmail._id.toString() !== id) {
         return res
           .status(400)
           .json({ message: "Email avval ro'yxatdan o'tgan!" });
       }
+      user.email = email;
     }
-
     if (phone) {
       const userPhone = await User.findOne({ phone });
-      if (userPhone && userPhone._id.toString() !== _id) {
+      if (userPhone && userPhone._id.toString() !== id) {
         return res
           .status(400)
           .json({ message: "Bu telefon raqam avval ro'yxatdan o'tgan!" });
@@ -108,14 +107,10 @@ const updateUser = async (req, res) => {
     }
     await user.save();
 
+    const userData = await getUserById(id);
+
     res.status(200).json({
-      user: {
-        firstname: user.firstname,
-        lastname: user.lastname,
-        phone: user.phone,
-        image: user.image,
-        _id: user._id,
-      },
+      user: userData,
     });
   } catch (error) {
     res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
@@ -142,17 +137,19 @@ const getUserType = async (req, res) => {
   }
 };
 
-const getUserById = async (req, res) => {
+const getUserData = async (req, res) => {
   try {
     const { id } = req.user;
-    const user = await User.findById(id)
-      .select("-password")
-      .populate("region", "name")
-      .populate("district", "name");
+    const user = await getUserById(id);
+
     if (!user) {
-      return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
+      return res.status(401).json({ message: "Avtorizatsiyadan o'tilmagan!" });
     }
-    res.status(200).json(user);
+
+    const organization =
+      user.organization && (await getOrganizationById(user.organization));
+
+    res.status(200).json({ user, organization });
   } catch (error) {
     res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
   }
@@ -207,11 +204,34 @@ const signInUser = async (req, res) => {
   }
 };
 
+const updatePassword = async (req, res) => {
+  try {
+    const { password, newPassword } = req.body;
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Joriy parol noto'g'ri" });
+    }
+
+    const passwordHash = await bcrypt.hash(newPassword, 12);
+    user.password = passwordHash;
+    await user.save();
+    res.status(200).json({ message: "Parol muvaffaqiyatli o'zgartirildi!" });
+  } catch (error) {
+    res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
+  }
+};
+
 module.exports = {
   createUser,
   updateUser,
-  getUserById,
+  getUserData,
   deleteUser,
   signInUser,
   getUserType,
+  updatePassword,
 };

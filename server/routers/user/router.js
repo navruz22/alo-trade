@@ -2,23 +2,29 @@ const router = require("express").Router();
 const {
   createUser,
   updateUser,
-  getUserById,
+  getUserData,
   deleteUser,
   signInUser,
-  getUserType,
+  updatePassword,
 } = require("./user");
-const { createOrganization } = require("./organization");
+const {
+  createOrganization,
+  createNewOrganization,
+  updateOrganization,
+} = require("./organization");
 const auth = require("../../middleware/auth.middleware");
 
 // User
 router.post("/signup", createUser);
 router.put("/update", auth, updateUser);
-router.post("/getuserbyid", auth, getUserById);
+router.post("/getuserbyid", auth, getUserData);
 router.delete("/delete", auth, deleteUser);
 router.post("/signin", signInUser);
-router.post("/getusertype", auth, getUserType);
+router.put("/updatepassword", auth, updatePassword);
 
 // Organization
 router.post("/organization/create", createOrganization);
+router.put("/organization/update", updateOrganization);
+router.post("/organization/new", createNewOrganization);
 
 module.exports = router;

@@ -2,6 +2,7 @@ const { Schema, model, Joi } = require("../../packages");
 
 const organization = new Schema(
   {
+    name: { type: String, required: true },
     email: { type: String, email: true, lowercase: true },
     images: [{ type: String }],
     phone: { type: String, unique: true, min: 13 },
@@ -26,6 +27,9 @@ function validateOrganization(organization) {
     image: Joi.array(),
     categories: Joi.array().required(),
     subcategories: Joi.array().required(),
+    tradetypes: Joi.array().required(),
+    region: Joi.string(),
+    district: Joi.string(),
   });
 
   return schema.validate(organization);

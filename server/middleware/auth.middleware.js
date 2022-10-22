@@ -1,4 +1,5 @@
 const { jwt, config } = require("../packages");
+const { User } = require("../models/models");
 module.exports = (req, res, next) => {
   if (req.method === "OPTIONS") {
     return next();
@@ -22,6 +23,7 @@ module.exports = (req, res, next) => {
         return decoded;
       }
     );
+
     req.user = decoded;
     next();
   } catch (e) {

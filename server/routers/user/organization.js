@@ -4,6 +4,7 @@ const {
 } = require("../../models/validators");
 const { Organization, User } = require("../../models/models");
 const { bcrypt, config, jwt } = require("../../packages");
+const { getOrganizationById } = require("./constants");
 
 const createOrganization = async (req, res) => {
   try {
@@ -41,6 +42,9 @@ const createOrganization = async (req, res) => {
       email,
       categories,
       subcategories,
+      tradetypes,
+      region,
+      district,
     });
 
     if (organizationError) {
@@ -122,4 +126,110 @@ const createOrganization = async (req, res) => {
   }
 };
 
-module.exports = { createOrganization };
+const updateOrganization = async (req, res) => {
+  try {
+    const {
+      name,
+      region,
+      district,
+      email,
+      image,
+      phone,
+      categories,
+      subcategories,
+      tradetypes,
+    } = req.body;
+
+    const { error } = validateOrganization({
+      name,
+      phone,
+      email,
+      categories,
+      subcategories,
+      tradetypes,
+      region,
+      district,
+      image,
+    });
+    if (error) {
+      return res.status(400).json({ message: error.message });
+    }
+
+    const organization = await Organization.findOne({ name, phone });
+    if (!organization) {
+      return res.status(400).json({
+        message: `${name} nomli tashkilot mavjud emas`,
+      });
+    }
+
+    organization.name = name;
+    organization.image = image;
+    organization.phone = phone;
+    organization.email = email;
+    organization.region = region;
+    organization.district = district;
+    organization.categories = categories;
+    organization.subcategories = subcategories;
+    organization.tradetypes = tradetypes;
+    await organization.save();
+
+    const updated = await getOrganizationById(organization._id);
+
+    res.status(200).json({ organization: updated });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
+const createNewOrganization = async (req, res) => {
+  try {
+    const {
+      name,
+      region,
+      district,
+      email,
+      phone,
+      image,
+      categories,
+      subcategories,
+      tradetypes,
+    } = req.body;
+    const { error } = validateOrganization({
+      name,
+      phone,
+      email,
+      categories,
+      subcategories,
+      tradetypes,
+      region,
+      district,
+      image,
+    });
+    if (error) {
+      return res.status(400).json({ message: error.message });
+    }
+    const newOrganization = new Organization({
+      name,
+      phone,
+      email,
+      categories,
+      subcategories,
+      tradetypes,
+      region,
+      district,
+      image,
+      user: req.user.id,
+    });
+    await newOrganization.save();
+    res.status(200).json(newOrganization);
+  } catch (e) {
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
+module.exports = {
+  createOrganization,
+  updateOrganization,
+  createNewOrganization,
+};

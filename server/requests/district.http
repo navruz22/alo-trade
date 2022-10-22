@@ -2,11 +2,11 @@
 POST http://localhost:8080/api/address/district/create
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNGViYTBjYjM2OTliZmFmZTQzNTkwYSIsImlhdCI6MTY2NjEwMzkxMSwiZXhwIjoxNjY2MTQ3MTExfQ.Fe-GVcAzpghnrEAtHu6we8Phm1G2Io0Uugtig9l8xK4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNTNiNGNmZDllMjE2NmFiYzE1ZTUxNiIsImlhdCI6MTY2NjQzMDI1NywiZXhwIjoxNjY2NDczNDU3fQ.FT4QJevdIumcUd8zOjNqT4kP6_rp0GdvcbaxCxCWLj4
 
 {
-  "name": "Xatirchi",
-  "region": "634ec2d776fc5aa7998fb88c"
+  "name": "Qiziltepa",
+  "region": "6353b62ed9e2166abc15e541"
 }
 
 ### update District
