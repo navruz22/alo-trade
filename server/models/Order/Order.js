@@ -1,0 +1,45 @@
+const { Schema, model, Joi } = require("../../packages");
+
+const Order = new Schema({
+  tradetypes: [{ type: Schema.Types.ObjectId, ref: "TradeType" }],
+  region: { type: Schema.Types.ObjectId, ref: "Region" },
+  district: { type: Schema.Types.ObjectId, ref: "District" },
+  categories: [
+    { type: Schema.Types.ObjectId, ref: "Category", required: true },
+  ],
+  subcategories: [{ type: Schema.Types.ObjectId, ref: "Subcategory" }],
+  name: { type: String, required: true },
+  description: { type: String },
+  status: { type: Array, required: true },
+  currency: { type: String },
+  minPrice: { type: Number },
+  maxPrice: { type: Number },
+  images: [{ type: String }],
+  organization: { type: Schema.Types.ObjectId, ref: "Organization" },
+  user: { type: Schema.Types.ObjectId, ref: "User" },
+  offers: [{ type: Schema.Types.ObjectId, ref: "Offer" }],
+  position: { type: String, required: true, default: "active" },
+  isArchive: { type: Boolean, default: false },
+});
+
+const validateOrder = (order) => {
+  const schema = Joi.object({
+    tradetypes: Joi.array().required(),
+    region: Joi.string(),
+    district: Joi.string(),
+    categories: Joi.array().required(),
+    subcategories: Joi.array(),
+    name: Joi.string().required(),
+    description: Joi.string(),
+    status: Joi.array(),
+    currency: Joi.string(),
+    minPrice: Joi.number(),
+    maxPrice: Joi.number(),
+    images: Joi.array(),
+  });
+
+  return schema.validate(order);
+};
+
+module.exports.validateOrder = validateOrder;
+module.exports.Order = model("Order", Order);

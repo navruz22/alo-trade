@@ -26,7 +26,7 @@ function UniversalModal({ body, isOpen, toggleModal, closeModal }) {
       case "signup":
         return <SignUpModal />;
       case "createOrder":
-        return <CreateOrderModal />;
+        return <CreateOrderModal closeModal={closeModal} />;
       default:
         return "Bunday jadval topilmadi";
     }

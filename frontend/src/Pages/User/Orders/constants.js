@@ -1,5 +1,3 @@
-import setErrors from "../../../Components/Modal/UniversalModal";
-
 export const checkRegisterOrder = ({
   tradetypes,
   categories,
@@ -41,7 +39,7 @@ export const checkRegisterOrder = ({
     return false;
   }
 
-  if ((minPrice > 0 || maxPrice > 0) && !currency) {
+  if ((minPrice > 0 || maxPrice > 0) && currency === null) {
     setErrors("Valyuta tanlanmagan");
     return false;
   }

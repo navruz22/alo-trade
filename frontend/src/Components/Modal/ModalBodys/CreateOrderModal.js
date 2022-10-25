@@ -12,8 +12,9 @@ import RadioButtonList from "../../RadioButtons/RadioButtonList";
 import { positions, currencices } from "../../../Config/globalConstants";
 import UploadImages from "../../ImageCrop/UploadImages";
 import { checkRegisterOrder } from "../../../Pages/User/Orders/constants";
+import { createOrder } from "../../../Pages/User/Orders/orderSlice";
 
-const CreateOrderModal = () => {
+const CreateOrderModal = ({ closeModal }) => {
   const dispatch = useDispatch();
   const { tradetypes } = useSelector((state) => state.trade);
   const { loading } = useSelector((state) => state.login);
@@ -30,7 +31,7 @@ const CreateOrderModal = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [statuses, setStatuses] = useState([]);
-  const [currency, setCurrency] = useState();
+  const [currency, setCurrency] = useState(null);
   const [districts, setDistricts] = useState([]);
   const [allSubcategories, setAllSubcategories] = useState([]);
   const [images, setImages] = useState([]);
@@ -108,7 +109,10 @@ const CreateOrderModal = () => {
     setSubcategories(e);
   };
 
-  const changeCurrency = (e) => setCurrency(e.value);
+  const changeCurrency = (e) => {
+    setCurrency(e.value);
+    clearErrors();
+  };
 
   const enterHandler = (e) => {
     clearErrors();
@@ -121,20 +125,25 @@ const CreateOrderModal = () => {
     const Subcategory = map(subcategories, (subcategory) => subcategory.value);
     const data = {
       name,
-      description,
+      description: description.length > 0 ? description : undefined,
       tradetypes: tradeTypes,
       region: region.value,
       district: district.value,
       categories: Category,
       subcategories: Subcategory,
       status: statuses,
-      currency: currency,
+      currency: currency ? currency : undefined,
       images,
-      minPrice,
-      maxPrice,
+      minPrice: minPrice.length > 0 ? minPrice : undefined,
+      maxPrice: maxPrice.length > 0 ? maxPrice : undefined,
     };
     const check = checkRegisterOrder({ ...data, setErrors });
-    // dispatch(createOrder(data));
+    check &&
+      dispatch(createOrder({ ...data })).then(({ error }) => {
+        if (!error) {
+          closeModal();
+        }
+      });
   };
 
   return (
