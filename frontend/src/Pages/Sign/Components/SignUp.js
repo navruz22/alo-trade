@@ -27,19 +27,19 @@ const SignUp = () => {
     setUrl(e.target.name);
   };
 
-  const [firstname, setFirstname] = useState("saravar");
-  const [lastname, setLastname] = useState("ffsasd");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("123456");
-  const [confirmPassword, setConfirmPassword] = useState("123456");
-  const [phone, setPhone] = useState("998973666221");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const [region, setRegion] = useState("");
   const [district, setDistrict] = useState("");
   const [districts, setDistricts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
   const [allSubcategories, setAllSubcategories] = useState([]);
-  const [name, setName] = useState("Alo24");
+  const [name, setName] = useState("");
   const [tradeTypes, setTradeTypes] = useState([]);
 
   const clearDatas = () => {
