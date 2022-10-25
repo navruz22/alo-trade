@@ -177,7 +177,6 @@ const updateOrganization = async (req, res) => {
 
     res.status(200).json({ organization: updated });
   } catch (e) {
-    console.log(e);
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
 };

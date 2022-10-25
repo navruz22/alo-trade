@@ -1,26 +1,31 @@
 const { Schema, model, Joi } = require("../../packages");
 
-const Order = new Schema({
-  tradetypes: [{ type: Schema.Types.ObjectId, ref: "TradeType" }],
-  region: { type: Schema.Types.ObjectId, ref: "Region" },
-  district: { type: Schema.Types.ObjectId, ref: "District" },
-  categories: [
-    { type: Schema.Types.ObjectId, ref: "Category", required: true },
-  ],
-  subcategories: [{ type: Schema.Types.ObjectId, ref: "Subcategory" }],
-  name: { type: String, required: true },
-  description: { type: String },
-  status: { type: Array, required: true },
-  currency: { type: String },
-  minPrice: { type: Number },
-  maxPrice: { type: Number },
-  images: [{ type: String }],
-  organization: { type: Schema.Types.ObjectId, ref: "Organization" },
-  user: { type: Schema.Types.ObjectId, ref: "User" },
-  offers: [{ type: Schema.Types.ObjectId, ref: "Offer" }],
-  position: { type: String, required: true, default: "active" },
-  isArchive: { type: Boolean, default: false },
-});
+const Order = new Schema(
+  {
+    tradetypes: [{ type: Schema.Types.ObjectId, ref: "TradeType" }],
+    region: { type: Schema.Types.ObjectId, ref: "Region" },
+    district: { type: Schema.Types.ObjectId, ref: "District" },
+    categories: [
+      { type: Schema.Types.ObjectId, ref: "Category", required: true },
+    ],
+    subcategories: [{ type: Schema.Types.ObjectId, ref: "Subcategory" }],
+    name: { type: String, required: true },
+    description: { type: String },
+    status: { type: Array, required: true },
+    currency: { type: String },
+    minPrice: { type: Number, default: 0 },
+    maxPrice: { type: Number, default: 0 },
+    images: [{ type: String }],
+    organization: { type: Schema.Types.ObjectId, ref: "Organization" },
+    user: { type: Schema.Types.ObjectId, ref: "User" },
+    offers: [{ type: Schema.Types.ObjectId, ref: "Offer" }],
+    position: { type: String, required: true, default: "active" },
+    isArchive: { type: Boolean, default: false },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 const validateOrder = (order) => {
   const schema = Joi.object({

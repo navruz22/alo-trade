@@ -47,7 +47,7 @@ const PageRoutes = () => {
             tradeTypes={tradetypes}
           />
         )}
-        <div className="h-screen overflow-scroll w-full">
+        <div className="h-screen w-full">
           <Suspense fallback={<Loader />}>
             <Routes>{protectedRoutes(type)}</Routes>
           </Suspense>

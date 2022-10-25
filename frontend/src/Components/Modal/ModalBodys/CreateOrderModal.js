@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CheckboxList from "../../CheckboxList/CheckboxList";
 import { filter, forEach, map, some, uniqueId } from "lodash";
@@ -12,9 +12,12 @@ import RadioButtonList from "../../RadioButtons/RadioButtonList";
 import { positions, currencices } from "../../../Config/globalConstants";
 import UploadImages from "../../ImageCrop/UploadImages";
 import { checkRegisterOrder } from "../../../Pages/User/Orders/constants";
-import { createOrder } from "../../../Pages/User/Orders/orderSlice";
+import {
+  createOrder,
+  getOrderById,
+} from "../../../Pages/User/Orders/orderSlice";
 
-const CreateOrderModal = ({ closeModal }) => {
+const CreateOrderModal = ({ closeModal, orderId }) => {
   const dispatch = useDispatch();
   const { tradetypes } = useSelector((state) => state.trade);
   const { loading } = useSelector((state) => state.login);
@@ -31,7 +34,7 @@ const CreateOrderModal = ({ closeModal }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [statuses, setStatuses] = useState([]);
-  const [currency, setCurrency] = useState(null);
+  const [currency, setCurrency] = useState("UZS");
   const [districts, setDistricts] = useState([]);
   const [allSubcategories, setAllSubcategories] = useState([]);
   const [images, setImages] = useState([]);
@@ -45,7 +48,7 @@ const CreateOrderModal = ({ closeModal }) => {
 
   const changeHandler = (e) => {
     const name = e.target.name;
-    const value = e.target.value.trim();
+    const value = e.target.value;
     name === "name" && setName(value);
     name === "description" && setDescription(value);
     name === "minPrice" && setMinPrice(value);
@@ -110,7 +113,7 @@ const CreateOrderModal = ({ closeModal }) => {
   };
 
   const changeCurrency = (e) => {
-    setCurrency(e.value);
+    setCurrency(e.target.value);
     clearErrors();
   };
 
@@ -125,17 +128,17 @@ const CreateOrderModal = ({ closeModal }) => {
     const Subcategory = map(subcategories, (subcategory) => subcategory.value);
     const data = {
       name,
-      description: description.length > 0 ? description : undefined,
+      description: description,
       tradetypes: tradeTypes,
       region: region.value,
       district: district.value,
       categories: Category,
       subcategories: Subcategory,
       status: statuses,
-      currency: currency ? currency : undefined,
+      currency,
       images,
-      minPrice: minPrice.length > 0 ? minPrice : undefined,
-      maxPrice: maxPrice.length > 0 ? maxPrice : undefined,
+      minPrice: Number(minPrice),
+      maxPrice: Number(maxPrice),
     };
     const check = checkRegisterOrder({ ...data, setErrors });
     check &&
@@ -145,6 +148,10 @@ const CreateOrderModal = ({ closeModal }) => {
         }
       });
   };
+
+  useEffect(() => {
+    orderId && dispatch(getOrderById({ id: orderId }));
+  }, [dispatch, orderId]);
 
   return (
     <div className="overflow-scroll p-1">
@@ -195,7 +202,7 @@ const CreateOrderModal = ({ closeModal }) => {
         name="description"
         value={description}
         onChange={changeHandler}
-        label="Qo'shimcha ma'lumot"
+        label="Qo'shimcha ma'lumot*"
         labelStyle="font-normal"
         placeholder="Izoh"
       />
@@ -208,6 +215,7 @@ const CreateOrderModal = ({ closeModal }) => {
           checkedList={statuses}
         />
         <RadioButtonList
+          currency={currency}
           onChange={changeCurrency}
           list={currencices}
           label="To'lov turi"

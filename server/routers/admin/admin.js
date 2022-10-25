@@ -36,7 +36,6 @@ const createAdmin = async (req, res) => {
 
 const loginAdmin = async (req, res) => {
   try {
-    console.log(req.body);
     const { phone, password } = req.body;
     const admin = await Admin.findOne({ phone });
     if (!admin) {
@@ -56,7 +55,6 @@ const loginAdmin = async (req, res) => {
     );
     res.json(token);
   } catch (e) {
-    console.log(e);
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
 };

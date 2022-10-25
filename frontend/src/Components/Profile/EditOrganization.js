@@ -9,7 +9,6 @@ import { capitalize, filter, forEach, map, some } from "lodash";
 import { checkOrganization } from "./constants";
 import ImageCrop from "../ImageCrop/ImageCrop";
 import Input from "../Inputs/Input";
-import SelectInput from "../SelectInput/SelectInput";
 import SaveButton from "../Buttons/SaveButton";
 import CheckboxList from "../CheckboxList/CheckboxList";
 import SelectRegion from "../Select/SelectRegion";
@@ -50,7 +49,7 @@ const EditOrganization = () => {
 
   const changeHandler = (e) => {
     const name = e.target.name;
-    const value = e.target.value.trim();
+    const value = e.target.value;
     name === "name" && setName(capitalize(value));
     name === "phone" && setPhone(value);
     name === "email" && setEmail(value);

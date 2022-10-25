@@ -58,7 +58,7 @@ const SignUp = () => {
 
   const changeHandler = (e) => {
     const name = e.target.name;
-    const value = e.target.value.trim();
+    const value = e.target.value;
     name === "firstname" && setFirstname(capitalize(value));
     name === "lastname" && setLastname(capitalize(value));
     name === "email" && setEmail(value);

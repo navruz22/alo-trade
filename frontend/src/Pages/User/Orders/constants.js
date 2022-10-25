@@ -8,7 +8,10 @@ export const checkRegisterOrder = ({
   maxPrice,
   currency,
   setErrors,
+  description,
 }) => {
+  const min = Number(minPrice);
+  const max = Number(maxPrice);
   if (tradetypes.length === 0) {
     setErrors("Savdo turlari tanlanmagan");
     return false;
@@ -25,21 +28,26 @@ export const checkRegisterOrder = ({
     setErrors("Mahsulot nomi kiritilmagan");
     return false;
   }
+
+  if (description.length === 0) {
+    setErrors("Mahsulot haqida ma'lumot kiritilmagan");
+    return false;
+  }
+
   if (status.length === 0) {
     setErrors("Mahsulot holati tanlanmagan");
     return false;
   }
-  if ((minPrice || maxPrice) && minPrice > maxPrice) {
+  if ((min || max) && min > max) {
+    setErrors("Narxlar to'g'ri kiritilmagan");
+    return false;
+  }
+  if ((min || max) && (min < 0 || max < 0)) {
     setErrors("Narxlar to'g'ri kiritilmagan");
     return false;
   }
 
-  if ((minPrice || maxPrice) && (minPrice < 0 || maxPrice < 0)) {
-    setErrors("Narxlar to'g'ri kiritilmagan");
-    return false;
-  }
-
-  if ((minPrice > 0 || maxPrice > 0) && currency === null) {
+  if ((min > 0 || max > 0) && currency === null) {
     setErrors("Valyuta tanlanmagan");
     return false;
   }

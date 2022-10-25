@@ -30,7 +30,6 @@ export const updateOrganization = createAsyncThunk(
   "login/updateOrganization",
   async (body = {}, { rejectWithValue }) => {
     try {
-      console.log(body);
       const { data } = await Api.put("/user/organization/update", body);
       return data;
     } catch (error) {

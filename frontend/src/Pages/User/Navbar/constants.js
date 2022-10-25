@@ -22,10 +22,10 @@ export const navs = [
     style: "rotate-180 mr-2 mt-1",
   },
   {
-    name: "AloShop",
+    name: "AloTrade",
     path: "/",
     navStyle:
-      "bg-white-800 text-primary-800 font-amazonbold mx-2 rounded-md px-2 text-xl hover:bg-black-700 transition-all ease-in-out duration-300 py-3",
+      "bg-white-900 text-primary-800 font-amazonbold mx-2 rounded-md px-2 text-xl hover:bg-primary-900 hover:text-white-900 transition-all ease-in-out duration-300 py-3",
     style: "mr-2",
   },
   {

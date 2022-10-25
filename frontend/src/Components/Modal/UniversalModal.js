@@ -2,8 +2,18 @@ import Modal from "react-modal";
 import ModalHeader from "./ModalHeader";
 import SignUpModal from "./ModalBodys/SignUpModal";
 import CreateOrderModal from "./ModalBodys/CreateOrderModal";
+import Approve from "./ModalBodys/Approve";
 
-function UniversalModal({ body, isOpen, toggleModal, closeModal }) {
+function UniversalModal({
+  body,
+  isOpen,
+  toggleModal,
+  closeModal,
+  orderId,
+  approveFunction,
+  headerText,
+  title,
+}) {
   const customStyles = {
     content: {
       width: "800px",
@@ -26,7 +36,16 @@ function UniversalModal({ body, isOpen, toggleModal, closeModal }) {
       case "signup":
         return <SignUpModal />;
       case "createOrder":
-        return <CreateOrderModal closeModal={closeModal} />;
+        return <CreateOrderModal closeModal={closeModal} orderId={orderId} />;
+      case "approve":
+        return (
+          <Approve
+            toggleModal={toggleModal}
+            approveFunction={approveFunction}
+            headerText={headerText}
+            title={title}
+          />
+        );
       default:
         return "Bunday jadval topilmadi";
     }
@@ -35,7 +54,7 @@ function UniversalModal({ body, isOpen, toggleModal, closeModal }) {
     <Modal
       isOpen={isOpen}
       style={
-        body === "signup" || "createOrder"
+        body === "signup" || "createOrder" || "approve"
           ? { ...customStyles }
           : { ...modalFull }
       }
