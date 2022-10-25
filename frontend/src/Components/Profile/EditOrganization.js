@@ -4,15 +4,16 @@ import {
   editProfileImage,
   getUser,
   updateOrganization,
-  updateUser,
 } from "../../Pages/Sign/signSlice";
-import { capitalize, filter, forEach, map, some, uniqueId } from "lodash";
-import { checkOrganization, checkUser } from "./constants";
+import { capitalize, filter, forEach, map, some } from "lodash";
+import { checkOrganization } from "./constants";
 import ImageCrop from "../ImageCrop/ImageCrop";
 import Input from "../Inputs/Input";
 import SelectInput from "../SelectInput/SelectInput";
-import Checkbox from "../CheckboxList/Checkbox";
 import SaveButton from "../Buttons/SaveButton";
+import CheckboxList from "../CheckboxList/CheckboxList";
+import SelectRegion from "../Select/SelectRegion";
+import SelectCategory from "../Select/SelectCategory";
 
 const EditOrganization = () => {
   const dispatch = useDispatch();
@@ -142,25 +143,25 @@ const EditOrganization = () => {
     organization.region && setRegion(organization.region);
     organization.district && setDistrict(organization.district);
     organization.image && setImage(organization.image);
-    organization.categories &&
-      setCategories(
-        filter(categoriesWithSubcategories, (category) =>
-          some(organization.categories, ["value", category.value])
-        )
+    organization.categories && setCategories(organization.categories);
+    if (organization.categories && organization.categories.length > 0) {
+      const data = [];
+      forEach(organization.categories, (category) =>
+        forEach(category.subcategories, (subcategory) => data.push(subcategory))
       );
+      setAllSubcategories(data);
+    }
     organization.subcategories && setSubcategories(organization.subcategories);
     organization.tradetypes && setTradeTypes(organization.tradetypes);
   };
-
   useEffect(() => {
-    categoriesWithSubcategories?.length > 0 &&
-      dispatch(getUser()).then(({ error, payload }) => {
-        if (!error) {
-          const { organization } = payload;
-          organization && setAllDatas(organization);
-        }
-      });
-  }, [dispatch, categoriesWithSubcategories]);
+    dispatch(getUser()).then(({ error, payload }) => {
+      if (!error) {
+        const { organization } = payload;
+        organization && setAllDatas(organization);
+      }
+    });
+  }, [dispatch]);
 
   return (
     <div className="p-5 flex ">
@@ -199,69 +200,36 @@ const EditOrganization = () => {
             onKeyUp={enterHandler}
           />
         </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="mr-3 w-full">
-            <p className="text-neutral-500 text-sm mt-[7px]">Viloyat</p>
-            <SelectInput
-              placeholder="Viloyat"
-              options={regions}
-              onSelect={selectRegion}
-              value={region}
-              name="region"
-              isDisabled={loading}
-            />
-          </div>
-          <div className="w-full">
-            <p className="text-neutral-500 text-sm mt-[7px]">Tuman</p>
-            <SelectInput
-              placeholder="Viloyat"
-              value={district}
-              options={districts}
-              onSelect={selectDistrict}
-              name={"district"}
-              isDisabled={loading}
-            />
-          </div>
-        </div>
+        <SelectRegion
+          region={region}
+          regions={regions}
+          selectRegion={selectRegion}
+          districts={districts}
+          district={district}
+          selectDistrict={selectDistrict}
+          loading={loading}
+          labelRegion={"Viloyat"}
+          labelDistrict={"Tuman"}
+        />
         <div className="mb-2 w-full">
-          <h1 className="text-sm text-neutral-500 mt-4">
-            Savdo turingizni tanlang
-          </h1>
-          <div className="grid grid-cols-2">
-            {map(tradetypes, (data) => (
-              <Checkbox
-                key={uniqueId("tradeType")}
-                data={data}
-                onChange={changeTradeTypes}
-                checked={tradeTypes?.some((item) => item === data.value)}
-              />
-            ))}
-          </div>
+          <CheckboxList
+            list={tradetypes}
+            onChange={changeTradeTypes}
+            headerText="Savdo turingizni tanlang"
+            checkedList={tradeTypes}
+            headerStyle="text-sm text-[#777] font-normal"
+            cols={2}
+          />
         </div>
-        <div className="flex flex-row w-full">
-          <div className="w-full mr-3">
-            <SelectInput
-              placeholder="kategoriya*"
-              options={categoriesWithSubcategories}
-              isMulti={true}
-              value={categories}
-              isDisabled={loading}
-              onSelect={selectCategory}
-              closeMenuOnSelect={false}
-            />
-          </div>
-          <div className="w-full">
-            <SelectInput
-              placeholder="kategoriya turi*"
-              options={allSubcategories}
-              isMulti={true}
-              value={subcategories}
-              isDisabled={categories.length === 0 || loading}
-              onSelect={selectSubcategory}
-              closeMenuOnSelect={false}
-            />
-          </div>
-        </div>
+        <SelectCategory
+          categories={categories}
+          selectSubcategory={selectSubcategory}
+          subcategories={subcategories}
+          selectCategory={selectCategory}
+          loading={loading}
+          allSubcategories={allSubcategories}
+          categoriesWithSubcategories={categoriesWithSubcategories}
+        />
         <SaveButton
           isDisabled={loading}
           title="Saqlash"

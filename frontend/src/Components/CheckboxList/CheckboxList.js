@@ -3,13 +3,28 @@ import { map, uniqueId } from "lodash";
 import Checkbox from "./Checkbox";
 import FilterHeader from "../FilterHeader/FilterHeader";
 
-const CheckboxList = ({ list, headerText }) => {
+const CheckboxList = ({
+  list,
+  headerText,
+  cols = 1,
+  onChange,
+  checkedList,
+  headerStyle,
+  listStyle,
+}) => {
   return (
-    <div className="mt-3 pl-3 pb-2">
-      <FilterHeader label={headerText} />
-      {map(list, (data) => (
-        <Checkbox data={data} key={uniqueId("checkbox")} />
-      ))}
+    <div className="">
+      <FilterHeader label={headerText} className={headerStyle} />
+      <div className={`grid grid-cols-${cols} ${listStyle}`}>
+        {map(list, (data) => (
+          <Checkbox
+            onChange={onChange}
+            data={data}
+            key={uniqueId("checkbox")}
+            checked={checkedList?.some((item) => item === data.value)}
+          />
+        ))}
+      </div>
     </div>
   );
 };

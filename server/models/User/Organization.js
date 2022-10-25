@@ -4,7 +4,7 @@ const organization = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, email: true, lowercase: true },
-    images: [{ type: String }],
+    image: { type: String },
     phone: { type: String, unique: true, min: 13 },
     user: { type: Schema.Types.ObjectId, ref: "User" },
     region: { type: Schema.Types.ObjectId, ref: "Region" },
@@ -24,7 +24,7 @@ function validateOrganization(organization) {
     name: Joi.string().required(),
     phone: Joi.string().required(),
     email: Joi.string(),
-    image: Joi.array(),
+    image: Joi.string(),
     categories: Joi.array().required(),
     subcategories: Joi.array().required(),
     tradetypes: Joi.array().required(),

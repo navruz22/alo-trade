@@ -1,6 +1,6 @@
 import React from "react";
 
-const User = () => {
+const Main = () => {
   return (
     <div className="w-full flex flex-row">
       <div className="w-full">Body</div>
@@ -9,4 +9,4 @@ const User = () => {
   );
 };
 
-export default User;
+export default Main;

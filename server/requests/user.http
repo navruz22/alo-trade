@@ -1,4 +1,4 @@
-### create a new User
+### create a new Main
 POST http://localhost:8080/api/user/signup
 Accept: application/json
 Content-Type: application/json
@@ -13,7 +13,7 @@ Content-Type: application/json
   "email": "test"
 }
 
-### update User
+### update Main
 PUT http://localhost:8080/api/user/update
 Accept: application/json
 Content-Type: application/json
@@ -43,7 +43,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNGY2ZWE3Y2QzZTIyNTNmZTA3MzdkZCIsImlhdCI6MTY2NjE1MDA1NX0.ftMPc7sEHAYuO_G0UQXS5_q0vco3Lvny9PvmuTDUmRc
 
 
-### signin User
+### signin Main
 POST http://localhost:8080/api/user/signin
 Accept: application/json
 Content-Type: application/json

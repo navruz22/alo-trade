@@ -14,7 +14,7 @@ const {
 } = require("./organization");
 const auth = require("../../middleware/auth.middleware");
 
-// User
+// Main
 router.post("/signup", createUser);
 router.put("/update", auth, updateUser);
 router.post("/getuserbyid", auth, getUserData);

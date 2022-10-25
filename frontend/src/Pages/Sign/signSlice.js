@@ -67,6 +67,18 @@ export const editProfileImage = createAsyncThunk(
   }
 );
 
+export const deleteProfileImage = createAsyncThunk(
+  "login/deleteProfileImage",
+  async (body, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/upload/del", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const getUser = createAsyncThunk(
   "login/getUser",
   async (body = {}, { rejectWithValue }) => {

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Routes, useLocation } from "react-router-dom";
 import protectedRoutes from "./ProtectedRoutes";
 import Loader from "../Components/Loader/Loader";
-import Navbar from "./Navbar/Navbar";
+import Navbar from "./User/Navbar/Navbar";
 import Filter from "./Filter/Filter";
 import { getAllCategories } from "./Category/categorySlice";
 import { getAllregions } from "./Filter/regionsSlice";
@@ -37,22 +37,20 @@ const PageRoutes = () => {
     setPathName(location.pathname.split("/")[1]);
   }, [location.pathname]);
   return (
-    <section>
+    <section className="flex flex-col w-full h-full max-h-screen">
       <Navbar />
-      <div className={"fixed top-0 w-full"}>
-        <div className="pt-14 flex flex-row w-full">
-          {pathName !== "profile" && (
-            <Filter
-              categories={categories}
-              regions={regions}
-              tradeTypes={tradetypes}
-            />
-          )}
-          <div className="h-screen overflow-scroll w-full">
-            <Suspense fallback={<Loader />}>
-              <Routes>{protectedRoutes(type)}</Routes>
-            </Suspense>
-          </div>
+      <div className="flex flex-row w-full overflow-hidden ">
+        {pathName !== "profile" && (
+          <Filter
+            categories={categories}
+            regions={regions}
+            tradeTypes={tradetypes}
+          />
+        )}
+        <div className="h-screen overflow-scroll w-full">
+          <Suspense fallback={<Loader />}>
+            <Routes>{protectedRoutes(type)}</Routes>
+          </Suspense>
         </div>
       </div>
     </section>

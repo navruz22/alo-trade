@@ -36,6 +36,7 @@ const createAdmin = async (req, res) => {
 
 const loginAdmin = async (req, res) => {
   try {
+    console.log(req.body);
     const { phone, password } = req.body;
     const admin = await Admin.findOne({ phone });
     if (!admin) {

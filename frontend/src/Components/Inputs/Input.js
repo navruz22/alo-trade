@@ -12,6 +12,7 @@ const Input = ({
   name,
   required = false,
   isDisabled,
+  labelStyle,
 }) => {
   const [showPassword, setShowPassword] = useState(type === "password");
   const [inputType, setInputType] = useState(type);
@@ -24,7 +25,9 @@ const Input = ({
   return (
     <div className={`py-2 w-full flex flex-col text-neutral-700 ${margin}`}>
       {label && (
-        <label className="text-neutral-500 font-semibold text-sm">
+        <label
+          className={`text-neutral-500 font-semibold text-sm ${labelStyle}`}
+        >
           {label}
         </label>
       )}

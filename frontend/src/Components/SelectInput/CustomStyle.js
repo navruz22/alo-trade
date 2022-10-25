@@ -52,7 +52,7 @@ const Control = (styles, { isDisabled }) => ({
   ...styles,
   width: "100%",
   height: "100%",
-  padding: ".425rem .58rem",
+  padding: ".0rem .58rem",
   borderRadius: ".25rem",
   fontSize: ".875rem",
   fontWeight: "400",

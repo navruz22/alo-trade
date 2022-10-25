@@ -49,6 +49,7 @@ const EditUser = () => {
 
   const selectRegion = (e) => {
     setRegion(e);
+    setDistrict("");
     setDistricts(e.districts);
   };
 
@@ -96,6 +97,7 @@ const EditUser = () => {
     user.lastname && setLastname(user.lastname);
     user.phone && setPhone(user.phone);
     user.region && setRegion(user.region);
+    user.region && setDistricts(user.region.districts);
     user.district && setDistrict(user.district);
     user.email && setEmail(user.email);
   };

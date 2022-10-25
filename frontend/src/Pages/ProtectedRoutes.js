@@ -3,14 +3,13 @@ import { map, uniqueId } from "lodash";
 import { Navigate, Route } from "react-router-dom";
 // pages -->
 const AdminReport = lazy(() => import("./Admin/Admin"));
-const OrganizationReport = lazy(() => import("./Organization/Organization"));
 
 const otherRoutes = {
   path: "*",
   element: <Navigate to={"/"} replace={true} />,
 };
 // user pages
-const UserReport = lazy(() => import("./User/User"));
+const UserReport = lazy(() => import("./User/Main"));
 const OrdersReport = lazy(() => import("./User/Orders/Orders"));
 const ProductsReport = lazy(() => import("./User/Products/Products"));
 const OffersReport = lazy(() => import("./User/Offers/Offers"));
@@ -21,13 +20,6 @@ const ProfileReport = lazy(() => import("./User/Profile/Profile"));
 // <-- pages
 
 // routes -->
-const organizationRoutes = [
-  {
-    path: "/",
-    element: <OrganizationReport />,
-  },
-  otherRoutes,
-];
 const userRoutes = [
   {
     path: "/",

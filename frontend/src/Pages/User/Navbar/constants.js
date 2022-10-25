@@ -25,7 +25,7 @@ export const navs = [
     name: "AloShop",
     path: "/",
     navStyle:
-      "bg-black-800 font-amazonbold mx-2 rounded-md px-2 text-xl hover:bg-black-700 transition-all ease-in-out duration-300 py-3",
+      "bg-white-800 text-primary-800 font-amazonbold mx-2 rounded-md px-2 text-xl hover:bg-black-700 transition-all ease-in-out duration-300 py-3",
     style: "mr-2",
   },
   {

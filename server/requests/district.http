@@ -2,10 +2,10 @@
 POST http://localhost:8080/api/address/district/create
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNTNiNGNmZDllMjE2NmFiYzE1ZTUxNiIsImlhdCI6MTY2NjQzMDI1NywiZXhwIjoxNjY2NDczNDU3fQ.FT4QJevdIumcUd8zOjNqT4kP6_rp0GdvcbaxCxCWLj4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNTNiNGNmZDllMjE2NmFiYzE1ZTUxNiIsImlhdCI6MTY2NjU4Nzk3MiwiZXhwIjoxNjY2NjMxMTcyfQ.GF9eNR2VvRGsSLsQ3nAniP-cJPR5xXsMt7yhoLt55Z8
 
 {
-  "name": "Qiziltepa",
+  "name": "Nurota tumani",
   "region": "6353b62ed9e2166abc15e541"
 }
 

@@ -1,19 +1,19 @@
 import React from "react";
+import { uniqueId } from "lodash";
 
 const Checkbox = ({ data, onChange, checked }) => {
+  const id = uniqueId();
   return (
     <>
       <label
-        htmlFor={data.label}
-        className={`flex items-center text-neutral-600 text-sm cursor-pointer ml-2 w-full ${
-          data.checked && "font-amazonbold"
-        }`}
+        htmlFor={id}
+        className={`flex items-center text-neutral-600 text-sm cursor-pointer ml-2 w-full `}
       >
         <input
           checked={checked}
           onChange={onChange}
           value={data.value}
-          id={data.label}
+          id={id}
           type="checkbox"
           className="w-[1rem] h-[1rem] mr-2"
         />

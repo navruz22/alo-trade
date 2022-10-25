@@ -1,10 +1,8 @@
 import React from "react";
 
-const FilterHeader = ({ label }) => {
+const FilterHeader = ({ label, className }) => {
   return (
-    <h3 className="font-amazonbold tracking-normal text-md text-neutral-700">
-      {label}
-    </h3>
+    <h3 className={`tracking-normal text-neutral-700 ${className}`}>{label}</h3>
   );
 };
 
