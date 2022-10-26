@@ -11,6 +11,7 @@ const {
   updateDistrict,
   deleteDistrict,
   getDistrictsByRegion,
+  createDistricts,
 } = require("./district");
 const auth = require("./../../middleware/auth.middleware");
 
@@ -25,5 +26,6 @@ router.post("/district/create", auth, createDistrict);
 router.put("/district/update", auth, updateDistrict);
 router.delete("/district/delete", auth, deleteDistrict);
 router.post("/district/getallbyregion", auth, getDistrictsByRegion);
+router.post("/district/createall", auth, createDistricts);
 
 module.exports = router;

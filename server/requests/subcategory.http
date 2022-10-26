@@ -5,8 +5,8 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNTNiNGNmZDllMjE2NmFiYzE1ZTUxNiIsImlhdCI6MTY2NjQzMDI1NywiZXhwIjoxNjY2NDczNDU3fQ.FT4QJevdIumcUd8zOjNqT4kP6_rp0GdvcbaxCxCWLj4
 
 {
-  "name": "Asbob uskunalar",
-  "category": "6353b70f5f02ad933b54d58b"
+  "name": "Yengil avtomobil",
+  "category": "6353b7075f02ad933b54d588"
 }
 
 ### get Subcategories by category

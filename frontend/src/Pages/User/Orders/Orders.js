@@ -3,12 +3,15 @@ import UniversalModal from "../../../Components/Modal/UniversalModal";
 import PageHeader from "../../../Components/PageHeaders/PageHeader";
 import OrderCard from "../../../Components/OrderCard/OrderCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrdersByUser } from "./orderSlice";
+import { getOrders, getOrdersByFilter } from "./orderSlice";
 import { map, uniqueId } from "lodash";
+import { filterOrder } from "../../Filter/filterSlice";
 
 const Orders = () => {
   const dispatch = useDispatch();
   const { orders } = useSelector((state) => state.orders);
+  const { order, categories, subcategories, tradetypes, regions, districts } =
+    useSelector((state) => state.filter);
   const [orderId, setOrderId] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const countPage = 4;
@@ -44,7 +47,6 @@ const Orders = () => {
   };
 
   const editHandler = (id) => {
-    console.log(id);
     setOrderId(id);
     setModalBody("createOrder");
     setModalVisible(true);
@@ -52,9 +54,48 @@ const Orders = () => {
 
   const count = 2000;
 
+  const handleFilter = (e) => {
+    const value = e.target.value;
+    dispatch(filterOrder(value));
+  };
+
   useEffect(() => {
-    dispatch(getOrdersByUser({ page: currentPage, count: countPage }));
-  }, [dispatch, currentPage, countPage]);
+    const data = {
+      page: 0,
+      count: 4,
+      order,
+      categories,
+      subcategories,
+      tradetypes,
+      regions,
+      districts,
+    };
+    setCurrentPage(0);
+    dispatch(getOrders(data));
+  }, [
+    dispatch,
+    order,
+    categories,
+    subcategories,
+    tradetypes,
+    regions,
+    districts,
+  ]);
+  useEffect(() => {
+    const data = {
+      page: currentPage,
+      count: countPage,
+      order,
+      categories,
+      subcategories,
+      tradetypes,
+      regions,
+      districts,
+    };
+
+    currentPage !== 0 && dispatch(getOrdersByFilter(data));
+    //    eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, order, currentPage, countPage]);
 
   return (
     <div
@@ -64,8 +105,10 @@ const Orders = () => {
       <PageHeader
         count={count}
         onClick={openModal}
-        countTitle="Faol buyurtmalar:"
+        countTitle="Jami:"
         buttonTitle="Buyurtma yaratish"
+        handleFilter={handleFilter}
+        filterData={order}
       />
 
       <div className="p-4">

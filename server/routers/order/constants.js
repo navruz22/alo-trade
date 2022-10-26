@@ -11,8 +11,8 @@ const getOrder = async (id) =>
     .populate("user", "firstname lastname phone email")
     .populate("organization", "name phone email");
 
-const getOrders = async ({ user, page, count }) =>
-  await Order.find({ user })
+const getOrders = async ({ page, count, query }) =>
+  await Order.find(query)
     .sort({ createdAt: -1 })
     .skip(page * count)
     .limit(count)
@@ -85,4 +85,4 @@ const getOrderWithId = async (id) =>
       };
     });
 
-module.exports = { getOrders, getOrder, getOrderWithId };
+module.exports = { getOrder, getOrderWithId, getOrders };

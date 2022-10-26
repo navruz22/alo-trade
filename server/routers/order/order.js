@@ -1,6 +1,7 @@
 const { validateOrder } = require("../../models/validators");
 const { Order, Organization } = require("../../models/models");
-const { getOrder, getOrders, getOrderWithId } = require("./constants");
+const { getOrder, getOrderWithId, getOrders } = require("./constants");
+const { map } = require("lodash");
 
 const createOrder = async (req, res) => {
   try {
@@ -32,15 +33,45 @@ const createOrder = async (req, res) => {
   }
 };
 
-const getOrdersByUser = async (req, res) => {
+const getOrdersByFilter = async (req, res) => {
   try {
-    const { count, page } = req.body;
+    const {
+      count,
+      page,
+      order: orderFilter,
+      categories,
+      subcategories,
+      tradetypes,
+      regions,
+      districts,
+    } = req.body;
     const user = req.user.id;
 
-    const orders = await getOrders({ user, count, page });
+    const all = orderFilter === "all";
+
+    let query = {};
+    if (tradetypes.length > 0) {
+      query.tradetypes = { $in: tradetypes };
+    }
+    if (districts.length) {
+      query.district = { $in: [...districts] };
+    }
+    if (regions.length) {
+      query.region = { $in: regions };
+    }
+    if (categories.length) {
+      query.categories = { $in: categories };
+    }
+    if (subcategories.length) {
+      query.subcategories = { $in: subcategories };
+    }
+    if (orderFilter === "my") {
+      query.user = user;
+    }
+    const orders = await getOrders({ count, page, query });
+
     res.status(200).json({ orders });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
   }
 };
@@ -57,4 +88,4 @@ const getOrderById = async (req, res) => {
   }
 };
 
-module.exports = { createOrder, getOrdersByUser, getOrder, getOrderById };
+module.exports = { createOrder, getOrdersByFilter, getOrder, getOrderById };

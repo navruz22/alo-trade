@@ -14,11 +14,23 @@ export const createOrder = createAsyncThunk(
   }
 );
 
-export const getOrdersByUser = createAsyncThunk(
-  "orders/getOrdersByUser",
+export const getOrders = createAsyncThunk(
+  "orders/getOrders",
   async (body = {}, { rejectWithValue }) => {
     try {
-      const { data } = await Api.post("/order/getbyuser", body);
+      const { data } = await Api.post("/order/getbyfilter", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getOrdersByFilter = createAsyncThunk(
+  "orders/getOrdersByFilter",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/order/getbyfilter", body);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -63,14 +75,26 @@ const orderSlice = createSlice({
       state.error = payload;
       universalToast(payload, "error");
     },
-    [getOrdersByUser.pending]: (state) => {
+    [getOrders.pending]: (state) => {
       state.loading = true;
     },
-    [getOrdersByUser.fulfilled]: (state, { payload: { orders } }) => {
+    [getOrders.fulfilled]: (state, { payload: { orders } }) => {
+      state.loading = false;
+      state.orders = orders;
+    },
+    [getOrders.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+      universalToast(payload, "error");
+    },
+    [getOrdersByFilter.pending]: (state) => {
+      state.loading = true;
+    },
+    [getOrdersByFilter.fulfilled]: (state, { payload: { orders } }) => {
       state.loading = false;
       state.orders = [...state.orders, ...orders];
     },
-    [getOrdersByUser.rejected]: (state, { payload }) => {
+    [getOrdersByFilter.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
       universalToast(payload, "error");

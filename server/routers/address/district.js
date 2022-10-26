@@ -1,5 +1,6 @@
 const { validateDistrict } = require("../../models/validators");
 const { District, Region } = require("../../models/models");
+const { forEach } = require("lodash");
 
 const createDistrict = async (req, res) => {
   try {
@@ -92,9 +93,31 @@ const getDistrictsByRegion = async (req, res) => {
   }
 };
 
+const createDistricts = async (req, res) => {
+  try {
+    const { districts, region } = req.body;
+
+    forEach(districts, async (district) => {
+      const newDistrict = new District({
+        name: district.name,
+        region,
+      });
+      await newDistrict.save();
+
+      const updateRegion = await Region.findById(region);
+      updateRegion.districts.push(newDistrict._id);
+      await updateRegion.save();
+    });
+    res.status(200).json({ message: "Tumanlar muvaffaqiyatli yaratildi." });
+  } catch (error) {
+    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+  }
+};
+
 module.exports = {
   createDistrict,
   updateDistrict,
   deleteDistrict,
   getDistrictsByRegion,
+  createDistricts,
 };

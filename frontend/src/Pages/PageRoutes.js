@@ -32,7 +32,6 @@ const PageRoutes = () => {
     dispatch(getAllCategories());
     dispatch(getAllregions());
   }, [dispatch]);
-
   useEffect(() => {
     setPathName(location.pathname.split("/")[1]);
   }, [location.pathname]);

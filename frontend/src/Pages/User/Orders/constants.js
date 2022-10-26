@@ -54,3 +54,14 @@ export const checkRegisterOrder = ({
 
   return true;
 };
+
+export const filter = [
+  {
+    label: "barcha buyurtmalar",
+    value: "all",
+  },
+  {
+    label: "mening buyurtmalarim",
+    value: "my",
+  },
+];

@@ -41,4 +41,22 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iL
   "region": "634ec2d776fc5aa7998fb88c"
 }
 
+### create all Districts
+POST http://localhost:8080/api/address/district/createall
+Accept: application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNThhNGY2MDQyNzlhZjVjYTZmYzY5MiIsImlhdCI6MTY2Njc1Mzc4MiwiZXhwIjoxNjY2Nzk2OTgyfQ.RyfX-2FA86j7ZtFpSTPlrwobooDQkjbwnOiqxtJlZUA
+
+{
+  "districts": [
+    {
+      "name": "Nurota tumani"
+    },
+    {
+      "name": "Xatirchi"
+    }
+  ],
+  "region": "Navoiy"
+}
+
 
