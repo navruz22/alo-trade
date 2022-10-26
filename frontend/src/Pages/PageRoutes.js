@@ -13,19 +13,15 @@ const PageRoutes = () => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const { userData } = useSelector((state) => state.login);
   const { categoriesWithSubcategories: categories } = useSelector(
     (state) => state.categories
   );
   const { tradetypes } = useSelector((state) => state.trade);
   const { regions } = useSelector((state) => state.regions);
-  const [type, setType] = useState(userData?.user?.type);
   const [pathName, setPathName] = useState(location.pathname.split("/")[1]);
 
-  useEffect(() => {
-    const { user } = userData;
-    setType(user?.type);
-  }, [userData]);
+  const filterVisible =
+    pathName !== "profile" && pathName !== "sign-in" && pathName !== "sign-up";
 
   useEffect(() => {
     dispatch(getTradeTypes());
@@ -39,7 +35,7 @@ const PageRoutes = () => {
     <section className="flex flex-col w-full h-full max-h-screen">
       <Navbar />
       <div className="flex flex-row w-full overflow-hidden ">
-        {pathName !== "profile" && (
+        {filterVisible && (
           <Filter
             categories={categories}
             regions={regions}
@@ -48,7 +44,7 @@ const PageRoutes = () => {
         )}
         <div className="h-screen w-full">
           <Suspense fallback={<Loader />}>
-            <Routes>{protectedRoutes(type)}</Routes>
+            <Routes>{protectedRoutes()}</Routes>
           </Suspense>
         </div>
       </div>

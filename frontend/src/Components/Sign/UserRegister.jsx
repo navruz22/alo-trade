@@ -117,7 +117,7 @@ const UserRegister = ({
         />
         <br />
         <LabelButton
-          link="sign-in"
+          link="../sign-in"
           label="Avval ro'yxatdan o'tgan bo'lsangiz "
           title={"kirish qismiga qayting"}
         />

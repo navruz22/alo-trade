@@ -8,14 +8,14 @@ const UserProfile = ({ changeHandler, navbarExpended, toggleMenu, user }) => {
         onClick={changeHandler}
         className="w-[50px] h-[50px] bg-neutral-500 rounded-full flex items-center justify-center border border-white-900"
       >
-        {user.image ? (
+        {user?.image ? (
           <img
             src={user.image}
             alt="avatar"
             className="w-full h-full rounded-full"
           />
         ) : (
-          user.firstname[0].toUpperCase() + user.lastname[0].toUpperCase()
+          user?.firstname[0].toUpperCase() + user?.lastname[0].toUpperCase()
         )}
       </button>
 

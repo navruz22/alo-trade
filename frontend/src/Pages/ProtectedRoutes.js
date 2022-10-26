@@ -1,6 +1,9 @@
 import React, { lazy } from "react";
 import { map, uniqueId } from "lodash";
 import { Navigate, Route } from "react-router-dom";
+import Sign from "./Sign/Sign";
+import SignUp from "./Sign/Components/SignUp";
+import SignIn from "./Sign/Components/SignIn";
 // pages -->
 const AdminReport = lazy(() => import("./Admin/Admin"));
 
@@ -41,6 +44,8 @@ const userRoutes = [
     path: "/organizations",
     element: <OrganizationsReport />,
   },
+  { path: "/sign-in", element: <SignIn /> },
+  { path: "/sign-up/*", element: <SignUp /> },
   {
     path: "/profile/*",
     element: <ProfileReport />,
@@ -55,7 +60,7 @@ const adminRoutes = [
   otherRoutes,
 ];
 
-const chooseRoute = (type) => {
+const chooseRoute = () => {
   return userRoutes;
   // switch (type) {
   //   case "organization":
@@ -74,8 +79,8 @@ const chooseRoute = (type) => {
   // }
 };
 
-const protectedRoutes = (type) => {
-  const catchRoutes = chooseRoute(type.toLowerCase());
+const protectedRoutes = () => {
+  const catchRoutes = chooseRoute();
   return map(catchRoutes, (route) => (
     <Route
       exact

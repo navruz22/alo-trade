@@ -1,15 +1,13 @@
 import { lazy, Suspense, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Loader from "./Components/Loader/Loader";
 import { getUser } from "./Pages/Sign/signSlice";
 
 // pages
-const Login = lazy(() => import("./Pages/Sign/Sign"));
 const PageRoutes = lazy(() => import("./Pages/PageRoutes"));
 
 function App() {
   const dispatch = useDispatch();
-  const { logged } = useSelector((state) => state.login);
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("_grecaptcha"));
@@ -21,7 +19,7 @@ function App() {
   return (
     <div className="font-amazon">
       <Suspense fallback={<Loader />}>
-        {logged ? <PageRoutes /> : <Login />}
+        <PageRoutes />
       </Suspense>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../../Components/Inputs/Input";
 import Button from "../../../Components/Buttons/Button";
 import LabelButton from "../../../Components/Buttons/LabelButton";
@@ -9,6 +9,7 @@ import { signIn } from "../signSlice";
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading } = useSelector((state) => state.login);
 
   const [password, setPassword] = useState("123456");
@@ -33,7 +34,11 @@ const SignIn = () => {
       password,
       phone: "+" + phone,
     };
-    dispatch(signIn({ ...data }));
+    dispatch(signIn({ ...data })).then(({ error }) => {
+      if (!error) {
+        navigate("/");
+      }
+    });
   };
 
   return (

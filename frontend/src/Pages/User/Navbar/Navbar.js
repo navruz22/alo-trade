@@ -14,12 +14,13 @@ const Navbar = () => {
   const changeHandler = () => {
     setNavbarExpended(!navbarExpended);
   };
-  const { userData } = useSelector((state) => state.login);
+  const {
+    userData: { user },
+  } = useSelector((state) => state.login);
   const closeHandler = () => {
     dispatch(logOut());
     setNavbarExpended(false);
   };
-
   const toggle = toggleMenu(closeHandler, changeHandler);
   return (
     <nav className="shadow shadow-md py-1 w-full bg-primary-800 z-50  ">
@@ -28,9 +29,9 @@ const Navbar = () => {
         <Outlet />
         <Menu navs={navs} />
         <div className="">
-          {userData ? (
+          {user ? (
             <UserProfile
-              user={userData.user}
+              user={user}
               toggleMenu={toggle}
               navbarExpended={navbarExpended}
               changeHandler={changeHandler}
