@@ -1,5 +1,6 @@
 import React from "react";
-import { IoPencilSharp, IoTrashOutline } from "react-icons/io5";
+import { IoTrashOutline } from "react-icons/io5";
+import { BsPencilSquare } from "react-icons/bs";
 
 const CardEdit = ({ editHandler, orderId, deleteHandler }) => {
   return (
@@ -8,7 +9,7 @@ const CardEdit = ({ editHandler, orderId, deleteHandler }) => {
         onClick={() => editHandler(orderId)}
         className="w-full flex justify-center border-r py-1 "
       >
-        <IoPencilSharp size={25} className="text-neutral-500" />
+        <BsPencilSquare size={22} className="text-neutral-500" />
       </button>
       <button
         className=" w-full flex justify-center py-1"

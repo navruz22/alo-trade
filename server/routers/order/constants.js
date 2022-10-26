@@ -45,7 +45,6 @@ const getOrderWithId = async (id) =>
       },
     })
     .populate("subcategories", "name")
-    .populate("tradetypes", "name")
     .populate("user", "firstname lastname phone email")
     .populate("organization", "name phone email")
     .then((order) => {
@@ -66,7 +65,7 @@ const getOrderWithId = async (id) =>
         region: {
           label: order?.region?.name,
           value: order?.region?._id,
-          districts: map(order?.region.districts, (district) => {
+          districts: map(order?.region?.districts, (district) => {
             return { label: district.name, value: district._id };
           }),
         },
@@ -74,7 +73,7 @@ const getOrderWithId = async (id) =>
           return {
             label: category.name,
             value: category._id,
-            subcategories: map(category.subcategories, (subcategory) => {
+            subcategories: map(category?.subcategories, (subcategory) => {
               return { label: subcategory.name, value: subcategory._id };
             }),
           };

@@ -1,6 +1,14 @@
 import React from "react";
+import { IoLocationOutline } from "react-icons/io5";
 
-const CardBody = ({ name, description, minPrice, maxPrice, currency }) => {
+const CardBody = ({
+  name,
+  description,
+  minPrice,
+  maxPrice,
+  currency,
+  region,
+}) => {
   const min = minPrice ? minPrice.toLocaleString("ru-RU") : 0;
   const max = maxPrice ? maxPrice.toLocaleString("ru-RU") : 0;
   return (
@@ -14,6 +22,10 @@ const CardBody = ({ name, description, minPrice, maxPrice, currency }) => {
         </p>
       </div>
       <p className="text-neutral-600 text-justify">{description}</p>
+      <p className="mt-1 flex items-center text-neutral-500 text-sm">
+        <IoLocationOutline className="" />
+        <span className="ml-2">{region.name}</span>
+      </p>
     </div>
   );
 };

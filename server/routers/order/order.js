@@ -1,7 +1,6 @@
 const { validateOrder } = require("../../models/validators");
 const { Order, Organization } = require("../../models/models");
 const { getOrder, getOrderWithId, getOrders } = require("./constants");
-const { map } = require("lodash");
 
 const createOrder = async (req, res) => {
   try {
@@ -88,4 +87,47 @@ const getOrderById = async (req, res) => {
   }
 };
 
-module.exports = { createOrder, getOrdersByFilter, getOrder, getOrderById };
+const updateOrder = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    delete req.body.id;
+
+    const { error } = validateOrder(req.body);
+
+    if (error) {
+      return res.status(400).json({ message: error.message });
+    }
+
+    await Order.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+
+    const order = await getOrder(id);
+
+    res.status(200).json({ order });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const deleteOrder = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    await Order.findByIdAndDelete(id);
+
+    res.status(200).json({ id });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  createOrder,
+  getOrdersByFilter,
+  getOrder,
+  getOrderById,
+  updateOrder,
+  deleteOrder,
+};

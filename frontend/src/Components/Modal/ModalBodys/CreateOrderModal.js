@@ -15,7 +15,9 @@ import { checkRegisterOrder } from "../../../Pages/User/Orders/constants";
 import {
   createOrder,
   getOrderById,
+  updateOrder,
 } from "../../../Pages/User/Orders/orderSlice";
+import universalModal from "../UniversalModal";
 
 const CreateOrderModal = ({ closeModal, orderId }) => {
   const dispatch = useDispatch();
@@ -142,15 +144,58 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
     };
     const check = checkRegisterOrder({ ...data, setErrors });
     check &&
-      dispatch(createOrder({ ...data })).then(({ error }) => {
+      dispatch(
+        orderId
+          ? updateOrder({ id: orderId, ...data })
+          : createOrder({ ...data })
+      ).then(({ error }) => {
         if (!error) {
           closeModal();
         }
       });
   };
 
+  const setDatas = (order) => {
+    const {
+      tradetypes,
+      region,
+      district,
+      categories,
+      subcategories,
+      status,
+      currency,
+      images,
+      minPrice,
+      maxPrice,
+      name,
+      description,
+    } = order;
+    const { districts } = region;
+    name && setName(name);
+    description && setDescription(description);
+    tradetypes && setTradeTypes(tradetypes);
+    region.label && setRegion(region);
+    district.label && setDistrict(district);
+    districts.length && setDistricts(districts);
+    setCategories && setCategories(categories);
+    subcategories && setSubcategories(subcategories);
+    status && setStatuses(status);
+    currency && setCurrency(currency);
+    images && setImages(images);
+    minPrice && setMinPrice(minPrice);
+    maxPrice && setMaxPrice(maxPrice);
+  };
+
   useEffect(() => {
-    orderId && dispatch(getOrderById({ id: orderId }));
+    orderId &&
+      dispatch(getOrderById({ id: orderId })).then(({ payload, error }) => {
+        if (error) {
+          universalModal(error.message, "error");
+        } else {
+          const { order } = payload;
+          setDatas(order);
+        }
+      });
   }, [dispatch, orderId]);
 
   return (

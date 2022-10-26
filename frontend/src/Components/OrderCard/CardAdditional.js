@@ -9,9 +9,22 @@ const CardAdditional = ({
   region,
   status,
   subcategories,
+  images,
 }) => {
   const [show, setShow] = useState(false);
+  const [title, setTitle] = useState("ko'proq ma'lumot");
+  const [icon, setIcon] = useState(
+    <IoChevronDownOutline size={16} color="#0090A2" className="mt-2" />
+  );
   const toggle = () => {
+    setTitle(show ? "ko'proq ma'lumot" : "yopish");
+    setIcon(
+      show ? (
+        <IoChevronDownOutline size={16} color="#0090A2" className="mt-2" />
+      ) : (
+        <IoChevronUpOutline size={16} color="#0090A2" className="mt-2" />
+      )
+    );
     setShow(!show);
   };
   return (
@@ -48,16 +61,19 @@ const CardAdditional = ({
               {region?.name}, {district?.name}
             </p>
           </div>
-          <div className="col-span-2"></div>
+          <div className="col-span-2 text-end flex justify-end">
+            {images[0] && (
+              <img src={images[0]} className="w-[150px]" alt="alotrade.uz" />
+            )}
+          </div>
         </div>
       )}
 
-      <button onClick={toggle} className="w-full">
-        {show ? (
-          <IoChevronUpOutline size={18} color="#0090A2" />
-        ) : (
-          <IoChevronDownOutline size={18} color="#0090A2" />
-        )}
+      <button onClick={toggle} className="w-full text-primary-800 ">
+        <span className="w-full flex items-center pointer-events-none">
+          <span className="pt-2"> {title}</span>
+          <span className="">{icon}</span>
+        </span>
       </button>
     </div>
   );

@@ -41,6 +41,7 @@ const OrderCard = ({ order, editHandler, deleteHandler }) => {
           organization={organization}
         />
         <CardBody
+          region={region}
           name={name}
           maxPrice={maxPrice}
           minPrice={minPrice}
@@ -55,6 +56,7 @@ const OrderCard = ({ order, editHandler, deleteHandler }) => {
           region={region}
           district={district}
           orderId={_id}
+          images={images}
         />
         {isCustomer ? (
           <CardEdit
@@ -66,11 +68,11 @@ const OrderCard = ({ order, editHandler, deleteHandler }) => {
           <CardFooter />
         )}
       </div>
-      <div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">
-        {images[0] && (
-          <img src={images[0]} className="w-[200px]" alt="alotrade.uz" />
-        )}
-      </div>
+      {/*<div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">*/}
+      {/*  {images[0] && (*/}
+      {/*    <img src={images[0]} className="w-[200px]" alt="alotrade.uz" />*/}
+      {/*  )}*/}
+      {/*</div>*/}
     </div>
   );
 };

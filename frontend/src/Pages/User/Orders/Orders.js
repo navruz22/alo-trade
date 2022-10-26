@@ -3,7 +3,7 @@ import UniversalModal from "../../../Components/Modal/UniversalModal";
 import PageHeader from "../../../Components/PageHeaders/PageHeader";
 import OrderCard from "../../../Components/OrderCard/OrderCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders, getOrdersByFilter } from "./orderSlice";
+import { getOrders, getOrdersByFilter, deleteOrder } from "./orderSlice";
 import { map, uniqueId } from "lodash";
 import { filterOrder } from "../../Filter/filterSlice";
 
@@ -30,6 +30,7 @@ const Orders = () => {
   const openModal = (body) => {
     setModalBody(body);
     setModalVisible(true);
+    setOrderId(null);
   };
 
   const handleScroll = (e) => {
@@ -57,6 +58,16 @@ const Orders = () => {
   const handleFilter = (e) => {
     const value = e.target.value;
     dispatch(filterOrder(value));
+  };
+
+  const deleteOrderById = () => {
+    orderId &&
+      dispatch(deleteOrder({ id: orderId })).then(({ error }) => {
+        if (!error) {
+          setModalVisible(false);
+          setOrderId(null);
+        }
+      });
   };
 
   useEffect(() => {
@@ -130,6 +141,7 @@ const Orders = () => {
         modalBody={modalBody}
         headerText="Buyurtmani o'chirish"
         title="Siz rostdan ham buyurtmani o'chirmoqchimisiz?"
+        approveFunction={deleteOrderById}
       />
     </div>
   );

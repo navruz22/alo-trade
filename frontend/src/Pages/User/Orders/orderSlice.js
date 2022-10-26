@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Api from "../../../Config/Api";
 import { universalToast } from "../../../Components/ToastMessages/ToastMessages";
+import { findIndex } from "lodash";
 
 export const createOrder = createAsyncThunk(
   "orders/createOrder",
@@ -43,6 +44,30 @@ export const getOrderById = createAsyncThunk(
   async (body = {}, { rejectWithValue }) => {
     try {
       const { data } = await Api.post("/order/getbyid", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const updateOrder = createAsyncThunk(
+  "orders/updateOrder",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.put("/order/update", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteOrder = createAsyncThunk(
+  "orders/deleteOrder",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/order/delete", body);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -105,6 +130,31 @@ const orderSlice = createSlice({
     [getOrderById.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      universalToast(payload, "error");
+    },
+    [updateOrder.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateOrder.fulfilled]: (state, { payload: { order } }) => {
+      const orderIndex = findIndex(state.orders, { _id: order._id });
+      state.orders[orderIndex] = order;
+      state.loading = false;
+    },
+    [updateOrder.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+      universalToast(payload, "error");
+    },
+    [deleteOrder.pending]: (state) => {
+      state.loading = true;
+    },
+    [deleteOrder.fulfilled]: (state, { payload: { id } }) => {
+      const orderIndex = findIndex(state.orders, { _id: id });
+      state.orders.splice(orderIndex, 1);
+      universalToast("Buyurtma muvaffaqqiyatli o'chirildi", "success");
+      state.loading = false;
+    },
+    [updateOrder.rejected]: (state, { payload }) => {
       universalToast(payload, "error");
     },
   },
