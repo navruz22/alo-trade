@@ -52,11 +52,11 @@ const OrderCard = ({ order, editHandler, deleteHandler }) => {
           orderId={_id}
         />
         <CardFooter />
-        <CardEdit
-          editHandler={editHandler}
-          orderId={_id}
-          deleteHandler={deleteHandler}
-        />
+        {/*<CardEdit*/}
+        {/*  editHandler={editHandler}*/}
+        {/*  orderId={_id}*/}
+        {/*  deleteHandler={deleteHandler}*/}
+        {/*/>*/}
       </div>
       <div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">
         {images[0] && (
