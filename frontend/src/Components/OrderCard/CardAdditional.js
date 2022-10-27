@@ -33,10 +33,10 @@ const CardAdditional = ({
       {show && (
         <div className="grid grid-cols-7 ">
           <div className="col-span-5">
-            <p className="">
+            <h4 className="">
               <span className="font-amazonbold">Telefon raqam:</span>{" "}
               <span className="lowercase ">{phone}</span>
-            </p>
+            </h4>
             <p className="">
               <span className="font-amazonbold">Savdo turi:</span>{" "}
               <span className="lowercase ">
