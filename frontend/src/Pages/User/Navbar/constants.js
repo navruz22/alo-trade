@@ -51,7 +51,7 @@ export const toggleMenu = (logOut, closeMenu) => [
     onClick: closeMenu,
   },
   {
-    link: "/sign-in",
+    link: "/",
     icon: <IoLogOutOutline />,
     title: "Chiqish",
     onClick: logOut,
