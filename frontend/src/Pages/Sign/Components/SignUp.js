@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import {
+  Link,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import UserRegister from "../../../Components/Sign/UserRegister";
 import BusinessmanRegister from "../../../Components/Sign/BusinessmanRegister";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +22,7 @@ import { getTradeTypes } from "../../Filter/tradeSlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { regions, error: errorRegion } = useSelector((state) => state.regions);
   const { categoriesWithSubcategories, error: errorCategories } = useSelector(
     (state) => state.categories
@@ -153,7 +161,10 @@ const SignUp = () => {
             tradetypes: tradeTypes,
           })
     ).then(({ error }) => {
-      if (!error) clearDatas();
+      if (!error) {
+        clearDatas();
+        navigate("../");
+      }
     });
   };
 
