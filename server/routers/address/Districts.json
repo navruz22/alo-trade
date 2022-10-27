@@ -1,29 +1,14 @@
-{
-  "districts": [
-    {
-      "name": "Oqoltin"
-    },
-    {
-      "name": "Bayovut"
-    },
-    {
-      "name": "Guliston"
-    },
-    {
-      "name": "Mirzoobod"
-    },
-    {
-      "name": "Sayhunobod"
-    },
-    {
-      "name": "Sardoba "
-    },
-    {
-      "name": "Xavas"
-    },
-    {
-      "name": "Sirdaryo"
-    }]
-  ,
-  "region":"6353b572d9e2166abc15e529"
-}
+{ "subcategories":
+[ { "name": "Erkaklar kiyimlari" },
+  { "name": "Ayollar kiyimlari" },
+  { "name": "Bolalar kiyimlari" },
+  { "name": "Maxsus kiyimlar" },
+  { "name": "Erkaklar oyoq kiyimi" },
+  { "name": "Ayollar oyoq kiyimi" },
+  { "name": "Bolalar oyoq kiyimi" },
+  { "name": "Maxsus oyoq kiyimlar" },
+  { "name": "To’qilgan kiyimlar" },
+  { "name": "Trikotaj maxsulotlari " },
+  { "name": "Tekstil maxsulotlari" },
+  { "name": "Matolar" }],
+  "category":"Tekstil,kiyim kechak " }

@@ -1,5 +1,6 @@
 const { validateSubcategory } = require("../../models/validators");
 const { Category, Subcategory } = require("../../models/models");
+const { forEach } = require("lodash");
 
 const createSubcategory = async (req, res) => {
   try {
@@ -42,6 +43,36 @@ const createSubcategory = async (req, res) => {
   }
 };
 
+const createSubcategories = async (req, res) => {
+  try {
+    const { subcategories, category } = req.body;
+
+    const categoryy = await Category.findById(category);
+
+    if (!categoryy) {
+      return res.status(400).json({ message: "Kategoriya mavjud emas" });
+    }
+
+    forEach(subcategories, async (subcategory) => {
+      const newSubcategory = new Subcategory({
+        name: subcategory.name,
+        category,
+      });
+
+      await newSubcategory.save();
+      const categoryy = await Category.findById(category);
+      categoryy.subcategories.push(newSubcategory._id);
+      await categoryy.save();
+    });
+
+    res
+      .status(201)
+      .json({ message: "Subkategoriyalar muvaffaqiyatli yaratildi" });
+  } catch (err) {
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
 const getSubcategories = async (req, res) => {
   try {
     const { category } = req.body;
@@ -62,4 +93,4 @@ const getSubcategories = async (req, res) => {
   }
 };
 
-module.exports = { createSubcategory, getSubcategories };
+module.exports = { createSubcategory, getSubcategories, createSubcategories };

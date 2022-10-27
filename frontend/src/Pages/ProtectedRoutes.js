@@ -12,7 +12,7 @@ const otherRoutes = {
   element: <Navigate to={"/"} replace={true} />,
 };
 // user pages
-const UserReport = lazy(() => import("./User/Main"));
+const UserReport = lazy(() => import("./User/Main/Main"));
 const OrdersReport = lazy(() => import("./User/Orders/Orders"));
 const ProductsReport = lazy(() => import("./User/Products/Products"));
 const OffersReport = lazy(() => import("./User/Offers/Offers"));

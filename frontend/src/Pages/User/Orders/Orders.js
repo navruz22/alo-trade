@@ -10,7 +10,10 @@ import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 
 const Orders = () => {
   const dispatch = useDispatch();
-  const { logged } = useSelector((state) => state.login);
+  const {
+    logged,
+    userData: { user },
+  } = useSelector((state) => state.login);
   const { orders } = useSelector((state) => state.orders);
   const { order, categories, subcategories, tradetypes, regions, districts } =
     useSelector((state) => state.filter);
@@ -82,6 +85,7 @@ const Orders = () => {
       tradetypes,
       regions,
       districts,
+      user: user?._id,
     };
     setCurrentPage(0);
     dispatch(getOrders(data));
@@ -93,6 +97,7 @@ const Orders = () => {
     tradetypes,
     regions,
     districts,
+    user,
   ]);
   useEffect(() => {
     const data = {
@@ -104,6 +109,7 @@ const Orders = () => {
       tradetypes,
       regions,
       districts,
+      user: user?._id,
     };
 
     currentPage !== 0 && dispatch(getOrdersByFilter(data));

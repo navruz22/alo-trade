@@ -181,6 +181,12 @@ const signInUser = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Parol noto'g'ri" });
     }
+
+    const userData = await getUserById(user.id);
+    const organization =
+      userData.organization &&
+      (await getOrganizationById(userData.organization));
+
     jwt.sign({ id: user._id }, config.get("JWT_SECRET"), {}, (err, token) => {
       if (err) {
         return res.status(400).json({
@@ -189,14 +195,8 @@ const signInUser = async (req, res) => {
       }
       return res.status(200).json({
         token,
-        user: {
-          firstname: user.firstname,
-          lastname: user.lastname,
-          phone: user.phone,
-          image: user.image,
-          _id: user._id,
-          type: user.organization ? "organization" : "user",
-        },
+        user: { ...userData },
+        organization,
       });
     });
   } catch (error) {

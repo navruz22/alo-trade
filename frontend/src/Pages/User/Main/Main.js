@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteOrder, getOrders, getOrdersByFilter } from "./Orders/orderSlice";
+import {
+  deleteOrder,
+  getOrders,
+  getOrdersByFilter,
+} from "../Orders/orderSlice";
 import { map, uniqueId } from "lodash";
-import OrderCard from "../../Components/OrderCard/OrderCard";
-import UniversalModal from "../../Components/Modal/UniversalModal";
-import MainPageHeader from "../../Components/MainPageHeader/MainPageHeader";
+import OrderCard from "../../../Components/OrderCard/OrderCard";
+import UniversalModal from "../../../Components/Modal/UniversalModal";
+import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
+import { onScroll } from "../globalConstants";
 
 const Main = () => {
   const dispatch = useDispatch();
   const { orders } = useSelector((state) => state.orders);
   const { order, categories, subcategories, tradetypes, regions, districts } =
     useSelector((state) => state.filter);
-  const { logged } = useSelector((state) => state.login);
+  const { logged, userData } = useSelector((state) => state.login);
   const [orderId, setOrderId] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const countPage = 4;
+  const { user } = userData;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalBody, setModalBody] = useState(null);
@@ -28,11 +34,7 @@ const Main = () => {
   };
 
   const handleScroll = (e) => {
-    const bottom =
-      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    bottom &&
-      (currentPage + 1) * countPage === orders.length &&
-      setCurrentPage(currentPage + 1);
+    onScroll({ e, setCurrentPage, countPage, currentPage, orders });
   };
 
   const deleteHandler = (id) => {
@@ -67,6 +69,7 @@ const Main = () => {
       tradetypes,
       regions,
       districts,
+      user: user?._id,
     };
     setCurrentPage(0);
     dispatch(getOrders(data));
@@ -78,6 +81,7 @@ const Main = () => {
     tradetypes,
     regions,
     districts,
+    user,
   ]);
   useEffect(() => {
     const data = {
@@ -89,8 +93,8 @@ const Main = () => {
       tradetypes,
       regions,
       districts,
+      user: user?._id,
     };
-
     currentPage !== 0 && dispatch(getOrdersByFilter(data));
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, order, currentPage, countPage]);

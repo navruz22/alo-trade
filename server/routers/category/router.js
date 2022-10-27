@@ -5,7 +5,11 @@ const {
   getCategories,
   getCategoriesWithSubcategories,
 } = require("./category");
-const { createSubcategory, getSubcategories } = require("./subcategory");
+const {
+  createSubcategory,
+  getSubcategories,
+  createSubcategories,
+} = require("./subcategory");
 const router = require("express").Router();
 const auth = require("../../middleware/auth.middleware");
 
@@ -19,5 +23,6 @@ router.get("/getwithsubcategories", getCategoriesWithSubcategories);
 // Subcategory
 router.post("/subcategory/create", createSubcategory);
 router.post("/subcategories/getbycategory", getSubcategories);
+router.post("/subcategories/create", createSubcategories);
 
 module.exports = router;

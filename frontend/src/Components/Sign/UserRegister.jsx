@@ -26,7 +26,7 @@ const UserRegister = ({
     <div className="bg-white-900 rounded ">
       <div className="px-16 py-5">
         <h1 className="font-bold text-center py-4 text-xl text-neutral-700">
-          Foydalanuvchi sifatida ro'yxatda o'tish
+          Foydalanuvchi sifatida ro'yxatdan o'tish
         </h1>
         <div className="flex flex-row">
           <Input

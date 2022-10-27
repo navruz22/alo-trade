@@ -201,16 +201,16 @@ const SignUp = () => {
               >
                 Buyurtmachi
               </Link>
-              <Link
-                onClick={changeUrl}
-                name="business"
-                to="/sign-up/business"
-                className={`font-semibold text-xl cursor-pointer text-center py-2 px-4 my-3 w-full  ${
-                  url === "business" && "bg-white-900 shadow"
-                }`}
-              >
-                Tadbirkor
-              </Link>
+              {/*<Link*/}
+              {/*  onClick={changeUrl}*/}
+              {/*  name="business"*/}
+              {/*  to="/sign-up/business"*/}
+              {/*  className={`font-semibold text-xl cursor-pointer text-center py-2 px-4 my-3 w-full  ${*/}
+              {/*    url === "business" && "bg-white-900 shadow"*/}
+              {/*  }`}*/}
+              {/*>*/}
+              {/*  Tadbirkor*/}
+              {/*</Link>*/}
             </div>
           </div>
           <div className="lg:w-1/2 w-full">

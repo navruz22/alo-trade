@@ -48,8 +48,8 @@ const getOrdersByFilter = async (req, res) => {
       tradetypes,
       regions,
       districts,
+      user,
     } = req.body;
-    const user = req?.user?.id;
     let query = {};
     if (tradetypes.length > 0) {
       query.tradetypes = { $in: tradetypes };
@@ -69,7 +69,6 @@ const getOrdersByFilter = async (req, res) => {
     if (orderFilter === "my") {
       query.user = user;
     }
-
     const orders = await getOrders({ count, page, query });
     res.status(200).json({ orders });
   } catch (error) {
