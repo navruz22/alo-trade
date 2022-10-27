@@ -12,8 +12,8 @@ const SignIn = () => {
   const navigate = useNavigate();
   const { loading } = useSelector((state) => state.login);
 
-  const [password, setPassword] = useState("123456");
-  const [phone, setPhone] = useState("998973666221");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
 
   const changeHandler = (e) => {
     const name = e.target.name;

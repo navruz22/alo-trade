@@ -56,6 +56,7 @@ const getOrderWithId = async (id) =>
         minPrice: order?.minPrice,
         maxPrice: order?.maxPrice,
         currency: order?.currency,
+        position: order?.position,
         tradetypes: order?.tradetypes,
         status: order?.status,
         district: {
@@ -84,4 +85,15 @@ const getOrderWithId = async (id) =>
       };
     });
 
-module.exports = { getOrder, getOrderWithId, getOrders };
+const getOrderForUpdate = async (id) =>
+  await Order.findById(id)
+    .select("-updatedAt -__v")
+    .populate("region", "name")
+    .populate("district", "name")
+    .populate("categories", "name")
+    .populate("subcategories", "name")
+    .populate("tradetypes", "name")
+    .populate("user", "firstname lastname phone email")
+    .populate("organization", "name phone email");
+
+module.exports = { getOrder, getOrderWithId, getOrders, getOrderForUpdate };

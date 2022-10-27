@@ -6,7 +6,7 @@ import CardFooter from "./CardFooter";
 import CardEdit from "./CardEdit";
 import { useSelector } from "react-redux";
 
-const OrderCard = ({ order, editHandler, deleteHandler }) => {
+const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
   const { userData } = useSelector((state) => state.login);
   const {
     _id,
@@ -28,13 +28,15 @@ const OrderCard = ({ order, editHandler, deleteHandler }) => {
     createdAt,
   } = order;
 
-  const isCustomer = userData.user._id === user._id;
+  const isCustomer = userData?.user?._id === user?._id;
+  const phone = userData?.user?.phone;
 
   return (
     <div className="w-full shadow-md mt-5 rounded bg-white-900 flex">
       <div className="text-sm w-full flex flex-col justify-between ">
         {/* Card header */}
         <CardHeader
+          logged={logged}
           user={user}
           position={position}
           createdAt={createdAt}
@@ -48,25 +50,29 @@ const OrderCard = ({ order, editHandler, deleteHandler }) => {
           description={description}
           currency={currency}
         />
-        <CardAdditional
-          tradetypes={tradetypes}
-          categories={categories}
-          subcategories={subcategories}
-          status={status}
-          region={region}
-          district={district}
-          orderId={_id}
-          images={images}
-        />
-        {isCustomer ? (
-          <CardEdit
-            editHandler={editHandler}
+        {logged && (
+          <CardAdditional
+            tradetypes={tradetypes}
+            categories={categories}
+            subcategories={subcategories}
+            status={status}
+            region={region}
+            district={district}
             orderId={_id}
-            deleteHandler={deleteHandler}
+            images={images}
+            phone={phone}
           />
-        ) : (
-          <CardFooter />
         )}
+        {isCustomer
+          ? logged && (
+              <CardEdit
+                editHandler={editHandler}
+                orderId={_id}
+                deleteHandler={deleteHandler}
+                position={position}
+              />
+            )
+          : logged && <CardFooter />}
       </div>
       {/*<div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">*/}
       {/*  {images[0] && (*/}

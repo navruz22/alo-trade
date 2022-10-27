@@ -6,9 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrders, getOrdersByFilter, deleteOrder } from "./orderSlice";
 import { map, uniqueId } from "lodash";
 import { filterOrder } from "../../Filter/filterSlice";
+import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 
 const Orders = () => {
   const dispatch = useDispatch();
+  const { logged } = useSelector((state) => state.login);
   const { orders } = useSelector((state) => state.orders);
   const { order, categories, subcategories, tradetypes, regions, districts } =
     useSelector((state) => state.filter);
@@ -113,18 +115,23 @@ const Orders = () => {
       className="h-screen w-full pb-20 bg-neutral-100 overflow-scroll "
       onScroll={handleScroll}
     >
-      <PageHeader
-        count={count}
-        onClick={openModal}
-        countTitle="Jami:"
-        buttonTitle="Buyurtma yaratish"
-        handleFilter={handleFilter}
-        filterData={order}
-      />
+      {logged ? (
+        <PageHeader
+          count={count}
+          onClick={openModal}
+          countTitle="Jami:"
+          buttonTitle="Buyurtma yaratish"
+          handleFilter={handleFilter}
+          filterData={order}
+        />
+      ) : (
+        <MainPageHeader />
+      )}
 
-      <div className="p-4">
+      <div className="p-4 pt-0">
         {map(orders, (order) => (
           <OrderCard
+            logged={logged}
             key={uniqueId()}
             order={order}
             editHandler={editHandler}

@@ -1,10 +1,24 @@
 import React from "react";
 import { IoTrashOutline } from "react-icons/io5";
 import { BsPencilSquare } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { updateOrderPosition } from "../../Pages/User/Orders/orderSlice";
 
-const CardEdit = ({ editHandler, orderId, deleteHandler }) => {
+const CardEdit = ({ editHandler, orderId, deleteHandler, position }) => {
+  const isActive = position === "active";
+  const dispatch = useDispatch();
+  const updatePosition = () => {
+    dispatch(updateOrderPosition({ id: orderId }));
+  };
+
   return (
-    <div className="w-full border-t grid grid-cols-2 m-0">
+    <div className="w-full border-t flex m-0">
+      <button
+        onClick={updatePosition}
+        className="w-full flex justify-center border-r py-1 text-neutral-500"
+      >
+        {isActive ? "Yakunlash" : "Faollashtirish"}
+      </button>
       <button
         onClick={() => editHandler(orderId)}
         className="w-full flex justify-center border-r py-1 "

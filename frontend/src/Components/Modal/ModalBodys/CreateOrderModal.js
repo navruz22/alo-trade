@@ -279,7 +279,7 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
       </div>
       <div>
         <SaveButton
-          title="Yaratish"
+          title="Saqlash"
           className="w-full mt-3"
           onClick={submitHandler}
         />

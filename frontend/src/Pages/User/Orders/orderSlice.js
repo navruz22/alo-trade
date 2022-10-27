@@ -63,6 +63,18 @@ export const updateOrder = createAsyncThunk(
   }
 );
 
+export const updateOrderPosition = createAsyncThunk(
+  "orders/updateOrderPosition",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.put("/order/updateposition", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const deleteOrder = createAsyncThunk(
   "orders/deleteOrder",
   async (body = {}, { rejectWithValue }) => {
@@ -154,7 +166,17 @@ const orderSlice = createSlice({
       universalToast("Buyurtma muvaffaqqiyatli o'chirildi", "success");
       state.loading = false;
     },
-    [updateOrder.rejected]: (state, { payload }) => {
+    [updateOrderPosition.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateOrderPosition.fulfilled]: (state, { payload: { order } }) => {
+      const orderIndex = findIndex(state.orders, { _id: order._id });
+      state.orders[orderIndex] = order;
+      state.loading = false;
+    },
+    [updateOrderPosition.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
       universalToast(payload, "error");
     },
   },

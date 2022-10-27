@@ -10,6 +10,7 @@ const CardAdditional = ({
   status,
   subcategories,
   images,
+  phone,
 }) => {
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("ko'proq ma'lumot");
@@ -32,6 +33,10 @@ const CardAdditional = ({
       {show && (
         <div className="grid grid-cols-7 ">
           <div className="col-span-5">
+            <p className="">
+              <span className="font-amazonbold">Telefon raqam:</span>{" "}
+              <span className="lowercase ">{phone}</span>
+            </p>
             <p className="">
               <span className="font-amazonbold">Savdo turi:</span>{" "}
               <span className="lowercase ">

@@ -1,6 +1,11 @@
 const { validateOrder } = require("../../models/validators");
 const { Order, Organization } = require("../../models/models");
-const { getOrder, getOrderWithId, getOrders } = require("./constants");
+const {
+  getOrder,
+  getOrderWithId,
+  getOrders,
+  getOrderForUpdate,
+} = require("./constants");
 
 const createOrder = async (req, res) => {
   try {
@@ -44,16 +49,13 @@ const getOrdersByFilter = async (req, res) => {
       regions,
       districts,
     } = req.body;
-    const user = req.user.id;
-
-    const all = orderFilter === "all";
-
+    const user = req?.user?.id;
     let query = {};
     if (tradetypes.length > 0) {
       query.tradetypes = { $in: tradetypes };
     }
     if (districts.length) {
-      query.district = { $in: [...districts] };
+      query.district = { $in: districts };
     }
     if (regions.length) {
       query.region = { $in: regions };
@@ -67,8 +69,8 @@ const getOrdersByFilter = async (req, res) => {
     if (orderFilter === "my") {
       query.user = user;
     }
-    const orders = await getOrders({ count, page, query });
 
+    const orders = await getOrders({ count, page, query });
     res.status(200).json({ orders });
   } catch (error) {
     res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
@@ -123,6 +125,27 @@ const deleteOrder = async (req, res) => {
   }
 };
 
+const updateOrderPosition = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    const updatedOrder = await Order.findById(id);
+
+    if (!updatedOrder) {
+      return res.status(400).json({ message: "Buyurtma topilmadi" });
+    }
+
+    updatedOrder.position =
+      updatedOrder.position === "active" ? "unactive" : "active";
+    await updatedOrder.save();
+
+    const order = await getOrderForUpdate(id);
+    res.status(200).json({ order });
+  } catch (err) {
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
 module.exports = {
   createOrder,
   getOrdersByFilter,
@@ -130,4 +153,5 @@ module.exports = {
   getOrderById,
   updateOrder,
   deleteOrder,
+  updateOrderPosition,
 };

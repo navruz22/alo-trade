@@ -23,7 +23,7 @@ const Navbar = () => {
   };
   const toggle = toggleMenu(closeHandler, changeHandler);
   return (
-    <nav className="shadow shadow-md py-1 w-full bg-primary-800 z-50  ">
+    <nav className="shadow shadow-md py-1 w-full bg-secondary-medium z-50  ">
       <div className="flex justify-between m-auto container items-center">
         <Logo />
         <Outlet />

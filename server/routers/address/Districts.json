@@ -1,44 +1,29 @@
 {
   "districts": [
-    {"name": "Oqqo'rg'on"},
-    {"name": "Olmaliq"},
-    {"name": "Angren"},
-    {"name": "Ohangaron"},
-    {"name": "Bekobod"},
-    {"name": "Katta Chimyon"},
-    {"name": "Bo'ka"},
-    {"name": "Chorvoq"},
-    {"name": "Chinoz"},
-    {"name": "Chirchiq"},
-    {"name": "So'qoq"},
-    {"name": "Durmen"},
-    {"name": "Do'stobod"},
-    {"name": "Eshonguzar"},
-    {"name": "G'azalkent"},
-    {"name": "Gulbahor"},
-    {"name": "Iskandar"},
-    {"name": "Qorasuv"},
-    {"name": "Keles"},
-    {"name": "Qibray"},
-    {"name": "Ko'ksaroy"},
-    {"name": "Krasnogorsk"},
-    {"name": "Mirobod"},
-    {"name": "Nazarbek"},
-    {"name": "To'ytepa"},
-    {"name": "Parkent"},
-    {"name": "Pskent"},
-    {"name": "Salar"},
-    {"name": "Toshkent"},
-    {"name": "Tashmore"},
-    {"name": "Turkiston"},
-    {"name": "Oʻrtaovul"},
-    {"name": "Xo'jakent"},
-    {"name": "Yangiobod"},
-    {"name": "Yangibozor"},
-    {"name": "Yangiyo'l"},
-    {"name": "Zafar"},
-    {"name": "Zangiota"}
-  ],
-  "region": "6353b548d9e2166abc15e51a"
-
+    {
+      "name": "Oqoltin"
+    },
+    {
+      "name": "Bayovut"
+    },
+    {
+      "name": "Guliston"
+    },
+    {
+      "name": "Mirzoobod"
+    },
+    {
+      "name": "Sayhunobod"
+    },
+    {
+      "name": "Sardoba "
+    },
+    {
+      "name": "Xavas"
+    },
+    {
+      "name": "Sirdaryo"
+    }]
+  ,
+  "region":"6353b572d9e2166abc15e529"
 }

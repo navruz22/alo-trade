@@ -45,7 +45,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iL
 POST http://localhost:8080/api/address/district/createall
 Accept: application/json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNThhNGY2MDQyNzlhZjVjYTZmYzY5MiIsImlhdCI6MTY2Njc1Mzc4MiwiZXhwIjoxNjY2Nzk2OTgyfQ.RyfX-2FA86j7ZtFpSTPlrwobooDQkjbwnOiqxtJlZUA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iLCJpZCI6IjYzNTNiNGNmZDllMjE2NmFiYzE1ZTUxNiIsImlhdCI6MTY2Njg0MjE4NywiZXhwIjoxNjY2ODg1Mzg3fQ.nBIRANfvVGW0L0fVG5bFE8b5ZQh2WIjto78xRwl9yfg
 
 {
   "districts": [
@@ -54,9 +54,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0eXBlIjoiYWRtaW4iL
     },
     {
       "name": "Xatirchi"
+    },
+    {
+      "name": "Qiziltepa"
+    },
+    {
+      "name": "Navbaxor"
+    },
+    {
+      "name": "Karmana"
+    },
+    {
+      "name": "Konimex"
+    },
+    {
+      "name": "Tomdi"
+    },
+    {
+      "name": "Zarafshon"
+    },
+    {
+      "name": "Uchquduq"
     }
   ],
-  "region": "Navoiy"
+  "region": "6353b62ed9e2166abc15e541"
 }
-
-

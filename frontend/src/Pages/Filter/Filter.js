@@ -70,7 +70,7 @@ const Filter = ({ categories, regions, tradeTypes }) => {
   return (
     <div className="w-1/3 min-w-[300px] max-w-[400px] overflow-scroll shadow">
       <div className="p-4">
-        <h1 className="font-amazonbold text-xl tracking-widest text-primary-800">
+        <h1 className="font-amazonbold text-xl tracking-widest text-secondary-medium">
           Filter
         </h1>
         <CheckboxList
