@@ -1,10 +1,12 @@
 # https://www.robotstxt.org/robotstxt.html
-Host: https://www.alotrade.uz
 Sitemap: https://www.alotrade.uz/sitemap.xml
-User-agent: *
+Host: https://www.alotrade.uz
+User-agent: Googlebot
+Disallow: /nogooglebot/
 Allow: /
 Allow: /products
 Allow: /orders
 Allow: /offers
 Allow: /organizations
+Allow: /static
 

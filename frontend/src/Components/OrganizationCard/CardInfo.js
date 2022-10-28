@@ -10,7 +10,7 @@ const CardInfo = ({ categories, subcategories, tradetypes, phone }) => {
     setShow(!show);
   };
   return (
-    <div className="mt-4 text-neutral-500">
+    <div className="mt-4 text-neutral-500 flex flex-col justify-between h-full ">
       <div className="border-l pl-3 mb-2 grid grid-cols-4 border-neutral-400 mx-4">
         <h3 className="text-sm font-amazonbold"> Savdo faoliyati</h3>
         <h4 className=" text-sm col-span-3">

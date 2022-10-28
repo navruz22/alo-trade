@@ -79,7 +79,6 @@ const Organizations = () => {
             ({
               image,
               name,
-              user,
               tradetypes,
               categories,
               subcategories,
@@ -90,7 +89,7 @@ const Organizations = () => {
             }) => (
               <div
                 key={uniqueId("organization")}
-                className="bg-white-900 overflow-hidden rounded shadow-lg border-t-4 border-amber-500"
+                className="bg-white-900 overflow-hidden rounded shadow-lg border-t-4 border-amber-500 flex flex-col justify-between"
               >
                 <CardLogo
                   logo={image}
