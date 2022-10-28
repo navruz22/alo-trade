@@ -7,6 +7,7 @@ import { getOrders, getOrdersByFilter, deleteOrder } from "./orderSlice";
 import { map, uniqueId } from "lodash";
 import { filterOrder } from "../../Filter/filterSlice";
 import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
+import { onScroll } from "../globalConstants";
 
 const Orders = () => {
   const dispatch = useDispatch();
@@ -39,11 +40,7 @@ const Orders = () => {
   };
 
   const handleScroll = (e) => {
-    const bottom =
-      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    bottom &&
-      (currentPage + 1) * countPage === orders.length &&
-      setCurrentPage(currentPage + 1);
+    onScroll({ e, currentPage, setCurrentPage, countPage, orders });
   };
 
   const deleteHandler = (id) => {

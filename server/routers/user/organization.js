@@ -4,7 +4,7 @@ const {
 } = require("../../models/validators");
 const { Organization, User } = require("../../models/models");
 const { bcrypt, config, jwt } = require("../../packages");
-const { getOrganizationById } = require("./constants");
+const { getOrganizationById, getOrganizations } = require("./constants");
 
 const createOrganization = async (req, res) => {
   try {
@@ -227,8 +227,43 @@ const createNewOrganization = async (req, res) => {
   }
 };
 
+const getOrganizationsByFilter = async (req, res) => {
+  try {
+    const {
+      count,
+      page,
+      categories,
+      subcategories,
+      tradetypes,
+      regions,
+      districts,
+    } = req.body;
+    let query = {};
+    if (tradetypes.length > 0) {
+      query.tradetypes = { $in: tradetypes };
+    }
+    if (districts.length) {
+      query.district = { $in: districts };
+    }
+    if (regions.length) {
+      query.region = { $in: regions };
+    }
+    if (categories.length) {
+      query.categories = { $in: categories };
+    }
+    if (subcategories.length) {
+      query.subcategories = { $in: subcategories };
+    }
+    const organizations = await getOrganizations({ count, page, query });
+    res.status(200).json({ organizations });
+  } catch (e) {
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
 module.exports = {
   createOrganization,
   updateOrganization,
   createNewOrganization,
+  getOrganizationsByFilter,
 };

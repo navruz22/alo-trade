@@ -89,7 +89,20 @@ const getOrganizationById = async (id) =>
       };
     });
 
+const getOrganizations = async ({ page, count, query }) =>
+  await Organization.find(query)
+    .sort({ createdAt: -1 })
+    .skip(page * count)
+    .limit(count)
+    .populate("district", "name")
+    .populate("region", "name")
+    .populate("categories", "name")
+    .populate("subcategories", "name")
+    .populate("tradetypes", "name")
+    .populate("user", "firstname lastname phone email");
+
 module.exports = {
   getUserById,
   getOrganizationById,
+  getOrganizations,
 };
