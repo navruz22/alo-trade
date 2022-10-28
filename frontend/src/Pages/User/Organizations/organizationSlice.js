@@ -18,7 +18,7 @@ export const getOrganizationsByFilter = createAsyncThunk(
   "organizations/getAllOrganizationsByFilter",
   async (body = {}, { rejectWithValue }) => {
     try {
-      const { data } = await Api.post("/user/organization/getalll", body);
+      const { data } = await Api.post("/user/organization/getall", body);
       return data;
     } catch (error) {
       return rejectWithValue(error);

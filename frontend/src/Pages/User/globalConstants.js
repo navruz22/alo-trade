@@ -5,7 +5,6 @@ export const onScroll = ({
   countPage,
   orders,
 }) => {
-  console.log(orders);
   const bottom =
     e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
   bottom &&

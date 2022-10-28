@@ -3,8 +3,10 @@ import CardLogo from "../../../Components/OrganizationCard/CardLogo";
 import CardInfo from "../../../Components/OrganizationCard/CardInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { onScroll } from "../globalConstants";
-import { getOrdersByFilter } from "../Orders/orderSlice";
-import { getOrganizations } from "./organizationSlice";
+import {
+  getOrganizations,
+  getOrganizationsByFilter,
+} from "./organizationSlice";
 import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 import { map, uniqueId } from "lodash";
 
@@ -16,7 +18,7 @@ const Organizations = () => {
     useSelector((state) => state.filter);
 
   const [currentPage, setCurrentPage] = useState(0);
-  const countPage = 4;
+  const countPage = 8;
 
   const handleScroll = (e) => {
     onScroll({
@@ -31,7 +33,7 @@ const Organizations = () => {
   useEffect(() => {
     const data = {
       page: 0,
-      count: 4,
+      count: 8,
       categories,
       subcategories,
       tradetypes,
@@ -60,8 +62,7 @@ const Organizations = () => {
       regions,
       districts,
     };
-
-    currentPage !== 0 && dispatch(getOrdersByFilter(data));
+    currentPage !== 0 && dispatch(getOrganizationsByFilter(data));
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, order, currentPage, countPage]);
 
@@ -71,39 +72,45 @@ const Organizations = () => {
       onScroll={handleScroll}
     >
       {!logged && <MainPageHeader />}
-
-      {logged &&
-        map(
-          organizations,
-          ({
-            image,
-            name,
-            user,
-            tradetypes,
-            categories,
-            subcategories,
-            region,
-            district,
-            phone,
-            email,
-          }) => (
-            <div
-              key={uniqueId("organization")}
-              className="grid grid-cols-12 gap-4 border-b py-5"
-            >
-              <CardLogo logo={image} name={name} />
-              <CardInfo
-                tradetypes={tradetypes}
-                categories={categories}
-                subcategories={subcategories}
-                region={region}
-                district={district}
-                phone={phone}
-                email={email}
-              />
-            </div>
-          )
-        )}
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-4">
+        {logged &&
+          map(
+            organizations,
+            ({
+              image,
+              name,
+              user,
+              tradetypes,
+              categories,
+              subcategories,
+              region,
+              district,
+              phone,
+              email,
+            }) => (
+              <div
+                key={uniqueId("organization")}
+                className="bg-white-900 overflow-hidden rounded shadow-lg border-t-4 border-amber-500"
+              >
+                <CardLogo
+                  logo={image}
+                  name={name}
+                  region={region}
+                  district={district}
+                />
+                <CardInfo
+                  tradetypes={tradetypes}
+                  categories={categories}
+                  subcategories={subcategories}
+                  region={region}
+                  district={district}
+                  phone={phone}
+                  email={email}
+                />
+              </div>
+            )
+          )}
+      </div>
     </div>
   );
 };

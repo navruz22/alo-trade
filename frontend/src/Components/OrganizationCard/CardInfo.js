@@ -1,67 +1,41 @@
-import React from "react";
-import { MdOutlineCategory } from "react-icons/md";
-import { BiCategory } from "react-icons/bi";
-import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
-import { map, uniqueId } from "lodash";
+import React, { useState } from "react";
+import { IoCallOutline } from "react-icons/io5";
+import { map } from "lodash";
+import { Link } from "react-router-dom";
 
-const CardInfo = ({
-  district,
-  region,
-  categories,
-  subcategories,
-  tradetypes,
-  phone,
-  email,
-}) => {
-  const icons = [
-    <MdOutlineCategory />,
-    <BiCategory />,
-    <IoCallOutline />,
-    <IoLocationOutline />,
-  ];
-  const types = ["Savdo turi:", "Kategoriyasi:", "Telefon raqam:", "Manzil:"];
-  const infos = [
-    `${map(tradetypes, (tradetype) => tradetype.name).join(", ")}`,
-    `${map(categories, (category) => category.name).join(", ")}, ${map(
-      subcategories,
-      (subcategory) => subcategory.name
-    ).join(", ")}`,
-    `Tel: ${phone}`,
-    `${region.name}, ${district.name}`,
-  ];
+const CardInfo = ({ categories, subcategories, tradetypes, phone }) => {
+  const [show, setShow] = useState(false);
+
+  const handleShow = () => {
+    setShow(!show);
+  };
   return (
-    <div className="col-span-8 bg-white-900 shadow-lg rounded-lg overflow-hidden grid grid-cols-7">
-      <div className="bg-secondary-medium grid grid-rows-6  ">
-        {map(icons, (icon, index) => (
-          <div
-            key={uniqueId("cardInfo")}
-            className="text-white-900 text-end w-full flex items-center justify-end px-2 text-lg"
-          >
-            <p className="bg-amber-500 rounded-full p-1">{icon}</p>
-          </div>
-        ))}
-        <div className="bg-amber-500"></div>
+    <div className="mt-4 text-neutral-500">
+      <div className="border-l pl-3 mb-2 grid grid-cols-4 border-neutral-400 mx-4">
+        <h3 className="text-sm font-amazonbold"> Savdo faoliyati</h3>
+        <h4 className=" text-sm col-span-3">
+          {`${map(tradetypes, (tradetype) => tradetype.name).join(", ")}`}
+        </h4>
       </div>
-      <div className="grid grid-rows-6 col-span-2  ">
-        {map(types, (type) => (
-          <div
-            key={uniqueId("type")}
-            className="flex items-center text-neutral-500 font-amazonbold px-2 uppercase text-[14px]"
-          >
-            {type}
-          </div>
-        ))}
+      <div className="border-l pl-3 border-neutral-400 mb-2 grid grid-cols-4 mx-4">
+        <h3 className="text-sm font-amazonbold">Yo'nalishi</h3>
+        <h4 className=" text-sm col-span-3">
+          {`${map(categories, (category) => category.name).join(", ")}, ${map(
+            subcategories,
+            (subcategory) => subcategory.name
+          ).join(", ")}`}
+        </h4>
       </div>
-      <div className="grid grid-rows-6 col-span-4  ">
-        {map(infos, (info) => (
-          <div
-            key={uniqueId("infos")}
-            className="flex items-center text-neutral-600 px-2 text-sm font-amazonbold"
-          >
-            {info}
-          </div>
-        ))}
-        <div className="bg-amber-500"></div>
+      <div className="pl-3 flex w-full border-t mt-3 text-sm">
+        <p
+          onClick={handleShow}
+          className="w-1/2 border-r flex items-center justify-center py-1 hover:text-success-500"
+        >
+          {show ? phone : <IoCallOutline size={20} />}
+        </p>
+        <Link className="w-1/2 flex items-center justify-center py-1 hover:text-success-500 text-green-600">
+          Mahsulotlar
+        </Link>
       </div>
     </div>
   );
