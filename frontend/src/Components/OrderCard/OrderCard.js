@@ -30,7 +30,6 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
   const isCustomer = userData?.user?._id === user?._id;
   const phone = userData?.user?.phone;
   const isOrganization = userData?.organization;
-
   return (
     <div className="w-full shadow-md mt-5 rounded bg-white-900 flex">
       <div className="text-sm w-full flex flex-col justify-between ">
@@ -61,6 +60,7 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
             orderId={_id}
             images={images}
             phone={phone}
+            organization={organization}
           />
         )}
         {isCustomer

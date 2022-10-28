@@ -1,11 +1,9 @@
 import React, { lazy } from "react";
 import { map, uniqueId } from "lodash";
 import { Navigate, Route } from "react-router-dom";
-import Sign from "./Sign/Sign";
 import SignUp from "./Sign/Components/SignUp";
 import SignIn from "./Sign/Components/SignIn";
 // pages -->
-const AdminReport = lazy(() => import("./Admin/Admin"));
 
 const otherRoutes = {
   path: "*",
@@ -52,36 +50,9 @@ const userRoutes = [
   },
   otherRoutes,
 ];
-const adminRoutes = [
-  {
-    path: "/",
-    element: <AdminReport />,
-  },
-  otherRoutes,
-];
-
-const chooseRoute = () => {
-  return userRoutes;
-  // switch (type) {
-  //   case "organization":
-  //     return organizationRoutes;
-  //   case "user":
-  //     return userRoutes;
-  //   case "admin":
-  //     return adminRoutes;
-  //   default:
-  //     return [
-  //       {
-  //         path: "/",
-  //         element: <h1>Sahifa mavjud emas</h1>,
-  //       },
-  //     ];
-  // }
-};
 
 const protectedRoutes = () => {
-  const catchRoutes = chooseRoute();
-  return map(catchRoutes, (route) => (
+  return map(userRoutes, (route) => (
     <Route
       exact
       key={uniqueId("route")}

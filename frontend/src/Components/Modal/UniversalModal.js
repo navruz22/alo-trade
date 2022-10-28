@@ -1,6 +1,5 @@
 import Modal from "react-modal";
 import ModalHeader from "./ModalHeader";
-import SignUpModal from "./ModalBodys/SignUpModal";
 import CreateOrderModal from "./ModalBodys/CreateOrderModal";
 import Approve from "./ModalBodys/Approve";
 
@@ -33,8 +32,6 @@ function UniversalModal({
   };
   const switchBody = () => {
     switch (body) {
-      case "signup":
-        return <SignUpModal />;
       case "createOrder":
         return <CreateOrderModal closeModal={closeModal} orderId={orderId} />;
       case "approve":

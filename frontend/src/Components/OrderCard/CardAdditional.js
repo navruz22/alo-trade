@@ -11,6 +11,7 @@ const CardAdditional = ({
   subcategories,
   images,
   phone,
+  organization,
 }) => {
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("ko'proq ma'lumot");
@@ -35,7 +36,9 @@ const CardAdditional = ({
           <div className="col-span-5">
             <h4 className="">
               <span className="font-amazonbold">Telefon raqam:</span>{" "}
-              <span className="lowercase ">{phone}</span>
+              <span className="lowercase ">
+                {organization ? organization?.phone : phone}
+              </span>
             </h4>
             <p className="">
               <span className="font-amazonbold">Savdo turi:</span>{" "}
