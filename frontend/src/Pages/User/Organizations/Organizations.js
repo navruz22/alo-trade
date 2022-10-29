@@ -26,7 +26,7 @@ const Organizations = () => {
       currentPage,
       setCurrentPage,
       countPage,
-      orders: [...organizations],
+      datas: organizations,
     });
   };
 

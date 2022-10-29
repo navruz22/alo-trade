@@ -1,6 +1,5 @@
 import React from "react";
 import AddButton from "../Buttons/AddButton";
-import { filter } from "../../Pages/User/Orders/constants";
 import RadioButtonList from "../RadioButtons/RadioButtonList";
 
 const PageHeader = ({
@@ -10,6 +9,7 @@ const PageHeader = ({
   count,
   handleFilter,
   filterData,
+  filter,
 }) => {
   return (
     <div className="flex justify-between shadow w-full px-5 py-3 items-center bg-white-900">
@@ -29,7 +29,7 @@ const PageHeader = ({
         </div>
       </div>
       <div>
-        <AddButton onClick={() => onClick("createOrder")} title={buttonTitle} />
+        <AddButton onClick={onClick} title={buttonTitle} />
       </div>
     </div>
   );

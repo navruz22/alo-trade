@@ -2,6 +2,7 @@ import Modal from "react-modal";
 import ModalHeader from "./ModalHeader";
 import CreateOrderModal from "./ModalBodys/CreateOrderModal";
 import Approve from "./ModalBodys/Approve";
+import CreateProductModal from "./ModalBodys/CreateProductModal";
 
 function UniversalModal({
   body,
@@ -12,6 +13,7 @@ function UniversalModal({
   approveFunction,
   headerText,
   title,
+  productId,
 }) {
   const customStyles = {
     content: {
@@ -34,6 +36,10 @@ function UniversalModal({
     switch (body) {
       case "createOrder":
         return <CreateOrderModal closeModal={closeModal} orderId={orderId} />;
+      case "createProduct":
+        return (
+          <CreateProductModal closeModal={closeModal} productId={productId} />
+        );
       case "approve":
         return (
           <Approve

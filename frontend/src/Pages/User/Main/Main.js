@@ -34,7 +34,7 @@ const Main = () => {
   };
 
   const handleScroll = (e) => {
-    onScroll({ e, setCurrentPage, countPage, currentPage, orders });
+    onScroll({ e, setCurrentPage, countPage, currentPage, datas: orders });
   };
 
   const deleteHandler = (id) => {

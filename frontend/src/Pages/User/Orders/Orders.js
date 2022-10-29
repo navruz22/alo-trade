@@ -8,6 +8,7 @@ import { map, uniqueId } from "lodash";
 import { filterOrder } from "../../Filter/filterSlice";
 import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 import { onScroll } from "../globalConstants";
+import { filter } from "./constants";
 
 const Orders = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const Orders = () => {
     useSelector((state) => state.filter);
   const [orderId, setOrderId] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const countPage = 4;
+  const countPage = 10;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalBody, setModalBody] = useState(null);
@@ -40,7 +41,7 @@ const Orders = () => {
   };
 
   const handleScroll = (e) => {
-    onScroll({ e, currentPage, setCurrentPage, countPage, orders });
+    onScroll({ e, currentPage, setCurrentPage, countPage, datas: orders });
   };
 
   const deleteHandler = (id) => {
@@ -75,7 +76,7 @@ const Orders = () => {
   useEffect(() => {
     const data = {
       page: 0,
-      count: 4,
+      count: 10,
       order,
       categories,
       subcategories,
@@ -121,11 +122,12 @@ const Orders = () => {
       {logged ? (
         <PageHeader
           count={count}
-          onClick={openModal}
+          onClick={() => openModal("createOrder")}
           countTitle="Jami:"
           buttonTitle="Buyurtma yaratish"
           handleFilter={handleFilter}
           filterData={order}
+          filter={filter}
         />
       ) : (
         <MainPageHeader />

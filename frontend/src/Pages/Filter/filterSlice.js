@@ -9,6 +9,7 @@ const filterSlice = createSlice({
     districts: [],
     regions: [],
     order: "all",
+    product: "all",
   },
   reducers: {
     filterTradeTypes: (state, { payload }) => {
@@ -29,6 +30,9 @@ const filterSlice = createSlice({
     filterOrder: (state, { payload }) => {
       state.order = payload;
     },
+    filterProduct: (state, { payload }) => {
+      state.product = payload;
+    },
   },
   extraReducers: {},
 });
@@ -40,5 +44,6 @@ export const {
   filterSubcategories,
   filterTradeTypes,
   filterOrder,
+  filterProduct,
 } = filterSlice.actions;
 export default filterSlice.reducer;
