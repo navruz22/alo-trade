@@ -9,7 +9,7 @@ import Description from "../../Inputs/Description";
 import SaveButton from "../../Buttons/SaveButton";
 import MinMaxPrice from "../../MinMaxPrice/MinMaxPrice";
 import RadioButtonList from "../../RadioButtons/RadioButtonList";
-import { positions, currencices } from "../../../Config/globalConstants";
+import { currencices } from "../../../Config/globalConstants";
 import UploadImages from "../../ImageCrop/UploadImages";
 import { checkRegisterProduct } from "../../../Pages/User/Products/constants";
 import {
@@ -79,13 +79,13 @@ const CreateProductModal = ({ closeModal, productId }) => {
       : setTradeTypes([...filtered]);
   };
 
-  const changeStatus = (e) => {
-    clearErrors();
-    const value = e.target.value;
-    const checked = e.target.checked;
-    const filtered = filter(statuses, (status) => status !== value);
-    checked ? setStatuses([...filtered, value]) : setStatuses([...filtered]);
-  };
+  // const changeStatus = (e) => {
+  //   clearErrors();
+  //   const value = e.target.value;
+  //   const checked = e.target.checked;
+  //   const filtered = filter(statuses, (status) => status !== value);
+  //   checked ? setStatuses([...filtered, value]) : setStatuses([...filtered]);
+  // };
 
   const filterSubcategory = (categories) => {
     clearErrors();
@@ -250,14 +250,14 @@ const CreateProductModal = ({ closeModal, productId }) => {
         labelStyle="font-normal"
         placeholder="Izoh"
       />
-      <div className="grid grid-cols-3">
-        <CheckboxList
-          onChange={changeStatus}
-          list={positions}
-          headerText="Holati*"
-          headerStyle="text-sm text-[#777]"
-          checkedList={statuses}
-        />
+      <div className="grid grid-cols-2">
+        {/*<CheckboxList*/}
+        {/*  onChange={changeStatus}*/}
+        {/*  list={positions}*/}
+        {/*  headerText="Holati*"*/}
+        {/*  headerStyle="text-sm text-[#777]"*/}
+        {/*  checkedList={statuses}*/}
+        {/*/>*/}
         <RadioButtonList
           currency={currency}
           onChange={changeCurrency}

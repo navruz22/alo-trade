@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { IoChevronDownOutline, IoChevronUpOutline } from "react-icons/io5";
 import { map } from "lodash";
+import description from "../Inputs/Description";
 
 const CardAdditional = ({
   categories,
   district,
   tradetypes,
   region,
-  status,
+  // status,
   subcategories,
   images,
   phone,
   organization,
+  description,
 }) => {
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState("ko'proq ma'lumot");
@@ -34,6 +36,9 @@ const CardAdditional = ({
       {show && (
         <div className="grid grid-cols-7 ">
           <div className="col-span-5">
+            <h3 className="text-neutral-600 text-justify py-2">
+              {description}
+            </h3>
             <h4 className="">
               <span className="font-amazonbold">Telefon raqam:</span>{" "}
               <span className="lowercase ">
@@ -58,12 +63,12 @@ const CardAdditional = ({
                 {map(subcategories, (subcategory) => subcategory.name + ", ")}
               </span>
             </p>
-            <p className="text-neutral-500">
-              <span className="font-amazonbold mr-3">Xolati:</span>
-              <span className="lowercase ">
-                {map(status, (stat) => stat + ", ")}
-              </span>
-            </p>
+            {/*<p className="text-neutral-500">*/}
+            {/*  <span className="font-amazonbold mr-3">Xolati:</span>*/}
+            {/*  <span className="lowercase ">*/}
+            {/*    {map(status, (stat) => stat + ", ")}*/}
+            {/*  </span>*/}
+            {/*</p>*/}
             <p className="text-neutral-500">
               <span className="font-amazonbold mr-2">Manzil:</span>
               {region?.name}, {district?.name}

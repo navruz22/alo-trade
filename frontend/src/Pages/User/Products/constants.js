@@ -45,10 +45,10 @@ export const checkRegisterProduct = ({
     return false;
   }
 
-  if (status.length === 0) {
-    setErrors("Mahsulot holati tanlanmagan");
-    return false;
-  }
+  // if (status.length === 0) {
+  //   setErrors("Mahsulot holati tanlanmagan");
+  //   return false;
+  // }
   if ((min || max) && min > max) {
     setErrors("Narxlar to'g'ri kiritilmagan");
     return false;

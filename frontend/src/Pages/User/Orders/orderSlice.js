@@ -51,6 +51,18 @@ export const getOrderById = createAsyncThunk(
   }
 );
 
+export const getOrderByOffer = createAsyncThunk(
+  "orders/getOrdersByOffer",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/order/getbyoffer", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const updateOrder = createAsyncThunk(
   "orders/updateOrder",
   async (body = {}, { rejectWithValue }) => {
@@ -139,6 +151,9 @@ const orderSlice = createSlice({
     [getOrderById.pending]: (state) => {
       state.loading = true;
     },
+    [getOrderById.fulfilled]: (state, { payload: { order } }) => {
+      state.loading = false;
+    },
     [getOrderById.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
@@ -175,6 +190,17 @@ const orderSlice = createSlice({
       state.loading = false;
     },
     [updateOrderPosition.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+      universalToast(payload, "error");
+    },
+    [getOrderByOffer.pending]: (state) => {
+      state.loading = true;
+    },
+    [getOrderByOffer.fulfilled]: (state, { payload: { order } }) => {
+      state.loading = false;
+    },
+    [getOrderByOffer.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
       universalToast(payload, "error");

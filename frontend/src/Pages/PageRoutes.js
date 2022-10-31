@@ -21,7 +21,10 @@ const PageRoutes = () => {
   const [pathName, setPathName] = useState(location.pathname.split("/")[1]);
 
   const filterVisible =
-    pathName !== "profile" && pathName !== "sign-in" && pathName !== "sign-up";
+    pathName !== "profile" &&
+    pathName !== "sign-in" &&
+    pathName !== "sign-up" &&
+    pathName !== "offers";
 
   useEffect(() => {
     dispatch(getTradeTypes());

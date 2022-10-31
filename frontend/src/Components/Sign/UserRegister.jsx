@@ -7,9 +7,9 @@ import SelectInput from "../SelectInput/SelectInput";
 const UserRegister = ({
   firstname,
   lastname,
-  email,
+  // email,
   password,
-  confirmPassword,
+  // confirmPassword,
   phone,
   region,
   district,
@@ -49,15 +49,15 @@ const UserRegister = ({
             onKeyUp={enterHandler}
           />
         </div>
-        <Input
-          isDisabled={loading}
-          placeholder="Email"
-          type="email"
-          value={email}
-          onChange={changeHandler}
-          name="email"
-          onKeyUp={enterHandler}
-        />
+        {/*<Input*/}
+        {/*  isDisabled={loading}*/}
+        {/*  placeholder="Email"*/}
+        {/*  type="email"*/}
+        {/*  value={email}*/}
+        {/*  onChange={changeHandler}*/}
+        {/*  name="email"*/}
+        {/*  onKeyUp={enterHandler}*/}
+        {/*/>*/}
         <Input
           isDisabled={loading}
           placeholder="Telefon raqam*"
@@ -100,16 +100,16 @@ const UserRegister = ({
           required={true}
           onKeyUp={enterHandler}
         />
-        <Input
-          isDisabled={loading}
-          placeholder="Parolni tasdiqlang"
-          type="password"
-          value={confirmPassword}
-          onChange={changeHandler}
-          name={"confirmPassword"}
-          required={true}
-          onKeyUp={enterHandler}
-        />
+        {/*<Input*/}
+        {/*  isDisabled={loading}*/}
+        {/*  placeholder="Parolni tasdiqlang"*/}
+        {/*  type="password"*/}
+        {/*  value={confirmPassword}*/}
+        {/*  onChange={changeHandler}*/}
+        {/*  name={"confirmPassword"}*/}
+        {/*  required={true}*/}
+        {/*  onKeyUp={enterHandler}*/}
+        {/*/>*/}
         <Button
           title="Ro'yxatdan o'tish"
           onClick={submitHandler}

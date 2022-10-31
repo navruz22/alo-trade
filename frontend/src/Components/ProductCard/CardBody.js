@@ -3,7 +3,7 @@ import { IoLocationOutline } from "react-icons/io5";
 
 const CardBody = ({
   name,
-  description,
+  // description,
   minPrice,
   maxPrice,
   currency,
@@ -21,7 +21,7 @@ const CardBody = ({
           Narxi: {min} - {max} {currency}
         </h3>
       </div>
-      <h3 className="text-neutral-600 text-justify">{description}</h3>
+      {/*<h3 className="text-neutral-600 text-justify">{description}</h3>*/}
       <p className="mt-1 flex items-center text-neutral-500 text-sm">
         <IoLocationOutline className="" />
         <span className="ml-2">{region.name}</span>

@@ -28,7 +28,7 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
     organization,
   } = order;
   const isCustomer = userData?.user?._id === user?._id;
-  const phone = userData?.user?.phone;
+  const phone = organization ? organization.phone : user.phone;
   const isOrganization = userData?.organization;
   return (
     <div className="w-full shadow-md mt-5 rounded bg-white-900 flex">
@@ -49,8 +49,9 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
           description={description}
           currency={currency}
         />
-        {logged && isOrganization && (
+        {logged && (isOrganization || isCustomer) && (
           <CardAdditional
+            description={description}
             tradetypes={tradetypes}
             categories={categories}
             subcategories={subcategories}
@@ -72,7 +73,7 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
                 position={position}
               />
             )
-          : logged && isOrganization && <CardFooter />}
+          : logged && isOrganization && <CardFooter phone={phone} id={_id} />}
       </div>
       {/*<div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">*/}
       {/*  {images[0] && (*/}

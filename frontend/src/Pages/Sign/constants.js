@@ -41,10 +41,10 @@ export const checkHandler = ({
     );
     return false;
   }
-  if (password !== confirmPassword) {
-    universalToast("Parollar mos kelmadi", "warning");
-    return false;
-  }
+  // if (password !== confirmPassword) {
+  //   universalToast("Parollar mos kelmadi", "warning");
+  //   return false;
+  // }
 
   if (url === "business") {
     if (name === "") {

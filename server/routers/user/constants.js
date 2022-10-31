@@ -56,6 +56,7 @@ const getOrganizationById = async (id) =>
     .populate("subcategories", "name")
     .then((organization) => {
       return {
+        _id: organization._id,
         name: organization?.name,
         image: organization?.image,
         description: organization?.description,

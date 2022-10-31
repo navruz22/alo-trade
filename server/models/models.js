@@ -4,11 +4,12 @@ const { Region } = require("./Adress/Region");
 const { District } = require("./Adress/District");
 const { Category } = require("./Category/Category");
 const { Subcategory } = require("./Category/Subcategory");
-const { Offer } = require("./Order_Offer_Product/Offer");
 const { Admin } = require("./User/Admin");
 const { TradeType } = require("./Trade/TradeType");
 const { Order } = require("./Order/Order");
 const { Product } = require("./Product/Product");
+const { Offer } = require("./Offer/Offer");
+const { Message } = require("./Offer/Message");
 
 module.exports = {
   Product,
@@ -21,5 +22,6 @@ module.exports = {
   Organization,
   Order,
   Offer,
+  Message,
   Admin,
 };

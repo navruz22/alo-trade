@@ -85,6 +85,22 @@ const getOrderWithId = async (id) =>
       };
     });
 
+const getOrderForOffer = async (id) =>
+  await Order.findById(id)
+    .populate({
+      path: "region",
+      select: "name",
+    })
+    .populate("district", "name")
+    .populate({
+      path: "categories",
+      select: "name",
+    })
+    .populate("tradetypes", "name")
+    .populate("subcategories", "name")
+    .populate("user", "firstname lastname phone email")
+    .populate("organization", "name phone email");
+
 const getOrderForUpdate = async (id) =>
   await Order.findById(id)
     .select("-updatedAt -__v")
@@ -96,4 +112,10 @@ const getOrderForUpdate = async (id) =>
     .populate("user", "firstname lastname phone email")
     .populate("organization", "name phone email");
 
-module.exports = { getOrder, getOrderWithId, getOrders, getOrderForUpdate };
+module.exports = {
+  getOrder,
+  getOrderWithId,
+  getOrders,
+  getOrderForUpdate,
+  getOrderForOffer,
+};

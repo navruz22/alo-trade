@@ -28,7 +28,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
     organization,
   } = product;
   const isCustomer = userData?.user?._id === user?._id;
-  const phone = userData?.user?.phone;
+  const phone = organization?.phone;
   const isOrganization = userData?.organization;
   return (
     <div className="w-full shadow-md mt-5 rounded bg-white-900 flex">
@@ -51,6 +51,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
         />
         {logged && (
           <CardAdditional
+            description={description}
             tradetypes={tradetypes}
             categories={categories}
             subcategories={subcategories}
@@ -72,7 +73,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
                 position={position}
               />
             )
-          : logged && isOrganization && <CardFooter />}
+          : logged && <CardFooter phone={phone} id={_id} />}
       </div>
       {/*<div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">*/}
       {/*  {images[0] && (*/}

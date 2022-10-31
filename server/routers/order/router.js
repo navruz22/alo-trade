@@ -7,6 +7,7 @@ const {
   updateOrder,
   deleteOrder,
   updateOrderPosition,
+  getOrderByOffer,
 } = require("./order");
 
 router.post("/create", auth, createOrder);
@@ -15,5 +16,6 @@ router.post("/getbyid", auth, getOrderById);
 router.put("/update", auth, updateOrder);
 router.post("/delete", auth, deleteOrder);
 router.put("/updateposition", auth, updateOrderPosition);
+router.post("/getbyoffer", auth, getOrderByOffer);
 
 module.exports = router;

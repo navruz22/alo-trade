@@ -5,6 +5,7 @@ const {
   getProductWithId,
   getProducts,
   getProductForUpdate,
+  getProductForOffer,
 } = require("./constants");
 
 const createProduct = async (req, res) => {
@@ -145,6 +146,19 @@ const updateProductPosition = async (req, res) => {
   }
 };
 
+const getProductByOffer = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    const product = await getProductForOffer(id);
+
+    res.status(200).json({ product });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
 module.exports = {
   createProduct,
   getProductsByFilter,
@@ -153,4 +167,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   updateProductPosition,
+  getProductByOffer,
 };

@@ -10,9 +10,9 @@ const BusinessmanRegister = ({
   categoriesWithSubcategories,
   firstname,
   lastname,
-  email,
+  // email,
   password,
-  confirmPassword,
+  // confirmPassword,
   phone,
   region,
   district,
@@ -74,15 +74,15 @@ const BusinessmanRegister = ({
             required={true}
             onKeyUp={enterHandler}
           />
-          <Input
-            isDisabled={loading}
-            placeholder="Email"
-            type="email"
-            value={email}
-            onChange={changeHandler}
-            name="email"
-            onKeyUp={enterHandler}
-          />
+          {/*<Input*/}
+          {/*  isDisabled={loading}*/}
+          {/*  placeholder="Email"*/}
+          {/*  type="email"*/}
+          {/*  value={email}*/}
+          {/*  onChange={changeHandler}*/}
+          {/*  name="email"*/}
+          {/*  onKeyUp={enterHandler}*/}
+          {/*/>*/}
         </div>
         <div className="flex flex-grow">
           <Input
@@ -96,16 +96,16 @@ const BusinessmanRegister = ({
             required={true}
             onKeyUp={enterHandler}
           />
-          <Input
-            isDisabled={loading}
-            placeholder="Parolni tasdiqlang"
-            type="password"
-            value={confirmPassword}
-            onChange={changeHandler}
-            name={"confirmPassword"}
-            required={true}
-            onKeyUp={enterHandler}
-          />
+          {/*<Input*/}
+          {/*  isDisabled={loading}*/}
+          {/*  placeholder="Parolni tasdiqlang"*/}
+          {/*  type="password"*/}
+          {/*  value={confirmPassword}*/}
+          {/*  onChange={changeHandler}*/}
+          {/*  name={"confirmPassword"}*/}
+          {/*  required={true}*/}
+          {/*  onKeyUp={enterHandler}*/}
+          {/*/>*/}
         </div>
         <br />
         <p className="text-neutral-500 text-sm">Tashkilot ma'lumotlari</p>

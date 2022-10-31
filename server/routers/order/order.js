@@ -5,6 +5,7 @@ const {
   getOrderWithId,
   getOrders,
   getOrderForUpdate,
+  getOrderForOffer,
 } = require("./constants");
 
 const createOrder = async (req, res) => {
@@ -145,6 +146,18 @@ const updateOrderPosition = async (req, res) => {
   }
 };
 
+const getOrderByOffer = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    const order = await getOrderForOffer(id);
+
+    res.status(200).json({ order });
+  } catch (error) {
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
 module.exports = {
   createOrder,
   getOrdersByFilter,
@@ -153,4 +166,5 @@ module.exports = {
   updateOrder,
   deleteOrder,
   updateOrderPosition,
+  getOrderByOffer,
 };

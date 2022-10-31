@@ -96,9 +96,26 @@ const getProductForUpdate = async (id) =>
     .populate("user", "firstname lastname phone email")
     .populate("organization", "name phone email");
 
+const getProductForOffer = async (id) =>
+  await Product.findById(id)
+    .populate({
+      path: "region",
+      select: "name",
+    })
+    .populate("district", "name")
+    .populate({
+      path: "categories",
+      select: "name",
+    })
+    .populate("subcategories", "name")
+    .populate("tradetypes", "name")
+    .populate("user", "firstname lastname phone email")
+    .populate("organization", "name phone email");
+
 module.exports = {
   getProduct,
   getProductWithId,
   getProducts,
   getProductForUpdate,
+  getProductForOffer,
 };
