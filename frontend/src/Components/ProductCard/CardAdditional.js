@@ -62,10 +62,12 @@ const CardAdditional = ({
                 {map(subcategories, (subcategory) => subcategory.name + ", ")}
               </span>
             </p>
-            <p className="text-neutral-500">
-              <span className="font-amazonbold mr-2">Manzil:</span>
-              {region?.name}, {district?.name}
-            </p>
+            {
+              <p className="text-neutral-500">
+                <span className="font-amazonbold mr-2">Manzil:</span>
+                {region?.name}, {district?.name}
+              </p>
+            }
           </div>
           <div className="col-span-2 text-end flex justify-end">
             {images[0] && (

@@ -29,7 +29,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   } = product;
   const isCustomer = userData?.user?._id === user?._id;
   const phone = organization?.phone;
-  const isOrganization = userData?.organization;
+  // const isOrganization = userData?.organization;
   return (
     <div className="w-full shadow-md mt-5 rounded bg-white-900 flex">
       <div className="text-sm w-full flex flex-col justify-between ">

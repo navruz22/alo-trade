@@ -14,7 +14,7 @@ export const checkRegisterProduct = ({
   categories,
   subcategories,
   name,
-  status,
+  // status,
   minPrice,
   maxPrice,
   currency,
