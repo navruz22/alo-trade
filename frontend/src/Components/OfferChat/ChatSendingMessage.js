@@ -9,7 +9,7 @@ const ChatIncomingMessage = ({ message: Message }) => {
           <h3 className="font-amazonbold text-neutral-500 text-[15px]">
             {user?.firstname} {user?.lastname}
           </h3>
-          <p className="text-sm text-neutral-500 text-end">
+          <p className="text-[12px] text-neutral-500 text-end">
             {new Date(createdAt).toLocaleTimeString().slice(0, 5)}{" "}
             {new Date(createdAt).toLocaleDateString()}
           </p>
@@ -17,11 +17,18 @@ const ChatIncomingMessage = ({ message: Message }) => {
         <p className="text-neutral-600">{message}</p>
       </div>
       <div className=" w-16 flex justify-center items-center">
-        <img
-          src={"https://picsum.photos/200"}
-          alt="Alotarade"
-          className="w-12 h-12 rounded-full"
-        />
+        {user?.image ? (
+          <img
+            src={user.image}
+            alt="Alotarade"
+            className="w-12 h-12 rounded-full"
+          />
+        ) : (
+          <div className="w-12 h-12 rounded-full uppercase flex items-center justify-center bg-white-900">
+            {user?.firstname[0]}
+            {user?.lastname[0]}
+          </div>
+        )}
       </div>
     </div>
   );

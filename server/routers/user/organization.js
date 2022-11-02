@@ -138,6 +138,7 @@ const updateOrganization = async (req, res) => {
       categories,
       subcategories,
       tradetypes,
+      id,
     } = req.body;
 
     const { error } = validateOrganization({
@@ -155,7 +156,7 @@ const updateOrganization = async (req, res) => {
       return res.status(400).json({ message: error.message });
     }
 
-    const organization = await Organization.findOne({ name, phone });
+    const organization = await Organization.findById(id);
     if (!organization) {
       return res.status(400).json({
         message: `${name} nomli tashkilot mavjud emas`,

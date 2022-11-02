@@ -116,6 +116,7 @@ const EditOrganization = () => {
       subcategories: subCategories,
       tradetypes: tradeTypes,
       email,
+      id: organization?._id,
     };
     const check = checkOrganization({
       ...data,

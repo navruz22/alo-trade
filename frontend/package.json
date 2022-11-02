@@ -25,6 +25,7 @@
     "react-select": "^5.5.2",
     "react-snap": "^1.23.0",
     "react-toastify": "^9.0.8",
+    "socket.io-client": "^4.5.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -5,6 +5,7 @@ const Message = new Schema(
     message: { type: String },
     offer: { type: Schema.Types.ObjectId, ref: "Offer" },
     user: { type: Schema.Types.ObjectId, ref: "User" },
+    recipient: { type: Schema.Types.ObjectId, ref: "User" },
     isRead: { type: Boolean, default: false },
     isArchive: { type: Boolean, default: false },
   },

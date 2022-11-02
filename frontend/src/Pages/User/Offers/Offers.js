@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ChatUser from "../../../Components/OfferChat/ChatUser";
 import ProductData from "../../../Components/OfferChat/ProductData";
 import ChatIncomingMessage from "../../../Components/OfferChat/ChatIncomingMessage";
@@ -9,26 +9,27 @@ import { useLocation } from "react-router-dom";
 import { getProductByOffer } from "../Products/productSlice";
 import { getOrderByOffer } from "../Orders/orderSlice";
 import { universalToast } from "../../../Components/ToastMessages/ToastMessages";
-import warning from "react-redux/es/utils/warning";
 import {
+  createMessage,
   createOffer,
   getMessagesByOffer,
+  getOfferById,
   getOfferByUser,
   getOffers,
   setAllMessages,
 } from "./offerSlice";
 import { map, uniqueId } from "lodash";
+import socket from "../../../Config/socket";
 
 const Offers = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const messagesEndRef = useRef(null);
   const {
-    userData: { user, organization },
+    userData: { user },
   } = useSelector((state) => state.login);
 
-  const { offers, loading, error, messages } = useSelector(
-    (state) => state.offers
-  );
+  const { offers, messages } = useSelector((state) => state.offers);
 
   const [id, setId] = useState(null);
   const [type, setType] = useState(null);
@@ -55,25 +56,23 @@ const Offers = () => {
     if (!currentProduct && !currentOrder)
       return universalToast("Mahsulot yoki buyurtma tanlanmagan", "warning");
 
-    const recipient = currentProduct
-      ? currentProduct.organization
-        ? currentProduct.organization._id
-        : currentProduct.user._id
-      : currentOrder.organization
-      ? currentOrder.organization._id
-      : currentOrder.user._id;
-
     const data = {
       message,
       product: currentProduct ? currentProduct._id : undefined,
       order: currentOrder ? currentOrder._id : undefined,
+      offer: offer ? offer._id : undefined,
     };
-    !offer &&
-      dispatch(createOffer({ ...data })).then(({ error }) => {
+    dispatch(offer ? createMessage(data) : createOffer(data)).then(
+      ({ error, payload: { offer, message } }) => {
         if (!error) {
           setMessage("");
+          setOffer(offer);
+          newMessageHasBeenSend({
+            recipient: message.recipient,
+          });
         }
-      });
+      }
+    );
   };
 
   const changeOffer = (offer) => {
@@ -91,6 +90,36 @@ const Offers = () => {
   const isUser = (offererUser) => {
     return offererUser?._id === user?._id;
   };
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const newMessageHasBeenSend = ({ recipient }) => {
+    socket.emit("sendMessage", { recipient });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  useEffect(() => {
+    socket.on("error", ({ id, message }) => {
+      user._id === id && universalToast(message, "error");
+    });
+    socket.on("newMessage", ({ recipient }) => {
+      const isUser = recipient === user._id;
+      isUser && dispatch(getOffers());
+      isUser &&
+        offer &&
+        dispatch(getMessagesByOffer({ id: offer._id })).then(({ error }) => {
+          if (!error) {
+            dispatch(getOfferById({ id: offer._id }));
+          }
+        });
+    });
+  }, [user, dispatch, offer]);
+
   useEffect(() => {
     if (location.state) {
       const type = location.state.type;
@@ -104,6 +133,10 @@ const Offers = () => {
           !offer && dispatch(setAllMessages({ messages: [] }));
         }
       });
+    } else {
+      dispatch(setAllMessages({ messages: [] }));
+      setCurrentOrder(null);
+      setCurrentProduct(null);
     }
   }, [location.state, dispatch]);
 
@@ -137,12 +170,17 @@ const Offers = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    offer && dispatch(getMessagesByOffer({ id: offer._id }));
+    offer &&
+      dispatch(getMessagesByOffer({ id: offer._id })).then(({ error }) => {
+        if (!error) {
+          dispatch(getOfferById({ id: offer._id }));
+        }
+      });
   }, [dispatch, offer]);
 
   return (
-    <div className="flex flex-row">
-      <div className="h-screen pb-20 overflow-scroll max-w-[400px] min-w-[300px] w-full w-1/4">
+    <div className="flex flex-row h-full w-full ">
+      <div className="max-w-[400px] min-w-[300px] w-1/4 h-full overflow-scroll px-3">
         {map(offers, (offer) => (
           <ChatUser
             changeOffer={() => changeOffer(offer)}
@@ -152,8 +190,8 @@ const Offers = () => {
           />
         ))}
       </div>
-      <div className="w-full h-screen pb-20 w-1/2 border-y shadow-lg bg-neutral-100 relative">
-        <div className="w-full h-screen overflow-scroll pb-32 p-3">
+      <div className="h-full w-1/2 relative bg-neutral-200 flex flex-col">
+        <div className="h-full overflow-scroll">
           {map(messages, (message) =>
             isUser(message.user) ? (
               <ChatSendingMessage key={uniqueId("message")} message={message} />
@@ -164,6 +202,7 @@ const Offers = () => {
               />
             )
           )}
+          <div className="" ref={messagesEndRef} />
         </div>
         <ChatInput
           value={message}
@@ -172,7 +211,7 @@ const Offers = () => {
           sendHandler={sendHandler}
         />
       </div>
-      <div className="w-full h-screen pb-20 overflow-scroll w-1/4 p-3">
+      <div className="max-w-[400px] min-w-[300px] w-1/4 h-full overflow-scroll p-4">
         <ProductData data={currentProduct || currentOrder} />
       </div>
     </div>

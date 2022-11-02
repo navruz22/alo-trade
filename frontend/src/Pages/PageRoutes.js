@@ -35,17 +35,17 @@ const PageRoutes = () => {
     setPathName(location.pathname.split("/")[1]);
   }, [location.pathname]);
   return (
-    <section className="flex flex-col w-full h-full max-h-screen">
+    <section className="flex flex-col w-full h-screen max-h-screen">
       <Navbar />
-      <div className="flex flex-row w-full overflow-hidden ">
-        {filterVisible && (
-          <Filter
-            categories={categories}
-            regions={regions}
-            tradeTypes={tradetypes}
-          />
-        )}
-        <div className="h-screen w-full">
+      <div className="w-full h-full overflow-hidden">
+        <div className="flex flex-row h-full overflow-hidden">
+          {filterVisible && (
+            <Filter
+              categories={categories}
+              regions={regions}
+              tradeTypes={tradetypes}
+            />
+          )}
           <Suspense fallback={<Loader />}>
             <Routes>{protectedRoutes()}</Routes>
           </Suspense>

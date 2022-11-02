@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { IoChevronDownOutline, IoChevronUpOutline } from "react-icons/io5";
 import { map } from "lodash";
-import description from "../Inputs/Description";
 
 const CardAdditional = ({
   categories,

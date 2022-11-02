@@ -1,11 +1,21 @@
-const { express, cors, path } = require("./packages");
+const { express, cors, path, socketIo, http } = require("./packages");
 const app = express();
+const { Server } = socketIo;
+const server = http.createServer(app);
 const { start } = require("./db/db");
-
 const { routers } = require("./routers/routers");
+const { socketIO } = require("./socketio/socket");
+
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    method: ["*"],
+  },
+});
 
 app.use(cors());
-start(app).then(() => {});
+socketIO(io);
+start(server).then(() => {});
 routers(app);
 
 if (process.env.NODE_ENV === "production") {

@@ -7,7 +7,7 @@ const CardAdditional = ({
   district,
   tradetypes,
   region,
-  status,
+  // status,
   subcategories,
   images,
   phone,

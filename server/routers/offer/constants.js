@@ -4,8 +4,8 @@ const { map } = require("lodash");
 const getOffersByUser = async (id) =>
   await Offer.find()
     .or([{ user: id }, { offererUser: id }])
-    .sort({ createdAt: -1 })
-    .populate("messages", "message")
+    .sort({ updatedAt: -1 })
+    .populate("messages", "message isRead user")
     .populate("user")
     .populate("organization")
     .populate("offererUser")
@@ -30,7 +30,7 @@ const getOffersByUser = async (id) =>
 
 const getOfferById = async (id) =>
   await Offer.findById(id)
-    .populate("messages", "message")
+    .populate("messages", "message user isRead")
     .populate("user")
     .populate("organization")
     .populate("offererUser")
@@ -77,8 +77,14 @@ const getOfferUser = async (query) =>
 
 const getMessages = async (offer) =>
   await Message.find(offer)
-    .select("user message createdAt")
-    .populate("user", "firstname lastname")
+    .select("user recipient message createdAt offer image")
+    .populate("user", "firstname lastname image")
+    .sort({ createdAt: 1 });
+
+const getMessageByid = async (id) =>
+  await Message.findById(id)
+    .select("user recipient message createdAt offer image")
+    .populate("user", "firstname lastname image")
     .sort({ createdAt: 1 });
 
 module.exports = {
@@ -86,4 +92,5 @@ module.exports = {
   getOfferById,
   getOfferUser,
   getMessages,
+  getMessageByid,
 };

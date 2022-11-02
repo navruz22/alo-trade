@@ -5,7 +5,9 @@ const {
   getOfferById,
   getMessages,
   getOfferUser,
+  getMessageByid,
 } = require("./constants");
+const { map } = require("lodash");
 
 const createOffer = async (req, res) => {
   try {
@@ -32,6 +34,7 @@ const createOffer = async (req, res) => {
       order,
       product,
       user: offererUser._id,
+      recipient: user,
     });
 
     await newMessage.save();
@@ -51,8 +54,9 @@ const createOffer = async (req, res) => {
     await newOffer.save();
     await newMessage.save();
     const offer = await getOfferById(newOffer._id);
+    const messages = await getMessages({ offer: newOffer._id });
 
-    res.status(201).json({ offer });
+    res.status(201).json({ offer, messages });
   } catch (e) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
@@ -85,14 +89,89 @@ const getOfferByUser = async (req, res) => {
   }
 };
 
-const getMessagesByOffer = async (req, res) => {
+const getOfferByid = async (req, res) => {
   try {
     const { id } = req.body;
-    const messages = await getMessages({ offer: id });
-    res.status(200).json(messages);
+
+    const offer = await getOfferById(id);
+    res.status(200).json({ offer });
   } catch (error) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
 };
 
-module.exports = { createOffer, getOffers, getMessagesByOffer, getOfferByUser };
+const getMessagesByOffer = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const messages = await getMessages({ offer: id });
+    res.status(200).json(messages);
+
+    map(messages, async (message) => {
+      if (message.recipient.toString() === req.user.id) {
+        message.isRead = true;
+        await message.save();
+      }
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
+const createMessage = async (req, res) => {
+  try {
+    const { offer, message, product, order } = req.body;
+    const user = req.user.id;
+    const oldOffer = await Offer.findById(offer);
+    if (!oldOffer) {
+      return res.status(400).json({ message: "Taklif topilmadi" });
+    }
+
+    const recipient =
+      oldOffer.offererUser.toString() === user
+        ? oldOffer.user
+        : oldOffer.offererUser;
+
+    const newMessage = new Message({
+      offer,
+      message,
+      user,
+      order,
+      product,
+      recipient,
+    });
+
+    await newMessage.save(user);
+    oldOffer.messages.push(newMessage._id);
+    await oldOffer.save();
+
+    const resMessage = await getMessageByid(newMessage._id);
+    const resOffer = await getOfferById(offer);
+
+    res.status(201).json({ message: resMessage, offer: resOffer });
+  } catch (error) {
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
+const getMessageById = async (req, res) => {
+  try {
+    const { messageId } = req.body;
+
+    const message = await getMessageByid(messageId);
+    message.isRead = true;
+    await message.save();
+    res.status(200).json({ message });
+  } catch (error) {
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
+module.exports = {
+  createOffer,
+  getOffers,
+  getMessagesByOffer,
+  getOfferByUser,
+  createMessage,
+  getMessageById,
+  getOfferByid,
+};

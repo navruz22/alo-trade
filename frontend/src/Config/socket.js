@@ -1,7 +1,9 @@
-import io from 'socket.io-client'
+import io from "socket.io-client";
+const baseURL =
+  process.env.REACT_APP_API_SOCKET_ENDPOINT || "http://localhost:8080";
 
-const socket = io('http://localhost:8801/')
-const userData = JSON.parse(localStorage.getItem('userData'))
-socket.auth = {token: userData.token, market: userData.market}
+const socket = io(baseURL);
+const token = JSON.parse(localStorage.getItem("_grecaptcha"));
+socket.auth = { token };
 
-export default socket
+export default socket;

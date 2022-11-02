@@ -1,12 +1,15 @@
 import React from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
 
-const ChatUser = ({ offer, user: { _id }, changeOffer }) => {
+const ChatUser = ({ offer, user, changeOffer }) => {
+  const _id = user?._id;
   const { order, product, messages, createdAt, offererUser } = offer;
   const name = order ? order.name : product ? product.name : "";
-  const { message } = messages;
+  const { message, isRead, user: chatUser } = messages;
   const image = order ? order.images[0] : product ? product.images[0] : null;
   const isUser = offererUser._id === _id;
+  const isNew = chatUser !== user._id && !isRead;
+
   return (
     <div
       onClick={changeOffer}
@@ -38,6 +41,11 @@ const ChatUser = ({ offer, user: { _id }, changeOffer }) => {
           <p className="text-neutral-500 mt-1 text-sm h-6 overflow-hidden">
             {message && message}
           </p>
+          {isNew && (
+            <p className="text-[10px] bg-green-500 px-2 text-red-600 rounded-md ">
+              new
+            </p>
+          )}
           <p className="text-xs text-neutral-600">
             {isUser ? (
               <IoArrowUpOutline size={15} className="rotate-45" />

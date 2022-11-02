@@ -18,7 +18,7 @@ const CardFooter = ({ phone, id }) => {
       </button>
       <Link
         to="/offers"
-        state={{ type: "product", id }}
+        state={{ type: "order", id }}
         className=" w-full flex justify-center py-1"
       >
         <MdOutlineMessage size={25} className="text-neutral-500" />

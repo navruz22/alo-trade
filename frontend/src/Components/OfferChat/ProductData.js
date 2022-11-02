@@ -4,8 +4,16 @@ import { map, uniqueId } from "lodash";
 
 const ProductData = ({ data }) => {
   if (!data) return null;
+  const organization = data?.organization;
+  const user = data?.user;
+  const whois = organization
+    ? "Tashkilot: " + organization?.name
+    : "Foydalanuvchi: " + user?.firstname + " " + user?.lastname;
   return (
     <>
+      <h2 className="font-amazonbold py-2 text-lg border-y border-neutral-300">
+        {whois}
+      </h2>
       <h3 className="font-amazonbold py-1">{data?.name}</h3>
       <h4 className="py-2 mb-2">{data?.description}</h4>
       <p className="flex items-center text-neutral-600 text-sm">
@@ -43,9 +51,9 @@ const ProductData = ({ data }) => {
             map(data?.subcategories, (subcategory) => subcategory?.name + ", ")}
         </span>
       </p>
-      <p className="flex items-center justify-between text-neutral-600 text-lg py-3">
+      <p className="flex items-center justify-between text-neutral-600 text-lg py-2 my-2 border-y border-neutral-300">
         <span className="pr-2 font-amazonbold">Narxi: </span>{" "}
-        <span className="text-amber-500 font-amazonbold">
+        <span className="text-amber-500 font-amazonbold ">
           {data?.minPrice
             ? data?.minPrice?.toLocaleString("ru-RU") + " - "
             : ""}{" "}
