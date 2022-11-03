@@ -74,7 +74,7 @@ const Offers = () => {
           setMessage("");
           setOffer(offer);
           newMessageHasBeenSend({
-            recipient: message.recipient,
+            recipient: message?.recipient,
           });
         }
       }
@@ -240,7 +240,7 @@ const Offers = () => {
           sendHandler={sendHandler}
         />
       </div>
-      <div className="max-w-[400px] min-w-[300px] w-1/4 h-full overflow-scroll p-4">
+      <div className="max-w-[400px] min-w-[300px] w-1/4 h-full overflow-scroll p-4 bg-neutral-100">
         <ProductData data={currentProduct || currentOrder} />
       </div>
     </div>

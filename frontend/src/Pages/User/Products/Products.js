@@ -18,8 +18,15 @@ const Products = () => {
     userData: { user, organization },
   } = useSelector((state) => state.login);
   const { products } = useSelector((state) => state.products);
-  const { product, categories, subcategories, tradetypes, regions, districts } =
-    useSelector((state) => state.filter);
+  const {
+    product,
+    categories,
+    subcategories,
+    tradetypes,
+    regions,
+    districts,
+    name,
+  } = useSelector((state) => state.filter);
   const [productId, setProductId] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const countPage = 10;
@@ -83,6 +90,7 @@ const Products = () => {
       regions,
       districts,
       user: user?._id,
+      name,
     };
     setCurrentPage(0);
     dispatch(getProducts(data));
@@ -95,6 +103,7 @@ const Products = () => {
     regions,
     districts,
     user,
+    name,
   ]);
   useEffect(() => {
     const data = {
@@ -107,12 +116,13 @@ const Products = () => {
       regions,
       districts,
       user: user?._id,
+      name,
     };
 
     currentPage !== 0 && dispatch(getProductsByFilter(data));
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, product, currentPage, countPage]);
-
+  console.log(name);
   return (
     <div
       className="h-screen w-full pb-20 bg-neutral-100 overflow-scroll"

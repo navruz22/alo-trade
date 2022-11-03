@@ -6,13 +6,16 @@ import { filter } from "lodash";
 import {
   filterCategories,
   filterDistricts,
+  filterName,
   filterRegions,
   filterSubcategories,
   filterTradeTypes,
 } from "./filterSlice";
+import { IoSearchOutline } from "react-icons/io5";
 
 const Filter = ({ categories, regions, tradeTypes }) => {
   const dispatch = useDispatch();
+  const [name, setName] = React.useState("");
   const {
     tradetypes,
     categories: categoriesList,
@@ -20,6 +23,21 @@ const Filter = ({ categories, regions, tradeTypes }) => {
     districts,
     regions: regionsList,
   } = useSelector((state) => state.filter);
+
+  const changeName = (e) => {
+    const value = e.target.value;
+    setName(value);
+  };
+
+  const enterHandler = (e) => {
+    if (e.key === "Enter") {
+      dispatch(filterName(name));
+    }
+  };
+
+  const handleSearch = () => {
+    dispatch(filterName(name));
+  };
 
   const changeTradeTypes = (e) => {
     const value = e.target.value;
@@ -73,6 +91,21 @@ const Filter = ({ categories, regions, tradeTypes }) => {
         <h1 className="font-amazonbold text-xl tracking-widest text-secondary-medium">
           Filter
         </h1>
+        <div className="flex w-full pl-3 mt-2">
+          <input
+            onKeyUp={enterHandler}
+            onChange={changeName}
+            type="text"
+            className="w-full border  rounded-l px-3 text-sm py-1 outline-0"
+            placeholder="Nomi bilan qidirish"
+          />
+          <button
+            onClick={handleSearch}
+            className="w-1/5 rounded-r bg-primary-800 text-white-900 border border-l-0 flex justify-center items-center"
+          >
+            <IoSearchOutline />
+          </button>
+        </div>
         <CheckboxList
           checkedList={tradetypes}
           list={tradeTypes}

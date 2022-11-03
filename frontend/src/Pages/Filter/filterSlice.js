@@ -10,6 +10,7 @@ const filterSlice = createSlice({
     regions: [],
     order: "all",
     product: "all",
+    name: "",
   },
   reducers: {
     filterTradeTypes: (state, { payload }) => {
@@ -33,6 +34,9 @@ const filterSlice = createSlice({
     filterProduct: (state, { payload }) => {
       state.product = payload;
     },
+    filterName: (state, { payload }) => {
+      state.name = payload;
+    },
   },
   extraReducers: {},
 });
@@ -45,5 +49,6 @@ export const {
   filterTradeTypes,
   filterOrder,
   filterProduct,
+  filterName,
 } = filterSlice.actions;
 export default filterSlice.reducer;

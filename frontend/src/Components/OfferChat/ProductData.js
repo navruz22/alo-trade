@@ -60,17 +60,17 @@ const ProductData = ({ data }) => {
           {data?.maxPrice?.toLocaleString("ru-RU")} {data?.currency}
         </span>
       </p>
-      <p className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         {data?.images &&
           map(data?.images, (image) => (
-            <img
-              className="rounded-md"
+            <div
               key={uniqueId("productImage")}
-              alt="alotrade"
-              src={image}
-            />
+              className="w-full flex items-center justify-center rounded bg-white-900 "
+            >
+              <img className="" alt="alotrade" src={image} />
+            </div>
           ))}
-      </p>
+      </div>
     </>
   );
 };

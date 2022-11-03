@@ -17,8 +17,15 @@ const Orders = () => {
     userData: { user },
   } = useSelector((state) => state.login);
   const { orders } = useSelector((state) => state.orders);
-  const { order, categories, subcategories, tradetypes, regions, districts } =
-    useSelector((state) => state.filter);
+  const {
+    order,
+    categories,
+    subcategories,
+    tradetypes,
+    regions,
+    districts,
+    name,
+  } = useSelector((state) => state.filter);
   const [orderId, setOrderId] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const countPage = 10;
@@ -84,6 +91,7 @@ const Orders = () => {
       regions,
       districts,
       user: user?._id,
+      name,
     };
     setCurrentPage(0);
     dispatch(getOrders(data));
@@ -96,6 +104,7 @@ const Orders = () => {
     regions,
     districts,
     user,
+    name,
   ]);
   useEffect(() => {
     const data = {
@@ -108,12 +117,12 @@ const Orders = () => {
       regions,
       districts,
       user: user?._id,
+      name,
     };
 
     currentPage !== 0 && dispatch(getOrdersByFilter(data));
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, order, currentPage, countPage]);
-
   return (
     <div
       className="h-screen w-full pb-20 bg-neutral-100 overflow-scroll "

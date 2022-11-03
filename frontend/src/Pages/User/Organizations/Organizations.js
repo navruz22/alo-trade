@@ -14,8 +14,15 @@ const Organizations = () => {
   const dispatch = useDispatch();
   const { logged } = useSelector((state) => state.login);
   const { organizations } = useSelector((state) => state.organizations);
-  const { order, categories, subcategories, tradetypes, regions, districts } =
-    useSelector((state) => state.filter);
+  const {
+    order,
+    categories,
+    subcategories,
+    tradetypes,
+    regions,
+    districts,
+    name,
+  } = useSelector((state) => state.filter);
 
   const [currentPage, setCurrentPage] = useState(0);
   const countPage = 8;
@@ -39,6 +46,7 @@ const Organizations = () => {
       tradetypes,
       regions,
       districts,
+      name,
     };
     setCurrentPage(0);
     dispatch(getOrganizations(data));
@@ -50,6 +58,7 @@ const Organizations = () => {
     tradetypes,
     regions,
     districts,
+    name,
   ]);
 
   useEffect(() => {
@@ -61,6 +70,7 @@ const Organizations = () => {
       tradetypes,
       regions,
       districts,
+      name,
     };
     currentPage !== 0 && dispatch(getOrganizationsByFilter(data));
     //    eslint-disable-next-line react-hooks/exhaustive-deps

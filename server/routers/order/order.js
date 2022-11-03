@@ -50,6 +50,7 @@ const getOrdersByFilter = async (req, res) => {
       regions,
       districts,
       user,
+      name,
     } = req.body;
     let query = {};
     if (tradetypes.length > 0) {
@@ -69,6 +70,9 @@ const getOrdersByFilter = async (req, res) => {
     }
     if (orderFilter === "my") {
       query.user = user;
+    }
+    if (name.length > 0) {
+      query.name = new RegExp(".*" + name + ".*", "i");
     }
     const orders = await getOrders({ count, page, query });
     res.status(200).json({ orders });
