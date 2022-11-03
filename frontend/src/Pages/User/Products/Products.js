@@ -3,13 +3,11 @@ import PageHeader from "../../../Components/PageHeaders/PageHeader";
 import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { filter } from "./constants";
-import { onScroll } from "../globalConstants";
 import { filterProduct } from "../../Filter/filterSlice";
-import { deleteProduct } from "./productSlice";
+import { deleteProduct, getProductsCount, getProducts } from "./productSlice";
 import UniversalModal from "../../../Components/Modal/UniversalModal";
 import { map, uniqueId } from "lodash";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
-import { getProducts, getProductsByFilter } from "../Products/productSlice";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -28,6 +26,7 @@ const Products = () => {
     name,
   } = useSelector((state) => state.filter);
   const [productId, setProductId] = useState(null);
+  const [totalDatas, setTotalDatas] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const countPage = 10;
 
@@ -46,10 +45,6 @@ const Products = () => {
     setModalBody(body);
     setModalVisible(true);
     setProductId(null);
-  };
-
-  const handleScroll = (e) => {
-    onScroll({ e, currentPage, setCurrentPage, countPage, datas: products });
   };
 
   const deleteHandler = (id) => {
@@ -82,7 +77,7 @@ const Products = () => {
   useEffect(() => {
     const data = {
       page: 0,
-      count: 10,
+      count: countPage,
       product,
       categories,
       subcategories,
@@ -94,6 +89,13 @@ const Products = () => {
     };
     setCurrentPage(0);
     dispatch(getProducts(data));
+    dispatch(getProductsCount(data)).then(
+      ({ error, payload: { totalCount } }) => {
+        if (!error) {
+          setTotalDatas(totalCount);
+        }
+      }
+    );
   }, [
     dispatch,
     product,
@@ -105,6 +107,7 @@ const Products = () => {
     user,
     name,
   ]);
+
   useEffect(() => {
     const data = {
       page: currentPage,
@@ -119,32 +122,43 @@ const Products = () => {
       name,
     };
 
-    currentPage !== 0 && dispatch(getProductsByFilter(data));
+    dispatch(getProducts(data));
+    dispatch(getProductsCount(data)).then(
+      ({ payload: { totalCount }, error }) => {
+        if (!error) {
+          setTotalDatas(totalCount);
+        }
+      }
+    );
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, product, currentPage, countPage]);
-  console.log(name);
-  return (
-    <div
-      className="h-screen w-full pb-20 bg-neutral-100 overflow-scroll"
-      onScroll={handleScroll}
-    >
-      {logged ? (
-        organization && (
-          <PageHeader
-            filter={filter}
-            count={2000}
-            onClick={() => openModal("createProduct")}
-            buttonTitle="Mahsulot yaratish"
-            handleFilter={handleFilter}
-            filterData={product}
-            countTitle="Jami:"
-          />
-        )
-      ) : (
-        <MainPageHeader />
-      )}
 
-      <div className="p-4 pt-0 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+  return (
+    <div className="h-full w-full bg-neutral-100 flex flex-col">
+      {logged ? (
+        <PageHeader
+          isOrganization={!!organization}
+          totalDatas={totalDatas}
+          countPage={countPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          filter={filter}
+          count={totalDatas}
+          onClick={() => openModal("createProduct")}
+          buttonTitle="Mahsulot yaratish"
+          handleFilter={handleFilter}
+          filterData={product}
+          countTitle="Jami:"
+        />
+      ) : (
+        <MainPageHeader
+          totalDatas={totalDatas}
+          countPage={countPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
+      <div className="p-4 pt-0 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 overflow-scroll">
         {map(products, (product) => (
           <ProductCard
             logged={logged}
@@ -155,7 +169,6 @@ const Products = () => {
           />
         ))}
       </div>
-
       <UniversalModal
         isOpen={modalVisible}
         body={modalBody}

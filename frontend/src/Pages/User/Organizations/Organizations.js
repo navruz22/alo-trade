@@ -2,17 +2,16 @@ import React, { useEffect, useState } from "react";
 import CardLogo from "../../../Components/OrganizationCard/CardLogo";
 import CardInfo from "../../../Components/OrganizationCard/CardInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { onScroll } from "../globalConstants";
-import {
-  getOrganizations,
-  getOrganizationsByFilter,
-} from "./organizationSlice";
-import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
+import { getOrganizations, getOrganizationsCount } from "./organizationSlice";
 import { map, uniqueId } from "lodash";
+import Pagination from "../../../Components/Pagination/Pagination";
 
 const Organizations = () => {
   const dispatch = useDispatch();
-  const { logged } = useSelector((state) => state.login);
+  const {
+    logged,
+    userData: { organization },
+  } = useSelector((state) => state.login);
   const { organizations } = useSelector((state) => state.organizations);
   const {
     order,
@@ -25,22 +24,13 @@ const Organizations = () => {
   } = useSelector((state) => state.filter);
 
   const [currentPage, setCurrentPage] = useState(0);
-  const countPage = 8;
-
-  const handleScroll = (e) => {
-    onScroll({
-      e,
-      currentPage,
-      setCurrentPage,
-      countPage,
-      datas: organizations,
-    });
-  };
+  const [totalDatas, setTotalDatas] = useState(0);
+  const countPage = 10;
 
   useEffect(() => {
     const data = {
       page: 0,
-      count: 8,
+      count: countPage,
       categories,
       subcategories,
       tradetypes,
@@ -50,6 +40,13 @@ const Organizations = () => {
     };
     setCurrentPage(0);
     dispatch(getOrganizations(data));
+    dispatch(getOrganizationsCount(data)).then(
+      ({ payload: { totalCount }, error }) => {
+        if (!error) {
+          setTotalDatas(totalCount);
+        }
+      }
+    );
   }, [
     dispatch,
     order,
@@ -72,19 +69,36 @@ const Organizations = () => {
       districts,
       name,
     };
-    currentPage !== 0 && dispatch(getOrganizationsByFilter(data));
+    dispatch(getOrganizations(data));
+    dispatch(getOrganizationsCount(data)).then(
+      ({ payload: { totalCount }, error }) => {
+        if (!error) {
+          setTotalDatas(totalCount);
+        }
+      }
+    );
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, order, currentPage, countPage]);
 
   return (
-    <div
-      className="h-screen w-full pb-20 bg-neutral-100 overflow-scroll p-4 "
-      onScroll={handleScroll}
-    >
-      {!logged && <MainPageHeader />}
-      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-4">
-        {logged &&
-          map(
+    <div className="h-full w-full  bg-neutral-100 flex flex-col justify-between">
+      <div className="bg-white-900 py-3 shadow-md flex justify-between items-center px-4">
+        <h3 className="font-amazonbold">
+          Jami tashkilotlar:{" "}
+          <span className="text-primary-900">{totalDatas} ta</span>
+        </h3>
+        {totalDatas > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            countPage={countPage}
+            setCurrentPage={setCurrentPage}
+            totalDatas={totalDatas}
+          />
+        )}
+      </div>
+      <div className="h-full overflow-scroll p-4">
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-4">
+          {map(
             organizations,
             ({
               image,
@@ -108,6 +122,8 @@ const Organizations = () => {
                   district={district}
                 />
                 <CardInfo
+                  isOrganization={!!organization}
+                  logged={logged}
                   tradetypes={tradetypes}
                   categories={categories}
                   subcategories={subcategories}
@@ -119,6 +135,7 @@ const Organizations = () => {
               </div>
             )
           )}
+        </div>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const CardBody = ({
       {/*<h3 className="text-neutral-600 text-justify">{description}</h3>*/}
       <p className="mt-1 flex items-center text-neutral-500 text-sm">
         <IoLocationOutline className="" />
-        <span className="ml-2">{region.name}</span>
+        <span className="ml-2">{region?.name}</span>
       </p>
     </div>
   );

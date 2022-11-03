@@ -3,12 +3,14 @@ export const checkRegisterOrder = ({
   categories,
   subcategories,
   name,
-  status,
+  // status,
   minPrice,
   maxPrice,
   currency,
   setErrors,
   description,
+  region,
+  district,
 }) => {
   const min = Number(minPrice);
   const max = Number(maxPrice);
@@ -34,10 +36,20 @@ export const checkRegisterOrder = ({
     return false;
   }
 
+  if (!region) {
+    setErrors("Viloyat tanlanmagan");
+    return false;
+  }
+
+  if (!district) {
+    setErrors("Tuman tanlanmagan");
+    return false;
+  }
   // if (status.length === 0) {
   //   setErrors("Mahsulot holati tanlanmagan");
   //   return false;
   // }
+
   if ((min || max) && min > max) {
     setErrors("Narxlar to'g'ri kiritilmagan");
     return false;

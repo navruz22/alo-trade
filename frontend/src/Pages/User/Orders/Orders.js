@@ -3,18 +3,17 @@ import UniversalModal from "../../../Components/Modal/UniversalModal";
 import PageHeader from "../../../Components/PageHeaders/PageHeader";
 import OrderCard from "../../../Components/OrderCard/OrderCard";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders, getOrdersByFilter, deleteOrder } from "./orderSlice";
+import { deleteOrder, getOrdersCount, getOrders } from "./orderSlice";
 import { map, uniqueId } from "lodash";
 import { filterOrder } from "../../Filter/filterSlice";
 import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
-import { onScroll } from "../globalConstants";
 import { filter } from "./constants";
 
 const Orders = () => {
   const dispatch = useDispatch();
   const {
     logged,
-    userData: { user },
+    userData: { user, organization },
   } = useSelector((state) => state.login);
   const { orders } = useSelector((state) => state.orders);
   const {
@@ -28,6 +27,7 @@ const Orders = () => {
   } = useSelector((state) => state.filter);
   const [orderId, setOrderId] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
+  const [totalDatas, setTotalDatas] = useState(0);
   const countPage = 10;
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -47,10 +47,6 @@ const Orders = () => {
     setOrderId(null);
   };
 
-  const handleScroll = (e) => {
-    onScroll({ e, currentPage, setCurrentPage, countPage, datas: orders });
-  };
-
   const deleteHandler = (id) => {
     setOrderId(id);
     setModalBody("approve");
@@ -62,8 +58,6 @@ const Orders = () => {
     setModalBody("createOrder");
     setModalVisible(true);
   };
-
-  const count = 2000;
 
   const handleFilter = (e) => {
     const value = e.target.value;
@@ -81,9 +75,10 @@ const Orders = () => {
   };
 
   useEffect(() => {
+    setCurrentPage(0);
     const data = {
       page: 0,
-      count: 10,
+      count: countPage,
       order,
       categories,
       subcategories,
@@ -93,19 +88,17 @@ const Orders = () => {
       user: user?._id,
       name,
     };
-    setCurrentPage(0);
     dispatch(getOrders(data));
-  }, [
-    dispatch,
-    order,
-    categories,
-    subcategories,
-    tradetypes,
-    regions,
-    districts,
-    user,
-    name,
-  ]);
+    dispatch(getOrdersCount(data)).then(
+      ({ error, payload: { totalCount } }) => {
+        if (!error) {
+          setTotalDatas(totalCount);
+        }
+      }
+    );
+    //    eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [order, categories, subcategories, tradetypes, regions, districts, name]);
+
   useEffect(() => {
     const data = {
       page: currentPage,
@@ -119,18 +112,27 @@ const Orders = () => {
       user: user?._id,
       name,
     };
-
-    currentPage !== 0 && dispatch(getOrdersByFilter(data));
+    dispatch(getOrders(data));
+    dispatch(getOrdersCount(data)).then(
+      ({ error, payload: { totalCount } }) => {
+        if (!error) {
+          setTotalDatas(totalCount);
+        }
+      }
+    );
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, order, currentPage, countPage]);
+
   return (
-    <div
-      className="h-screen w-full pb-20 bg-neutral-100 overflow-scroll "
-      onScroll={handleScroll}
-    >
+    <div className="h-full w-full bg-neutral-100 flex flex-col justify-between">
       {logged ? (
         <PageHeader
-          count={count}
+          isOrganization={!!organization}
+          currentPage={currentPage}
+          countPage={countPage}
+          totalDatas={totalDatas}
+          setCurrentPage={setCurrentPage}
+          count={totalDatas}
           onClick={() => openModal("createOrder")}
           countTitle="Jami:"
           buttonTitle="Buyurtma yaratish"
@@ -139,10 +141,15 @@ const Orders = () => {
           filter={filter}
         />
       ) : (
-        <MainPageHeader />
+        <MainPageHeader
+          currentPage={currentPage}
+          countPage={countPage}
+          totalDatas={totalDatas}
+          setCurrentPage={setCurrentPage}
+        />
       )}
 
-      <div className="p-4 pt-0">
+      <div className="p-4 pt-0 h-full overflow-scroll">
         {map(orders, (order) => (
           <OrderCard
             logged={logged}
@@ -153,6 +160,7 @@ const Orders = () => {
           />
         ))}
       </div>
+
       <UniversalModal
         isOpen={modalVisible}
         body={modalBody}

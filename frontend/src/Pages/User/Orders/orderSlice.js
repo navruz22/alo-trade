@@ -27,11 +27,11 @@ export const getOrders = createAsyncThunk(
   }
 );
 
-export const getOrdersByFilter = createAsyncThunk(
-  "orders/getOrdersByFilter",
+export const getOrdersCount = createAsyncThunk(
+  "orders/getOrdersCount",
   async (body = {}, { rejectWithValue }) => {
     try {
-      const { data } = await Api.post("/order/getbyfilter", body);
+      const { data } = await Api.post("/order/getbyfiltercount", body);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -132,18 +132,6 @@ const orderSlice = createSlice({
       state.orders = orders;
     },
     [getOrders.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = payload;
-      universalToast(payload, "error");
-    },
-    [getOrdersByFilter.pending]: (state) => {
-      state.loading = true;
-    },
-    [getOrdersByFilter.fulfilled]: (state, { payload: { orders } }) => {
-      state.loading = false;
-      state.orders = [...state.orders, ...orders];
-    },
-    [getOrdersByFilter.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
       universalToast(payload, "error");

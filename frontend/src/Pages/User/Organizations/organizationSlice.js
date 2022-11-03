@@ -14,11 +14,11 @@ export const getOrganizations = createAsyncThunk(
   }
 );
 
-export const getOrganizationsByFilter = createAsyncThunk(
-  "organizations/getAllOrganizationsByFilter",
+export const getOrganizationsCount = createAsyncThunk(
+  "organizations/getAllOrganizationsCount",
   async (body = {}, { rejectWithValue }) => {
     try {
-      const { data } = await Api.post("/user/organization/getall", body);
+      const { data } = await Api.post("/user/organization/getallcount", body);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -47,21 +47,6 @@ const organizationSlice = createSlice({
       state.organizations = organizations;
     },
     [getOrganizations.rejected]: (state, { payload }) => {
-      state.loading = false;
-      state.error = payload;
-      universalToast(payload, "error");
-    },
-    [getOrganizationsByFilter.pending]: (state) => {
-      state.loading = true;
-    },
-    [getOrganizationsByFilter.fulfilled]: (
-      state,
-      { payload: { organizations } }
-    ) => {
-      state.loading = false;
-      state.organizations = [...state.organizations, ...organizations];
-    },
-    [getOrganizationsByFilter.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
       universalToast(payload, "error");

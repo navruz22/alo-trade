@@ -27,6 +27,18 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+export const getProductsCount = createAsyncThunk(
+  "products/getProductsCount",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/product/getbyfiltercount", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 export const getProductsByFilter = createAsyncThunk(
   "products/getProductsByFilter",
   async (body = {}, { rejectWithValue }) => {
@@ -141,7 +153,7 @@ const productSlice = createSlice({
     },
     [getProductsByFilter.fulfilled]: (state, { payload: { products } }) => {
       state.loading = false;
-      state.products = [...state.products, ...products];
+      state.products = products;
     },
     [getProductsByFilter.rejected]: (state, { payload }) => {
       state.loading = false;
