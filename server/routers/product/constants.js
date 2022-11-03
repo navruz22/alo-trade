@@ -25,6 +25,8 @@ const getProducts = async ({ page, count, query }) =>
     .populate("user", "firstname lastname phone email")
     .populate("organization", "name phone email");
 
+const getProductsCount = async ({ query }) => await Product.find(query).count();
+
 const getProductWithId = async (id) =>
   await Product.findById(id)
     .populate({
@@ -118,4 +120,5 @@ module.exports = {
   getProducts,
   getProductForUpdate,
   getProductForOffer,
+  getProductsCount,
 };

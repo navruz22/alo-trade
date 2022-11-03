@@ -6,6 +6,7 @@ const {
   getOrders,
   getOrderForUpdate,
   getOrderForOffer,
+  getOrdersCount,
 } = require("./constants");
 
 const createOrder = async (req, res) => {
@@ -76,6 +77,49 @@ const getOrdersByFilter = async (req, res) => {
     }
     const orders = await getOrders({ count, page, query });
     res.status(200).json({ orders });
+  } catch (error) {
+    res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
+  }
+};
+
+const getOrdersByFilterCount = async (req, res) => {
+  try {
+    const {
+      count,
+      page,
+      order: orderFilter,
+      categories,
+      subcategories,
+      tradetypes,
+      regions,
+      districts,
+      user,
+      name,
+    } = req.body;
+    let query = {};
+    if (tradetypes.length > 0) {
+      query.tradetypes = { $in: tradetypes };
+    }
+    if (districts.length) {
+      query.district = { $in: districts };
+    }
+    if (regions.length) {
+      query.region = { $in: regions };
+    }
+    if (categories.length) {
+      query.categories = { $in: categories };
+    }
+    if (subcategories.length) {
+      query.subcategories = { $in: subcategories };
+    }
+    if (orderFilter === "my") {
+      query.user = user;
+    }
+    if (name.length > 0) {
+      query.name = new RegExp(".*" + name + ".*", "i");
+    }
+    const totalCount = await getOrdersCount({ query });
+    res.status(200).json({ totalCount });
   } catch (error) {
     res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
   }
@@ -165,6 +209,7 @@ const getOrderByOffer = async (req, res) => {
 module.exports = {
   createOrder,
   getOrdersByFilter,
+  getOrdersByFilterCount,
   getOrder,
   getOrderById,
   updateOrder,

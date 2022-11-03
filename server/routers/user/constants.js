@@ -102,8 +102,12 @@ const getOrganizations = async ({ page, count, query }) =>
     .populate("tradetypes", "name")
     .populate("user", "firstname lastname phone email");
 
+const getOrganizationsCount = async ({ query }) =>
+  await Organization.find(query).count();
+
 module.exports = {
   getUserById,
   getOrganizationById,
   getOrganizations,
+  getOrganizationsCount,
 };

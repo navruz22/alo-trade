@@ -4,7 +4,11 @@ const {
 } = require("../../models/validators");
 const { Organization, User } = require("../../models/models");
 const { bcrypt, config, jwt } = require("../../packages");
-const { getOrganizationById, getOrganizations } = require("./constants");
+const {
+  getOrganizationById,
+  getOrganizations,
+  getOrganizationsCount,
+} = require("./constants");
 
 const createOrganization = async (req, res) => {
   try {
@@ -238,6 +242,7 @@ const getOrganizationsByFilter = async (req, res) => {
       tradetypes,
       regions,
       districts,
+      name,
     } = req.body;
     let query = {};
     if (tradetypes.length > 0) {
@@ -255,9 +260,44 @@ const getOrganizationsByFilter = async (req, res) => {
     if (subcategories.length) {
       query.subcategories = { $in: subcategories };
     }
+    if (name.length > 0) {
+      query.name = new RegExp(".*" + name + ".*", "i");
+    }
     const organizations = await getOrganizations({ count, page, query });
     res.status(200).json({ organizations });
   } catch (e) {
+    console.log(e);
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
+const getOrganizationsByFilterCount = async (req, res) => {
+  try {
+    const { categories, subcategories, tradetypes, regions, districts, name } =
+      req.body;
+    let query = {};
+    if (tradetypes.length > 0) {
+      query.tradetypes = { $in: tradetypes };
+    }
+    if (districts.length) {
+      query.district = { $in: districts };
+    }
+    if (regions.length) {
+      query.region = { $in: regions };
+    }
+    if (categories.length) {
+      query.categories = { $in: categories };
+    }
+    if (subcategories.length) {
+      query.subcategories = { $in: subcategories };
+    }
+    if (name.length > 0) {
+      query.name = new RegExp(".*" + name + ".*", "i");
+    }
+    const totalCount = await getOrganizationsCount({ query });
+    res.status(200).json({ totalCount });
+  } catch (e) {
+    console.log(e);
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
 };
@@ -267,4 +307,5 @@ module.exports = {
   updateOrganization,
   createNewOrganization,
   getOrganizationsByFilter,
+  getOrganizationsByFilterCount,
 };

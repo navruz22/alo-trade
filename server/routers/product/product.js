@@ -6,6 +6,7 @@ const {
   getProducts,
   getProductForUpdate,
   getProductForOffer,
+  getProductsCount,
 } = require("./constants");
 
 const createProduct = async (req, res) => {
@@ -76,6 +77,47 @@ const getProductsByFilter = async (req, res) => {
     }
     const products = await getProducts({ count, page, query });
     res.status(200).json({ products });
+  } catch (error) {
+    res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
+  }
+};
+
+const getProductsByFilterCount = async (req, res) => {
+  try {
+    const {
+      product: productFilter,
+      categories,
+      subcategories,
+      tradetypes,
+      regions,
+      districts,
+      user,
+      name,
+    } = req.body;
+    let query = {};
+    if (tradetypes.length > 0) {
+      query.tradetypes = { $in: tradetypes };
+    }
+    if (districts.length) {
+      query.district = { $in: districts };
+    }
+    if (regions.length) {
+      query.region = { $in: regions };
+    }
+    if (categories.length) {
+      query.categories = { $in: categories };
+    }
+    if (subcategories.length) {
+      query.subcategories = { $in: subcategories };
+    }
+    if (productFilter === "my") {
+      query.user = user;
+    }
+    if (name.length > 0) {
+      query.name = new RegExp(".*" + name + ".*", "i");
+    }
+    const totalCount = await getProductsCount({ query });
+    res.status(200).json({ totalCount });
   } catch (error) {
     res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
   }
@@ -158,7 +200,6 @@ const getProductByOffer = async (req, res) => {
 
     res.status(200).json({ product });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
 };
@@ -166,6 +207,7 @@ const getProductByOffer = async (req, res) => {
 module.exports = {
   createProduct,
   getProductsByFilter,
+  getProductsByFilterCount,
   getProduct,
   getProductById,
   updateProduct,

@@ -8,10 +8,12 @@ const {
   deleteProduct,
   updateProductPosition,
   getProductByOffer,
+  getProductsByFilterCount,
 } = require("./product");
 
 router.post("/create", auth, createProduct);
 router.post("/getbyfilter", getProductsByFilter);
+router.post("/getbyfiltercount", getProductsByFilterCount);
 router.post("/getbyid", auth, getProductById);
 router.put("/update", auth, updateProduct);
 router.post("/delete", auth, deleteProduct);

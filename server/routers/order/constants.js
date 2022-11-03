@@ -25,6 +25,8 @@ const getOrders = async ({ page, count, query }) =>
     .populate("user", "firstname lastname phone email")
     .populate("organization", "name phone email");
 
+const getOrdersCount = async ({ query }) => await Order.find(query).count();
+
 const getOrderWithId = async (id) =>
   await Order.findById(id)
     .populate({
@@ -118,4 +120,5 @@ module.exports = {
   getOrders,
   getOrderForUpdate,
   getOrderForOffer,
+  getOrdersCount,
 };

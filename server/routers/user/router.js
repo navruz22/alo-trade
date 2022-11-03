@@ -12,6 +12,7 @@ const {
   createNewOrganization,
   updateOrganization,
   getOrganizationsByFilter,
+  getOrganizationsByFilterCount,
 } = require("./organization");
 const auth = require("../../middleware/auth.middleware");
 
@@ -27,6 +28,7 @@ router.put("/updatepassword", auth, updatePassword);
 router.post("/organization/create", createOrganization);
 router.put("/organization/update", updateOrganization);
 router.post("/organization/new", createNewOrganization);
-router.post("/organization/getall", auth, getOrganizationsByFilter);
+router.post("/organization/getall", getOrganizationsByFilter);
+router.post("/organization/getallcount", getOrganizationsByFilterCount);
 
 module.exports = router;
