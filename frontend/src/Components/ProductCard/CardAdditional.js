@@ -31,49 +31,40 @@ const CardAdditional = ({
     setShow(!show);
   };
   return (
-    <div className="text-neutral-500 px-3 relative">
+    <div className="text-neutral-500 px-3">
       {show && (
-        <div className="grid grid-cols-7 ">
-          <div className="col-span-5">
-            <h3 className="text-neutral-600 text-justify py-2">
-              {description}
-            </h3>
-            <h4 className="">
-              <span className="font-amazonbold">Telefon raqam:</span>{" "}
-              <span className="lowercase ">
-                {organization ? organization?.phone : phone}
-              </span>
-            </h4>
-            <p className="">
-              <span className="font-amazonbold">Savdo turi:</span>{" "}
-              <span className="lowercase ">
-                {map(tradetypes, (tradetype) => tradetype.name + ", ")}
-              </span>
+        <div className="col-span-5">
+          <h3 className="text-neutral-600 text-justify py-2">{description}</h3>
+          <h4 className="">
+            <span className="font-amazonbold">Telefon raqam:</span>{" "}
+            <span className="lowercase ">
+              {organization ? organization?.phone : phone}
+            </span>
+          </h4>
+          <p className="">
+            <span className="font-amazonbold">Savdo turi:</span>{" "}
+            <span className="lowercase ">
+              {map(tradetypes, (tradetype) => tradetype.name + ", ")}
+            </span>
+          </p>
+          <p className="">
+            <span className="font-amazonbold">Kategoriyasi:</span>{" "}
+            <span className="lowercase ">
+              {map(categories, (category) => category.name + ", ")}
+            </span>
+          </p>
+          <p className="">
+            <span className="font-amazonbold">Kategoriyasi turlari:</span>{" "}
+            <span className="lowercase ">
+              {map(subcategories, (subcategory) => subcategory.name + ", ")}
+            </span>
+          </p>
+          {
+            <p className="text-neutral-500">
+              <span className="font-amazonbold mr-2">Manzil:</span>
+              {region?.name}, {district?.name}
             </p>
-            <p className="">
-              <span className="font-amazonbold">Kategoriyasi:</span>{" "}
-              <span className="lowercase ">
-                {map(categories, (category) => category.name + ", ")}
-              </span>
-            </p>
-            <p className="">
-              <span className="font-amazonbold">Kategoriyasi turlari:</span>{" "}
-              <span className="lowercase ">
-                {map(subcategories, (subcategory) => subcategory.name + ", ")}
-              </span>
-            </p>
-            {
-              <p className="text-neutral-500">
-                <span className="font-amazonbold mr-2">Manzil:</span>
-                {region?.name}, {district?.name}
-              </p>
-            }
-          </div>
-          <div className="col-span-2 text-end flex justify-end">
-            {images[0] && (
-              <img src={images[0]} className="w-[150px]" alt="alotrade.uz" />
-            )}
-          </div>
+          }
         </div>
       )}
 

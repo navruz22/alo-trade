@@ -1,8 +1,8 @@
 const { Offer, Message } = require("../../models/models");
 const { map } = require("lodash");
 
-const getOffersByUser = async (id) =>
-  await Offer.find()
+const getOffersByUser = async ({ query, id }) =>
+  await Offer.find(query)
     .or([{ user: id }, { offererUser: id }])
     .sort({ updatedAt: -1 })
     .populate("messages", "message isRead user")

@@ -64,8 +64,17 @@ const createOffer = async (req, res) => {
 
 const getOffers = async (req, res) => {
   try {
+    const { filter } = req.body;
+    let query = {};
     const id = req.user.id;
-    const offers = await getOffersByUser(id);
+    if (filter === "user") {
+      query = { user: id };
+    }
+    if (filter === "offererUser") {
+      query = { offererUser: id };
+    }
+
+    const offers = await getOffersByUser({ query, id });
     res.status(200).json({ offers });
   } catch (error) {
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });

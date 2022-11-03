@@ -134,7 +134,7 @@ const Products = () => {
         <MainPageHeader />
       )}
 
-      <div className="p-4 pt-0">
+      <div className="p-4 pt-0 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
         {map(products, (product) => (
           <ProductCard
             logged={logged}

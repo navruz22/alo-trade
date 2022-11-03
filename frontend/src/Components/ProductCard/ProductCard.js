@@ -5,6 +5,7 @@ import CardAdditional from "./CardAdditional";
 import CardFooter from "./CardFooter";
 import CardEdit from "./CardEdit";
 import { useSelector } from "react-redux";
+import noImage from "../../assets/images/no-image.svg";
 
 const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   const { userData } = useSelector((state) => state.login);
@@ -31,8 +32,15 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   const phone = organization?.phone;
   // const isOrganization = userData?.organization;
   return (
-    <div className="w-full shadow-md mt-5 rounded bg-white-900 flex">
-      <div className="text-sm w-full flex flex-col justify-between ">
+    <div className="w-full shadow-md mt-5 rounded-md bg-white-900 ">
+      <div className="text-sm w-full h-full flex flex-col justify-between ">
+        <div className="flex overflow-hidden items-center justify-center">
+          <img
+            src={images[0] ? images[0] : noImage}
+            className="rounded h-[200px]"
+            alt="Product"
+          />
+        </div>
         {/* Card header */}
         <CardHeader
           logged={logged}

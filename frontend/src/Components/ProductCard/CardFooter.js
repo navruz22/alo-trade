@@ -12,16 +12,16 @@ const CardFooter = ({ phone, id }) => {
     <div className="w-full border-t grid grid-cols-2 m-0">
       <button
         onClick={showHandler}
-        className="w-full flex justify-center border-r py-1 text-neutral-500"
+        className="w-full flex justify-center items-center border-r py-1 text-neutral-500"
       >
-        {show ? phone : <IoCallOutline size={25} />}
+        {show ? phone : <IoCallOutline size={22} />}
       </button>
       <Link
         to="/offers"
         state={{ type: "product", id }}
-        className=" w-full flex justify-center py-1"
+        className=" w-full flex justify-center items-center py-1"
       >
-        <MdOutlineMessage size={25} className="text-neutral-500" />
+        <MdOutlineMessage size={22} className="text-neutral-500" />
       </Link>
     </div>
   );

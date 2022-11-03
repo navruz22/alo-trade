@@ -8,7 +8,7 @@ const ChatUser = ({ offer, user, changeOffer }) => {
   const { message, isRead, user: chatUser } = messages;
   const image = order ? order.images[0] : product ? product.images[0] : null;
   const isUser = offererUser._id === _id;
-  const isNew = chatUser !== user._id && !isRead;
+  const isNew = chatUser !== user?._id && !isRead;
 
   return (
     <div

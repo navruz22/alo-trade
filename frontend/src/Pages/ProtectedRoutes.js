@@ -18,6 +18,9 @@ const OrganizationsReport = lazy(() =>
   import("./User/Organizations/Organizations")
 );
 const ProfileReport = lazy(() => import("./User/Profile/Profile"));
+const CompanyReport = lazy(() =>
+  import("../Components/MainPageHeader/CompanyRegister")
+);
 // <-- pages
 
 // routes -->
@@ -47,6 +50,10 @@ const userRoutes = [
   {
     path: "/profile/*",
     element: <ProfileReport />,
+  },
+  {
+    path: "/companyregister",
+    element: <CompanyReport />,
   },
   otherRoutes,
 ];

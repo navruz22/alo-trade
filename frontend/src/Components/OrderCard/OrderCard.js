@@ -49,7 +49,7 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
           description={description}
           currency={currency}
         />
-        {logged && (isOrganization || isCustomer) && (
+        {logged && (isOrganization || isCustomer) && position === "active" && (
           <CardAdditional
             description={description}
             tradetypes={tradetypes}
@@ -73,7 +73,9 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
                 position={position}
               />
             )
-          : logged && isOrganization && <CardFooter phone={phone} id={_id} />}
+          : logged &&
+            isOrganization &&
+            position === "active" && <CardFooter phone={phone} id={_id} />}
       </div>
       {/*<div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">*/}
       {/*  {images[0] && (*/}

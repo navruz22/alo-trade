@@ -37,6 +37,12 @@ const Offers = () => {
   const [currentOrder, setCurrentOrder] = useState(null);
   const [message, setMessage] = useState("");
   const [offer, setOffer] = useState(null);
+  const [filter, setFilter] = useState(null);
+
+  const changeFilter = (e) => {
+    const val = e.target.name;
+    val === filter ? setFilter(null) : setFilter(e.target.name);
+  };
 
   const changeHandler = (e) => {
     setMessage(e.target.value);
@@ -166,8 +172,8 @@ const Offers = () => {
   }, [id, type, dispatch]);
 
   useEffect(() => {
-    dispatch(getOffers());
-  }, [dispatch]);
+    dispatch(getOffers({ filter }));
+  }, [dispatch, filter, user]);
 
   useEffect(() => {
     offer &&
@@ -180,16 +186,39 @@ const Offers = () => {
 
   return (
     <div className="flex flex-row h-full w-full ">
-      <div className="max-w-[400px] min-w-[300px] w-1/4 h-full overflow-scroll px-3">
-        {map(offers, (offer) => (
-          <ChatUser
-            changeOffer={() => changeOffer(offer)}
-            user={user}
-            key={uniqueId("chatUser")}
-            offer={offer}
-          />
-        ))}
+      <div className="max-w-[400px] min-w-[300px] w-1/4 h-full flex flex-col">
+        <div>
+          <button
+            onClick={changeFilter}
+            name="offererUser"
+            className={`w-1/2 py-2 ${
+              filter === "offererUser" ? "bg-primary-700" : "bg-primary-800"
+            } text-white-900 border-r border-white-900`}
+          >
+            Mening tafliflarim
+          </button>
+          <button
+            onClick={changeFilter}
+            name="user"
+            className={`w-1/2 py-2 ${
+              filter === "user" ? "bg-primary-700" : "bg-primary-800"
+            } text-white-900`}
+          >
+            Menga tafliflar
+          </button>
+        </div>
+        <div className="h-full w-full overflow-scroll px-3">
+          {map(offers, (offer) => (
+            <ChatUser
+              changeOffer={() => changeOffer(offer)}
+              user={user}
+              key={uniqueId("chatUser")}
+              offer={offer}
+            />
+          ))}
+        </div>
       </div>
+
       <div className="h-full w-1/2 relative bg-neutral-200 flex flex-col">
         <div className="h-full overflow-scroll">
           {map(messages, (message) =>
