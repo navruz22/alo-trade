@@ -4,6 +4,7 @@ import { map } from "lodash";
 import { Link } from "react-router-dom";
 
 const CardInfo = ({
+  _id,
   categories,
   subcategories,
   tradetypes,
@@ -41,7 +42,11 @@ const CardInfo = ({
           >
             {show ? phone : <IoCallOutline size={20} />}
           </p>
-          <Link className="w-1/2 flex items-center justify-center py-1 hover:text-success-500 text-green-600">
+          <Link
+            to="/organization"
+            state={{ _id }}
+            className="w-1/2 flex items-center justify-center py-1 hover:text-success-500 text-green-600"
+          >
             Mahsulotlar
           </Link>
         </div>

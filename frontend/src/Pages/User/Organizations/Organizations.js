@@ -101,6 +101,7 @@ const Organizations = () => {
           {map(
             organizations,
             ({
+              _id,
               image,
               name,
               tradetypes,
@@ -122,6 +123,7 @@ const Organizations = () => {
                   district={district}
                 />
                 <CardInfo
+                  _id={_id}
                   isOrganization={!!organization}
                   logged={logged}
                   tradetypes={tradetypes}

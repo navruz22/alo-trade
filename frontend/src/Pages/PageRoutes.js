@@ -24,7 +24,8 @@ const PageRoutes = () => {
     pathName !== "profile" &&
     pathName !== "sign-in" &&
     pathName !== "sign-up" &&
-    pathName !== "offers";
+    pathName !== "offers" &&
+    pathName !== "organization";
 
   useEffect(() => {
     dispatch(getTradeTypes());

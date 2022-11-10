@@ -9,6 +9,7 @@ const {
   updateProductPosition,
   getProductByOffer,
   getProductsByFilterCount,
+  getOrganizationProducts,
 } = require("./product");
 
 router.post("/create", auth, createProduct);

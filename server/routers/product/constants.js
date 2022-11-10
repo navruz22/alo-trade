@@ -1,6 +1,47 @@
 const { Product } = require("../../models/models");
 const { map } = require("lodash");
 
+const queryProducts = (req) => {
+  const {
+    product: productFilter,
+    categories,
+    subcategories,
+    tradetypes,
+    regions,
+    districts,
+    user,
+    name,
+    organization,
+  } = req.body;
+  let query = {};
+  if (organization) {
+    query.organization = organization;
+  }
+  if (tradetypes && tradetypes.length > 0) {
+    query.tradetypes = { $in: tradetypes };
+  }
+  if (districts && districts.length) {
+    query.district = { $in: districts };
+  }
+  if (regions && regions.length) {
+    query.region = { $in: regions };
+  }
+  if (categories && categories.length) {
+    query.categories = { $in: categories };
+  }
+  if (subcategories && subcategories.length) {
+    query.subcategories = { $in: subcategories };
+  }
+  if (productFilter && productFilter === "my") {
+    query.user = user;
+  }
+  if (name && name.length > 0) {
+    query.name = new RegExp(".*" + name + ".*", "i");
+  }
+
+  return query;
+};
+
 const getProduct = async (id) =>
   await Product.findById(id)
     .populate("region", "name")
@@ -121,4 +162,5 @@ module.exports = {
   getProductForUpdate,
   getProductForOffer,
   getProductsCount,
+  queryProducts,
 };

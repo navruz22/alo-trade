@@ -17,6 +17,7 @@ const OffersReport = lazy(() => import("./User/Offers/Offers"));
 const OrganizationsReport = lazy(() =>
   import("./User/Organizations/Organizations")
 );
+const Organization = lazy(() => import("./User/Organizations/Organization"));
 const ProfileReport = lazy(() => import("./User/Profile/Profile"));
 const CompanyReport = lazy(() =>
   import("../Components/MainPageHeader/CompanyRegister")
@@ -55,6 +56,7 @@ const userRoutes = [
     path: "/companyregister",
     element: <CompanyReport />,
   },
+  { path: "/organization", element: <Organization /> },
   otherRoutes,
 ];
 

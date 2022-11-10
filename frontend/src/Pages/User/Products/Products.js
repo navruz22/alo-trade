@@ -176,8 +176,8 @@ const Products = () => {
         toggleModal={toggleModal}
         productId={productId}
         modalBody={modalBody}
-        headerText="Buyurtmani o'chirish"
-        title="Siz rostdan ham buyurtmani o'chirmoqchimisiz?"
+        headerText="Mahsulotni o'chirish"
+        title="Siz rostdan ham mahsulotni o'chirmoqchimisiz?"
         approveFunction={deleteProductById}
       />
     </div>

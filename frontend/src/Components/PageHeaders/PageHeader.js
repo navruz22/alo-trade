@@ -17,7 +17,6 @@ const PageHeader = ({
   totalDatas,
   setCurrentPage,
 }) => {
-  console.log(isOrganization);
   return (
     <div className="flex  justify-between shadow w-full px-5 py-3 items-center bg-white-900">
       {isOrganization && (
