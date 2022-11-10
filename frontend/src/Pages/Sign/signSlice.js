@@ -179,10 +179,10 @@ const signSlice = createSlice({
       state.userData = { user, organization };
       localStorage.setItem("_grecaptcha", JSON.stringify(token));
     },
-    [signIn.rejected]: (state, { payload }) => {
+    [signIn.rejected]: (state, { payload: { message } }) => {
       state.loading = false;
-      state.error = payload;
-      universalToast(payload, "error");
+      state.error = message;
+      universalToast(message, "error");
     },
     [getUser.pending]: (state) => {
       state.loading = true;

@@ -8,6 +8,7 @@ const {
   getOrganizationById,
   getOrganizations,
   getOrganizationsCount,
+  getOrganization,
 } = require("./constants");
 
 const createOrganization = async (req, res) => {
@@ -302,10 +303,24 @@ const getOrganizationsByFilterCount = async (req, res) => {
   }
 };
 
+const getOrganizationByid = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const organization = await getOrganization(id);
+    if (!organization) {
+      return res.status(400).json({ message: "Tashkilot topilmadi" });
+    }
+    res.status(200).json({ organization });
+  } catch (e) {
+    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+  }
+};
+
 module.exports = {
   createOrganization,
   updateOrganization,
   createNewOrganization,
   getOrganizationsByFilter,
   getOrganizationsByFilterCount,
+  getOrganizationByid,
 };

@@ -10,6 +10,8 @@ import {
 import { map, uniqueId } from "lodash";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 import UniversalModal from "../../../Components/Modal/UniversalModal";
+import { getOrganizationById } from "./organizationSlice";
+import noImage from "../../../assets/images/no-image.svg";
 
 const Oeganization = () => {
   const dispatch = useDispatch();
@@ -18,6 +20,7 @@ const Oeganization = () => {
   const [productId, setProductId] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalBody, setModalBody] = useState(null);
+  const [organization, setOrganization] = useState(null);
 
   const { products } = useSelector((state) => state.products);
   const { logged } = useSelector((state) => state.login);
@@ -53,6 +56,13 @@ const Oeganization = () => {
       organization: _id,
     };
     setCurrentPage(0);
+    dispatch(getOrganizationById({ id: _id })).then(
+      ({ error, payload: { organization } }) => {
+        if (!error) {
+          setOrganization(organization);
+        }
+      }
+    );
     dispatch(getProducts(data));
     dispatch(getProductsCount(data)).then(
       ({ error, payload: { totalCount } }) => {
@@ -94,7 +104,50 @@ const Oeganization = () => {
   return (
     <div className="flex flex-row h-full overflow-hidden w-full">
       <div className="w-1/3 min-w-[300px] max-w-[400px] overflow-scroll shadow">
-        <div className="p-4">Organization</div>
+        <div className="p-4">
+          <div className="rounded-md overflow-hidden bg-neutral-200">
+            <img
+              src={organization?.image || noImage}
+              alt="CompanyPhoto"
+              className="w-full"
+            />
+          </div>
+          <h2 className="py-4 font-amazonbold text-base">
+            {organization?.name}
+          </h2>
+          <p className="text-sm text-neutral-500">
+            Telefon: {organization?.phone}
+          </p>
+          <p className="text-sm text-neutral-500">
+            Manzil: {organization?.region?.label},{" "}
+            {organization?.district?.label}
+          </p>
+
+          <div className="text-sm text-neutral-500 mt-4">
+            Savdo turi:
+            {map(organization?.tradetypes, ({ name }) => (
+              <h3 className="pl-3" key={uniqueId()}>
+                - {name}
+              </h3>
+            ))}
+          </div>
+          <div className="text-sm text-neutral-500 mt-4">
+            Kategoriyasi:
+            {map(organization?.categories, ({ label }) => (
+              <h3 className="pl-3" key={uniqueId()}>
+                - {label}
+              </h3>
+            ))}
+          </div>
+          <div className="text-sm text-neutral-500 mt-4">
+            Kategoriya turlari:
+            {map(organization?.subcategories, ({ label }) => (
+              <h3 className="pl-3" key={uniqueId()}>
+                - {label}
+              </h3>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="h-full w-full bg-neutral-100 flex flex-col">
         <div className="flex  justify-between shadow w-full px-5 py-3 items-center bg-white-900">
