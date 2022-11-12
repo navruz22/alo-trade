@@ -61,7 +61,6 @@ const getProductsByFilterCount = async (req, res) => {
 
     res.status(200).json({ totalCount });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
   }
 };

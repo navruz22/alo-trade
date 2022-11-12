@@ -12,8 +12,12 @@ import {
   filterTradeTypes,
 } from "./filterSlice";
 import { IoSearchOutline } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "./constants";
 
 const Filter = ({ categories, regions, tradeTypes }) => {
+  const { t } = useTranslation(["common"]);
+  const { Filter } = getTranslations(t);
   const dispatch = useDispatch();
   const [name, setName] = React.useState("");
   const {
@@ -89,7 +93,7 @@ const Filter = ({ categories, regions, tradeTypes }) => {
     <div className="w-1/3 min-w-[300px] max-w-[400px] overflow-scroll shadow">
       <div className="p-4">
         <h1 className="font-amazonbold text-xl tracking-widest text-secondary-medium">
-          Filter
+          {Filter}
         </h1>
         <div className="flex w-full pl-3 mt-2">
           <input

@@ -4,53 +4,38 @@ import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import Store from "./Config/store";
 import App from "./App";
-import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "./index.css";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+import "./i18n";
+
 const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
+
+const renderElement = (
+  <>
+    <Router>
+      <Provider store={Store}>
+        <App />
+      </Provider>
+    </Router>
+    <ToastContainer
+      position="top-right"
+      theme={"colored"}
+      autoClose={2000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      pauseOnHover
+    />
+  </>
+);
+
 if (rootElement.hasChildNodes()) {
-  ReactDOM.hydrate(
-    <>
-      <Router>
-        <Provider store={Store}>
-          <App />
-        </Provider>
-      </Router>
-      <ToastContainer
-        position="top-right"
-        theme={"colored"}
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-      />
-    </>,
-    rootElement
-  );
+  ReactDOM.hydrate(renderElement, rootElement);
 } else {
-  root.render(
-    <>
-      <Router>
-        <Provider store={Store}>
-          <App />
-        </Provider>
-      </Router>
-      <ToastContainer
-        position="top-right"
-        theme={"colored"}
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        pauseOnHover
-      />
-    </>
-  );
+  root.render(renderElement);
 }

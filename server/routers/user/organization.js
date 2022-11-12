@@ -267,7 +267,6 @@ const getOrganizationsByFilter = async (req, res) => {
     const organizations = await getOrganizations({ count, page, query });
     res.status(200).json({ organizations });
   } catch (e) {
-    console.log(e);
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
 };
@@ -298,7 +297,6 @@ const getOrganizationsByFilterCount = async (req, res) => {
     const totalCount = await getOrganizationsCount({ query });
     res.status(200).json({ totalCount });
   } catch (e) {
-    console.log(e);
     res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
   }
 };
