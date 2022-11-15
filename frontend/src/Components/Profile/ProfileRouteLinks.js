@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { map, uniqueId } from "lodash";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../translation";
 
 const ProfileRouteLinks = ({ menu }) => {
+  const { t } = useTranslation();
+  const translations = getTranslations(t);
   const location = useLocation();
   const [path, setPath] = useState(location.pathname);
 
   const linkHandler = (e) => {
     setPath(e);
   };
-
+  console.log(menu);
   return (
     <div className="max-w-[400px] w-1/3 w-full flex flex-col px-2">
       {map(menu, (item) => (
@@ -22,7 +26,7 @@ const ProfileRouteLinks = ({ menu }) => {
           to={item.path}
         >
           <span className="px-2">{item.icon}</span>
-          {item.title}
+          {translations[item.title.toLowerCase()]}
         </Link>
       ))}
     </div>

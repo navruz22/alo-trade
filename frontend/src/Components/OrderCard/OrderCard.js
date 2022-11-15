@@ -6,7 +6,13 @@ import CardFooter from "./CardFooter";
 import CardEdit from "./CardEdit";
 import { useSelector } from "react-redux";
 
-const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
+const OrderCard = ({
+  order,
+  editHandler,
+  deleteHandler,
+  logged,
+  translations,
+}) => {
   const { userData } = useSelector((state) => state.login);
   const {
     _id,
@@ -35,6 +41,7 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
       <div className="text-sm w-full flex flex-col justify-between ">
         {/* Card header */}
         <CardHeader
+          translations={translations}
           logged={logged}
           user={user}
           position={position}
@@ -42,6 +49,7 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
           organization={organization}
         />
         <CardBody
+          translations={translations}
           region={region}
           name={name}
           maxPrice={maxPrice}
@@ -51,6 +59,7 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
         />
         {logged && (isOrganization || isCustomer) && position === "active" && (
           <CardAdditional
+            translations={translations}
             description={description}
             tradetypes={tradetypes}
             categories={categories}
@@ -67,6 +76,7 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
         {isCustomer
           ? logged && (
               <CardEdit
+                translations={translations}
                 editHandler={editHandler}
                 orderId={_id}
                 deleteHandler={deleteHandler}
@@ -77,11 +87,6 @@ const OrderCard = ({ order, editHandler, deleteHandler, logged }) => {
             isOrganization &&
             position === "active" && <CardFooter phone={phone} id={_id} />}
       </div>
-      {/*<div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">*/}
-      {/*  {images[0] && (*/}
-      {/*    <img src={images[0]} className="w-[200px]" alt="alotrade.uz" />*/}
-      {/*  )}*/}
-      {/*</div>*/}
     </div>
   );
 };

@@ -4,7 +4,13 @@ import { BsPencilSquare } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { updateOrderPosition } from "../../Pages/User/Orders/orderSlice";
 
-const CardEdit = ({ editHandler, orderId, deleteHandler, position }) => {
+const CardEdit = ({
+  editHandler,
+  orderId,
+  deleteHandler,
+  position,
+  translations,
+}) => {
   const isActive = position === "active";
   const dispatch = useDispatch();
   const updatePosition = () => {
@@ -17,7 +23,7 @@ const CardEdit = ({ editHandler, orderId, deleteHandler, position }) => {
         onClick={updatePosition}
         className="w-full flex justify-center border-r py-1 text-neutral-500"
       >
-        {isActive ? "Yakunlash" : "Faollashtirish"}
+        {isActive ? translations.yakunlash : translations.faollashtirish}
       </button>
       <button
         onClick={() => editHandler(orderId)}

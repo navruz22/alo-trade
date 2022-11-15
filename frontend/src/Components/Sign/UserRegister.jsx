@@ -21,17 +21,18 @@ const UserRegister = ({
   enterHandler,
   submitHandler,
   loading,
+  translations,
 }) => {
   return (
     <div className="bg-white-900 rounded ">
       <div className="px-16 py-5">
         <h1 className="font-bold text-center py-4 text-xl text-neutral-700">
-          Foydalanuvchi sifatida ro'yxatdan o'tish
+          {translations.foydalanuvchi_sifatida_royxatdan_otish}
         </h1>
         <div className="flex flex-row">
           <Input
             isDisabled={loading}
-            placeholder="Ism*"
+            placeholder={translations.ism + "*"}
             margin="mr-3"
             value={firstname}
             onChange={changeHandler}
@@ -41,7 +42,7 @@ const UserRegister = ({
           />
           <Input
             isDisabled={loading}
-            placeholder="Familiya*"
+            placeholder={translations.familiya + "*"}
             value={lastname}
             onChange={changeHandler}
             name="lastname"
@@ -49,18 +50,9 @@ const UserRegister = ({
             onKeyUp={enterHandler}
           />
         </div>
-        {/*<Input*/}
-        {/*  isDisabled={loading}*/}
-        {/*  placeholder="Email"*/}
-        {/*  type="email"*/}
-        {/*  value={email}*/}
-        {/*  onChange={changeHandler}*/}
-        {/*  name="email"*/}
-        {/*  onKeyUp={enterHandler}*/}
-        {/*/>*/}
         <Input
           isDisabled={loading}
-          placeholder="Telefon raqam*"
+          placeholder={translations.telefon_raqam + "*"}
           type="number"
           value={phone}
           onChange={changeHandler}
@@ -71,7 +63,7 @@ const UserRegister = ({
         <div className="flex flex-row w-full">
           <div className="w-full mr-3">
             <SelectInput
-              placeholder="viloyat*"
+              placeholder={translations.davlat + "*"}
               options={regions}
               onSelect={selectRegion}
               value={region}
@@ -81,7 +73,7 @@ const UserRegister = ({
           </div>
           <div className="w-full">
             <SelectInput
-              placeholder="tuman*"
+              placeholder={translations.viloyat + "*"}
               value={district}
               options={districts}
               onSelect={selectDistrict}
@@ -92,7 +84,7 @@ const UserRegister = ({
         </div>
         <Input
           isDisabled={loading}
-          placeholder="Parol"
+          placeholder={translations.parol + "*"}
           type="password"
           value={password}
           onChange={changeHandler}
@@ -111,15 +103,15 @@ const UserRegister = ({
         {/*  onKeyUp={enterHandler}*/}
         {/*/>*/}
         <Button
-          title="Ro'yxatdan o'tish"
+          title={translations.royxatdan_otish}
           onClick={submitHandler}
           isDisabled={loading}
         />
         <br />
         <LabelButton
           link="../sign-in"
-          label="Avval ro'yxatdan o'tgan bo'lsangiz "
-          title={"kirish qismiga qayting"}
+          label={translations.avval_royxatdan_otgan_bolsangiz + " "}
+          title={translations.kirish_qismiga_qayting}
         />
       </div>
     </div>

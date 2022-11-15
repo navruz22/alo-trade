@@ -1,9 +1,9 @@
+import React from "react";
 import {
   IoBusinessSharp,
   IoKeyOutline,
   IoPersonCircleOutline,
 } from "react-icons/io5";
-import React from "react";
 import EditUser from "../../../Components/Profile/EditUser";
 import { Navigate } from "react-router-dom";
 import EditPassword from "../../../Components/Profile/EditPassword";

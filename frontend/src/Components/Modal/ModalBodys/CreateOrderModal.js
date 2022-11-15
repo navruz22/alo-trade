@@ -18,8 +18,25 @@ import {
   updateOrder,
 } from "../../../Pages/User/Orders/orderSlice";
 import universalModal from "../UniversalModal";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../../translation";
 
 const CreateOrderModal = ({ closeModal, orderId }) => {
+  const { t } = useTranslation();
+  const {
+    yangi_buyurtma,
+    saqlash,
+    kategoriya,
+    kategoriya_turi,
+    nomi,
+    mahsulot_yoki_xizmat_nomi,
+    qoshimcha_malumot,
+    izoh,
+    tolov_turi,
+    savdo_turi,
+    davlat,
+    viloyat,
+  } = getTranslations(t);
   const dispatch = useDispatch();
   const { tradetypes } = useSelector((state) => state.trade);
   const { loading } = useSelector((state) => state.login);
@@ -200,12 +217,12 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
 
   return (
     <div className="overflow-scroll p-1">
-      <div className="text-base font-amazonbold mb-3">Yangi buyurtma</div>
+      <div className="text-base font-amazonbold mb-3">{yangi_buyurtma}</div>
       <CheckboxList
         list={tradetypes}
         checkedList={tradeTypes}
         cols={2}
-        headerText="Savdo turi*"
+        headerText={savdo_turi}
         headerStyle="text-sm"
         listStyle="ml-0"
         onChange={changeTradeTypes}
@@ -218,8 +235,8 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
         districts={districts}
         regions={regions}
         loading={loading}
-        labelRegion={"Viloyat"}
-        labelDistrict={"Tuman"}
+        labelRegion={davlat}
+        labelDistrict={viloyat}
       />
       <SelectCategory
         categories={categories}
@@ -229,15 +246,15 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
         categoriesWithSubcategories={categoriesWithSubcategories}
         allSubcategories={allSubcategories}
         loading={loading}
-        labelCategory={"Kategoriya*"}
-        labelSubcategory={"Kategoriya turi*"}
+        labelCategory={kategoriya}
+        labelSubcategory={kategoriya_turi}
       />
 
       <Input
         onKeyUp={enterHandler}
-        label="Nomi*"
+        label={nomi}
         labelStyle="font-normal"
-        placeholder="Mahsulot yoki xizmat nomi"
+        placeholder={mahsulot_yoki_xizmat_nomi}
         name="name"
         onChange={changeHandler}
         value={name}
@@ -247,23 +264,16 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
         name="description"
         value={description}
         onChange={changeHandler}
-        label="Qo'shimcha ma'lumot*"
+        label={qoshimcha_malumot}
         labelStyle="font-normal"
-        placeholder="Izoh"
+        placeholder={izoh}
       />
       <div className="grid grid-cols-2">
-        {/*<CheckboxList*/}
-        {/*  onChange={changeStatus}*/}
-        {/*  list={positions}*/}
-        {/*  headerText="Holati*"*/}
-        {/*  headerStyle="text-sm text-[#777]"*/}
-        {/*  checkedList={statuses}*/}
-        {/*/>*/}
         <RadioButtonList
           currency={currency}
           onChange={changeCurrency}
           list={currencices}
-          label="To'lov turi"
+          label={tolov_turi}
           name={uniqueId("valyuta")}
         />
         <MinMaxPrice
@@ -279,7 +289,7 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
       </div>
       <div>
         <SaveButton
-          title="Saqlash"
+          title={saqlash}
           className="w-full mt-3"
           onClick={submitHandler}
         />

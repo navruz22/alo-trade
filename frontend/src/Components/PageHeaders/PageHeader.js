@@ -16,6 +16,7 @@ const PageHeader = ({
   countPage,
   totalDatas,
   setCurrentPage,
+  translations,
 }) => {
   return (
     <div className="flex  justify-between shadow w-full px-5 py-3 items-center bg-white-900">
@@ -24,11 +25,12 @@ const PageHeader = ({
           <div>
             <span>{countTitle}</span>{" "}
             <span className="font-amazonbold text-primary-900">
-              {count.toLocaleString()} ta
+              {count.toLocaleString()} {translations.ta}
             </span>
           </div>
           <div className="flex">
             <RadioButtonList
+              translations={translations}
               list={filter}
               onChange={handleFilter}
               currency={filterData}
@@ -46,12 +48,9 @@ const PageHeader = ({
           />
         </div>
       )}
-
-      {isOrganization && (
-        <div>
-          <AddButton onClick={onClick} title={buttonTitle} />
-        </div>
-      )}
+      <div>
+        <AddButton onClick={onClick} title={buttonTitle} />
+      </div>
     </div>
   );
 };

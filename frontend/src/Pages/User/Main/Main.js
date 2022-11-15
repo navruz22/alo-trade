@@ -6,9 +6,13 @@ import OrderCard from "../../../Components/OrderCard/OrderCard";
 import UniversalModal from "../../../Components/Modal/UniversalModal";
 import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 import Pagination from "../../../Components/Pagination/Pagination";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../../translation";
 
 const Main = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation(["common"]);
+  const translations = getTranslations(t);
   const { orders } = useSelector((state) => state.orders);
   const {
     order,
@@ -120,7 +124,9 @@ const Main = () => {
     <div className="h-full w-full bg-neutral-100 flex flex-col">
       {logged ? (
         <div className="bg-white-900 py-3 shadow-md flex justify-between items-center px-4">
-          <h3 className="font-amazonbold">Jami buyurtmalar: {totalDatas} ta</h3>
+          <h3 className="font-amazonbold">
+            {translations.jami_buyurtmalar}: {totalDatas} {translations.ta}
+          </h3>
           {totalDatas > 0 && (
             <Pagination
               currentPage={currentPage}
@@ -132,6 +138,7 @@ const Main = () => {
         </div>
       ) : (
         <MainPageHeader
+          translations={translations}
           countPage={countPage}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
@@ -141,6 +148,7 @@ const Main = () => {
       <div className="p-4 pt-0 overflow-scroll h-full w-full">
         {map(orders, (order) => (
           <OrderCard
+            translations={translations}
             logged={logged}
             key={uniqueId()}
             order={order}

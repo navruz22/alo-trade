@@ -11,6 +11,7 @@ const CardInfo = ({
   phone,
   logged,
   isOrganization,
+  translations,
 }) => {
   const [show, setShow] = useState(false);
 
@@ -20,13 +21,13 @@ const CardInfo = ({
   return (
     <div className="mt-4 text-neutral-500 flex flex-col justify-between h-full ">
       <div className="border-l pl-3 mb-2 grid grid-cols-4 border-neutral-400 mx-4">
-        <h3 className="text-sm font-amazonbold"> Savdo faoliyati</h3>
+        <h3 className="text-sm font-amazonbold"> {translations.savdo_turi}</h3>
         <h4 className=" text-sm col-span-3">
           {`${map(tradetypes, (tradetype) => tradetype.name).join(", ")}`}
         </h4>
       </div>
       <div className="border-l pl-3 border-neutral-400 mb-2 grid grid-cols-4 mx-4">
-        <h3 className="text-sm font-amazonbold">Yo'nalishi</h3>
+        <h3 className="text-sm font-amazonbold">{translations.kategoriya}</h3>
         <h4 className=" text-sm col-span-3">
           {`${map(categories, (category) => category.name).join(", ")}, ${map(
             subcategories,
@@ -47,7 +48,7 @@ const CardInfo = ({
             state={{ _id }}
             className="w-1/2 flex items-center justify-center py-1 hover:text-success-500 text-green-600"
           >
-            Mahsulotlar
+            {translations.koproq_malumot}
           </Link>
         </div>
       )}

@@ -12,8 +12,20 @@ import ImageCrop from "../ImageCrop/ImageCrop";
 import { capitalize } from "lodash";
 import { checkUser } from "./constants";
 import SaveButton from "../Buttons/SaveButton";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../translation";
 
 const EditUser = () => {
+  const { t } = useTranslation(["common"]);
+  const {
+    ism,
+    familiya,
+    telefon_raqam,
+    email: Email,
+    davlat,
+    viloyat,
+    saqlash,
+  } = getTranslations(t);
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.login);
   const { regions } = useSelector((state) => state.regions);
@@ -123,8 +135,8 @@ const EditUser = () => {
       </div>
       <div className="grid grid-cols-2 w-full gap-4 ">
         <Input
-          placeholder="Ism"
-          label="Ism"
+          placeholder={ism}
+          label={ism}
           isDisabled={loading}
           margin="mr-3"
           value={firstname}
@@ -134,8 +146,8 @@ const EditUser = () => {
           onKeyUp={enterHandler}
         />
         <Input
-          placeholder="Familiya"
-          label="Familiya"
+          placeholder={familiya}
+          label={familiya}
           isDisabled={loading}
           value={lastname}
           onChange={changeHandler}
@@ -144,8 +156,8 @@ const EditUser = () => {
           onKeyUp={enterHandler}
         />
         <Input
-          placeholder="Telefon raqam"
-          label="Telefon raqam"
+          placeholder={telefon_raqam}
+          label={telefon_raqam}
           isDisabled={loading}
           type="phone"
           value={phone}
@@ -155,8 +167,8 @@ const EditUser = () => {
           onKeyUp={enterHandler}
         />
         <Input
-          placeholder="Email"
-          label="Email"
+          placeholder={Email}
+          label={Email}
           isDisabled={loading}
           type="email"
           value={email}
@@ -165,9 +177,9 @@ const EditUser = () => {
           onKeyUp={enterHandler}
         />
         <div className="mr-3 w-full">
-          <p className="text-neutral-500 text-sm mt-[7px]">Viloyat</p>
+          <p className="text-neutral-500 text-sm mt-[7px]">{davlat}</p>
           <SelectInput
-            placeholder="Viloyat"
+            placeholder={davlat}
             options={regions}
             onSelect={selectRegion}
             value={region}
@@ -176,9 +188,9 @@ const EditUser = () => {
           />
         </div>
         <div className="w-full">
-          <p className="text-neutral-500 text-sm mt-[7px]">Tuman</p>
+          <p className="text-neutral-500 text-sm mt-[7px]">{viloyat}</p>
           <SelectInput
-            placeholder="Viloyat"
+            placeholder={viloyat}
             value={district}
             options={districts}
             onSelect={selectDistrict}
@@ -189,7 +201,7 @@ const EditUser = () => {
         <SaveButton
           className="col-span-2"
           onClick={submitHandler}
-          title="saqlash"
+          title={saqlash}
         />
       </div>
     </div>

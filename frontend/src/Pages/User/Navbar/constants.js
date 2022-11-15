@@ -5,7 +5,6 @@ import {
   IoPersonOutline,
   IoShare,
 } from "react-icons/io5";
-import React from "react";
 
 export const navs = [
   {
@@ -16,7 +15,7 @@ export const navs = [
     navStyle: "border-r",
   },
   {
-    name: "Takliflar",
+    name: "Xabar",
     path: "/offers",
     icon: <IoShare size={20} color="white" />,
     style: "rotate-180 mr-2 mt-1",
@@ -64,3 +63,16 @@ export const toggleMenu = (logOut, closeMenu) => [
     onClick: logOut,
   },
 ];
+
+export const getTranslations = (t) => {
+  const translations = {
+    Buyurtmalar: t("Buyurtmalar"),
+    Xabar: t("Xabar"),
+    AloTrade: t("AloTrade"),
+    Kompaniyalar: t("Kompaniyalar"),
+    Profile: t("Profile"),
+    kirish: t("kirish"),
+  };
+
+  return translations;
+};

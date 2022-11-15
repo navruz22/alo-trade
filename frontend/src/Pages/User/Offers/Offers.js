@@ -20,10 +20,15 @@ import {
 } from "./offerSlice";
 import { map, uniqueId } from "lodash";
 import socket from "../../../Config/socket";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../../translation";
 
 const Offers = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const { t } = useTranslation(["common"]);
+  const translations = getTranslations(t);
+
   const messagesEndRef = useRef(null);
   const {
     userData: { user },
@@ -195,7 +200,7 @@ const Offers = () => {
               filter === "offererUser" ? "bg-primary-700" : "bg-primary-800"
             } text-white-900 border-r border-white-900`}
           >
-            Mening tafliflarim
+            {translations.kiruvchi_xabar}
           </button>
           <button
             onClick={changeFilter}
@@ -204,7 +209,7 @@ const Offers = () => {
               filter === "user" ? "bg-primary-700" : "bg-primary-800"
             } text-white-900`}
           >
-            Menga tafliflar
+            {translations.chiquvchi_xabar}
           </button>
         </div>
         <div className="h-full w-full overflow-scroll px-3">
@@ -241,7 +246,10 @@ const Offers = () => {
         />
       </div>
       <div className="max-w-[400px] min-w-[300px] w-1/4 h-full overflow-scroll p-4 bg-neutral-100">
-        <ProductData data={currentProduct || currentOrder} />
+        <ProductData
+          data={currentProduct || currentOrder}
+          translations={translations}
+        />
       </div>
     </div>
   );

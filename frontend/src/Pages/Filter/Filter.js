@@ -13,11 +13,12 @@ import {
 } from "./filterSlice";
 import { IoSearchOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
-import { getTranslations } from "./constants";
+import { getTranslations } from "../../translation";
 
 const Filter = ({ categories, regions, tradeTypes }) => {
   const { t } = useTranslation(["common"]);
-  const { Filter } = getTranslations(t);
+  const { Filter, savdo_turi, davlatlar, kategoriyalar, nomi_bilan_qidirish } =
+    getTranslations(t);
   const dispatch = useDispatch();
   const [name, setName] = React.useState("");
   const {
@@ -101,7 +102,7 @@ const Filter = ({ categories, regions, tradeTypes }) => {
             onChange={changeName}
             type="text"
             className="w-full border  rounded-l px-3 text-sm py-1 outline-0"
-            placeholder="Nomi bilan qidirish"
+            placeholder={nomi_bilan_qidirish}
           />
           <button
             onClick={handleSearch}
@@ -113,7 +114,7 @@ const Filter = ({ categories, regions, tradeTypes }) => {
         <CheckboxList
           checkedList={tradetypes}
           list={tradeTypes}
-          headerText="Savdo turi"
+          headerText={savdo_turi}
           headerStyle="ml-3 mt-3"
           listStyle="pl-3"
           onChange={changeTradeTypes}
@@ -123,7 +124,7 @@ const Filter = ({ categories, regions, tradeTypes }) => {
           changeHeader={changeCategories}
           changeBody={changeSubcategories}
           bodyCheckeds={subcategories}
-          headerText={"Kategoriyalar"}
+          headerText={kategoriyalar}
           datas={categories}
           property="subcategories"
         />
@@ -132,7 +133,7 @@ const Filter = ({ categories, regions, tradeTypes }) => {
           bodyCheckeds={districts}
           changeHeader={changeRegions}
           changeBody={changeDistricts}
-          headerText={"Viloyatlar"}
+          headerText={davlatlar}
           datas={regions}
           property="districts"
         />

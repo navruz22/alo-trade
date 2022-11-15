@@ -5,9 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrganizations, getOrganizationsCount } from "./organizationSlice";
 import { map, uniqueId } from "lodash";
 import Pagination from "../../../Components/Pagination/Pagination";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../../translation";
 
 const Organizations = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation(["common"]);
+  const translations = getTranslations(t);
   const {
     logged,
     userData: { organization },
@@ -123,6 +127,7 @@ const Organizations = () => {
                   district={district}
                 />
                 <CardInfo
+                  translations={translations}
                   _id={_id}
                   isOrganization={!!organization}
                   logged={logged}

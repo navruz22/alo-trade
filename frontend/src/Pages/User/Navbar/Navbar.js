@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginButton from "../../../Components/Buttons/LoginButton";
 import Logo from "../../../Components/Logo/Logo";
 import Menu from "../../../Components/Navbar/Menu";
-import { navs, toggleMenu } from "./constants";
+import { getTranslations, navs, toggleMenu } from "./constants";
 import UserProfile from "../../../Components/Navbar/UserProfile";
 import { logOut } from "../../Sign/signSlice";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation(["common"]);
+  const translations = getTranslations(t);
   const [navbarExpended, setNavbarExpended] = useState(false);
   const changeHandler = () => {
     setNavbarExpended(!navbarExpended);
@@ -27,7 +30,7 @@ const Navbar = () => {
       <div className="flex justify-between m-auto container items-center">
         <Logo />
         <Outlet />
-        <Menu navs={navs} />
+        <Menu navs={navs} translations={translations} />
         <div className="">
           {user ? (
             <UserProfile
@@ -37,7 +40,7 @@ const Navbar = () => {
               changeHandler={changeHandler}
             />
           ) : (
-            <LoginButton title="kirish" />
+            <LoginButton title={translations.kirish} />
           )}
         </div>
       </div>

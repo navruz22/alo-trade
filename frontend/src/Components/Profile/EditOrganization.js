@@ -13,9 +13,23 @@ import SaveButton from "../Buttons/SaveButton";
 import CheckboxList from "../CheckboxList/CheckboxList";
 import SelectRegion from "../Select/SelectRegion";
 import SelectCategory from "../Select/SelectCategory";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../translation";
 
 const EditOrganization = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation(["common"]);
+  const {
+    tashkilot_nomi,
+    telefon_raqam,
+    email: Email,
+    davlat,
+    viloyat,
+    savdo_turingizni_tanlang,
+    kategoriya,
+    kategoriya_turi,
+    saqlash,
+  } = getTranslations(t);
   const { loading, userData } = useSelector((state) => state.login);
   const { organization } = userData;
   const { regions } = useSelector((state) => state.regions);
@@ -207,23 +221,23 @@ const EditOrganization = () => {
       <div className="w-full">
         <div className="grid grid-cols-3 gap-4">
           <Input
-            placeholder="Tashkilot nomi"
-            label="Tashkilot nomi"
+            placeholder={tashkilot_nomi}
+            label={tashkilot_nomi}
             name="name"
             value={name}
             onChange={changeHandler}
             onKeyUp={enterHandler}
           />
           <Input
-            placeholder="Telefon raqami"
-            label="Telefon raqami"
+            placeholder={telefon_raqam}
+            label={telefon_raqam}
             name="phone"
             value={phone}
             onChange={changeHandler}
             onKeyUp={enterHandler}
           />
           <Input
-            placeholder="email"
+            placeholder={Email}
             label="Email"
             name="email"
             value={email}
@@ -239,20 +253,22 @@ const EditOrganization = () => {
           district={district}
           selectDistrict={selectDistrict}
           loading={loading}
-          labelRegion={"Viloyat"}
-          labelDistrict={"Tuman"}
+          labelRegion={davlat}
+          labelDistrict={viloyat}
         />
         <div className="mb-2 w-full">
           <CheckboxList
             list={tradetypes}
             onChange={changeTradeTypes}
-            headerText="Savdo turingizni tanlang"
+            headerText={savdo_turingizni_tanlang}
             checkedList={tradeTypes}
             headerStyle="text-sm text-[#777] font-normal"
             cols={2}
           />
         </div>
         <SelectCategory
+          kategoriya_turi={kategoriya_turi}
+          kategoriya={kategoriya}
           categories={categories}
           selectSubcategory={selectSubcategory}
           subcategories={subcategories}
@@ -263,7 +279,7 @@ const EditOrganization = () => {
         />
         <SaveButton
           isDisabled={loading}
-          title="Saqlash"
+          title={saqlash}
           onClick={submitHandler}
           className="mt-3 w-full"
         />

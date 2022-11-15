@@ -4,10 +4,15 @@ import SaveButton from "../Buttons/SaveButton";
 import { checkPassword } from "./constants";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "../../Pages/Sign/signSlice";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../translation";
 
 const EditPassword = () => {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.login);
+  const { t } = useTranslation(["common"]);
+  const { joriy_parol, yangi_parol, parolni_takrorlang, tasdiqlash } =
+    getTranslations(t);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [oldPassword, newPassword] = useState("");
@@ -56,16 +61,16 @@ const EditPassword = () => {
           value={oldPassword}
           type="password"
           name="oldPassword"
-          placeholder="Hozirchi parol"
-          label="Joriy parol"
+          placeholder={joriy_parol}
+          label={joriy_parol}
           onKeyUp={enterHandler}
         />
         <Input
           onChange={changeHandler}
           value={password}
           type="password"
-          placeholder="Yangi parol"
-          label="Yangi parol"
+          placeholder={yangi_parol}
+          label={yangi_parol}
           name="password"
           onKeyUp={enterHandler}
         />
@@ -74,14 +79,14 @@ const EditPassword = () => {
           value={confirmPassword}
           name="confirmPassword"
           type="password"
-          placeholder="Yangi parolni tasdiqlang"
-          label="Yangi parolni tasdiqlang"
+          placeholder={parolni_takrorlang}
+          label={parolni_takrorlang}
           onKeyUp={enterHandler}
         />
       </div>
       <div className="">
         <SaveButton
-          title="Tasdiqlash"
+          title={tasdiqlash}
           className="w-full mt-3"
           isDisabled={loading}
           onClick={submitHandler}

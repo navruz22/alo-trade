@@ -67,13 +67,13 @@ export const checkRegisterOrder = ({
   return true;
 };
 
-export const filter = [
+export const filter = (t) => [
   {
-    label: "barcha buyurtmalar",
+    label: t("barcha buyurtmalar"),
     value: "all",
   },
   {
-    label: "mening buyurtmalarim",
+    label: t("mening buyurtmalarim"),
     value: "my",
   },
 ];

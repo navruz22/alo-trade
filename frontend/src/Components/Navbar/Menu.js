@@ -2,7 +2,7 @@ import React from "react";
 import { map, uniqueId } from "lodash";
 import { Link } from "react-router-dom";
 
-const Menu = ({ navs }) => {
+const Menu = ({ navs, translations }) => {
   return (
     <ul className="flex">
       {map(navs, (nav) => (
@@ -17,7 +17,7 @@ const Menu = ({ navs }) => {
               {nav.icon}
             </span>
           )}
-          {nav.name}
+          {translations[nav.name]}
         </Link>
       ))}
     </ul>

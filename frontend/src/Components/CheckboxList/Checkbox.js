@@ -1,7 +1,9 @@
 import React from "react";
 import { uniqueId } from "lodash";
+import { useTranslation } from "react-i18next";
 
 const Checkbox = ({ data, onChange, checked }) => {
+  const { t } = useTranslation(["common"]);
   const id = uniqueId();
   return (
     <>
@@ -17,7 +19,7 @@ const Checkbox = ({ data, onChange, checked }) => {
           type="checkbox"
           className="w-[1rem] h-[1rem] mr-2"
         />
-        <span className="w-full">{data.label}</span>
+        <span className="w-full">{t(data.label)}</span>
       </label>
     </>
   );

@@ -21,7 +21,7 @@ const SelectRegion = ({
           <p className="text-neutral-500 text-sm mt-[7px]">{labelRegion}</p>
         )}
         <SelectInput
-          placeholder="viloyat"
+          placeholder={labelRegion}
           options={regions}
           onSelect={selectRegion}
           value={region}
@@ -35,7 +35,7 @@ const SelectRegion = ({
           <p className="text-neutral-500 text-sm mt-[7px]">{labelDistrict}</p>
         )}
         <SelectInput
-          placeholder="tuman"
+          placeholder={labelDistrict}
           value={district}
           options={districts}
           onSelect={selectDistrict}

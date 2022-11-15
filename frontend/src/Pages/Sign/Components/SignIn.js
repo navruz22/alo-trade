@@ -6,10 +6,20 @@ import LabelButton from "../../../Components/Buttons/LabelButton";
 import image from "../../../assets/images/login.png";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../signSlice";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../../translation";
 
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation(["common"]);
+  const {
+    telefon_raqam,
+    parol,
+    kirish,
+    tizimda_yangimisiz_unda_avval,
+    royxatdan_oting,
+  } = getTranslations(t);
   const { loading } = useSelector((state) => state.login);
 
   const [password, setPassword] = useState("");
@@ -56,7 +66,7 @@ const SignIn = () => {
                 isDisabled={loading}
                 placeholder="+998 97 366 62 21"
                 type="text"
-                label="Telefon raqam"
+                label={telefon_raqam}
                 value={phone}
                 onChange={changeHandler}
                 name="phone"
@@ -66,20 +76,20 @@ const SignIn = () => {
                 isDisabled={loading}
                 placeholder="* * * * * *"
                 type="password"
-                label="Parol"
+                label={parol}
                 onKeyUp={enterHandler}
                 name="password"
                 value={password}
                 onChange={changeHandler}
               />
               <Button
-                title="Kirish"
+                title={kirish}
                 onClick={submitHandler}
                 isDisabled={loading}
               />
               <LabelButton
-                label="Tizimda yangimisiz? Unda avval "
-                title=" ro'yxatdan o'ting"
+                label={tizimda_yangimisiz_unda_avval}
+                title={royxatdan_oting}
                 link="/sign-up"
               />
             </div>

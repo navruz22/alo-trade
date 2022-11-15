@@ -19,10 +19,14 @@ import {
   clearErrorCategories,
 } from "../../Category/categorySlice";
 import { getTradeTypes } from "../../Filter/tradeSlice";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../../translation";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation(["common"]);
+  const translations = getTranslations(t);
   const { regions, error: errorRegion } = useSelector((state) => state.regions);
   const { categoriesWithSubcategories, error: errorCategories } = useSelector(
     (state) => state.categories
@@ -199,18 +203,8 @@ const SignUp = () => {
                   url === "sign-up" && "bg-white-900 shadow"
                 } `}
               >
-                Buyurtmachi
+                {translations.buyurtmachi}
               </Link>
-              {/*<Link*/}
-              {/*  onClick={changeUrl}*/}
-              {/*  name="business"*/}
-              {/*  to="/sign-up/business"*/}
-              {/*  className={`font-semibold text-xl cursor-pointer text-center py-2 px-4 my-3 w-full  ${*/}
-              {/*    url === "business" && "bg-white-900 shadow"*/}
-              {/*  }`}*/}
-              {/*>*/}
-              {/*  Tadbirkor*/}
-              {/*</Link>*/}
             </div>
           </div>
           <div className="lg:w-1/2 w-full">
@@ -220,6 +214,7 @@ const SignUp = () => {
                 path="/"
                 element={
                   <UserRegister
+                    translations={translations}
                     firstname={firstname}
                     lastname={lastname}
                     email={email}
@@ -243,6 +238,7 @@ const SignUp = () => {
                 path="business"
                 element={
                   <BusinessmanRegister
+                    translations={translations}
                     firstname={firstname}
                     lastname={lastname}
                     email={email}

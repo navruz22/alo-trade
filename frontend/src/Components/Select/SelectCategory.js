@@ -11,6 +11,8 @@ const SelectCategory = ({
   selectSubcategory,
   labelCategory,
   labelSubcategory,
+  kategoriya,
+  kategoriya_turi,
 }) => {
   return (
     <div className="flex flex-row w-full">
@@ -19,7 +21,7 @@ const SelectCategory = ({
           <p className="text-neutral-500 text-sm mt-[7px]">{labelCategory}</p>
         )}
         <SelectInput
-          placeholder="kategoriya"
+          placeholder={kategoriya}
           options={categoriesWithSubcategories}
           isMulti={true}
           value={categories}
@@ -35,7 +37,7 @@ const SelectCategory = ({
           </p>
         )}
         <SelectInput
-          placeholder="kategoriya turi"
+          placeholder={kategoriya_turi}
           options={allSubcategories}
           isMulti={true}
           value={subcategories}

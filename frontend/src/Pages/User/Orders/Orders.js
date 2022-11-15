@@ -8,9 +8,14 @@ import { map, uniqueId } from "lodash";
 import { filterOrder } from "../../Filter/filterSlice";
 import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 import { filter } from "./constants";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../../translation";
 
 const Orders = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation(["common"]);
+  const translations = getTranslations(t);
+  const filterData = filter(t);
   const {
     logged,
     userData: { user, organization },
@@ -127,6 +132,7 @@ const Orders = () => {
     <div className="h-full w-full bg-neutral-100 flex flex-col justify-between">
       {logged ? (
         <PageHeader
+          translations={translations}
           isOrganization={!!organization}
           currentPage={currentPage}
           countPage={countPage}
@@ -134,14 +140,15 @@ const Orders = () => {
           setCurrentPage={setCurrentPage}
           count={totalDatas}
           onClick={() => openModal("createOrder")}
-          countTitle="Jami:"
-          buttonTitle="Buyurtma yaratish"
+          countTitle={translations.jami}
+          buttonTitle={translations.buyurtma_yaratish}
           handleFilter={handleFilter}
           filterData={order}
-          filter={filter}
+          filter={filterData}
         />
       ) : (
         <MainPageHeader
+          translations={translations}
           currentPage={currentPage}
           countPage={countPage}
           totalDatas={totalDatas}
@@ -152,6 +159,7 @@ const Orders = () => {
       <div className="p-4 pt-0 h-full overflow-scroll">
         {map(orders, (order) => (
           <OrderCard
+            translations={translations}
             logged={logged}
             key={uniqueId()}
             order={order}

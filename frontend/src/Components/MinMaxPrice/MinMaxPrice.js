@@ -1,7 +1,11 @@
 import React from "react";
 import Input from "../Inputs/Input";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../translation";
 
 const MinMaxPrice = ({ minPrice, maxPrice, onChange, onKeyUp }) => {
+  const { t } = useTranslation(["common"]);
+  const { narxi } = getTranslations(t);
   return (
     <div>
       <div className="grid grid-cols-2 gap-4">
@@ -12,7 +16,7 @@ const MinMaxPrice = ({ minPrice, maxPrice, onChange, onKeyUp }) => {
           onKeyUp={onKeyUp}
           value={minPrice}
           placeholder="min"
-          label="Narxi"
+          label={narxi}
           labelStyle="text-sm font-normal"
         />
         <Input
