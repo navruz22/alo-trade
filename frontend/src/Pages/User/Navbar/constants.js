@@ -53,13 +53,13 @@ export const toggleMenu = (logOut, closeMenu) => [
   {
     link: "/profile/user",
     icon: <IoPersonOutline />,
-    title: "Profile",
+    title: "Профиль",
     onClick: closeMenu,
   },
   {
     link: "/",
     icon: <IoLogOutOutline />,
-    title: "Chiqish",
+    title: "Выход",
     onClick: logOut,
   },
 ];

@@ -52,6 +52,7 @@ export const getTranslations = (t) => {
     // Order
     buyurtma_berish: t("Buyurtma berish"),
     mahsulot_yaratish: t("Mahsulot yaratish"),
+    tashkilot_yaratish: t("Tashkilot yaratish"),
     barcha_buyurtmalar: t("Barcha buyurtmalar"),
     jami_buyurtmalar: t("Jami buyurtmalar"),
     mening_buyurtmalarim: t("Mening buyurtmalarim"),
@@ -67,16 +68,25 @@ export const getTranslations = (t) => {
     faollashtirish: t("Faollashtirish"),
     jami: t("Jami"),
     buyurtma_yaratish: t("Buyurtma yaratish"),
+    buyurtmani_ochirish: t("Buyurtmani o'chirish"),
+    siz_buyurtmani_ochirishni_xohlaysizmi: t(
+      "Siz rostdan ham buyurtmani o'chirmoqchimisiz?"
+    ),
+    bekor_qilish: t("Bekor qilish"),
+    ochirish: t("O'chirish"),
 
     // Offer
     kiruvchi_xabar: t("Kiruvchi xabar"),
     chiquvchi_xabar: t("Chiquvchi xabar"),
     tashkilot: t("Tashkilot"),
     foydalanuvchi: t("Foydalanuvchi"),
+    xabarni_kiriting: t("Xabarni kiriting"),
+    mahsulot_yoki_buyurtma_tanlanmagan: t("Mahsulot yoki buyurtma tanlanmagan"),
 
-    // Company
+    // Organizations
     jami_tashkilotlar: t("Jami tashkilotlar"),
     mahsulotlar: t("Mahsulotlar"),
+    tashkilotlar: t("Tashkilotlar"),
 
     // Profile
     joriy_parol: t("Joriy parol"),
@@ -90,6 +100,8 @@ export const getTranslations = (t) => {
     qoshimcha_malumot: t("Qo'shimcha ma'lumot"),
     izoh: t("Izoh"),
     tolov_turi: t("To'lov turi"),
+    active: t("active"),
+    unactive: t("unactive"),
   };
 
   return translations;

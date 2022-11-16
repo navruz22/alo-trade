@@ -18,12 +18,12 @@ const MainPageHeader = ({
         >
           {translations.buyurtma_berish}
         </Link>
-        {/*<Link*/}
-        {/*  to="/companyregister"*/}
-        {/*  className="bg-primary-800 w-[10rem] block py-2 text-center rounded text-white-900"*/}
-        {/*>*/}
-        {/*  {translations.mahsulot_yaratish}*/}
-        {/*</Link>*/}
+        <Link
+          to="/companyregister"
+          className="bg-primary-800 w-[10rem] block py-2 text-center rounded text-white-900"
+        >
+          {translations.tashkilot_yaratish}
+        </Link>
       </div>
       <div className="w-full">
         {totalDatas.length > 0 && (

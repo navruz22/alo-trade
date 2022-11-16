@@ -22,7 +22,7 @@ export const checkHandler = ({
     universalToast("Familiyangizni kiritilmadi", "warning");
     return false;
   }
-  if (phone.length !== 13) {
+  if (phone.length < 9) {
     universalToast("Telefon raqamni to'liq kiriting", "warning");
     return false;
   }

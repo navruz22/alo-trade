@@ -42,7 +42,7 @@ const SignIn = () => {
   const submitHandler = () => {
     const data = {
       password,
-      phone: "+" + phone,
+      phone: phone,
     };
     dispatch(signIn({ ...data })).then(({ error }) => {
       if (!error) {

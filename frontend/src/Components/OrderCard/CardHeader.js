@@ -32,7 +32,7 @@ const CardHeader = ({
             position === "active" ? "bg-green-500" : "bg-red-600"
           } px-2 rounded-md text-white-900 text-xs flex items-center`}
         >
-          {position}
+          {translations[position]}
         </div>
       </div>
     </div>

@@ -65,7 +65,10 @@ const Offers = () => {
     }
 
     if (!currentProduct && !currentOrder)
-      return universalToast("Mahsulot yoki buyurtma tanlanmagan", "warning");
+      return universalToast(
+        translations.mahsulot_yoki_buyurtma_tanlanmagan,
+        "warning"
+      );
 
     const data = {
       message,

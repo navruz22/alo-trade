@@ -128,7 +128,7 @@ const SignUp = () => {
       firstname,
       lastname,
       password,
-      phone: "+" + phone,
+      phone: phone,
       region: region.value,
       district: district.value,
     };

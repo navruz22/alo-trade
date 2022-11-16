@@ -9,7 +9,7 @@ export const checkUser = ({ firstname, lastname, phone, region, district }) => {
     universalToast("Familiyangizni kiritilmadi", "warning");
     return false;
   }
-  if (phone.length !== 13) {
+  if (phone.length < 9) {
     universalToast("Telefon raqamni to'liq kiriting", "warning");
     return false;
   }
@@ -50,7 +50,7 @@ export const checkOrganization = ({
     universalToast("Tashkilot nomini kiriting", "warning");
     return false;
   }
-  if (phone.length !== 13) {
+  if (phone.length < 9) {
     universalToast("Telefon raqamni to'liq kiriting", "warning");
     return false;
   }

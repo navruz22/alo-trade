@@ -5,7 +5,7 @@ const organization = new Schema(
     name: { type: String, required: true },
     email: { type: String, email: true, lowercase: true },
     image: { type: String },
-    phone: { type: String, unique: true, min: 13 },
+    phone: { type: String, unique: true },
     user: { type: Schema.Types.ObjectId, ref: "User" },
     region: { type: Schema.Types.ObjectId, ref: "Region" },
     district: { type: Schema.Types.ObjectId, ref: "District" },

@@ -20,24 +20,22 @@ const PageHeader = ({
 }) => {
   return (
     <div className="flex  justify-between shadow w-full px-5 py-3 items-center bg-white-900">
-      {isOrganization && (
+      <div>
         <div>
-          <div>
-            <span>{countTitle}</span>{" "}
-            <span className="font-amazonbold text-primary-900">
-              {count.toLocaleString()} {translations.ta}
-            </span>
-          </div>
-          <div className="flex">
-            <RadioButtonList
-              translations={translations}
-              list={filter}
-              onChange={handleFilter}
-              currency={filterData}
-            />
-          </div>
+          <span>{countTitle}</span>{" "}
+          <span className="font-amazonbold text-primary-900">
+            {count.toLocaleString()} {translations.ta}
+          </span>
         </div>
-      )}
+        <div className="flex">
+          <RadioButtonList
+            translations={translations}
+            list={filter}
+            onChange={handleFilter}
+            currency={filterData}
+          />
+        </div>
+      </div>
       {totalDatas > 0 && (
         <div className="flex justify-center">
           <Pagination

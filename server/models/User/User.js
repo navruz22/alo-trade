@@ -6,7 +6,7 @@ const user = new Schema(
     lastname: { type: String, required: true, trim: true, capitalize: true },
     email: { type: String, email: true, lowercase: true },
     image: { type: String },
-    phone: { type: String, unique: true, min: 13 },
+    phone: { type: String, unique: true },
     password: { type: String, min: 6, required: true },
     organization: { type: Schema.Types.ObjectId, ref: "Organization" },
     region: { type: Schema.Types.ObjectId, ref: "Region" },
@@ -22,7 +22,7 @@ function validateUserSignUp(user) {
   const schema = Joi.object({
     firstname: Joi.string().required(),
     lastname: Joi.string().required(),
-    phone: Joi.string().required().min(13),
+    phone: Joi.string().required(),
     email: Joi.string(),
     image: Joi.string(),
     password: Joi.string().required(),

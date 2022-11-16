@@ -88,7 +88,7 @@ const Organizations = () => {
     <div className="h-full w-full  bg-neutral-100 flex flex-col justify-between">
       <div className="bg-white-900 py-3 shadow-md flex justify-between items-center px-4">
         <h3 className="font-amazonbold">
-          Jami tashkilotlar:{" "}
+          {translations.tashkilotlar}:{" "}
           <span className="text-primary-900">{totalDatas} ta</span>
         </h3>
         {totalDatas > 0 && (

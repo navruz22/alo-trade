@@ -1,6 +1,10 @@
 import { IoCloseCircleOutline } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../../translation";
 
 function Approve({ toggleModal, approveFunction, headerText, title }) {
+  const { t } = useTranslation();
+  const { bekor_qilish, ochirish } = getTranslations(t);
   return (
     <div className={"modalContent text-center"}>
       <div className="flex items-center justify-center">
@@ -18,13 +22,13 @@ function Approve({ toggleModal, approveFunction, headerText, title }) {
           className={"approveBtn bg-black-500 hover:bg-black-700"}
           onClick={toggleModal}
         >
-          {"Bekor qilish"}
+          {bekor_qilish}
         </button>
         <button
           className={"approveBtn bg-error-500 hover:bg-error-700"}
           onClick={approveFunction}
         >
-          {"O`chirish"}
+          {ochirish}
         </button>
       </div>
     </div>

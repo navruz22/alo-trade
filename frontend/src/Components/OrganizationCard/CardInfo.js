@@ -10,7 +10,6 @@ const CardInfo = ({
   tradetypes,
   phone,
   logged,
-  isOrganization,
   translations,
 }) => {
   const [show, setShow] = useState(false);
@@ -35,7 +34,7 @@ const CardInfo = ({
           ).join(", ")}`}
         </h4>
       </div>
-      {logged && isOrganization && (
+      {logged && (
         <div className="pl-3 flex w-full border-t mt-3 text-sm">
           <p
             onClick={handleShow}

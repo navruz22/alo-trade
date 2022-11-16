@@ -165,8 +165,8 @@ const Main = () => {
         toggleModal={toggleModal}
         orderId={orderId}
         modalBody={modalBody}
-        headerText="Buyurtmani o'chirish"
-        title="Siz rostdan ham buyurtmani o'chirmoqchimisiz?"
+        headerText={translations.buyurtmani_ochirish}
+        title={translations.siz_buyurtmani_ochirishni_xohlaysizmi}
         approveFunction={deleteOrderById}
       />
     </div>
