@@ -63,7 +63,7 @@ export const getTranslations = (t) => {
     koproq_malumot: t("ko'proq ma'lumot"),
     yopish: t("yopish"),
     manzil: t("Manzil"),
-    ta: t("ta"),
+    ta: t(" "),
     yakunlash: t("Yakunlash"),
     faollashtirish: t("Faollashtirish"),
     jami: t("Jami"),
@@ -102,6 +102,10 @@ export const getTranslations = (t) => {
     tolov_turi: t("To'lov turi"),
     active: t("active"),
     unactive: t("unactive"),
+
+    // Organization
+    aloqa_malumotlari: t("Aloqa ma'lumotlari"),
+    tashkilot_haqida: t("Tashkilot haqida"),
   };
 
   return translations;

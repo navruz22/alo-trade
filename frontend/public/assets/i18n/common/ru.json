@@ -74,7 +74,7 @@
     "Ro'yxatdan o'ting": "Зарегистрироваться",
     "Davlat": "Страна",
     "kirish qismiga qayting": "Вернитесь на страницу входа",
-    "Buyurtma berish": "Размещение заказа",
+    "Buyurtma berish": "Создать заказ",
     "Mahsulot yaratish": "Создать товар",
     "Buyurtma holati": "Статус заказа",
     "Jami buyurtmalar": "Всего заказов",
@@ -91,7 +91,9 @@
     "Mahsulot yoki buyurtma tanlanmagan": "Товар или заказ не выбран",
     "Chiqish": "Выход",
     "active": "Активный",
-    "unactive": "Сделка завершена"
+    "unactive": "Сделка завершена",
+    "Aloqa ma'lumotlari": "Контактные данные",
+    "Tashkilot haqida": "О компании"
 
 
 }

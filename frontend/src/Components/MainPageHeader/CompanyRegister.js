@@ -3,15 +3,17 @@ import React from "react";
 const CompanyRegister = () => {
   return (
     <div className="p-5 text-neutral-600">
+      <p className="font-amazonbold text-lg">
+        Уважаемый пользователь, вы еще не зарегистрированы как организация?
+      </p>
       <p className="text-justify py-3">
-        Tashkilot yoki korxona egasi bo'lsangiz,{" "}
-        <span className="font-amazonbold">"ALOTRADE"</span> platformasida
-        foydalanuvchilarga xizmat ko'rsatish, ularga o'z mahsulot va
-        xizmatlaringizni taklif etmoqchi bo'lsangiz administrator bilan
-        bog'lanishingizni so'raymiz.
+        Если вы хотите участвовать во внутренней и внешней торговле и продавать
+        свою продукцию по всему миру, присоединяйтесь к международной торговой
+        площадке <span className="font-amazonbold">"ALOTRADE"</span>, где вас
+        ждут заказы со всего мира.
       </p>
       <p>
-        <span className="font-amazonbold">Telefon:</span>{" "}
+        <span className="font-amazonbold">Номер телефона:</span>{" "}
         <a href="tel:+998992234244" className="text-primary-800">
           +998 99 223 42 44
         </a>

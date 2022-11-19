@@ -89,7 +89,7 @@ const Organizations = () => {
       <div className="bg-white-900 py-3 shadow-md flex justify-between items-center px-4">
         <h3 className="font-amazonbold">
           {translations.tashkilotlar}:{" "}
-          <span className="text-primary-900">{totalDatas} ta</span>
+          <span className="text-primary-900">{totalDatas} </span>
         </h3>
         {totalDatas > 0 && (
           <Pagination

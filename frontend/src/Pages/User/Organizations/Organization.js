@@ -1,61 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Pagination from "../../../Components/Pagination/Pagination";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  deleteProduct,
-  getProducts,
-  getProductsCount,
-} from "../Products/productSlice";
-import { map, uniqueId } from "lodash";
-import ProductCard from "../../../Components/ProductCard/ProductCard";
-import UniversalModal from "../../../Components/Modal/UniversalModal";
+import { useDispatch } from "react-redux";
 import { getOrganizationById } from "./organizationSlice";
 import noImage from "../../../assets/images/no-image.svg";
+import {
+  IoBusinessSharp,
+  IoCallSharp,
+  IoLocationOutline,
+  IoLocationSharp,
+} from "react-icons/io5";
+import { MdOutlineAlternateEmail } from "react-icons/md";
+import { map, uniqueId } from "lodash";
+import { useTranslation } from "react-i18next";
+import { getTranslations } from "../../../translation";
 
-const Oeganization = () => {
+const Organization = () => {
   const dispatch = useDispatch();
-  const [totalDatas, setTotalDatas] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [productId, setProductId] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalBody, setModalBody] = useState(null);
+  const { t } = useTranslation(["common"]);
+  const {
+    aloqa_malumotlari,
+    tashkilot_haqida,
+    savdo_turi,
+    kategoriya,
+    kategoriya_turi,
+  } = getTranslations(t);
   const [organization, setOrganization] = useState(null);
-
-  const { products } = useSelector((state) => state.products);
-  const { logged } = useSelector((state) => state.login);
-  const countPage = 10;
 
   const location = useLocation();
   const { _id } = location.state;
 
-  const closeHandler = () => {
-    setModalVisible(false);
-  };
-
-  const editHandler = (id) => {
-    setProductId(id);
-    setModalBody("createProduct");
-    setModalVisible(true);
-  };
-
-  const toggleModal = () => {
-    setModalVisible(!modalVisible);
-  };
-
-  const deleteHandler = (id) => {
-    setProductId(id);
-    setModalBody("approve");
-    setModalVisible(true);
-  };
-
   useEffect(() => {
-    const data = {
-      page: 0,
-      count: countPage,
-      organization: _id,
-    };
-    setCurrentPage(0);
     dispatch(getOrganizationById({ id: _id })).then(
       ({ error, payload: { organization } }) => {
         if (!error) {
@@ -63,135 +37,123 @@ const Oeganization = () => {
         }
       }
     );
-    dispatch(getProducts(data));
-    dispatch(getProductsCount(data)).then(
-      ({ error, payload: { totalCount } }) => {
-        if (!error) {
-          setTotalDatas(totalCount);
-        }
-      }
-    );
-  }, [dispatch, countPage, _id]);
-
-  const deleteProductById = () => {
-    productId &&
-      dispatch(deleteProduct({ id: productId })).then(({ error }) => {
-        if (!error) {
-          setModalVisible(false);
-          setProductId(null);
-        }
-      });
-  };
-
-  useEffect(() => {
-    const data = {
-      page: currentPage,
-      count: countPage,
-      organization: _id,
-    };
-
-    dispatch(getProducts(data));
-    dispatch(getProductsCount(data)).then(
-      ({ payload: { totalCount }, error }) => {
-        if (!error) {
-          setTotalDatas(totalCount);
-        }
-      }
-    );
-    //    eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, currentPage, countPage]);
+  }, [_id, dispatch]);
 
   return (
-    <div className="flex flex-row h-full overflow-hidden w-full">
-      <div className="w-1/3 min-w-[300px] max-w-[400px] overflow-scroll shadow">
-        <div className="p-4">
-          <div className="rounded-md overflow-hidden bg-neutral-200">
+    <div className="bg-neutral-200 w-full overflow-scroll">
+      <div className="bg-white-800  shadow">
+        <div className="container m-auto top-0 my-0">
+          <div className="w-full overflow-hidden rounded-b rounded-b-md">
             <img
-              src={organization?.image || noImage}
-              alt="CompanyPhoto"
-              className="w-full"
+              src="https://picsum.photos/1920/500/?blur"
+              alt="organization"
+              className=""
             />
           </div>
-          <h2 className="py-4 font-amazonbold text-base">
-            {organization?.name}
-          </h2>
-          <p className="text-sm text-neutral-500">
-            Telefon: {organization?.phone}
-          </p>
-          <p className="text-sm text-neutral-500">
-            Manzil: {organization?.region?.label},{" "}
-            {organization?.district?.label}
-          </p>
-
-          <div className="text-sm text-neutral-500 mt-4">
-            Savdo turi:
-            {map(organization?.tradetypes, ({ name }) => (
-              <h3 className="pl-3" key={uniqueId()}>
-                - {name}
+          <div className="w-full h-[11rem] flex flex-row">
+            <div className="relative w-1/5">
+              <div className="w-[12rem] h-[12rem] rounded-full absolute -top-12 bg-white-900 left-20 p-1">
+                <img
+                  className="w-full h-full rounded-full"
+                  src={organization?.image || noImage}
+                  alt=""
+                />
+              </div>
+            </div>
+            <div className="w-4/5 pl-12 flex mt-9 flex-col">
+              <h3 className="font-amazonbold text-[2rem]">
+                {organization?.name}
               </h3>
-            ))}
-          </div>
-          <div className="text-sm text-neutral-500 mt-4">
-            Kategoriyasi:
-            {map(organization?.categories, ({ label }) => (
-              <h3 className="pl-3" key={uniqueId()}>
-                - {label}
-              </h3>
-            ))}
-          </div>
-          <div className="text-sm text-neutral-500 mt-4">
-            Kategoriya turlari:
-            {map(organization?.subcategories, ({ label }) => (
-              <h3 className="pl-3" key={uniqueId()}>
-                - {label}
-              </h3>
-            ))}
+              <p className="flex items-center text-neutral-500">
+                <IoLocationOutline />{" "}
+                <span className="ml-2">
+                  {organization?.region?.label}, {organization?.district?.label}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       </div>
-      <div className="h-full w-full bg-neutral-100 flex flex-col">
-        <div className="flex  justify-between shadow w-full px-5 py-3 items-center bg-white-900">
-          <div className="font-amazonbold">
-            <span>Jami: </span>
-            <span className="text-primary-900">{totalDatas} ta</span>
+      <div className="container m-auto">
+        <div className="w-full grid grid-cols-12 mt-3 gap-4">
+          <div className="col-span-4 bg-white-800 rounded-md shadow p-4 text-neutral-700">
+            <h3 className="text-xl font-amazonbold">{aloqa_malumotlari}</h3>
+            <h4 className="flex items-center my-2">
+              <IoBusinessSharp size={19} />
+              <span className="text-black font-amazonbold ml-2">
+                {organization?.name}
+              </span>
+            </h4>
+            <h4 className="flex items-center my-2">
+              <IoLocationSharp size={19} />
+              <span className="text-black font-amazonbold ml-2">
+                {organization?.region?.label}, {organization?.district?.label}
+              </span>
+            </h4>
+            <h4 className="flex items-center my-2">
+              <IoCallSharp size={19} />
+              <a
+                href={`tel:${organization?.phone}`}
+                className="text-black font-amazonbold ml-2"
+              >
+                {organization?.phone}
+              </a>
+            </h4>
+            <h4 className="flex items-center my-2">
+              <MdOutlineAlternateEmail size={19} />
+              <a
+                href={`mailto:${organization?.email}`}
+                className="text-black font-amazonbold ml-2"
+              >
+                {organization?.email}
+              </a>
+            </h4>
           </div>
-          <div>
-            {totalDatas > 0 && (
-              <Pagination
-                totalDatas={totalDatas}
-                setCurrentPage={setCurrentPage}
-                countPage={countPage}
-                currentPage={currentPage}
-              />
-            )}
+          <div className="col-span-8 bg-white-800 rounded-md shadow p-4 text-neutral-700">
+            <h3 className="text-xl font-amazonbold">{tashkilot_haqida}</h3>
+            <h3>
+              {savdo_turi}:
+              <p className="pl-10">
+                {map(organization?.tradetypes, (type) => (
+                  <span key={uniqueId()} className="font-amazonbold">
+                    {type?.name}, &nbsp;
+                  </span>
+                ))}
+              </p>
+            </h3>
+            <h3>
+              {kategoriya}:
+              <p className="pl-10">
+                {map(organization?.categories, (category) => (
+                  <span key={uniqueId()} className="font-amazonbold">
+                    {category?.label}, &nbsp;
+                  </span>
+                ))}
+              </p>
+            </h3>
+            <h3>
+              {kategoriya_turi}:
+              <p className="pl-10 firstUppercase">
+                {map(organization?.subcategories, (subcategory) => (
+                  <span key={uniqueId()} className="font-amazonbold">
+                    {subcategory?.label}, &nbsp;
+                  </span>
+                ))}
+              </p>
+            </h3>
+            <h3 className="my-2 indent-6 normal-case firstUppercase">
+              lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
+              quod quia quae quas quidem, quibusdam, voluptas, voluptate
+              voluptatem voluptatum vitae voluptates. Quisquam quod quia quae
+              quas quidem, quibusdam, voluptas, voluptate voluptatem voluptatum
+              vitae voluptates. Quisquam quod quia quae quas quidem, quibusdam,
+              voluptas, voluptate voluptatem voluptatum vitae voluptates.
+            </h3>
           </div>
-        </div>
-        <div className="p-4 pt-0 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 overflow-scroll">
-          {map(products, (product) => (
-            <ProductCard
-              logged={logged}
-              key={uniqueId()}
-              product={product}
-              editHandler={editHandler}
-              deleteHandler={deleteHandler}
-            />
-          ))}
         </div>
       </div>
-
-      <UniversalModal
-        isOpen={modalVisible}
-        body={modalBody}
-        closeModal={closeHandler}
-        toggleModal={toggleModal}
-        productId={productId}
-        modalBody={modalBody}
-        headerText="Mahsulotni o'chirish"
-        title="Siz rostdan ham mahsulotni o'chirmoqchimisiz?"
-        approveFunction={deleteProductById}
-      />
     </div>
   );
 };
 
-export default Oeganization;
+export default Organization;
