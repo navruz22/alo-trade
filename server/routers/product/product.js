@@ -49,7 +49,7 @@ const getProductsByFilter = async (req, res) => {
     const products = await getProducts({ count, page, query });
     res.status(200).json({ products });
   } catch (error) {
-    res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ Serverda: "Ошибка в сервере..." });
   }
 };
 
@@ -61,7 +61,7 @@ const getProductsByFilterCount = async (req, res) => {
 
     res.status(200).json({ totalCount });
   } catch (error) {
-    res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ Serverda: "Ошибка в сервере..." });
   }
 };
 
@@ -73,7 +73,7 @@ const getProductById = async (req, res) => {
 
     res.status(200).json({ product });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -120,7 +120,7 @@ const updateProductPosition = async (req, res) => {
     const updatedProduct = await Product.findById(id);
 
     if (!updatedProduct) {
-      return res.status(400).json({ message: "Buyurtma topilmadi" });
+      return res.status(400).json({ message: "Заказ не найден" });
     }
 
     updatedProduct.position =
@@ -130,7 +130,7 @@ const updateProductPosition = async (req, res) => {
     const product = await getProductForUpdate(id);
     res.status(200).json({ product });
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -142,7 +142,7 @@ const getProductByOffer = async (req, res) => {
 
     res.status(200).json({ product });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 

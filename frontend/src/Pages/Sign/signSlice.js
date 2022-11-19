@@ -203,7 +203,7 @@ const signSlice = createSlice({
     [updateUser.fulfilled]: (state, { payload: { user } }) => {
       state.loading = false;
       state.userData.user = user;
-      universalToast("Foydalanuvchi ma'lumotlari yangilandi", "success");
+      universalToast("Личные данные пользователя успешно обновлены", "success");
     },
     [updateUser.rejected]: (state, { payload }) => {
       state.loading = false;

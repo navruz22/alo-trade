@@ -14,7 +14,7 @@ const createTradeType = async (req, res) => {
 
     res.status(201).json(tradeType);
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -31,7 +31,7 @@ const updateTradeType = async (req, res) => {
     tradeType.save();
     res.status(200).json(tradeType);
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -47,7 +47,7 @@ const deleteTradeType = async (req, res) => {
     tradeType.save();
     res.status(200).json(tradeType);
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -64,7 +64,7 @@ const getTradeTypes = async (req, res) => {
     );
     res.status(200).json(tradeTypes);
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 

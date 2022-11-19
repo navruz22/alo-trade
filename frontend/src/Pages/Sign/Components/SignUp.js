@@ -141,6 +141,7 @@ const SignUp = () => {
       email,
       confirmPassword,
       tradeTypes,
+      t,
     });
     if (email !== "") {
       data.email = email;

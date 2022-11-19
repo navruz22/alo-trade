@@ -13,7 +13,7 @@ const createAdmin = async (req, res) => {
     if (candidate) {
       return res
         .status(400)
-        .json({ message: "Foydalanuvchi avval ro'yxatga olingan" });
+        .json({ message: "Пользователь уже зарегистрирован" });
     }
     const hashedPassword = await bcrypt.hash(password, 12);
     const admin = new Admin({ phone, password: hashedPassword });
@@ -30,7 +30,7 @@ const createAdmin = async (req, res) => {
 
     res.status(201).json(token);
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -39,11 +39,11 @@ const loginAdmin = async (req, res) => {
     const { phone, password } = req.body;
     const admin = await Admin.findOne({ phone });
     if (!admin) {
-      return res.status(400).json({ message: "Foydalanuvchi topilmadi" });
+      return res.status(400).json({ message: "Пользователь не найден" });
     }
     const isMatch = await bcrypt.compare(password, admin.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Parol noto'g'ri" });
+      return res.status(400).json({ message: "Неверный пароль" });
     }
     const token = jwt.sign(
       {
@@ -55,7 +55,7 @@ const loginAdmin = async (req, res) => {
     );
     res.json(token);
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -75,7 +75,7 @@ const updateAdmin = async (req, res) => {
 
     res.json(admin);
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -84,7 +84,7 @@ const deleteAdmin = async (req, res) => {
     const { phone, password } = req.body;
     const adminn = await Admin.findOne({ phone });
     if (!adminn) {
-      return res.status(400).json({ message: "Foydalanuvchi topilmadi" });
+      return res.status(400).json({ message: "Пользователь не найден" });
     }
 
     const admin = await Admin.findOneAndDelete({ _id: req.user.id }).select(
@@ -92,7 +92,7 @@ const deleteAdmin = async (req, res) => {
     );
     res.json(admin);
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 

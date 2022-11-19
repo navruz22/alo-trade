@@ -23,7 +23,7 @@ const createSubcategory = async (req, res) => {
 
     const categoryy = await Category.findById(category);
     if (!categoryy) {
-      return res.status(404).json({ message: "Kategoriya mavjd emas" });
+      return res.status(404).json({ message: "Категория не найдена" });
     }
 
     const newSubcategory = new Subcategory({
@@ -39,7 +39,7 @@ const createSubcategory = async (req, res) => {
 
     res.status(201).json(newSubcategory);
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -50,7 +50,7 @@ const createSubcategories = async (req, res) => {
     const categoryy = await Category.findById(category);
 
     if (!categoryy) {
-      return res.status(400).json({ message: "Kategoriya mavjud emas" });
+      return res.status(400).json({ message: "Категория не найдена" });
     }
 
     forEach(subcategories, async (subcategory) => {
@@ -69,7 +69,7 @@ const createSubcategories = async (req, res) => {
       .status(201)
       .json({ message: "Subkategoriyalar muvaffaqiyatli yaratildi" });
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -80,7 +80,7 @@ const getSubcategories = async (req, res) => {
     const categoryy = await Category.findById(category);
 
     if (!categoryy) {
-      return res.status(400).json({ message: "Kategoriya mavjud emas" });
+      return res.status(400).json({ message: "Категория не найдена" });
     }
 
     const subcategories = await Subcategory.find({ category }).select(
@@ -89,7 +89,7 @@ const getSubcategories = async (req, res) => {
 
     res.status(200).json(subcategories);
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 

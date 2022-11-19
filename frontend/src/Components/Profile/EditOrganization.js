@@ -30,6 +30,7 @@ const EditOrganization = () => {
     kategoriya,
     kategoriya_turi,
     saqlash,
+    tashkilot_haqida,
   } = getTranslations(t);
   const { loading, userData } = useSelector((state) => state.login);
   const { organization } = userData;
@@ -61,6 +62,11 @@ const EditOrganization = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [tradeTypes, setTradeTypes] = useState([]);
   const [allSubcategories, setAllSubcategories] = useState([]);
+  const [description, setDescription] = useState(
+    organization?.description || ""
+  );
+
+  console.log(organization);
 
   const changeHandler = (e) => {
     const name = e.target.name;
@@ -132,9 +138,11 @@ const EditOrganization = () => {
       tradetypes: tradeTypes,
       email,
       id: organization?._id,
+      description,
     };
     const check = checkOrganization({
       ...data,
+      t,
     });
     if (image !== null) {
       data.image = image;
@@ -250,6 +258,12 @@ const EditOrganization = () => {
           loading={loading}
           allSubcategories={allSubcategories}
           categoriesWithSubcategories={categoriesWithSubcategories}
+        />
+        <textarea
+          value={description}
+          placeholder={tashkilot_haqida}
+          onChange={(e) => setDescription(e.target.value)}
+          className="w-full outline-0 border border-neutral-200 rounded p-2 mt-2 text-sm"
         />
         <SaveButton
           isDisabled={loading}

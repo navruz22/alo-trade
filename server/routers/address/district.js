@@ -33,7 +33,7 @@ const createDistrict = async (req, res) => {
 
     res.send(newDistrict);
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -58,7 +58,7 @@ const updateDistrict = async (req, res) => {
 
     res.send(district);
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -77,7 +77,7 @@ const deleteDistrict = async (req, res) => {
 
     res.send(district);
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -89,7 +89,7 @@ const getDistrictsByRegion = async (req, res) => {
     );
     res.send(districts);
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -110,7 +110,7 @@ const createDistricts = async (req, res) => {
     });
     res.status(200).json({ message: "Tumanlar muvaffaqiyatli yaratildi." });
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 

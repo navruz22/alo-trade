@@ -127,7 +127,7 @@ const createOrganization = async (req, res) => {
       }
     );
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -144,6 +144,7 @@ const updateOrganization = async (req, res) => {
       subcategories,
       tradetypes,
       id,
+      description,
     } = req.body;
 
     const { error } = validateOrganization({
@@ -177,13 +178,14 @@ const updateOrganization = async (req, res) => {
     organization.categories = categories;
     organization.subcategories = subcategories;
     organization.tradetypes = tradetypes;
+    organization.description = description;
     await organization.save();
 
     const updated = await getOrganizationById(organization._id);
 
     res.status(200).json({ organization: updated });
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -229,7 +231,7 @@ const createNewOrganization = async (req, res) => {
     await newOrganization.save();
     res.status(200).json(newOrganization);
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -267,7 +269,7 @@ const getOrganizationsByFilter = async (req, res) => {
     const organizations = await getOrganizations({ count, page, query });
     res.status(200).json({ organizations });
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -297,7 +299,7 @@ const getOrganizationsByFilterCount = async (req, res) => {
     const totalCount = await getOrganizationsCount({ query });
     res.status(200).json({ totalCount });
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -310,7 +312,7 @@ const getOrganizationByid = async (req, res) => {
     }
     res.status(200).json({ organization });
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 

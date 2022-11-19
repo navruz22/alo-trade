@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization.split(" ")[1]; // "Bearer TOKEN"
     if (!token) {
-      return res.status(401).json({ message: "Avtorizatsiyadan o'tilmagan" });
+      return res.status(401).json({ message: "Вы не авторизованы" });
     }
     const decoded = jwt.verify(
       token,
@@ -16,9 +16,7 @@ module.exports = (req, res, next) => {
       {},
       (err, decoded) => {
         if (err) {
-          return res
-            .status(401)
-            .json({ message: "Avtorizatsiyadan o'tilmagan" });
+          return res.status(401).json({ message: "Вы не авторизованы" });
         }
         return decoded;
       }
@@ -27,6 +25,6 @@ module.exports = (req, res, next) => {
     req.user = decoded;
     next();
   } catch (e) {
-    return res.status(401).json({ message: "Avtorizatsiyadan o'tilmagan" });
+    return res.status(401).json({ message: "Вы не авторизованы" });
   }
 };

@@ -16,7 +16,7 @@ module.exports.start = async (app) => {
       });
     app.listen(PORT, () => console.log(`App has been started on port ${PORT}`));
   } catch (error) {
-    console.log("Serverda xatolik yuz berdi", error.message);
+    console.log("Ошибка в сервере", error.message);
     process.exit(1);
   }
 };

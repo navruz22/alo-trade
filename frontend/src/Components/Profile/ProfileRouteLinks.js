@@ -13,7 +13,6 @@ const ProfileRouteLinks = ({ menu }) => {
   const linkHandler = (e) => {
     setPath(e);
   };
-  console.log(menu);
   return (
     <div className="max-w-[400px] w-1/3 w-full flex flex-col px-2">
       {map(menu, (item) => (

@@ -23,7 +23,7 @@ const createCategory = async (req, res) => {
 
     res.status(201).json(newCategory);
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -38,7 +38,7 @@ const updateCategory = async (req, res) => {
 
     const category = await Category.findById(_id);
     if (!category) {
-      return res.status(404).json({ message: "Katoriya topilmadi" });
+      return res.status(404).json({ message: "Kateriya topilmadi" });
     }
 
     category.name = name;
@@ -47,7 +47,7 @@ const updateCategory = async (req, res) => {
 
     res.status(200).json(category);
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -57,7 +57,7 @@ const deleteCategory = async (req, res) => {
 
     const category = await Category.findById(_id);
     if (!category) {
-      return res.status(404).json({ message: "Katoriya topilmadi" });
+      return res.status(404).json({ message: "Категория не найдена" });
     }
 
     category.isArchive = true;
@@ -65,7 +65,7 @@ const deleteCategory = async (req, res) => {
 
     res.status(200).json(category);
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -74,7 +74,7 @@ const getCategories = async (req, res) => {
     const categories = await Category.find().select("name image");
     res.status(200).json(categories);
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -100,7 +100,7 @@ const getCategoriesWithSubcategories = async (req, res) => {
       );
     res.status(200).json(categories);
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 

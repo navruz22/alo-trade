@@ -58,7 +58,7 @@ const createOffer = async (req, res) => {
 
     res.status(201).json({ offer, messages });
   } catch (e) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -77,7 +77,7 @@ const getOffers = async (req, res) => {
     const offers = await getOffersByUser({ query, id });
     res.status(200).json({ offers });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -94,7 +94,7 @@ const getOfferByUser = async (req, res) => {
     const offer = await getOfferUser(query);
     res.status(200).json({ offer });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -105,7 +105,7 @@ const getOfferByid = async (req, res) => {
     const offer = await getOfferById(id);
     res.status(200).json({ offer });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -122,7 +122,7 @@ const getMessagesByOffer = async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -132,7 +132,7 @@ const createMessage = async (req, res) => {
     const user = req.user.id;
     const oldOffer = await Offer.findById(offer);
     if (!oldOffer) {
-      return res.status(400).json({ message: "Taklif topilmadi" });
+      return res.status(400).json({ message: "Предложение не найдено" });
     }
 
     const recipient =
@@ -158,7 +158,7 @@ const createMessage = async (req, res) => {
 
     res.status(201).json({ message: resMessage, offer: resOffer });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -171,7 +171,7 @@ const getMessageById = async (req, res) => {
     await message.save();
     res.status(200).json({ message });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 

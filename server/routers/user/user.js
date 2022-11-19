@@ -50,7 +50,7 @@ const createUser = async (req, res) => {
       }
     );
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -70,7 +70,7 @@ const updateUser = async (req, res) => {
     const { id } = req.user;
     const user = await User.findById(id);
     if (!user) {
-      return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
+      return res.status(400).json({ message: "Пользователь не найден!" });
     }
     user.firstname = firstname || user.firstname;
     user.lastname = lastname || user.lastname;
@@ -100,7 +100,7 @@ const updateUser = async (req, res) => {
     if (newPassword) {
       const isMatch = bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return res.status(400).json({ message: "Parol noto'g'ri" });
+        return res.status(400).json({ message: "Неверный пароль" });
       }
       const passwordHash = bcrypt.hash(newPassword, 12);
       user.password = passwordHash;
@@ -113,7 +113,7 @@ const updateUser = async (req, res) => {
       user: userData,
     });
   } catch (error) {
-    res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -122,7 +122,7 @@ const getUserType = async (req, res) => {
     const { id } = req.user;
     const user = await User.findById(id).select("-password");
     if (!user) {
-      return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
+      return res.status(400).json({ message: "Пользователь не найден!" });
     }
     res.status(200).json({
       firstname: user.firstname,
@@ -133,7 +133,7 @@ const getUserType = async (req, res) => {
       type: user.organization ? "organization" : "user",
     });
   } catch (error) {
-    res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -143,7 +143,7 @@ const getUserData = async (req, res) => {
     const user = await getUserById(id);
 
     if (!user) {
-      return res.status(401).json({ message: "Avtorizatsiyadan o'tilmagan!" });
+      return res.status(401).json({ message: "Вы не авторизованы" });
     }
 
     const organization =
@@ -151,7 +151,7 @@ const getUserData = async (req, res) => {
 
     res.status(200).json({ user, organization });
   } catch (error) {
-    res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -160,13 +160,13 @@ const deleteUser = async (req, res) => {
     const { id } = req.user;
     const user = await User.findById(id).select("-password");
     if (!user) {
-      return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
+      return res.status(400).json({ message: "Пользователь не найден!" });
     }
     user.isArchive = true;
     await user.save();
     res.status(200).json({ message: "Foydalanuvchi o'chirildi!" });
   } catch (error) {
-    res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -175,11 +175,11 @@ const signInUser = async (req, res) => {
     const { phone, password } = req.body;
     const user = await User.findOne({ phone });
     if (!user) {
-      return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
+      return res.status(400).json({ message: "Пользователь не найден!" });
     }
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Parol noto'g'ri" });
+      return res.status(400).json({ message: "Неверный пароль" });
     }
 
     const userData = await getUserById(user.id);
@@ -200,7 +200,7 @@ const signInUser = async (req, res) => {
       });
     });
   } catch (error) {
-    res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -209,20 +209,20 @@ const updatePassword = async (req, res) => {
     const { password, newPassword } = req.body;
     const user = await User.findById(req.user.id);
     if (!user) {
-      return res.status(400).json({ message: "Foydalanuvchi topilmadi!" });
+      return res.status(400).json({ message: "Пользователь не найден!" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: "Joriy parol noto'g'ri" });
+      return res.status(400).json({ message: "Текущий пароль неверный" });
     }
 
     const passwordHash = await bcrypt.hash(newPassword, 12);
     user.password = passwordHash;
     await user.save();
-    res.status(200).json({ message: "Parol muvaffaqiyatli o'zgartirildi!" });
+    res.status(200).json({ message: "Пароль успешно изменен!" });
   } catch (error) {
-    res.status(500).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ error: "Ошибка в сервере..." });
   }
 };
 

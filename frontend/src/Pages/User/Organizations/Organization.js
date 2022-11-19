@@ -142,12 +142,7 @@ const Organization = () => {
               </p>
             </h3>
             <h3 className="my-2 indent-6 normal-case firstUppercase">
-              lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-              quod quia quae quas quidem, quibusdam, voluptas, voluptate
-              voluptatem voluptatum vitae voluptates. Quisquam quod quia quae
-              quas quidem, quibusdam, voluptas, voluptate voluptatem voluptatum
-              vitae voluptates. Quisquam quod quia quae quas quidem, quibusdam,
-              voluptas, voluptate voluptatem voluptatum vitae voluptates.
+              {organization?.description}
             </h3>
           </div>
         </div>

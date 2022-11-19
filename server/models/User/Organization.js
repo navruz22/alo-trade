@@ -13,6 +13,7 @@ const organization = new Schema(
     categories: [{ type: Schema.Types.ObjectId, ref: "Category" }],
     subcategories: [{ type: Schema.Types.ObjectId, ref: "Subcategory" }],
     tradetypes: [{ type: Schema.Types.ObjectId, ref: "TradeType" }],
+    description: { type: String },
   },
   {
     timestamps: true,
@@ -30,6 +31,7 @@ function validateOrganization(organization) {
     tradetypes: Joi.array().required(),
     region: Joi.string(),
     district: Joi.string(),
+    description: Joi.string(),
   });
 
   return schema.validate(organization);

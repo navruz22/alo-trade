@@ -1,36 +1,51 @@
 import { universalToast } from "../ToastMessages/ToastMessages";
 
-export const checkUser = ({ firstname, lastname, phone, region, district }) => {
+export const checkUser = ({
+  firstname,
+  lastname,
+  phone,
+  region,
+  district,
+  t,
+}) => {
   if (firstname.length < 1) {
-    universalToast("Ismingizni kiriting", "warning");
+    universalToast(t("Ismingizni kiriting"), "warning");
     return false;
   }
   if (lastname.length < 1) {
-    universalToast("Familiyangizni kiritilmadi", "warning");
+    universalToast(t("Familiyangizni kiriting"), "warning");
     return false;
   }
   if (phone.length < 9) {
-    universalToast("Telefon raqamni to'liq kiriting", "warning");
+    universalToast(t("Telefon raqamni to'liq kiriting"), "warning");
     return false;
   }
   if (!region) {
-    universalToast("Viloyat tanlanmagan", "warning");
+    universalToast(t("Viloyat tanlanmagan"), "warning");
     return false;
   }
   if (!district) {
-    universalToast("Tuman tanlanmagan", "warning");
+    universalToast(t("Tuman tanlanmagan"), "warning");
     return false;
   }
   return true;
 };
 
-export const checkPassword = ({ password, oldPassword, confirmPassword }) => {
+export const checkPassword = ({
+  password,
+  oldPassword,
+  confirmPassword,
+  t,
+}) => {
   if (password.length < 6 || oldPassword.length < 6) {
-    universalToast("Parol 6 ta belgidan kam bo'lmaydi", "warning");
+    universalToast(
+      t("Parol 6 ta belgidan kam bo'lishi mumkin emas"),
+      "warning"
+    );
     return false;
   }
   if (password !== confirmPassword) {
-    universalToast("Parollar mos emas", "warning");
+    universalToast(t("Parollar mos emas"), "warning");
     return false;
   }
   return true;
@@ -45,37 +60,38 @@ export const checkOrganization = ({
   tradetypes,
   region,
   district,
+  t,
 }) => {
   if (name.length < 1) {
-    universalToast("Tashkilot nomini kiriting", "warning");
+    universalToast(t("Tashkilot nomini kiriting"), "warning");
     return false;
   }
   if (phone.length < 9) {
-    universalToast("Telefon raqamni to'liq kiriting", "warning");
+    universalToast(t("Telefon raqamni to'liq kiriting"), "warning");
     return false;
   }
   if (email.length < 1) {
-    universalToast("Emailni kiriting", "warning");
+    universalToast(t("Emailni kiriting"), "warning");
     return false;
   }
   if (!categories.length) {
-    universalToast("Kategoriya tanlanmagan", "warning");
+    universalToast(t("Kategoriya tanlanmagan"), "warning");
     return false;
   }
   if (!subcategories.length) {
-    universalToast("Kategoriya turlari tanlanmagan", "warning");
+    universalToast(t("Kategoriya turlari tanlanmagan"), "warning");
     return false;
   }
   if (!tradetypes.length) {
-    universalToast("Savdo turi", "warning");
+    universalToast(t("Savdo turi tanlanmagan"), "warning");
     return false;
   }
   if (!region) {
-    universalToast("Viloyat tanlanmagan", "warning");
+    universalToast(t("Viloyat tanlanmagan"), "warning");
     return false;
   }
   if (!district) {
-    universalToast("Tuman tanlanmagan", "warning");
+    universalToast(t("Tuman tanlanmagan"), "warning");
     return false;
   }
   return true;

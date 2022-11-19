@@ -44,7 +44,7 @@ const EditPassword = () => {
       oldPassword,
     };
 
-    const check = checkPassword({ ...data });
+    const check = checkPassword({ ...data, t });
     check &&
       dispatch(
         updatePassword({ password: oldPassword, newPassword: password })

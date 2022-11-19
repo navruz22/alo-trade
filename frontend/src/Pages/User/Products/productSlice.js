@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import Api from "../../../Config/Api";
 import { universalToast } from "../../../Components/ToastMessages/ToastMessages";
 import { findIndex } from "lodash";
+import { useTranslation as t } from "react-i18next";
 
 export const createProduct = createAsyncThunk(
   "products/createProduct",
@@ -190,7 +191,7 @@ const productSlice = createSlice({
     [deleteProduct.fulfilled]: (state, { payload: { id } }) => {
       const productIndex = findIndex(state.products, { _id: id });
       state.products.splice(productIndex, 1);
-      universalToast("Buyurtma muvaffaqqiyatli o'chirildi", "success");
+      universalToast(t("Buyurtma muvaffaqqiyatli o'chirildi"), "success");
       state.loading = false;
     },
     [updateProductPosition.pending]: (state) => {

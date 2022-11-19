@@ -26,7 +26,7 @@ instance.interceptors.response.use(
   (response) => response,
   ({ response: { data, status } }) => {
     if (!status) {
-      return Promise.reject({ message: "Internet mavjud emas" });
+      return Promise.reject({ message: "Интернет недоступен" });
     } else if (status === 401) {
       localStorage.removeItem("_grecaptcha");
       Store.dispatch(logOut(data?.error || data?.message));

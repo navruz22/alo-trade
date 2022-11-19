@@ -166,7 +166,7 @@ const orderSlice = createSlice({
     [deleteOrder.fulfilled]: (state, { payload: { id } }) => {
       const orderIndex = findIndex(state.orders, { _id: id });
       state.orders.splice(orderIndex, 1);
-      universalToast("Buyurtma muvaffaqqiyatli o'chirildi", "success");
+      universalToast("Заказ успешно удален", "success");
       state.loading = false;
     },
     [updateOrderPosition.pending]: (state) => {

@@ -61,7 +61,7 @@ const Offers = () => {
 
   const sendHandler = () => {
     if (message.length === 0) {
-      return universalToast("Diqqat! Xabar kiritilmagan", "warning");
+      return universalToast("Внимание! Сообщение не введено", "warning");
     }
 
     if (!currentProduct && !currentOrder)

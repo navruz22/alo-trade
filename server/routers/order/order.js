@@ -78,7 +78,7 @@ const getOrdersByFilter = async (req, res) => {
     const orders = await getOrders({ count, page, query });
     res.status(200).json({ orders });
   } catch (error) {
-    res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ Serverda: "Ошибка в сервере..." });
   }
 };
 
@@ -121,7 +121,7 @@ const getOrdersByFilterCount = async (req, res) => {
     const totalCount = await getOrdersCount({ query });
     res.status(200).json({ totalCount });
   } catch (error) {
-    res.status(500).json({ Serverda: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ Serverda: "Ошибка в сервере..." });
   }
 };
 
@@ -133,7 +133,7 @@ const getOrderById = async (req, res) => {
 
     res.status(200).json({ order });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -180,7 +180,7 @@ const updateOrderPosition = async (req, res) => {
     const updatedOrder = await Order.findById(id);
 
     if (!updatedOrder) {
-      return res.status(400).json({ message: "Buyurtma topilmadi" });
+      return res.status(400).json({ message: "Заказ не найден" });
     }
 
     updatedOrder.position =
@@ -190,7 +190,7 @@ const updateOrderPosition = async (req, res) => {
     const order = await getOrderForUpdate(id);
     res.status(200).json({ order });
   } catch (err) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 
@@ -202,7 +202,7 @@ const getOrderByOffer = async (req, res) => {
 
     res.status(200).json({ order });
   } catch (error) {
-    res.status(500).json({ message: "Serverda xatolik yuz berdi..." });
+    res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };
 

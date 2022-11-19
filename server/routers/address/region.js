@@ -28,7 +28,7 @@ const createRegion = async (req, res) => {
 
     res.send(newRegion);
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -53,7 +53,7 @@ const updateRegion = async (req, res) => {
 
     res.send(region);
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -73,7 +73,7 @@ const deleteRegion = async (req, res) => {
 
     res.send(region);
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 
@@ -96,7 +96,7 @@ const getRegions = async (req, res) => {
       );
     res.send(regions);
   } catch (error) {
-    res.status(501).json({ error: "Serverda xatolik yuz berdi..." });
+    res.status(501).json({ error: "Ошибка в сервере..." });
   }
 };
 

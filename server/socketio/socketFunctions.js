@@ -43,7 +43,7 @@ const getProductsByCount = async ({ socket, market }) => {
   } catch (error) {
     return socket.emit("error", {
       id: market,
-      message: "Serverda xatolik yuz berdi",
+      message: "Ошибка в сервере",
     });
   }
 };
@@ -64,7 +64,7 @@ const getAllFilials = async ({ socket, market }) => {
   } catch (error) {
     return socket.emit("error", {
       id: market,
-      message: "Serverda xatolik yuz berdi",
+      message: "Ошибка в сервере",
     });
   }
 };
@@ -106,7 +106,7 @@ const getPartnerProducts = async ({ socket, market, partner }) => {
   } catch (error) {
     return socket.emit("error", {
       id: market,
-      message: "Serverda xatolik yuz berdi",
+      message: "Ошибка в сервере",
     });
   }
 };

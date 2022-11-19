@@ -84,6 +84,7 @@ const EditUser = () => {
     };
     const check = checkUser({
       ...data,
+      t,
     });
     if (email !== "") {
       data.email = email;
