@@ -13,7 +13,7 @@ const getOrder = async (id) =>
 
 const getOrders = async ({ page, count, query }) =>
   await Order.find(query)
-    .sort({ createdAt: -1 })
+    .sort({ position: 1, createdAt: -1 })
     .skip(page * count)
     .limit(count)
     .select("-updatedAt -__v")
