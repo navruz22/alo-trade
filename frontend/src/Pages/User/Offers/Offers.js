@@ -203,7 +203,7 @@ const Offers = () => {
               filter === "offererUser" ? "bg-primary-700" : "bg-primary-800"
             } text-white-900 border-r border-white-900`}
           >
-            {translations.kiruvchi_xabar}
+            {translations.chiquvchi_xabar}
           </button>
           <button
             onClick={changeFilter}
@@ -212,7 +212,7 @@ const Offers = () => {
               filter === "user" ? "bg-primary-700" : "bg-primary-800"
             } text-white-900`}
           >
-            {translations.chiquvchi_xabar}
+            {translations.kiruvchi_xabar}
           </button>
         </div>
         <div className="h-full w-full overflow-scroll px-3">
@@ -226,7 +226,6 @@ const Offers = () => {
           ))}
         </div>
       </div>
-
       <div className="h-full w-1/2 relative bg-neutral-200 flex flex-col">
         <div className="h-full overflow-scroll">
           {map(messages, (message) =>
