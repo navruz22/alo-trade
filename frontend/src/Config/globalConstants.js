@@ -5,4 +5,8 @@ export const positions = [
 export const currencices = [
   { label: "USD", value: "USD" },
   { label: "UZS", value: "UZS" },
+  {
+    label: "Договорная",
+    value: "Договорная",
+  },
 ];

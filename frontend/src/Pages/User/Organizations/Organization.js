@@ -13,6 +13,7 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { map, uniqueId } from "lodash";
 import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../../translation";
+import background from "../../../assets/background/3.png";
 
 const Organization = () => {
   const dispatch = useDispatch();
@@ -44,11 +45,7 @@ const Organization = () => {
       <div className="bg-white-800  shadow">
         <div className="container m-auto top-0 my-0">
           <div className="w-full overflow-hidden rounded-b rounded-b-md">
-            <img
-              src="https://picsum.photos/1920/500/?blur"
-              alt="organization"
-              className=""
-            />
+            <img src={background} alt="organization" className="" />
           </div>
           <div className="w-full h-[11rem] flex flex-row">
             <div className="relative w-1/5">

@@ -83,7 +83,7 @@ const updateUser = async (req, res) => {
       if (userEmail && userEmail._id.toString() !== id) {
         return res
           .status(400)
-          .json({ message: "Email avval ro'yxatdan o'tgan!" });
+          .json({ message: "Электронная почта уже зарегистрирована!" });
       }
       user.email = email;
     }
@@ -92,7 +92,7 @@ const updateUser = async (req, res) => {
       if (userPhone && userPhone._id.toString() !== id) {
         return res
           .status(400)
-          .json({ message: "Bu telefon raqam avval ro'yxatdan o'tgan!" });
+          .json({ message: "Этот номер телефона уже зарегистрирован!" });
       }
       user.phone = phone;
     }

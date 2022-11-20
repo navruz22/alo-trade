@@ -276,12 +276,14 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
           label={tolov_turi}
           name={uniqueId("valyuta")}
         />
-        <MinMaxPrice
-          onChange={changeHandler}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-          onKeyUp={enterHandler}
-        />
+        {currency !== "Договорная" && (
+          <MinMaxPrice
+            onChange={changeHandler}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+            onKeyUp={enterHandler}
+          />
+        )}
       </div>
       <UploadImages images={images} setImages={setImages} />
       <div className="text-sm text-red-600 font-amazonbold text-center">

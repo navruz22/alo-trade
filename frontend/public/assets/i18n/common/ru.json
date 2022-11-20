@@ -127,7 +127,8 @@
     "Foydalanuvchi avval ro'yxatga olingan": "Пользователь уже зарегистрирован",
     "Joriy parol noto'g'ri": "Текущий пароль неверный",
     "Katoriya topilmadi": "Категория не найдена",
-    "Buyurtma topilmadi": "Заказ не найден"
-
+    "Buyurtma topilmadi": "Заказ не найден",
+    "Email avval ro'yxatdan o'tgan": "",
+    "Bu telefon raqam avval ro'yxatdan o'tgan": ""
 
 }

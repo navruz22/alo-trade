@@ -8,24 +8,14 @@ const MinMaxPrice = ({ minPrice, maxPrice, onChange, onKeyUp }) => {
   const { narxi } = getTranslations(t);
   return (
     <div>
-      <div className="grid grid-cols-2 gap-4">
-        <Input
-          name="minPrice"
-          type="number"
-          onChange={onChange}
-          onKeyUp={onKeyUp}
-          value={minPrice}
-          placeholder="min"
-          label={narxi}
-          labelStyle="text-sm font-normal"
-        />
+      <div className="">
         <Input
           name="maxPrice"
           type="number"
           onKeyUp={onKeyUp}
-          placeholder="max"
-          label={" "}
-          labelStyle={`pt-5`}
+          placeholder={narxi}
+          label={narxi}
+          labelStyle={``}
           value={maxPrice}
           onChange={onChange}
         />

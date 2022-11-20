@@ -308,7 +308,7 @@ const getOrganizationByid = async (req, res) => {
     const { id } = req.body;
     const organization = await getOrganization(id);
     if (!organization) {
-      return res.status(400).json({ message: "Tashkilot topilmadi" });
+      return res.status(400).json({ message: "Компания не найдена" });
     }
     res.status(200).json({ organization });
   } catch (e) {
