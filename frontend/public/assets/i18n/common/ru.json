@@ -121,7 +121,7 @@
     "Emailni kiriting": "Введите адрес электронной почты",
     "Kategoriya tanlanmagan": "Категория не выбрана",
     "Kategoriya turlari tanlanmagan": "Типы категорий не выбраны",
-    "Buyurtma muvaffaqiyatli o'chirildi": "Заказ успешно удален",
+    "Buyurtma muvaffaqqiyatli o'chirildi": "Заказ успешно удален",
     "Savdo turi tanlanmagan": "Тип продажи не выбран",
     "Diqqat! Xabar kiritilmagan": "Внимание! Сообщение не введено",
     "Foydalanuvchi avval ro'yxatga olingan": "Пользователь уже зарегистрирован",
@@ -129,6 +129,8 @@
     "Katoriya topilmadi": "Категория не найдена",
     "Buyurtma topilmadi": "Заказ не найден",
     "Email avval ro'yxatdan o'tgan": "",
-    "Bu telefon raqam avval ro'yxatdan o'tgan": ""
+    "Bu telefon raqam avval ro'yxatdan o'tgan": "",
+    "Yuklash": "Загрузит"
+
 
 }

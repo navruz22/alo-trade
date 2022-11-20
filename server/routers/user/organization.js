@@ -60,7 +60,7 @@ const createOrganization = async (req, res) => {
 
     if (user) {
       return res.status(400).json({
-        message: `${phone} telefon raqamdan avval ro'yxatdan o'tilgan`,
+        message: `Номер телефона уже зарегистрирован`,
       });
     }
 
@@ -68,7 +68,7 @@ const createOrganization = async (req, res) => {
 
     if (organization) {
       return res.status(400).json({
-        message: `${name} nomli tashkilot avval ro'yxatdan`,
+        message: `Организация с таким названием ранее была зарегистрирована`,
       });
     }
 
@@ -165,7 +165,7 @@ const updateOrganization = async (req, res) => {
     const organization = await Organization.findById(id);
     if (!organization) {
       return res.status(400).json({
-        message: `${name} nomli tashkilot mavjud emas`,
+        message: `Организации с таким названием не существует`,
       });
     }
 

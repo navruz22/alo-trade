@@ -3,8 +3,10 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import { IoCamera, IoClose } from "react-icons/io5";
 import Modal from "react-modal";
+import { useTranslation } from "react-i18next";
 
 function ImageCrop({ approve, output, modalIsOpen, setIsOpen }) {
+  const { t } = useTranslation(["common"]);
   const [src, setSrc] = useState(null);
   const [crop, setCrop] = useState({
     unit: "%",
@@ -163,7 +165,7 @@ function ImageCrop({ approve, output, modalIsOpen, setIsOpen }) {
                 className={"approveBtn bg-primary-800 hover:bg-primary-900"}
                 onClick={cropImageNow}
               >
-                Yuklash
+                {t("Yuklash")}
               </button>
             </div>
           </div>

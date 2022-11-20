@@ -15,7 +15,7 @@ const createUser = async (req, res) => {
     const user = await User.findOne({ phone });
     if (user) {
       return res.status(400).json({
-        message: `Diqqat! ${phone} telefon raqam avval ro'yxatdan o'tgan.`,
+        message: `Номер телефона уже зарегистрирован`,
       });
     }
 
