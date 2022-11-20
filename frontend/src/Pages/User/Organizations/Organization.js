@@ -13,7 +13,10 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { map, uniqueId } from "lodash";
 import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../../translation";
-import background from "../../../assets/background/3.png";
+import background1 from "../../../assets/background/1.png";
+import background2 from "../../../assets/background/2.png";
+import background3 from "../../../assets/background/3.png";
+import background4 from "../../../assets/background/4.png";
 
 const Organization = () => {
   const dispatch = useDispatch();
@@ -26,6 +29,9 @@ const Organization = () => {
     kategoriya_turi,
   } = getTranslations(t);
   const [organization, setOrganization] = useState(null);
+
+  const backgrounds = [background1, background2, background3, background4];
+  const background = backgrounds[Math.floor(Math.random() * 4)];
 
   const location = useLocation();
   const { _id } = location.state;
