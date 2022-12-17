@@ -6,7 +6,6 @@ import {
   editProfileImage,
 } from "../../Pages/Sign/signSlice";
 import { filter, map, uniqueId } from "lodash";
-import Resizer from "react-image-file-resizer";
 
 const UploadImages = ({ images, setImages }) => {
   const dispatch = useDispatch();
