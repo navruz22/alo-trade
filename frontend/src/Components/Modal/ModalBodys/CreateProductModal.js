@@ -198,7 +198,7 @@ const CreateProductModal = ({ closeModal, productId }) => {
   }, [dispatch, productId]);
 
   return (
-    <div className="overflow-scroll p-1">
+    <div className="p-1">
       <div className="text-base font-amazonbold mb-3">Yangi mahsulot</div>
       <CheckboxList
         list={tradetypes}

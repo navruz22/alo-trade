@@ -105,6 +105,7 @@ const orderSlice = createSlice({
     orders: [],
     loading: false,
     error: null,
+    order: null,
   },
   reducers: {
     clearErrorCategories: (state) => {
@@ -140,6 +141,7 @@ const orderSlice = createSlice({
       state.loading = true;
     },
     [getOrderById.fulfilled]: (state, { payload: { order } }) => {
+      state.order = order;
       state.loading = false;
     },
     [getOrderById.rejected]: (state, { payload }) => {

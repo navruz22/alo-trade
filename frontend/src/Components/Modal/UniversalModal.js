@@ -3,6 +3,8 @@ import ModalHeader from "./ModalHeader";
 import CreateOrderModal from "./ModalBodys/CreateOrderModal";
 import Approve from "./ModalBodys/Approve";
 import CreateProductModal from "./ModalBodys/CreateProductModal";
+import { useEffect, useState } from "react";
+import useWindowSize from "../../hooks/useWindowSize";
 
 function UniversalModal({
   body,
@@ -17,11 +19,14 @@ function UniversalModal({
 }) {
   const customStyles = {
     content: {
-      width: "800px",
-      height: "600px",
+      maxWidth: "550px",
       padding: "1.25rem",
       transform: "auto",
       margin: "auto",
+    },
+    overlay: {
+      background: "rgba(0, 0, 0, 0.75)",
+      zIndex: "50",
     },
   };
   const modalFull = {
@@ -30,6 +35,8 @@ function UniversalModal({
       height: "100%",
       padding: "1rem",
       transform: "auto",
+      position: "fixed",
+      zIndex: "50",
     },
   };
   const switchBody = () => {

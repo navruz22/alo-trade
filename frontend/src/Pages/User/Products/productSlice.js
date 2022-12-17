@@ -116,12 +116,16 @@ const productSlice = createSlice({
   name: "products",
   initialState: {
     products: [],
+    product: null,
     loading: false,
     error: null,
   },
   reducers: {
     clearErrorCategories: (state) => {
       state.error = null;
+    },
+    clearProductData: (state) => {
+      state.product = null;
     },
   },
   extraReducers: {
@@ -166,6 +170,7 @@ const productSlice = createSlice({
     },
     [getProductById.fulfilled]: (state, { payload: { product } }) => {
       state.loading = false;
+      state.product = product;
     },
     [getProductById.rejected]: (state, { payload }) => {
       state.loading = false;
@@ -221,5 +226,5 @@ const productSlice = createSlice({
   },
 });
 
-export const { clearErrorCategories } = productSlice.actions;
+export const { clearErrorCategories, clearProductData } = productSlice.actions;
 export default productSlice.reducer;

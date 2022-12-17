@@ -15,7 +15,7 @@ const CheckboxList = ({
   return (
     <div className="">
       <FilterHeader label={headerText} className={headerStyle} />
-      <div className={`grid grid-cols-${cols} ${listStyle}`}>
+      <div className={`grid grid-cols-1 md:grid-cols-${cols} ${listStyle}`}>
         {map(list, (data) => (
           <Checkbox
             onChange={onChange}

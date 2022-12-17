@@ -1,97 +1,70 @@
 import React, { useState } from "react";
 import { IoChevronDownOutline, IoChevronUpOutline } from "react-icons/io5";
 import { map } from "lodash";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getOrderById } from "../../Pages/User/Orders/orderSlice";
 
 const CardAdditional = ({
-  categories,
-  district,
-  tradetypes,
   region,
-  // status,
-  subcategories,
-  images,
   phone,
-  organization,
-  description,
-  translations,
+  logged,
+  position,
+  isOrganization,
+  id,
 }) => {
-  const [show, setShow] = useState(false);
-  const [title, setTitle] = useState(translations.koproq_malumot);
-  const [icon, setIcon] = useState(
-    <IoChevronDownOutline size={16} color="#0090A2" className="mt-2" />
-  );
-  const toggle = () => {
-    setTitle(show ? translations.koproq_malumot : translations.yopish);
-    setIcon(
-      show ? (
-        <IoChevronDownOutline size={16} color="#0090A2" className="mt-2" />
-      ) : (
-        <IoChevronUpOutline size={16} color="#0090A2" className="mt-2" />
-      )
-    );
-    setShow(!show);
+  const dispatch = useDispatch();
+  const [phoneValue, setPhoneValue] = useState("Контакты");
+  const [visible, setVisible] = useState(false);
+  const handleOpenNumber = () => {
+    if (!visible) {
+      setPhoneValue(phone);
+      setVisible(true);
+    } else {
+      setPhoneValue("Контакты");
+      setVisible(false);
+    }
   };
   return (
-    <div className="text-neutral-500 px-3 relative">
-      {show && (
-        <div className="grid grid-cols-7 ">
-          <div className="col-span-5">
-            <h3 className="text-neutral-600 text-justify py-2">
-              {description}
-            </h3>
-            <h4 className="">
-              <span className="font-amazonbold">
-                {translations.koproq_malumot}:
-              </span>{" "}
-              <span className="lowercase ">
-                {organization ? organization?.phone : phone}
-              </span>
-            </h4>
-            <p className="">
-              <span className="font-amazonbold">
-                {translations.savdo_turi}:
-              </span>{" "}
-              <span className="lowercase ">
-                {map(tradetypes, (tradetype) => tradetype.name + ", ")}
-              </span>
-            </p>
-            <p className="">
-              <span className="font-amazonbold">
-                {translations.kategoriya}:
-              </span>{" "}
-              <span className="lowercase ">
-                {map(categories, (category) => category.name + ", ")}
-              </span>
-            </p>
-            <p className="">
-              <span className="font-amazonbold">
-                {translations.kategoriya_turi}:
-              </span>{" "}
-              <span className="lowercase ">
-                {map(subcategories, (subcategory) => subcategory.name + ", ")}
-              </span>
-            </p>
-            <p className="text-neutral-500">
-              <span className="font-amazonbold mr-2">
-                {translations.manzil}:
-              </span>
-              {region?.name}, {district?.name}
-            </p>
+    <div class="flex items-center gap-7">
+      <div class="text-grey-500 flex flex-row space-x-1  my-4">
+        <svg
+          stroke="currentColor"
+          fill="none"
+          stroke-width="0"
+          viewBox="0 0 24 24"
+          height="1em"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+          ></path>
+        </svg>
+        <p class="text-xs font-semibold">{region?.name}</p>
+      </div>
+      <div class="flex flex-row space-x-1">
+        <Link
+          to={`/orders/${id}`}
+          onClick={() => dispatch(getOrderById({ id }))}
+          className="bg-orange-500 text-[12px] md:text-[16px] shadow-lg shadow- shadow-orange-600 text-white cursor-pointer px-3 py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row"
+        >
+          Подробнее
+        </Link>
+        {logged && (
+          <div
+            onClick={() => handleOpenNumber()}
+            class="bg-green-500 shadow-lg text-[12px] md:text-[16px] shadow- shadow-green-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row"
+          >
+            {logged && isOrganization && position === "active"
+              ? phoneValue
+              : "Контакты"}
           </div>
-          <div className="col-span-2 text-end flex justify-end">
-            {images[0] && (
-              <img src={images[0]} className="w-[150px]" alt="alotrade.uz" />
-            )}
-          </div>
-        </div>
-      )}
-
-      <button onClick={toggle} className="w-full text-primary-800 ">
-        <span className="w-full flex items-center pointer-events-none">
-          <span className="pt-2"> {title}</span>
-          <span className="">{icon}</span>
-        </span>
-      </button>
+        )}
+      </div>
     </div>
   );
 };

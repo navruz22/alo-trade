@@ -22,6 +22,8 @@ const ProfileReport = lazy(() => import("./User/Profile/Profile"));
 const CompanyReport = lazy(() =>
   import("../Components/MainPageHeader/CompanyRegister")
 );
+const DetailOrder = lazy(() => import("./User/DetailOrder/DetailOrder"));
+const DetailProduct = lazy(() => import("./User/DetailProduct/DetailProduct"));
 // <-- pages
 
 // routes -->
@@ -35,8 +37,16 @@ const userRoutes = [
     element: <OrdersReport />,
   },
   {
+    path: "/orders/:id",
+    element: <DetailOrder />,
+  },
+  {
     path: "/products",
     element: <ProductsReport />,
+  },
+  {
+    path: "/products/:id",
+    element: <DetailProduct />,
   },
   {
     path: "/offers",

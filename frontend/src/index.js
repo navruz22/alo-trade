@@ -6,7 +6,7 @@ import Store from "./Config/store";
 import App from "./App";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./index.css";
+import "./tailwind.css";
 
 import "./i18n";
 

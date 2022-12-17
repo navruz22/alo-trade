@@ -14,10 +14,10 @@ const router = require("express").Router();
 const auth = require("../../middleware/auth.middleware");
 
 // Category
-router.post("/create", auth, createCategory);
-router.put("/update", auth, updateCategory);
-router.delete("/delete", auth, deleteCategory);
-router.get("/get", auth, getCategories);
+router.post("/create", createCategory);
+router.put("/update", updateCategory);
+router.delete("/delete", deleteCategory);
+router.get("/get", getCategories);
 router.get("/getwithsubcategories", getCategoriesWithSubcategories);
 
 // Subcategory

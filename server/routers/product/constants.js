@@ -89,7 +89,22 @@ const getProductWithId = async (id) =>
     })
     .populate("subcategories", "name")
     .populate("user", "firstname lastname phone email")
-    .populate("organization", "name phone email")
+    .populate({
+      path: "organization",
+      select: "name phone email region district image",
+      populate: {
+        path: "region",
+        select: "name",
+      },
+    })
+    .populate({
+      path: "organization",
+      select: "name phone email region district image",
+      populate: {
+        path: "district",
+        select: "name",
+      },
+    })
     .then((product) => {
       return {
         _id: product?._id,
@@ -102,6 +117,13 @@ const getProductWithId = async (id) =>
         position: product?.position,
         tradetypes: product?.tradetypes,
         status: product?.status,
+        organization: {
+          name: product?.organization?.name,
+          phone: product?.organization?.phone,
+          region: product?.organization?.region.name,
+          district: product?.organization?.district.name,
+          image: product?.organization?.image,
+        },
         district: {
           label: product?.district?.name,
           value: product?.district?._id,

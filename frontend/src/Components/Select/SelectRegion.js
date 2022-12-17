@@ -15,8 +15,8 @@ const SelectRegion = ({
   labelDistrict,
 }) => {
   return (
-    <div className="grid grid-cols-2 gap-4">
-      <div className="mr-3 w-full">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+      <div className="md:mr-3 w-full">
         {labelRegion && (
           <p className="text-neutral-500 text-sm mt-[7px]">{labelRegion}</p>
         )}

@@ -216,8 +216,8 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
   }, [dispatch, orderId]);
 
   return (
-    <div className="overflow-scroll p-1">
-      <div className="text-base font-amazonbold mb-3">{yangi_buyurtma}</div>
+    <div className="p-1">
+      <div className="text-lg font-amazonbold mb-3 ">{yangi_buyurtma}</div>
       <CheckboxList
         list={tradetypes}
         checkedList={tradeTypes}

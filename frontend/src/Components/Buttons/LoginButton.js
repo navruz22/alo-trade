@@ -5,7 +5,19 @@ const LoginButton = ({ title }) => {
   return (
     <Link
       to="/sign-in"
-      className="bg-amber-500 block px-4 py-2 rounded-md text-white-900"
+      class="
+                  text-base
+                  font-medium
+                  text-white
+                  bg-white bg-opacity-20
+                  rounded-lg
+                  py-3
+                  px-6
+                  hover:bg-opacity-100 hover:text-dark
+                  signUpBtn
+                  duration-300
+                  ease-in-out
+                "
     >
       {title}
     </Link>

@@ -10,6 +10,8 @@ import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 import { filter } from "./constants";
 import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../../translation";
+import Filter from "../../Filter/Filter";
+import Pagination from "../../../Components/Pagination/Pagination";
 
 const Orders = () => {
   const dispatch = useDispatch();
@@ -37,6 +39,9 @@ const Orders = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalBody, setModalBody] = useState(null);
+
+  const [filterVisible, setFilterVisible] = useState(false);
+  const [filterBody, setFilterBody] = useState(null);
 
   const closeHandler = () => {
     setModalVisible(false);
@@ -103,7 +108,7 @@ const Orders = () => {
     );
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, categories, subcategories, tradetypes, regions, districts, name]);
-
+  console.log(totalDatas);
   useEffect(() => {
     const data = {
       page: currentPage,
@@ -129,44 +134,54 @@ const Orders = () => {
   }, [dispatch, order, currentPage, countPage]);
 
   return (
-    <div className="h-full w-full bg-neutral-100 flex flex-col justify-between">
-      {logged ? (
-        <PageHeader
-          translations={translations}
-          isOrganization={!!organization}
-          currentPage={currentPage}
-          countPage={countPage}
-          totalDatas={totalDatas}
-          setCurrentPage={setCurrentPage}
-          count={totalDatas}
-          onClick={() => openModal("createOrder")}
-          countTitle={translations.jami}
-          buttonTitle={translations.buyurtma_yaratish}
-          handleFilter={handleFilter}
-          filterData={order}
-          filter={filterData}
-        />
-      ) : (
-        <MainPageHeader
-          translations={translations}
-          currentPage={currentPage}
-          countPage={countPage}
-          totalDatas={totalDatas}
-          setCurrentPage={setCurrentPage}
-        />
-      )}
-
-      <div className="p-4 pt-0 h-full overflow-scroll">
-        {map(orders, (order) => (
-          <OrderCard
-            translations={translations}
-            logged={logged}
-            key={uniqueId()}
-            order={order}
-            editHandler={editHandler}
-            deleteHandler={deleteHandler}
+    <div className="w-full bg-slate-100">
+      <div className="p-2 md:container">
+        <div className="w-full block md:flex">
+          <Filter
+            filterBody={filterBody}
+            filterVisible={filterVisible}
+            setFilterVisible={setFilterVisible}
           />
-        ))}
+          <div className="w-full px-4 flex flex-col gap-[20px]">
+            <PageHeader
+              translations={translations}
+              isOrganization={!!organization}
+              currentPage={currentPage}
+              countPage={countPage}
+              totalDatas={totalDatas}
+              setCurrentPage={setCurrentPage}
+              count={totalDatas}
+              onClick={() => openModal("createOrder")}
+              countTitle={translations.jami}
+              buttonTitle={translations.buyurtma_yaratish}
+              handleFilter={handleFilter}
+              filterData={order}
+              filter={filterData}
+              setFilterBody={setFilterBody}
+              setFilterVisible={setFilterVisible}
+            />
+            {map(orders, (order) => (
+              <OrderCard
+                translations={translations}
+                logged={logged}
+                key={uniqueId()}
+                order={order}
+                editHandler={editHandler}
+                deleteHandler={deleteHandler}
+              />
+            ))}
+            {totalDatas > 0 && (
+              <div className="flex justify-center py-2">
+                <Pagination
+                  totalDatas={totalDatas}
+                  countPage={countPage}
+                  setCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       <UniversalModal

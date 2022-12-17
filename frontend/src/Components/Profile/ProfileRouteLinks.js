@@ -25,7 +25,7 @@ const ProfileRouteLinks = ({ menu }) => {
           to={item.path}
         >
           <span className="px-2">{item.icon}</span>
-          {translations[item.title.toLowerCase()]}
+          {item.title}
         </Link>
       ))}
     </div>

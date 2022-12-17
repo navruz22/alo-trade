@@ -22,7 +22,7 @@ const SelectCheckbox = ({
   return (
     <div className="border-t mt-3 pl-3">
       <FilterHeader label={headerText} />
-      <div className="overflow-scroll max-h-[500px]">
+      <div className="max-h-[500px]">
         {map(datas, (data, index) => (
           <div key={uniqueId("selectButton")}>
             <SelectButton

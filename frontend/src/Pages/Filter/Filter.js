@@ -14,11 +14,15 @@ import {
 import { IoSearchOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../translation";
+import useWindowSize from "../../hooks/useWindowSize";
+import closeIcon from "../../assets/close.svg";
 
-const Filter = ({ categories, regions, tradeTypes }) => {
+const Filter = ({ filterVisible, setFilterVisible, filterBody }) => {
   const { t } = useTranslation(["common"]);
   const { Filter, savdo_turi, davlatlar, kategoriyalar, nomi_bilan_qidirish } =
     getTranslations(t);
+
+  const { width } = useWindowSize();
   const dispatch = useDispatch();
   const [name, setName] = React.useState("");
   const {
@@ -28,6 +32,12 @@ const Filter = ({ categories, regions, tradeTypes }) => {
     districts,
     regions: regionsList,
   } = useSelector((state) => state.filter);
+
+  const { categoriesWithSubcategories: categories } = useSelector(
+    (state) => state.categories
+  );
+  const { tradetypes: tradeTypes } = useSelector((state) => state.trade);
+  const { regions } = useSelector((state) => state.regions);
 
   const changeName = (e) => {
     const value = e.target.value;
@@ -60,6 +70,7 @@ const Filter = ({ categories, regions, tradeTypes }) => {
     const checked = e.target.checked;
     const filtered = filter(categoriesList, (category) => category !== value);
     const newCategories = checked ? [...filtered, value] : [...filtered];
+    console.log(newCategories);
     dispatch(filterCategories(newCategories));
   };
 
@@ -91,11 +102,26 @@ const Filter = ({ categories, regions, tradeTypes }) => {
   };
 
   return (
-    <div className="w-1/3 min-w-[300px] max-w-[400px] overflow-scroll shadow">
+    <div
+      className={
+        width < 720
+          ? `w-full h-full ease-in-out duration-200 fixed top-0 ${
+              filterVisible ? "left-0" : "left-[-100%]"
+            } z-50 bg-white`
+          : "min-w-[300px] max-w-[400px] shadow bg-white"
+      }
+    >
       <div className="p-4">
-        <h1 className="font-amazonbold text-xl tracking-widest text-secondary-medium">
-          {Filter}
-        </h1>
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="font-amazonbold text-xl tracking-widest text-secondary-medium">
+            {Filter}
+          </h1>
+          {width < 720 && (
+            <button onClick={() => setFilterVisible(false)}>
+              <img src={closeIcon} alt="close" width={30} />
+            </button>
+          )}
+        </div>
         <div className="flex w-full pl-3 mt-2">
           <input
             onKeyUp={enterHandler}
@@ -111,32 +137,80 @@ const Filter = ({ categories, regions, tradeTypes }) => {
             <IoSearchOutline />
           </button>
         </div>
-        <CheckboxList
-          checkedList={tradetypes}
-          list={tradeTypes}
-          headerText={savdo_turi}
-          headerStyle="ml-3 mt-3"
-          listStyle="pl-3"
-          onChange={changeTradeTypes}
-        />
-        <SelectCheckbox
-          headerCheckeds={categoriesList}
-          changeHeader={changeCategories}
-          changeBody={changeSubcategories}
-          bodyCheckeds={subcategories}
-          headerText={kategoriyalar}
-          datas={categories}
-          property="subcategories"
-        />
-        <SelectCheckbox
-          headerCheckeds={regionsList}
-          bodyCheckeds={districts}
-          changeHeader={changeRegions}
-          changeBody={changeDistricts}
-          headerText={davlatlar}
-          datas={regions}
-          property="districts"
-        />
+        {width < 720 ? (
+          <>
+            {filterBody === "category" && (
+              <>
+                <CheckboxList
+                  checkedList={tradetypes}
+                  list={tradeTypes}
+                  headerText={savdo_turi}
+                  headerStyle="ml-3 mt-3"
+                  listStyle="pl-3"
+                  onChange={changeTradeTypes}
+                />
+                <SelectCheckbox
+                  headerCheckeds={categoriesList}
+                  changeHeader={changeCategories}
+                  changeBody={changeSubcategories}
+                  bodyCheckeds={subcategories}
+                  headerText={kategoriyalar}
+                  datas={categories}
+                  property="subcategories"
+                />
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <CheckboxList
+              checkedList={tradetypes}
+              list={tradeTypes}
+              headerText={savdo_turi}
+              headerStyle="ml-3 mt-3"
+              listStyle="pl-3"
+              onChange={changeTradeTypes}
+            />
+            <SelectCheckbox
+              headerCheckeds={categoriesList}
+              changeHeader={changeCategories}
+              changeBody={changeSubcategories}
+              bodyCheckeds={subcategories}
+              headerText={kategoriyalar}
+              datas={categories}
+              property="subcategories"
+            />
+          </>
+        )}
+        {width < 720 ? (
+          <>
+            {filterBody === "country" && (
+              <>
+                <SelectCheckbox
+                  headerCheckeds={regionsList}
+                  bodyCheckeds={districts}
+                  changeHeader={changeRegions}
+                  changeBody={changeDistricts}
+                  headerText={davlatlar}
+                  datas={regions}
+                  property="districts"
+                />
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            <SelectCheckbox
+              headerCheckeds={regionsList}
+              bodyCheckeds={districts}
+              changeHeader={changeRegions}
+              changeBody={changeDistricts}
+              headerText={davlatlar}
+              datas={regions}
+              property="districts"
+            />
+          </>
+        )}
       </div>
     </div>
   );

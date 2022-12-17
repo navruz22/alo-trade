@@ -6,6 +6,7 @@ import {
   editProfileImage,
 } from "../../Pages/Sign/signSlice";
 import { filter, map, uniqueId } from "lodash";
+import Resizer from "react-image-file-resizer";
 
 const UploadImages = ({ images, setImages }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const UploadImages = ({ images, setImages }) => {
   const handleChange = () => {
     ref.current.click();
   };
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);

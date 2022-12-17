@@ -47,7 +47,22 @@ const getOrderWithId = async (id) =>
       },
     })
     .populate("subcategories", "name")
-    .populate("user", "firstname lastname phone email")
+    .populate({
+      path: "user",
+      select: "firstname lastname phone email image region district",
+      populate: {
+        path: "district",
+        select: "name",
+      },
+    })
+    .populate({
+      path: "user",
+      select: "firstname lastname phone email image region district",
+      populate: {
+        path: "region",
+        select: "name",
+      },
+    })
     .populate("organization", "name phone email")
     .then((order) => {
       return {
@@ -61,6 +76,14 @@ const getOrderWithId = async (id) =>
         position: order?.position,
         tradetypes: order?.tradetypes,
         status: order?.status,
+        user: {
+          firstname: order?.user?.firstname,
+          lastname: order?.user?.lastname,
+          phone: order?.user?.phone,
+          image: order?.user?.image,
+          region: order?.user?.region?.name,
+          district: order?.user?.district?.name,
+        },
         district: {
           label: order?.district?.name,
           value: order?.district?._id,

@@ -6,9 +6,12 @@ import CardFooter from "./CardFooter";
 import CardEdit from "./CardEdit";
 import { useSelector } from "react-redux";
 import noImage from "../../assets/images/no-image.svg";
+import { useLocation } from "react-router-dom";
+import { IoLocationOutline } from "react-icons/io5";
 
 const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   const { userData } = useSelector((state) => state.login);
+  const location = useLocation();
   const {
     _id,
     tradetypes,
@@ -30,14 +33,21 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   } = product;
   const isCustomer = userData?.user?._id === user?._id;
   const phone = organization?.phone;
-  // const isOrganization = userData?.organization;
+  const isOrganization = !!userData?.organization?._id;
+  const isProfileProducts = location.pathname === "/profile/products";
   return (
-    <div className="w-full shadow-md mt-5 rounded-md bg-white-900 ">
-      <div className="text-sm w-full h-full flex flex-col justify-between ">
-        <div className="flex overflow-hidden items-center justify-center">
+    <div className="w-full shadow-2xl mt-5 rounded-xl bg-white-900 bg-white border-[1px] border-[#01c2cc]">
+      <div className="text-sm w-full h-full flex flex-col justify-between rounded-xl">
+        <p className="pl-2 border-b my-1 flex items-center text-neutral-500 text-sm">
+          <IoLocationOutline className="" />
+          <span className="text-[10px] md:text-[14px] ml-2">
+            {region ? region?.name : "Respublika bo'ylab"}
+          </span>
+        </p>
+        <div className="flex overflow-hidden items-center justify-center bg-white rounded-t-xl">
           <img
             src={images[0] ? images[0] : noImage}
-            className="rounded h-[200px]"
+            className="rounded object-contain h-[150px] md:h-[200px]"
             alt="Product"
           />
         </div>
@@ -57,7 +67,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
           description={description}
           currency={currency}
         />
-        {logged && (
+        {/* {logged && (
           <CardAdditional
             description={description}
             tradetypes={tradetypes}
@@ -71,17 +81,16 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
             phone={phone}
             organization={organization}
           />
+        )} */}
+        {!isCustomer && logged && <CardFooter phone={phone} id={_id} />}
+        {isOrganization && logged && isProfileProducts && (
+          <CardEdit
+            editHandler={editHandler}
+            productId={_id}
+            deleteHandler={deleteHandler}
+            position={position}
+          />
         )}
-        {isCustomer
-          ? logged && (
-              <CardEdit
-                editHandler={editHandler}
-                productId={_id}
-                deleteHandler={deleteHandler}
-                position={position}
-              />
-            )
-          : logged && <CardFooter phone={phone} id={_id} />}
       </div>
       {/*<div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">*/}
       {/*  {images[0] && (*/}

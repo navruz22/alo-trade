@@ -5,7 +5,7 @@ const { map } = require("lodash");
 const createCategory = async (req, res) => {
   try {
     const { name, image } = req.body;
-
+    console.log("fff");
     const { error } = validateCategory({ name, image });
     if (error) {
       return res.status(400).json({ message: error.message });

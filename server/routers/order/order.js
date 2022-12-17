@@ -75,9 +75,11 @@ const getOrdersByFilter = async (req, res) => {
     if (name.length > 0) {
       query.name = new RegExp(".*" + name + ".*", "i");
     }
+
     const orders = await getOrders({ count, page, query });
     res.status(200).json({ orders });
   } catch (error) {
+    // console.log(error);
     res.status(500).json({ Serverda: "Ошибка в сервере..." });
   }
 };
@@ -128,11 +130,13 @@ const getOrdersByFilterCount = async (req, res) => {
 const getOrderById = async (req, res) => {
   try {
     const { id } = req.body;
+    console.log(id);
 
     const order = await getOrderWithId(id);
 
     res.status(200).json({ order });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };

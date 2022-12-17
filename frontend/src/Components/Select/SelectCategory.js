@@ -15,8 +15,8 @@ const SelectCategory = ({
   kategoriya_turi,
 }) => {
   return (
-    <div className="flex flex-row w-full">
-      <div className="w-full mr-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+      <div className="w-full md:mr-3">
         {labelCategory && (
           <p className="text-neutral-500 text-sm mt-[7px]">{labelCategory}</p>
         )}

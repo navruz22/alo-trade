@@ -7,6 +7,8 @@ import { map, uniqueId } from "lodash";
 import Pagination from "../../../Components/Pagination/Pagination";
 import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../../translation";
+import Filter from "../../Filter/Filter";
+import PageHeader from "../../../Components/PageHeaders/PageHeader";
 
 const Organizations = () => {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ const Organizations = () => {
     userData: { organization },
   } = useSelector((state) => state.login);
   const { organizations } = useSelector((state) => state.organizations);
+  const isOrganization = !!organization?._id;
   const {
     order,
     categories,
@@ -30,6 +33,17 @@ const Organizations = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [totalDatas, setTotalDatas] = useState(0);
   const countPage = 10;
+
+  const [modalBody, setModalBody] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const [filterVisible, setFilterVisible] = useState(false);
+  const [filterBody, setFilterBody] = useState(null);
+
+  const openModal = (body) => {
+    setModalBody(body);
+    setModalVisible(true);
+  };
 
   useEffect(() => {
     const data = {
@@ -85,66 +99,151 @@ const Organizations = () => {
   }, [dispatch, order, currentPage, countPage]);
 
   return (
-    <div className="h-full w-full  bg-neutral-100 flex flex-col justify-between">
-      <div className="bg-white-900 py-3 shadow-md flex justify-between items-center px-4">
-        <h3 className="font-amazonbold">
-          {translations.tashkilotlar}:{" "}
-          <span className="text-primary-900">{totalDatas} </span>
-        </h3>
-        {totalDatas > 0 && (
-          <Pagination
-            currentPage={currentPage}
-            countPage={countPage}
-            setCurrentPage={setCurrentPage}
-            totalDatas={totalDatas}
+    <div className="w-full bg-white">
+      <div className="p-2 md:container">
+        <div className="w-full block md:flex">
+          <Filter
+            filterBody={filterBody}
+            filterVisible={filterVisible}
+            setFilterVisible={setFilterVisible}
           />
-        )}
-      </div>
-      <div className="h-full overflow-scroll p-4">
-        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-4">
-          {map(
-            organizations,
-            ({
-              _id,
-              image,
-              name,
-              tradetypes,
-              categories,
-              subcategories,
-              region,
-              district,
-              phone,
-              email,
-            }) => (
-              <div
-                key={uniqueId("organization")}
-                className="bg-white-900 overflow-hidden rounded shadow-lg border-t-4 border-amber-500 flex flex-col justify-between"
-              >
-                <CardLogo
-                  logo={image}
-                  name={name}
-                  region={region}
-                  district={district}
-                />
-                <CardInfo
-                  translations={translations}
-                  _id={_id}
-                  isOrganization={!!organization}
-                  logged={logged}
-                  tradetypes={tradetypes}
-                  categories={categories}
-                  subcategories={subcategories}
-                  region={region}
-                  district={district}
-                  phone={phone}
-                  email={email}
-                />
-              </div>
-            )
-          )}
+          <div className="w-full px-2 md:px-4 flex flex-col gap-[20px]">
+            {!isOrganization && (
+              <PageHeader
+                isOrganization={!!organization}
+                totalDatas={totalDatas}
+                countPage={countPage}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                // filter={filter}
+                count={totalDatas}
+                onClick={() => openModal("createOrganization")}
+                buttonTitle="Добавить компанию"
+                // handleFilter={handleFilter}
+                // filterData={product}
+                setFilterBody={setFilterBody}
+                setFilterVisible={setFilterVisible}
+                countTitle="Jami:"
+              />
+            )}
+            <div className="grid grid-cols-1 gap-1 md:grid-cols-3 md:gap-3">
+              {map(
+                organizations,
+                ({
+                  _id,
+                  image,
+                  name,
+                  tradetypes,
+                  categories,
+                  subcategories,
+                  region,
+                  district,
+                  phone,
+                  email,
+                }) => (
+                  <div
+                    key={uniqueId("organization")}
+                    className="bg-white-900 overflow-hidden rounded shadow-lg border-t-8 border-[#01c2cc] flex flex-col justify-between"
+                  >
+                    <div className="border-neutral-400 mt-2 mx-4 flex gap-1">
+                      <h3 className="text-[12px] font-semibold font-amazonbold">
+                        {" "}
+                        {translations.savdo_turi}:
+                      </h3>
+                      <h4 className="text-[12px]">
+                        {`${map(tradetypes, (tradetype) => tradetype.name).join(
+                          ", "
+                        )}`}
+                      </h4>
+                    </div>
+                    <CardLogo
+                      logo={image}
+                      name={name}
+                      region={region}
+                      district={district}
+                    />
+                    <CardInfo
+                      translations={translations}
+                      _id={_id}
+                      isOrganization={!!organization}
+                      logged={logged}
+                      tradetypes={tradetypes}
+                      categories={categories}
+                      subcategories={subcategories}
+                      district={district}
+                      phone={phone}
+                      email={email}
+                      name={name}
+                      region={region}
+                    />
+                  </div>
+                )
+              )}
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    // <div className="h-full w-full  bg-neutral-100 flex flex-col justify-between">
+    //   <div className="bg-white-900 py-3 shadow-md flex justify-between items-center px-4">
+    //     <h3 className="font-amazonbold">
+    //       {translations.tashkilotlar}:{" "}
+    //       <span className="text-primary-900">{totalDatas} </span>
+    //     </h3>
+    //     {totalDatas > 0 && (
+    //       <Pagination
+    //         currentPage={currentPage}
+    //         countPage={countPage}
+    //         setCurrentPage={setCurrentPage}
+    //         totalDatas={totalDatas}
+    //       />
+    //     )}
+    //   </div>
+    //   <div className="h-full overflow-scroll p-4">
+    //     <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-4">
+    //       {map(
+    //         organizations,
+    //         ({
+    //           _id,
+    //           image,
+    //           name,
+    //           tradetypes,
+    //           categories,
+    //           subcategories,
+    //           region,
+    //           district,
+    //           phone,
+    //           email,
+    //         }) => (
+    //           <div
+    //             key={uniqueId("organization")}
+    //             className="bg-white-900 overflow-hidden rounded shadow-lg border-t-4 border-amber-500 flex flex-col justify-between"
+    //           >
+    //             <CardLogo
+    //               logo={image}
+    //               name={name}
+    //               region={region}
+    //               district={district}
+    //             />
+    //             <CardInfo
+    //               translations={translations}
+    //               _id={_id}
+    //               isOrganization={!!organization}
+    //               logged={logged}
+    //               tradetypes={tradetypes}
+    //               categories={categories}
+    //               subcategories={subcategories}
+    //               region={region}
+    //               district={district}
+    //               phone={phone}
+    //               email={email}
+    //             />
+    //           </div>
+    //         )
+    //       )}
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 

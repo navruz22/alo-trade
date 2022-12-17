@@ -31,7 +31,7 @@ const CardAdditional = ({
     setShow(!show);
   };
   return (
-    <div className="text-neutral-500 px-3">
+    <div className="hidden md:block text-neutral-500 rounded-b-xl px-3">
       {show && (
         <div className="col-span-5">
           <h3 className="text-neutral-600 text-justify py-2">{description}</h3>

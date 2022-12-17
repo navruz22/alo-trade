@@ -38,20 +38,16 @@ const PageRoutes = () => {
   return (
     <section className="flex flex-col w-full h-screen max-h-screen">
       <Navbar />
-      <div className="w-full h-full overflow-hidden">
-        <div className="flex flex-row h-full overflow-hidden">
-          {filterVisible && (
-            <Filter
-              categories={categories}
-              regions={regions}
-              tradeTypes={tradetypes}
-            />
-          )}
-          <Suspense fallback={<Loader />}>
-            <Routes>{protectedRoutes()}</Routes>
-          </Suspense>
-        </div>
-      </div>
+      {/* {filterVisible && (
+        <Filter
+          categories={categories}
+          regions={regions}
+          tradeTypes={tradetypes}
+        />
+      )} */}
+      <Suspense fallback={<Loader />}>
+        <Routes>{protectedRoutes()}</Routes>
+      </Suspense>
     </section>
   );
 };

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { IoCallOutline } from "react-icons/io5";
+import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { map } from "lodash";
 import { Link } from "react-router-dom";
+import PhoneIcon from "../Icons/PhoneIcon";
 
 const CardInfo = ({
   _id,
@@ -11,6 +12,9 @@ const CardInfo = ({
   phone,
   logged,
   translations,
+  name,
+  region,
+  district,
 }) => {
   const [show, setShow] = useState(false);
 
@@ -19,33 +23,30 @@ const CardInfo = ({
   };
   return (
     <div className="mt-4 text-neutral-500 flex flex-col justify-between h-full ">
-      <div className="border-l pl-3 mb-2 grid grid-cols-4 border-neutral-400 mx-4">
-        <h3 className="text-sm font-amazonbold"> {translations.savdo_turi}</h3>
-        <h4 className=" text-sm col-span-3">
-          {`${map(tradetypes, (tradetype) => tradetype.name).join(", ")}`}
-        </h4>
+      <div className="pl-3 mb-2 border-neutral-400 mx-4">
+        <h3 className="text-neutral-600 text-lg font-bold font-amazonbold">
+          {name}
+        </h3>
+        <div className="flex items-center text-neutral-500">
+          <IoLocationOutline />
+          <h3 className="ml-3 text-sm">
+            {region?.name}, {district?.name}
+          </h3>
+        </div>
       </div>
-      <div className="border-l pl-3 border-neutral-400 mb-2 grid grid-cols-4 mx-4">
-        <h3 className="text-sm font-amazonbold">{translations.kategoriya}</h3>
-        <h4 className=" text-sm col-span-3">
-          {`${map(categories, (category) => category.name).join(", ")}, ${map(
-            subcategories,
-            (subcategory) => subcategory.name
-          ).join(", ")}`}
-        </h4>
-      </div>
+
       {logged && (
-        <div className="pl-3 flex w-full border-t mt-3 text-sm">
+        <div className=" flex w-full border-t mt-3 text-sm">
           <p
             onClick={handleShow}
-            className="w-1/2 border-r flex items-center justify-center py-1 hover:text-success-500"
+            className="w-1/2  bg-[#16a34a] text-white flex items-center justify-center py-1 hover:text-success-500"
           >
-            {show ? phone : <IoCallOutline size={20} />}
+            {show ? phone : <PhoneIcon size={20} fill="#fff" />}
           </p>
           <Link
             to="/organization"
             state={{ _id }}
-            className="w-1/2 flex items-center justify-center py-1 hover:text-success-500 text-green-600"
+            className="w-1/2 bg-orange-500 flex items-center justify-center py-1 hover:text-success-500 text-white"
           >
             {translations.koproq_malumot}
           </Link>
