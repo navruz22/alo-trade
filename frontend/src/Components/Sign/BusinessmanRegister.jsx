@@ -36,15 +36,15 @@ const BusinessmanRegister = ({
   translations,
 }) => {
   return (
-    <div className="bg-white-900 rounded ">
-      <div className="px-16 py-5">
+    <div className="bg-white rounded ">
+      <div className="md:px-16 md:py-5">
         <h1 className="font-bold text-center py-4 text-xl text-neutral-700">
           {translations.tashkilot_sifatida_royxatdan_otish}
         </h1>
         <p className="text-neutral-500 text-sm">
           {translations.shaxsiy_malumotlaringiz}
         </p>
-        <div className="flex flex-row ">
+        <div className="flex flex-col md:flex-row ">
           <Input
             isDisabled={loading}
             placeholder={translations.ism + "*"}
@@ -65,7 +65,7 @@ const BusinessmanRegister = ({
             onKeyUp={enterHandler}
           />
         </div>
-        <div className="flex flex-row">
+        <div className="flex flex-col md:flex-row">
           <Input
             margin="mr-3"
             isDisabled={loading}
@@ -105,7 +105,7 @@ const BusinessmanRegister = ({
           onKeyUp={enterHandler}
         />
 
-        <div className="flex flex-row w-full mb-2">
+        <div className="flex flex-col gap-4 md:gap-0 md:flex-row w-full mb-2">
           <div className="w-full mr-3">
             <SelectInput
               placeholder={translations.davlat + "*"}
@@ -142,7 +142,7 @@ const BusinessmanRegister = ({
             ))}
           </div>
         </div>
-        <div className="flex flex-row w-full">
+        <div className="flex flex-col gap-4 md:gap-0 md:flex-row w-full">
           <div className="w-full mr-3">
             <SelectInput
               placeholder={translations.kategoriya + "*"}

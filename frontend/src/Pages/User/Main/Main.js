@@ -169,7 +169,7 @@ const Main = () => {
         ))}
       </div> */}
       <MainCarousel />
-      <div className="bg-slate-100">
+      <div className="bg-white">
         <MainTabs handleCreateOrder={handleCreateOrder} />
         <div class="container">
           <OrderCarousel />

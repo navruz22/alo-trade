@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import LoginButton from "../../../Components/Buttons/LoginButton";
 import Logo from "../../../Components/Logo/Logo";
 import Menu from "../../../Components/Navbar/Menu";
-import { getTranslations, navs, toggleMenu } from "./constants";
+import { getTranslations, navs, toggleMenu, guestNavs } from "./constants";
 import UserProfile from "../../../Components/Navbar/UserProfile";
 import { logOut } from "../../Sign/signSlice";
 import { useTranslation } from "react-i18next";
@@ -14,17 +14,30 @@ const Navbar = () => {
   const { t } = useTranslation(["common"]);
   const translations = getTranslations(t);
   const [navbarExpended, setNavbarExpended] = useState(false);
+  const [navigations, setNavigations] = useState(navs);
   const changeHandler = () => {
     setNavbarExpended(!navbarExpended);
   };
   const {
     userData: { user },
+    logged,
   } = useSelector((state) => state.login);
   const closeHandler = () => {
     dispatch(logOut());
     setNavbarExpended(false);
   };
   const toggle = toggleMenu(closeHandler, changeHandler);
+
+  useEffect(() => {
+    if (!logged) {
+      setNavigations([
+        ...navs.filter((nav) => !guestNavs.includes(nav.path.slice(1))),
+      ]);
+    } else {
+      setNavigations(navs);
+    }
+  }, [logged]);
+
   return (
     <div
       class="
@@ -88,7 +101,7 @@ const Navbar = () => {
                   lg:block lg:static lg:shadow-none
                 "
               >
-                <Menu navs={navs} translations={translations} />
+                <Menu navs={navigations} translations={translations} />
               </nav>
             </div>
             <div class="sm:flex justify-end hidden pr-16 lg:pr-0">

@@ -36,6 +36,8 @@ export const navs = [
   },
 ];
 
+export const guestNavs = ["offers"];
+
 export const toggleMenu = (logOut, closeMenu) => [
   {
     link: "/profile/user",

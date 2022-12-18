@@ -1,17 +1,13 @@
 import React from "react";
-import TextTruncate from "react-text-truncate";
 
 const CardBody = ({ title, description }) => {
+  function truncate(str, maxlength) {
+    return str.length > maxlength ? str.slice(0, maxlength - 1) + "…" : str;
+  }
   return (
-    <div class="space-y-4 pr-2">
-      <h4 class="text-md font-semibold text-cyan-900 text-justify">{title}</h4>
-      <TextTruncate
-        line={2}
-        element="span"
-        truncateText="…"
-        text={description}
-        textTruncateChild={<a href="#">Read on</a>}
-      />
+    <div class="px-4">
+      <h4 class="text-md font-semibold text-cyan-900">{title}</h4>
+      <p className="text-[12px] text-justify">{truncate(description, 30)}</p>
     </div>
   );
 };

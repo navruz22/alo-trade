@@ -9,27 +9,27 @@ const HowItWorks = () => {
     <div className="">
       <div className="container">
         <div className="py-[30px]">
-          <h2 className="md:text-[36px] text-[16px] font-bold">
+          <h2 className="md:text-[36px] text-[16px] font-bold mb-6">
             Как это работает?
           </h2>
-          <div class="flex gap-4 pt-4 justify-center mb-[20px]">
+          <div class="flex justify-between md:gap-4 md:justify-center mb-[20px]">
             <button
-              className={`block uppercase shadow md:ml-0 border-4 border-[#03c1f6cc] ${
-                (content === "buy" && "bg-[#03c1f6cc] text-white") ||
-                " bg-white text-[#03c1f6cc]"
+              className={`block w-full md:w-auto uppercase shadow md:ml-0 rounded-tr-none rounded-br-none rounded-l-xl border-r-0 border-1 border-[#03c1f6cc] ${
+                (content === "buy" && "bg-alotrade text-white") ||
+                " bg-white text-[#00c2cb]"
               } font-bold focus:shadow-outline focus:outline-none text-white md:text-xs text-[10px] py-3 md:px-10 px-2 rounded`}
               onClick={() => setContent("buy")}
             >
               Покупатель
             </button>
             <button
-              className={`block uppercase shadow md:ml-0 border-4 border-[#03c1f6cc] ${
-                (content === "sell" && "bg-[#03c1f6cc] text-white") ||
-                " bg-white text-[#03c1f6cc]"
+              className={`block w-full md:w-auto uppercase shadow md:ml-0 rounded-tl-none rounded-bl-none rounded-r-xl border-l-0 border-1 border-[#03c1f6cc] ${
+                (content === "sell" && "bg-alotrade text-white") ||
+                " bg-white text-alotrade"
               } font-bold focus:shadow-outline focus:outline-none text-white md:text-xs text-[10px] py-3 md:px-10 px-2 rounded`}
               onClick={() => setContent("sell")}
             >
-              Продавец
+              Поставщик
             </button>
           </div>
           {content === "sell" ? <Seller /> : <Client />}

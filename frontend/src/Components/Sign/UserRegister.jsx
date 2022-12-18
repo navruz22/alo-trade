@@ -25,11 +25,11 @@ const UserRegister = ({
 }) => {
   return (
     <div className="bg-white-900 rounded ">
-      <div className="px-16 py-5">
+      <div className="md:px-16 md:py-5">
         <h1 className="font-bold text-center py-4 text-xl text-neutral-700">
           {translations.foydalanuvchi_sifatida_royxatdan_otish}
         </h1>
-        <div className="flex flex-row">
+        <div className="flex flex-col md:flex-row">
           <Input
             isDisabled={loading}
             placeholder={translations.ism + "*"}
@@ -60,7 +60,7 @@ const UserRegister = ({
           required={true}
           onKeyUp={enterHandler}
         />
-        <div className="flex flex-row w-full">
+        <div className="flex flex-col gap-4 md:gap-0 md:flex-row w-full">
           <div className="w-full mr-3">
             <SelectInput
               placeholder={translations.davlat + "*"}

@@ -10,6 +10,7 @@ import PageHeader from "../PageHeaders/PageHeader";
 import ProductCard from "../ProductCard/ProductCard";
 import Pagination from "../Pagination/Pagination";
 import UniversalModal from "../Modal/UniversalModal";
+import AddButton from "../Buttons/AddButton";
 
 const MyProducts = () => {
   const dispatch = useDispatch();
@@ -79,7 +80,6 @@ const MyProducts = () => {
       product: "my",
       page: 0,
       count: countPage,
-      product,
       categories,
       subcategories,
       tradetypes,
@@ -113,7 +113,7 @@ const MyProducts = () => {
     const data = {
       page: currentPage,
       count: countPage,
-      product,
+      product: "my",
       categories,
       subcategories,
       tradetypes,
@@ -137,20 +137,12 @@ const MyProducts = () => {
     <div className="w-full bg-white">
       <div className="p-2 md:container">
         <div className="w-full px-2 md:px-4">
-          <PageHeader
-            isOrganization={!!organization}
-            totalDatas={totalDatas}
-            countPage={countPage}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            count={totalDatas}
-            onClick={() => openModal("createProduct")}
-            buttonTitle="Mahsulot yaratish"
-            filterData={product}
-            setFilterBody={setFilterBody}
-            setFilterVisible={setFilterVisible}
-            countTitle="Jami:"
-          />
+          <div className="flex justify-end w-full">
+            <AddButton
+              onClick={() => openModal("createProduct")}
+              title={"Создать товар"}
+            />
+          </div>
           <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
             {map(products, (product) => (
               <ProductCard

@@ -153,14 +153,14 @@ const Products = () => {
 
   return (
     <div className="w-full bg-white">
-      <div className="p-2 md:container">
+      <div className="md:container">
         <div className="w-full block md:flex">
           <Filter
             filterBody={filterBody}
             filterVisible={filterVisible}
             setFilterVisible={setFilterVisible}
           />
-          <div className="w-full px-2 md:px-4 flex flex-col gap-[20px]">
+          <div className="w-full md:px-4 flex flex-col gap-[20px]">
             <PageHeader
               isOrganization={!!organization}
               totalDatas={totalDatas}
@@ -170,14 +170,14 @@ const Products = () => {
               filter={filter}
               count={totalDatas}
               onClick={() => openModal("createProduct")}
-              buttonTitle="Mahsulot yaratish"
               handleFilter={handleFilter}
               filterData={product}
               setFilterBody={setFilterBody}
               setFilterVisible={setFilterVisible}
+              mainTitle={"Товары"}
               countTitle="Jami:"
             />
-            <div className="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3">
+            <div className="grid grid-cols-2 px-2 gap-2 md:grid-cols-3 md:gap-3">
               {map(products, (product) => (
                 <ProductCard
                   logged={logged}

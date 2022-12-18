@@ -35,23 +35,21 @@ const CardInfo = ({
         </div>
       </div>
 
-      {logged && (
-        <div className=" flex w-full border-t mt-3 text-sm">
-          <p
-            onClick={handleShow}
-            className="w-1/2  bg-[#16a34a] text-white flex items-center justify-center py-1 hover:text-success-500"
-          >
-            {show ? phone : <PhoneIcon size={20} fill="#fff" />}
-          </p>
-          <Link
-            to="/organization"
-            state={{ _id }}
-            className="w-1/2 bg-orange-500 flex items-center justify-center py-1 hover:text-success-500 text-white"
-          >
-            {translations.koproq_malumot}
-          </Link>
-        </div>
-      )}
+      <div className=" flex w-full border-t mt-3 text-sm">
+        <p
+          onClick={handleShow}
+          className="w-1/2  bg-[#16a34a] text-white flex items-center justify-center py-1 hover:text-success-500"
+        >
+          {show ? phone : <PhoneIcon size={20} fill="#fff" />}
+        </p>
+        <Link
+          to="/organization"
+          state={{ _id }}
+          className="w-1/2 bg-orange-500 flex items-center justify-center py-1 hover:text-success-500 text-white"
+        >
+          {translations.koproq_malumot}
+        </Link>
+      </div>
     </div>
   );
 };

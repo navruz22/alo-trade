@@ -12,12 +12,14 @@ import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../../translation";
 import Filter from "../../Filter/Filter";
 import Pagination from "../../../Components/Pagination/Pagination";
+import { useNavigate } from "react-router-dom";
 
 const Orders = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["common"]);
   const translations = getTranslations(t);
   const filterData = filter(t);
+  const navigate = useNavigate();
   const {
     logged,
     userData: { user, organization },
@@ -134,15 +136,15 @@ const Orders = () => {
   }, [dispatch, order, currentPage, countPage]);
 
   return (
-    <div className="w-full bg-slate-100">
-      <div className="p-2 md:container">
+    <div className="w-full bg-white">
+      <div className="md:container">
         <div className="w-full block md:flex">
           <Filter
             filterBody={filterBody}
             filterVisible={filterVisible}
             setFilterVisible={setFilterVisible}
           />
-          <div className="w-full px-4 flex flex-col gap-[20px]">
+          <div className="w-full md:px-4 flex flex-col gap-[20px]">
             <PageHeader
               translations={translations}
               isOrganization={!!organization}
@@ -151,7 +153,13 @@ const Orders = () => {
               totalDatas={totalDatas}
               setCurrentPage={setCurrentPage}
               count={totalDatas}
-              onClick={() => openModal("createOrder")}
+              onClick={() => {
+                if (logged) {
+                  openModal("createOrder");
+                } else {
+                  navigate("/sign-up/business");
+                }
+              }}
               countTitle={translations.jami}
               buttonTitle={translations.buyurtma_yaratish}
               handleFilter={handleFilter}
@@ -159,17 +167,20 @@ const Orders = () => {
               filter={filterData}
               setFilterBody={setFilterBody}
               setFilterVisible={setFilterVisible}
+              mainTitle="Заявки"
             />
-            {map(orders, (order) => (
-              <OrderCard
-                translations={translations}
-                logged={logged}
-                key={uniqueId()}
-                order={order}
-                editHandler={editHandler}
-                deleteHandler={deleteHandler}
-              />
-            ))}
+            <div className="px-4 flex flex-col gap-[20px]">
+              {map(orders, (order) => (
+                <OrderCard
+                  translations={translations}
+                  logged={logged}
+                  key={uniqueId()}
+                  order={order}
+                  editHandler={editHandler}
+                  deleteHandler={deleteHandler}
+                />
+              ))}
+            </div>
             {totalDatas > 0 && (
               <div className="flex justify-center py-2">
                 <Pagination

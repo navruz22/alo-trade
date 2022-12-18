@@ -191,8 +191,8 @@ const EditOrganization = () => {
   }
 
   return (
-    <div className="p-5 flex ">
-      <div className="w-1/3">
+    <div className="p-5 md:flex ">
+      <div className="md:w-1/3">
         <ImageCrop
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
@@ -201,7 +201,7 @@ const EditOrganization = () => {
         />
       </div>
       <div className="w-full">
-        <div className="grid grid-cols-3 gap-4">
+        <div className="md:grid md:grid-cols-3 md:gap-4">
           <Input
             placeholder={tashkilot_nomi}
             label={tashkilot_nomi}

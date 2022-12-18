@@ -14,7 +14,7 @@ const DetailProduct = () => {
   const { width } = useWindowSize();
 
   const [imagesForSlide, setImageForSlide] = useState([]);
-
+  console.log(product);
   useEffect(() => {
     if (product?._id) {
       setImageForSlide([...product.images.map((el) => ({ url: el }))]);

@@ -138,6 +138,7 @@ module.exports = {
         secondary: "#13C296",
         "body-color": "#637381",
         warning: "#FBBF24",
+        alotrade: "#00c2cb",
       },
       boxShadow: {
         input: "0px 7px 20px rgba(0, 0, 0, 0.03)",

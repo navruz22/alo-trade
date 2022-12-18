@@ -125,8 +125,8 @@ const EditUser = () => {
   }, [dispatch]);
 
   return (
-    <div className="p-5 flex ">
-      <div className="w-1/3">
+    <div className="p-5 flex flex-col md:flex-row">
+      <div className=" md:w-1/3">
         <ImageCrop
           modalIsOpen={modalIsOpen}
           setIsOpen={setIsOpen}
@@ -134,7 +134,7 @@ const EditUser = () => {
           output={image}
         />
       </div>
-      <div className="grid grid-cols-2 w-full gap-4 ">
+      <div className="flex flex-col md:grid md:grid-cols-2 w-full md:gap-4">
         <Input
           placeholder={ism}
           label={ism}

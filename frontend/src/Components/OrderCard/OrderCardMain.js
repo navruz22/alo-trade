@@ -42,8 +42,8 @@ const OrderCardMain = ({
       {/* <div class="bg-red-500 shadow-lg shadow- shadow-red-600 text-white cursor-pointer px-3 py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row">
               Disactive
             </div> */}
-      <div class="absolute text-[10px] md:text-[16px] top-1 right-1 bg-green-500 shadow-lg shadow- shadow-green-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row">
-        Active
+      <div class="absolute text-[10px] md:text-[16px] top-1 right-1 bg-green-500 shadow-lg text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-lg flex space-x-2 flex-row">
+        Актуально
       </div>
       {isImg && (
         <img

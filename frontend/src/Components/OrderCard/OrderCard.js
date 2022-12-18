@@ -8,9 +8,11 @@ import { useSelector } from "react-redux";
 
 const OrderCard = ({
   order,
-  // editHandler,
-  // deleteHandler,
+  editHandler,
+  deleteHandler,
   logged,
+  updatePosition,
+  isProfile,
   // translations,
 }) => {
   const { userData } = useSelector((state) => state.login);
@@ -22,8 +24,8 @@ const OrderCard = ({
     // categories,
     // subcategories,
     name,
-    // description,
-    // status,
+    description,
+    status,
     // currency,
     // minPrice,
     // maxPrice,
@@ -33,17 +35,24 @@ const OrderCard = ({
     createdAt,
     organization,
   } = order;
+  console.log(position);
   // const isCustomer = userData?.user?._id === user?._id;
   const phone = organization ? organization.phone : user.phone;
   const isOrganization = userData?.organization;
   return (
-    <div class="relative md:p-4  justify-center w-full rounded-xl group sm:flex space-x-6 bg-white shadow-xl hover:rounded-2xl">
+    <div class="relative pt-10 md:p-4  justify-center w-full rounded-xl group sm:flex space-x-6 bg-white shadow-slate-200 shadow-md border-[1px] hover:rounded-2xl">
       {/* <div class="bg-red-500 shadow-lg shadow- shadow-red-600 text-white cursor-pointer px-3 py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row">
               Disactive
             </div> */}
-      <div class="absolute text-[10px] md:text-[16px] top-1 right-1 bg-green-500 shadow-lg shadow- shadow-green-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row">
-        Active
-      </div>
+      {position === "active" ? (
+        <div class="absolute text-[10px] md:text-[16px] top-1 left-1 bg-green-500 shadow-lg text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-lg flex space-x-2 flex-row">
+          Актуально
+        </div>
+      ) : (
+        <div class="absolute text-[10px] md:text-[16px] top-1 left-1 bg-red-500 shadow-lg text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-lg flex space-x-2 flex-row">
+          Не актуально
+        </div>
+      )}
       <img
         class="mx-auto  md:block w-3/12 h-40 rounded-lg hidden"
         alt="art cover"
@@ -51,13 +60,13 @@ const OrderCard = ({
         src={images[0]}
       />
       <div class="sm:w-8/12">
-        <div class="flex flex-col gap-5">
-          <CardHeader
+        <div class="flex flex-col gap-2">
+          {/* <CardHeader
             createdAt={createdAt}
             organization={organization}
             user={user}
-          />
-          <CardBody title={name} />
+          /> */}
+          <CardBody title={name} description={description} />
           <CardAdditional
             id={_id}
             logged={logged}
@@ -65,6 +74,10 @@ const OrderCard = ({
             position={position}
             phone={phone}
             region={region}
+            editHandler={editHandler}
+            deleteHandler={deleteHandler}
+            updatePosition={updatePosition}
+            isProfile={isProfile}
           />
         </div>
       </div>

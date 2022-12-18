@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import AddIcon from "./icons/AddIcon";
 import OrderIcon from "./icons/OrderIcon";
 import PriceIcon from "./icons/PriceIcon";
@@ -7,8 +9,9 @@ import SellerIcon from "./icons/SellerIcon";
 import TabContent from "./TabContent/TabContent";
 
 const MainTabs = ({ handleCreateOrder }) => {
-  const iconClass =
-    "sm:static absolute sm:top-0 sm:left-0 sm:translate-x-0 top-1 left-[50%] translate-x-[-50%] md:w-[100px] w-[20px]";
+  const iconClass = "md:w-[40px] w-[30px] ";
+  const { logged } = useSelector((state) => state.login);
+  const navigate = useNavigate();
   const sell = [
     {
       icon: <OrderIcon className={iconClass} />,
@@ -18,6 +21,7 @@ const MainTabs = ({ handleCreateOrder }) => {
     {
       icon: <AddIcon className={iconClass} />,
       title: "Добавить компанию",
+      link: "/sign-up/business",
     },
     {
       title: "Тарифы",
@@ -43,20 +47,20 @@ const MainTabs = ({ handleCreateOrder }) => {
     <div className="bg-white">
       <div className="container">
         <div className="py-4">
-          <div class="flex gap-4 justify-center mb-[20px]">
+          <div class="flex justify-between md:gap-4 md:justify-center mb-[20px]">
             <button
-              className={`block uppercase shadow md:ml-0 border-4 border-[#03c1f6cc] ${
-                (content === "buy" && "bg-[#03c1f6cc] text-white") ||
-                " bg-white text-[#03c1f6cc]"
+              className={`block w-full md:w-auto uppercase shadow md:ml-0 rounded-tr-none rounded-br-none rounded-l-xl border-r-0 border-1 border-[#03c1f6cc] ${
+                (content === "buy" && "bg-alotrade text-white") ||
+                " bg-white text-[#00c2cb]"
               } font-bold focus:shadow-outline focus:outline-none text-white md:text-xs text-[10px] py-3 md:px-10 px-2 rounded`}
               onClick={() => setContent("buy")}
             >
               Покупать
             </button>
             <button
-              className={`block uppercase shadow md:ml-0 border-4 border-[#03c1f6cc] ${
-                (content === "sell" && "bg-[#03c1f6cc] text-white") ||
-                " bg-white text-[#03c1f6cc]"
+              className={`block w-full md:w-auto uppercase shadow md:ml-0 rounded-tl-none rounded-bl-none rounded-r-xl border-l-0 border-1 border-[#03c1f6cc] ${
+                (content === "sell" && "bg-alotrade text-white") ||
+                " bg-white text-alotrade"
               } font-bold focus:shadow-outline focus:outline-none text-white md:text-xs text-[10px] py-3 md:px-10 px-2 rounded`}
               onClick={() => setContent("sell")}
             >
@@ -64,16 +68,28 @@ const MainTabs = ({ handleCreateOrder }) => {
             </button>
           </div>
           {content === "buy" ? (
-            <div className="flex md:justify-evenly justify-between items-center w-full">
-              <button
-                onClick={handleCreateOrder}
-                className="relative sm:static flex sm:justify-start  justify-center items-center drop-shadow-xl sm:gap-[20px] sm:py-6 sm:px-8 md:w-[350px] md:h-[150px] w-[100px] h-[100px] bg-[#03c1f6cc] rounded-xl"
-              >
-                <OrderIcon className={iconClass} />
-                <h2 className="md:text-[25px] text-[14px] font-bold text-white text-center">
-                  Создать заявку
-                </h2>
-              </button>
+            <div className="flex md:justify-center gap-2 md:gap items-center w-full">
+              {logged ? (
+                <button
+                  onClick={handleCreateOrder}
+                  className="flex flex-col justify-center items-center drop-shadow-xl md:w-[250px] md:h-[150px] w-full h-[100px] bg-alotrade rounded-xl"
+                >
+                  <OrderIcon className={iconClass} />
+                  <h2 className="md:text-[21px] text-[12px] font-bold text-white text-center mt-2">
+                    Создать заявку
+                  </h2>
+                </button>
+              ) : (
+                <Link
+                  to={"/sign-in"}
+                  className="flex flex-col justify-center items-center drop-shadow-xl md:w-[250px] md:h-[150px] w-full h-[100px] bg-alotrade rounded-xl"
+                >
+                  <OrderIcon className={iconClass} />
+                  <h2 className="md:text-[21px] text-[12px] font-bold text-white text-center mt-2">
+                    Создать заявку
+                  </h2>
+                </Link>
+              )}
               {buy.map((el, ind) => (
                 <TabContent
                   icon={el?.icon}
@@ -84,9 +100,14 @@ const MainTabs = ({ handleCreateOrder }) => {
               ))}
             </div>
           ) : (
-            <div className="flex md:justify-evenly justify-between items-center w-full">
+            <div className="flex md:justify-center gap-2 md:gap items-center w-full">
               {sell.map((el, ind) => (
-                <TabContent icon={el?.icon} title={el?.title} key={ind} />
+                <TabContent
+                  icon={el?.icon}
+                  link={el.link}
+                  title={el?.title}
+                  key={ind}
+                />
               ))}
             </div>
           )}

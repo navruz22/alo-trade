@@ -15,7 +15,7 @@ const {
 router.post("/create", auth, createProduct);
 router.post("/getbyfilter", getProductsByFilter);
 router.post("/getbyfiltercount", getProductsByFilterCount);
-router.post("/getbyid", auth, getProductById);
+router.post("/getbyid", getProductById);
 router.put("/update", auth, updateProduct);
 router.post("/delete", auth, deleteProduct);
 router.put("/updateposition", auth, updateProductPosition);

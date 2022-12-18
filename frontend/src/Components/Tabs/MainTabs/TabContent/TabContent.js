@@ -5,10 +5,10 @@ const TabContent = ({ icon, title, link }) => {
   return (
     <Link
       to={link}
-      className="relative sm:static flex sm:justify-start  justify-center items-center drop-shadow-xl sm:gap-[20px] sm:py-6 sm:px-8 md:w-[350px] md:h-[150px] w-[100px] h-[100px] bg-[#03c1f6cc] rounded-xl"
+      className="flex flex-col justify-center items-center drop-shadow-xl md:w-[250px] md:h-[150px] w-full h-[100px] bg-alotrade rounded-xl"
     >
       {icon}
-      <h2 className="md:text-[25px] text-[14px] font-bold text-white text-center">
+      <h2 className="md:text-[21px] text-[12px] font-bold text-white text-center mt-2">
         {title}
       </h2>
     </Link>

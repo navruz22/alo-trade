@@ -9,11 +9,13 @@ import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../../translation";
 import Filter from "../../Filter/Filter";
 import PageHeader from "../../../Components/PageHeaders/PageHeader";
+import { useNavigate } from "react-router-dom";
 
 const Organizations = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["common"]);
   const translations = getTranslations(t);
+  const navigate = useNavigate();
   const {
     logged,
     userData: { organization },
@@ -100,14 +102,14 @@ const Organizations = () => {
 
   return (
     <div className="w-full bg-white">
-      <div className="p-2 md:container">
+      <div className="md:container">
         <div className="w-full block md:flex">
           <Filter
             filterBody={filterBody}
             filterVisible={filterVisible}
             setFilterVisible={setFilterVisible}
           />
-          <div className="w-full px-2 md:px-4 flex flex-col gap-[20px]">
+          <div className="w-full md:px-4 flex flex-col gap-[20px]">
             {!isOrganization && (
               <PageHeader
                 isOrganization={!!organization}
@@ -117,16 +119,17 @@ const Organizations = () => {
                 setCurrentPage={setCurrentPage}
                 // filter={filter}
                 count={totalDatas}
-                onClick={() => openModal("createOrganization")}
-                buttonTitle="Добавить компанию"
+                onClick={() => navigate("/sign-up/business")}
                 // handleFilter={handleFilter}
                 // filterData={product}
                 setFilterBody={setFilterBody}
                 setFilterVisible={setFilterVisible}
                 countTitle="Jami:"
+                mainTitle={"Компании"}
+                buttonTitle={"Добавить компанию"}
               />
             )}
-            <div className="grid grid-cols-1 gap-1 md:grid-cols-3 md:gap-3">
+            <div className="grid grid-cols-1 px-2 gap-4 md:grid-cols-3 md:gap-3 pt-4">
               {map(
                 organizations,
                 ({

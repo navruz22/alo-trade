@@ -4,7 +4,7 @@ import { map, uniqueId } from "lodash";
 
 const ProfileRoutes = ({ routes }) => {
   return (
-    <div className="w-full h-full bg-white-900 rounded shadow-lg">
+    <div className="w-full bg-white-900 rounded shadow-lg">
       <Routes>
         {map(routes, (route) => (
           <Route

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoCallOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const DetailProductCard = ({ id, user }) => {
@@ -7,10 +8,11 @@ const DetailProductCard = ({ id, user }) => {
   const showHandler = () => {
     setShow(!show);
   };
+  const { logged } = useSelector((state) => state.login);
   return (
     <div
       className="
-            bg-primary
+            bg-alotrade
             rounded
             overflow-hidden
             text-center
@@ -54,7 +56,7 @@ const DetailProductCard = ({ id, user }) => {
             h-[50px]
             text-sm
             font-medium
-            bg-white bg-opacity-20
+            bg-green-500
             placeholder-white
             text-white
             rounded
@@ -71,7 +73,7 @@ const DetailProductCard = ({ id, user }) => {
           )}
         </button>
         <Link
-          to="/offers"
+          to={logged ? "/offers" : "/sign-in"}
           state={{ type: "product", id }}
           class="
           w-full
@@ -85,9 +87,9 @@ const DetailProductCard = ({ id, user }) => {
             text-white
             rounded
             mb-6
-            bg-[#13C296]
+            bg-orange-500
             cursor-pointer
-            hover:shadow-lg hover:bg-opacity-90
+            hover:shadow-lg
             transition
             duration-300
             ease-in-out

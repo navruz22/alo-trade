@@ -10,27 +10,59 @@ import { Navigate } from "react-router-dom";
 import EditPassword from "../../../Components/Profile/EditPassword";
 import EditOrganization from "../../../Components/Profile/EditOrganization";
 import MyProducts from "../../../Components/Profile/MyProducts";
+import MyOrders from "../../../Components/Profile/MyOrders";
 
-export const menu = [
+export const menuUser = [
   {
     path: "/profile/user",
     title: "Пользователь",
     icon: <IoPersonCircleOutline size={26} color={"#444"} />,
+    class: "rounded-l-xl md:rounded",
   },
   {
-    path: "/profile/organization",
-    title: "Компания",
-    icon: <IoBusinessSharp size={26} color={"#444"} />,
-  },
-  {
-    path: "/profile/products",
-    title: "Товары",
+    path: "/profile/orders",
+    title: "Мои заказы",
     icon: <MdOutlineProductionQuantityLimits size={26} color={"#444"} />,
+    class: "rounded-none md:rounded",
   },
   {
     path: "/profile/password",
     title: "Пароль",
     icon: <IoKeyOutline size={26} color={"#444"} />,
+    class: "rounded-r-xl md:rounded",
+  },
+];
+
+export const menuOrganization = [
+  {
+    path: "/profile/user",
+    title: "Пользователь",
+    icon: <IoPersonCircleOutline size={26} color={"#444"} />,
+    class: "rounded-l-xl md:rounded",
+  },
+  {
+    path: "/profile/organization",
+    title: "Компания",
+    icon: <IoBusinessSharp size={26} color={"#444"} />,
+    class: "rounded-none md:rounded",
+  },
+  {
+    path: "/profile/products",
+    title: "Мои товары",
+    icon: <MdOutlineProductionQuantityLimits size={26} color={"#444"} />,
+    class: "rounded-none md:rounded",
+  },
+  {
+    path: "/profile/orders",
+    title: "Мои заказы",
+    icon: <MdOutlineProductionQuantityLimits size={26} color={"#444"} />,
+    class: "rounded-none md:rounded",
+  },
+  {
+    path: "/profile/password",
+    title: "Пароль",
+    icon: <IoKeyOutline size={26} color={"#444"} />,
+    class: "rounded-r-xl md:rounded",
   },
 ];
 
@@ -46,6 +78,10 @@ export const routes = [
   {
     path: "/products",
     element: <MyProducts />,
+  },
+  {
+    path: "/orders",
+    element: <MyOrders />,
   },
   {
     path: "/password",

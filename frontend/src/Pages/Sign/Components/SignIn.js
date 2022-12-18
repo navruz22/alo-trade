@@ -52,47 +52,45 @@ const SignIn = () => {
   };
 
   return (
-    <div className="w-full h-screen bg-[#EFF2F5] flex flex-col ">
-      <div className="container m-auto">
-        <div className="container m-auto flex lg:flex-row">
-          <div className="lg:w-1/2  hidden lg:block">
-            <div className="flex justify-center">
-              <img src={image} alt="login" width="70%" />
-            </div>
+    <div className="w-full h-screen bg-white flex flex-col ">
+      <div className="container flex">
+        <div className="lg:w-1/2  hidden lg:block">
+          <div className="flex justify-center">
+            <img src={image} alt="login" width="70%" />
           </div>
-          <div className="lg:w-1/2 w-full">
-            <div className="flex flex-col items-center justify-center h-full bg-white-900 px-10 py-5 rounded mx-20 shadow shadow-xl">
-              <Input
-                isDisabled={loading}
-                placeholder="+998 97 366 62 21"
-                type="text"
-                label={telefon_raqam}
-                value={phone}
-                onChange={changeHandler}
-                name="phone"
-                onKeyUp={enterHandler}
-              />
-              <Input
-                isDisabled={loading}
-                placeholder="* * * * * *"
-                type="password"
-                label={parol}
-                onKeyUp={enterHandler}
-                name="password"
-                value={password}
-                onChange={changeHandler}
-              />
-              <Button
-                title={kirish}
-                onClick={submitHandler}
-                isDisabled={loading}
-              />
-              <LabelButton
-                label={tizimda_yangimisiz_unda_avval}
-                title={royxatdan_oting}
-                link="/sign-up"
-              />
-            </div>
+        </div>
+        <div className="lg:w-1/2 w-full py-6">
+          <div className="flex flex-col items-center justify-center h-full bg-white-900 md:px-10 md:py-5 rounded md:mx-20 md:shadow md:shadow-xl">
+            <Input
+              isDisabled={loading}
+              placeholder="+998 97 366 62 21"
+              type="text"
+              label={telefon_raqam}
+              value={phone}
+              onChange={changeHandler}
+              name="phone"
+              onKeyUp={enterHandler}
+            />
+            <Input
+              isDisabled={loading}
+              placeholder="* * * * * *"
+              type="password"
+              label={parol}
+              onKeyUp={enterHandler}
+              name="password"
+              value={password}
+              onChange={changeHandler}
+            />
+            <Button
+              title={kirish}
+              onClick={submitHandler}
+              isDisabled={loading}
+            />
+            <LabelButton
+              label={tizimda_yangimisiz_unda_avval}
+              title={royxatdan_oting}
+              link="/sign-up"
+            />
           </div>
         </div>
       </div>

@@ -31,15 +31,10 @@ const MainCarousel = () => {
         autoPlay={true}
         infinite={true}
         autoPlaySpeed={3000}
+        removeArrowOnDeviceType={["tablet", "mobile"]}
       >
-        <div className="w-[100%] h-[200px] xl:h-[500px] md:h-[400px] sm:h-[300px]">
+        <div className="w-[100%] h-[200px] md:h-[600px]">
           <img src={bgImg} alt="bg" className="w-full h-full" />
-        </div>
-        <div className="w-[100%] h-[200px] xl:h-[500px] md:h-[400px] sm:h-[300px]">
-          <img src={bgImg1} alt="bg" className="w-full h-full" />
-        </div>
-        <div className="w-[100%] h-[200px] xl:h-[500px] md:h-[400px] sm:h-[300px]">
-          <img src={bgImg2} alt="bg" className="w-full h-full" />
         </div>
       </Carousel>
     </div>

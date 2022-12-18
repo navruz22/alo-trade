@@ -5,7 +5,7 @@ const SaveButton = ({ onClick, title, className, isDisabled }) => {
     <button
       disabled={isDisabled}
       onClick={onClick}
-      className={`bg-primary-800 text-white-900 rounded-md py-2 px-4 hover:bg-primary-900 ${className}`}
+      className={`bg-alotrade text-white mt-4 rounded-md py-2 px-4 ${className}`}
     >
       {title}
     </button>

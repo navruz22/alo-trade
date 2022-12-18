@@ -112,7 +112,7 @@ const OrderCarousel = () => {
         </h2>
         <Link
           to="/orders"
-          className="block uppercase shadow md:ml-0  bg-orange-500 hover:bg-orange-400 focus:shadow-outline focus:outline-none text-white md:text-xs text-[10px] py-3 md:px-10 px-2 rounded"
+          className="block uppercase shadow md:ml-0  bg-orange-500 hover:bg-orange-400 focus:shadow-outline focus:outline-none text-white md:text-xs text-[10px] py-2 md:px-10 px-4 rounded"
         >
           Все заявки
         </Link>

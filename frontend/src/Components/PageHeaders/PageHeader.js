@@ -14,45 +14,74 @@ const PageHeader = ({
   translations,
   setFilterVisible,
   setFilterBody,
+  mainTitle,
 }) => {
   return (
-    <div className="flex justify-between shadow w-full px-5 py-3 items-center bg-white">
-      <div className="hidden md:flex gap-2">
+    <div className="bg-alotrade md:bg-white w-full pt-6">
+      <div className="w-full block md:hidden">
+        <h2 className="text-center text-white text-[20px] mb-2 md:mb-0 md:text-[21px]">
+          {mainTitle}
+        </h2>
+      </div>
+      <div className="flex w-full md:justify-end">
+        {/* <div className="hidden md:flex gap-2">
         <span className="text-[12px] md:text-[16px]">{countTitle}</span>{" "}
         <span className="font-amazonbold text-[12px] md:text-[16px] text-primary-900">
           {count.toLocaleString()} {translations?.ta}
         </span>
-        {/* <div className="flex">
+        <div className="flex">
           <RadioButtonList
             translations={translations}
             list={filter}
             onChange={handleFilter}
             currency={filterData}
           />
-        </div> */}
-      </div>
-      <div className="flex gap-2 md:gap-4 md:hidden">
-        <button
-          className={`bg-[#03c1f6cc] shadow-lg text-[10px] md:text-[16px] text-white cursor-pointer px-4 py-2 md:px-3 md:py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row`}
-          onClick={() => {
-            setFilterBody("category");
-            setFilterVisible(true);
-          }}
-        >
-          Категории
-        </button>
-        <button
-          className={`bg-[#03c1f6cc] shadow-lg text-[10px] md:text-[16px] text-white cursor-pointer px-2 py-1 md:px-3 md:py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row`}
-          onClick={() => {
-            setFilterBody("country");
-            setFilterVisible(true);
-          }}
-        >
-          Страны
-        </button>
-      </div>
-      <div>
-        <AddButton onClick={onClick} title={buttonTitle} />
+        </div>
+      </div> */}
+        <div className="flex w-full px-4 md:gap-4 md:justify-center mb-[20px] md:hidden">
+          <button
+            className={`block w-full  md:w-auto uppercase shadow bg-white md:ml-0 rounded-tr-none rounded-br-none
+             rounded-l-xl border-r-0 border-1 border-[#03c1f6cc]
+             font-bold focus:shadow-outline focus:outline-none text-alotrade md:text-xs text-[10px]
+              py-3 md:px-10 px-2 rounded`}
+            onClick={() => {
+              setFilterBody("category");
+              setFilterVisible(true);
+            }}
+          >
+            Категории
+          </button>
+          <button
+            className={`block w-full bg-white md:w-auto uppercase shadow md:ml-0 rounded-tl-none rounded-bl-none
+             ${
+               buttonTitle ? "rounded-r-none" : "rounded-r-xl"
+             } border-l-0 border-1 border-[#03c1f6cc]
+             font-bold focus:shadow-outline focus:outline-none text-alotrade md:text-xs text-[10px]
+              py-3 md:px-10 px-2 rounded`}
+            onClick={() => {
+              setFilterBody("country");
+              setFilterVisible(true);
+            }}
+          >
+            Страны
+          </button>
+          {buttonTitle && (
+            <button
+              className={`block w-full bg-white md:w-auto uppercase shadow md:ml-0 rounded-tl-none rounded-bl-none
+             rounded-r-xl border-l-0 border-1 border-[#03c1f6cc]
+             font-bold focus:shadow-outline focus:outline-none text-alotrade md:text-xs text-[10px]
+              py-3 md:px-10 px-2 rounded`}
+              onClick={onClick}
+            >
+              {buttonTitle}
+            </button>
+          )}
+        </div>
+        {buttonTitle && (
+          <div className="hidden md:block">
+            <AddButton onClick={onClick} title={buttonTitle} />
+          </div>
+        )}
       </div>
     </div>
   );

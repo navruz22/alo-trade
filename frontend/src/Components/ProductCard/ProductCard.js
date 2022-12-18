@@ -6,7 +6,7 @@ import CardFooter from "./CardFooter";
 import CardEdit from "./CardEdit";
 import { useSelector } from "react-redux";
 import noImage from "../../assets/images/no-image.svg";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 
 const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
@@ -36,7 +36,10 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   const isOrganization = !!userData?.organization?._id;
   const isProfileProducts = location.pathname === "/profile/products";
   return (
-    <div className="w-full shadow-2xl mt-5 rounded-xl bg-white-900 bg-white border-[1px] border-[#01c2cc]">
+    <Link
+      to={`/products/${_id}`}
+      className="w-full shadow-2xl mt-5 rounded-xl bg-white-900 bg-white border-[1px] border-[#01c2cc]"
+    >
       <div className="text-sm w-full h-full flex flex-col justify-between rounded-xl">
         <p className="pl-2 border-b my-1 flex items-center text-neutral-500 text-sm">
           <IoLocationOutline className="" />
@@ -82,7 +85,6 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
             organization={organization}
           />
         )} */}
-        {!isCustomer && logged && <CardFooter phone={phone} id={_id} />}
         {isOrganization && logged && isProfileProducts && (
           <CardEdit
             editHandler={editHandler}
@@ -97,7 +99,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
       {/*    <img src={images[0]} className="w-[200px]" alt="alotrade.uz" />*/}
       {/*  )}*/}
       {/*</div>*/}
-    </div>
+    </Link>
   );
 };
 
