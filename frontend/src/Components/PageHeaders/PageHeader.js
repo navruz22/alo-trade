@@ -15,6 +15,7 @@ const PageHeader = ({
   setFilterVisible,
   setFilterBody,
   mainTitle,
+  isOrganization,
 }) => {
   return (
     <div className="bg-alotrade md:bg-white w-full pt-6">
@@ -54,7 +55,9 @@ const PageHeader = ({
           <button
             className={`block w-full bg-white md:w-auto uppercase shadow md:ml-0 rounded-tl-none rounded-bl-none
              ${
-               buttonTitle ? "rounded-r-none" : "rounded-r-xl"
+               buttonTitle && !isOrganization
+                 ? "rounded-r-none"
+                 : "rounded-r-xl"
              } border-l-0 border-1 border-[#03c1f6cc]
              font-bold focus:shadow-outline focus:outline-none text-alotrade md:text-xs text-[10px]
               py-3 md:px-10 px-2 rounded`}
@@ -65,7 +68,7 @@ const PageHeader = ({
           >
             Страны
           </button>
-          {buttonTitle && (
+          {buttonTitle && !isOrganization && (
             <button
               className={`block w-full bg-white md:w-auto uppercase shadow md:ml-0 rounded-tl-none rounded-bl-none
              rounded-r-xl border-l-0 border-1 border-[#03c1f6cc]

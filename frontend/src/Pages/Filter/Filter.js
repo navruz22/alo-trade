@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CheckboxList from "../../Components/CheckboxList/CheckboxList";
 import SelectCheckbox from "../../Components/SelectCheckbox/SelectCheckbox";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../translation";
 import useWindowSize from "../../hooks/useWindowSize";
 import closeIcon from "../../assets/close.svg";
+import { useLocation, useParams } from "react-router-dom";
 
 const Filter = ({ filterVisible, setFilterVisible, filterBody }) => {
   const { t } = useTranslation(["common"]);
@@ -24,6 +25,8 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody }) => {
 
   const { width } = useWindowSize();
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const [name, setName] = React.useState("");
   const {
     tradetypes,
@@ -100,6 +103,15 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody }) => {
     const newDistricts = checked ? [...filtered, value] : [...filtered];
     dispatch(filterDistricts(newDistricts));
   };
+
+  useEffect(() => {
+    if (location?.state?.category?.value) {
+      const value = location?.state?.category?.value;
+      const filtered = filter(categoriesList, (category) => category !== value);
+      const newCategories = [...filtered, value];
+      dispatch(filterCategories(newCategories));
+    }
+  }, [dispatch, location]);
 
   return (
     <div

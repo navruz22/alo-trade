@@ -4,6 +4,7 @@ import {
   deleteProduct,
   getProductsCount,
   getProducts,
+  clearProductData,
 } from "../../Pages/User/Products/productSlice";
 import { map, uniqueId } from "lodash";
 import PageHeader from "../PageHeaders/PageHeader";
@@ -133,6 +134,11 @@ const MyProducts = () => {
     );
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, product, currentPage, countPage]);
+
+  useEffect(() => {
+    dispatch(clearProductData());
+  }, [dispatch]);
+
   return (
     <div className="w-full bg-white">
       <div className="p-2 md:container">

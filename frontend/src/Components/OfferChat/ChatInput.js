@@ -19,7 +19,7 @@ const ChatInput = ({ changeHandler, enterHandler, sendHandler, value }) => {
         onClick={sendHandler}
         className="px-3 border-r border-y text-neutral-500 rounded-r"
       >
-        <IoSend />
+        <IoSend color="#fff" />
       </button>
     </div>
   );

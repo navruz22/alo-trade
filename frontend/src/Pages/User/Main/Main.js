@@ -15,6 +15,7 @@ import MainTabs from "../../../Components/Tabs/MainTabs/MainTabs";
 import Benefits from "../Benefits/Benefits";
 import MainCarousel from "../Carousels/MainCarousel";
 import OrderCarousel from "../Carousels/OrderCarousel";
+import CategoryCarousels from "../Carousels/CategoryCarousels";
 
 const Main = () => {
   // const dispatch = useDispatch();
@@ -170,6 +171,7 @@ const Main = () => {
       </div> */}
       <MainCarousel />
       <div className="bg-white">
+        <CategoryCarousels />
         <MainTabs handleCreateOrder={handleCreateOrder} />
         <div class="container">
           <OrderCarousel />

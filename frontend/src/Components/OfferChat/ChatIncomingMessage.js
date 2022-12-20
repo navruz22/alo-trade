@@ -3,8 +3,8 @@ import React from "react";
 const ChatIncomingMessage = ({ message: Message }) => {
   const { message, user, createdAt } = Message;
   return (
-    <div className="w-full flex flex-row my-3">
-      <div className=" w-16 flex justify-center items-center">
+    <div className="w-full flex flex-row gap-1 ml-1 my-3">
+      <div className="rounded-full bg-white w-15 flex justify-center items-center">
         {user?.image ? (
           <img
             src={user.image}
@@ -18,7 +18,7 @@ const ChatIncomingMessage = ({ message: Message }) => {
           </div>
         )}
       </div>
-      <div className="w-2/3 bg-white-900 rounded shadow-md px-2">
+      <div className="w-2/3 bg-white rounded shadow-md px-2">
         <div className="flex justify-between">
           <h3 className="font-amazonbold text-neutral-500 text-[15px]">
             {user?.firstname} {user?.lastname}

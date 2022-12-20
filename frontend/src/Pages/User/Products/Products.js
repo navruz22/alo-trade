@@ -17,6 +17,7 @@ import { getTranslations } from "../../../translation";
 import { useTranslation } from "react-i18next";
 import Filter from "../../Filter/Filter";
 import Pagination from "../../../Components/Pagination/Pagination";
+import { useParams } from "react-router-dom";
 
 const Products = () => {
   const { t } = useTranslation(["common"]);

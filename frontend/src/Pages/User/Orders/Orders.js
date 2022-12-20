@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteOrder, getOrdersCount, getOrders } from "./orderSlice";
 import { map, uniqueId } from "lodash";
 import { filterOrder } from "../../Filter/filterSlice";
-import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 import { filter } from "./constants";
 import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../../translation";
@@ -110,7 +109,7 @@ const Orders = () => {
     );
     //    eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, categories, subcategories, tradetypes, regions, districts, name]);
-  console.log(totalDatas);
+
   useEffect(() => {
     const data = {
       page: currentPage,

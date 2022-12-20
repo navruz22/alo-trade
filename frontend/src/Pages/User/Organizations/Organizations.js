@@ -110,25 +110,24 @@ const Organizations = () => {
             setFilterVisible={setFilterVisible}
           />
           <div className="w-full md:px-4 flex flex-col gap-[20px]">
-            {!isOrganization && (
-              <PageHeader
-                isOrganization={!!organization}
-                totalDatas={totalDatas}
-                countPage={countPage}
-                currentPage={currentPage}
-                setCurrentPage={setCurrentPage}
-                // filter={filter}
-                count={totalDatas}
-                onClick={() => navigate("/sign-up/business")}
-                // handleFilter={handleFilter}
-                // filterData={product}
-                setFilterBody={setFilterBody}
-                setFilterVisible={setFilterVisible}
-                countTitle="Jami:"
-                mainTitle={"Компании"}
-                buttonTitle={"Добавить компанию"}
-              />
-            )}
+            <PageHeader
+              isOrganization={isOrganization}
+              totalDatas={totalDatas}
+              countPage={countPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              // filter={filter}
+              count={totalDatas}
+              onClick={() => navigate("/sign-up/business")}
+              // handleFilter={handleFilter}
+              // filterData={product}
+              setFilterBody={setFilterBody}
+              setFilterVisible={setFilterVisible}
+              countTitle="Jami:"
+              mainTitle={"Компании"}
+              buttonTitle={"Добавить компанию"}
+            />
+
             <div className="grid grid-cols-1 px-2 gap-4 md:grid-cols-3 md:gap-3 pt-4">
               {map(
                 organizations,

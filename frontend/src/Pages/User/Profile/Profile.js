@@ -11,11 +11,9 @@ const Profile = () => {
     userData: { user, organization },
   } = useSelector((state) => state.login);
 
-  console.log(user);
-  console.log(organization);
   return (
     <div className="md:container h-full">
-      <div className="bg-white w-full h-full md:flex flex-col md:flex-row">
+      <div className="w-[45px] h-[45px] bg-white md:w-full md:h-full md:flex flex-col md:flex-row">
         {/* <Outlet /> */}
         <ProfileRouteLinks menu={organization ? menuOrganization : menuUser} />
         <ProfileRoutes routes={routes} />

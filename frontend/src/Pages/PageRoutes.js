@@ -8,6 +8,8 @@ import Filter from "./Filter/Filter";
 import { getAllCategories } from "./Category/categorySlice";
 import { getAllregions } from "./Filter/regionsSlice";
 import { getTradeTypes } from "./Filter/tradeSlice";
+import useWindowSize from "../hooks/useWindowSize";
+import MobileNavbar from "./User/Navbar/MobileNavbar";
 
 const PageRoutes = () => {
   const dispatch = useDispatch();
@@ -19,6 +21,8 @@ const PageRoutes = () => {
   const { tradetypes } = useSelector((state) => state.trade);
   const { regions } = useSelector((state) => state.regions);
   const [pathName, setPathName] = useState(location.pathname.split("/")[1]);
+
+  const { width } = useWindowSize();
 
   const filterVisible =
     pathName !== "profile" &&
@@ -38,6 +42,7 @@ const PageRoutes = () => {
   return (
     <section className="flex flex-col w-full h-screen max-h-screen">
       <Navbar />
+      {width < 720 && <MobileNavbar />}
       {/* {filterVisible && (
         <Filter
           categories={categories}

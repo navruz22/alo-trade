@@ -35,10 +35,61 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   const phone = organization?.phone;
   const isOrganization = !!userData?.organization?._id;
   const isProfileProducts = location.pathname === "/profile/products";
+
+  if (isOrganization && logged && isProfileProducts) {
+    return (
+      <div
+        className={`w-full shadow-2xl mt-5 rounded-xl bg-white-900 bg-white border-[1px] border-[#01c2cc]`}
+      >
+        <div className="text-sm w-full h-full flex flex-col justify-between rounded-xl">
+          <Link
+            to={`/products/${_id}`}
+            className="text-sm w-full h-full flex flex-col justify-between rounded-xl"
+          >
+            <p className="pl-2 border-b my-1 flex items-center text-neutral-500 text-sm">
+              <IoLocationOutline className="" />
+              <span className="text-[10px] md:text-[14px] ml-2">
+                {region ? region?.name : "Respublika bo'ylab"}
+              </span>
+            </p>
+            <div className="flex overflow-hidden items-center justify-center bg-white rounded-t-xl">
+              <img
+                src={images[0] ? images[0] : noImage}
+                className="rounded object-contain h-[150px] md:h-[200px]"
+                alt="Product"
+              />
+            </div>
+            {/* Card header */}
+            <CardHeader
+              logged={logged}
+              user={user}
+              position={position}
+              createdAt={createdAt}
+              organization={organization}
+            />
+            <CardBody
+              region={region}
+              name={name}
+              maxPrice={maxPrice}
+              minPrice={minPrice}
+              description={description}
+              currency={currency}
+            />
+          </Link>
+          <CardEdit
+            editHandler={editHandler}
+            productId={_id}
+            deleteHandler={deleteHandler}
+            position={position}
+          />
+        </div>
+      </div>
+    );
+  }
   return (
     <Link
       to={`/products/${_id}`}
-      className="w-full shadow-2xl mt-5 rounded-xl bg-white-900 bg-white border-[1px] border-[#01c2cc]"
+      className={`w-full shadow-2xl mt-5 rounded-xl bg-white-900 bg-white border-[1px] border-[#01c2cc]`}
     >
       <div className="text-sm w-full h-full flex flex-col justify-between rounded-xl">
         <p className="pl-2 border-b my-1 flex items-center text-neutral-500 text-sm">
@@ -70,35 +121,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
           description={description}
           currency={currency}
         />
-        {/* {logged && (
-          <CardAdditional
-            description={description}
-            tradetypes={tradetypes}
-            categories={categories}
-            subcategories={subcategories}
-            status={status}
-            region={region}
-            district={district}
-            productId={_id}
-            images={images}
-            phone={phone}
-            organization={organization}
-          />
-        )} */}
-        {isOrganization && logged && isProfileProducts && (
-          <CardEdit
-            editHandler={editHandler}
-            productId={_id}
-            deleteHandler={deleteHandler}
-            position={position}
-          />
-        )}
       </div>
-      {/*<div className="max-w-sm flex items-center justify-center overflow-hidden h-auto">*/}
-      {/*  {images[0] && (*/}
-      {/*    <img src={images[0]} className="w-[200px]" alt="alotrade.uz" />*/}
-      {/*  )}*/}
-      {/*</div>*/}
     </Link>
   );
 };

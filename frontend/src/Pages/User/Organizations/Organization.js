@@ -3,12 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrganizationById } from "./organizationSlice";
 import noImage from "../../../assets/images/no-image.svg";
-import {
-  IoBusinessSharp,
-  IoCallSharp,
-  IoLocationOutline,
-  IoLocationSharp,
-} from "react-icons/io5";
+import { IoCallSharp, IoLocationOutline } from "react-icons/io5";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { map, uniqueId } from "lodash";
 import { useTranslation } from "react-i18next";
@@ -20,20 +15,12 @@ import background4 from "../../../assets/background/4.png";
 import UniversalModal from "../../../Components/Modal/UniversalModal";
 import Pagination from "../../../Components/Pagination/Pagination";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
-import PageHeader from "../../../Components/PageHeaders/PageHeader";
-import Filter from "../../Filter/Filter";
 import { getProducts, getProductsCount } from "../Products/productSlice";
 
 const Organization = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["common"]);
-  const {
-    aloqa_malumotlari,
-    tashkilot_haqida,
-    savdo_turi,
-    kategoriya,
-    kategoriya_turi,
-  } = getTranslations(t);
+  const { savdo_turi } = getTranslations(t);
 
   const {
     logged,

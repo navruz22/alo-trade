@@ -28,6 +28,8 @@ const Navbar = () => {
   };
   const toggle = toggleMenu(closeHandler, changeHandler);
 
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     if (!logged) {
       setNavigations([
@@ -61,26 +63,6 @@ const Navbar = () => {
           </div>
           <div class="flex px-4 justify-between items-center w-full">
             <div>
-              <button
-                id="navbarToggler"
-                class="
-                  block
-                  absolute
-                  right-4
-                  top-1/2
-                  -translate-y-1/2
-                  lg:hidden
-                  focus:ring-2
-                  ring-primary
-                  px-3
-                  py-[6px]
-                  rounded-lg
-                "
-              >
-                <span class="relative w-[30px] h-[2px] my-[6px] block bg-white"></span>
-                <span class="relative w-[30px] h-[2px] my-[6px] block bg-white"></span>
-                <span class="relative w-[30px] h-[2px] my-[6px] block bg-white"></span>
-              </button>
               <nav
                 id="navbarCollapse"
                 class="
@@ -98,13 +80,13 @@ const Navbar = () => {
                   right-4
                   top-full
                   hidden
-                  lg:block lg:static lg:shadow-none
+                  md:block lg:static lg:shadow-none
                 "
               >
                 <Menu navs={navigations} translations={translations} />
               </nav>
             </div>
-            <div class="sm:flex justify-end hidden pr-16 lg:pr-0">
+            <div class="sm:flex justify-end lg:pr-0">
               {user ? (
                 <UserProfile
                   user={user}
