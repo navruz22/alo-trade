@@ -1,18 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Carousel from "react-multi-carousel";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../../Category/categorySlice";
+import { useSelector } from "react-redux";
 import CategoryCard from "./CategoryCard";
 
 const CategoryCarousels = () => {
-  const dispatch = useDispatch();
   const { categoriesWithSubcategories: categories } = useSelector(
     (state) => state.categories
   );
-
-  useEffect(() => {
-    dispatch(getAllCategories());
-  }, [dispatch]);
 
   const responsive = {
     desktop: {
@@ -34,19 +28,20 @@ const CategoryCarousels = () => {
 
   return (
     <div className="py-2 md:py-6">
-      <Carousel
-        responsive={responsive}
-        autoPlay={true}
-        autoPlaySpeed={3000}
-        removeArrowOnDeviceType={["tablet", "mobile"]}
-        infinite={true}
-        itemClass={"px-1 md:px-4"}
-      >
-        {categories &&
-          categories.map((category, ind) => (
+      {categories && categories.length > 0 && (
+        <Carousel
+          responsive={responsive}
+          autoPlay={true}
+          autoPlaySpeed={3000}
+          removeArrowOnDeviceType={["tablet", "mobile"]}
+          infinite={true}
+          itemClass={"px-1 md:px-4"}
+        >
+          {categories.map((category, ind) => (
             <CategoryCard ind={ind} category={category} />
           ))}
-      </Carousel>
+        </Carousel>
+      )}
     </div>
   );
 };

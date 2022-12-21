@@ -16,6 +16,7 @@ import OrderCarousel from "../Carousels/OrderCarousel";
 import CategoryCarousels from "../Carousels/CategoryCarousels";
 import { useDispatch } from "react-redux";
 import { clearFilters } from "../../Filter/filterSlice";
+import { getAllCategories } from "../../Category/categorySlice";
 
 const Main = () => {
   // const dispatch = useDispatch();
@@ -76,6 +77,10 @@ const Main = () => {
   const handleCreateOrder = () => {
     setModalVisible(true);
   };
+
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(clearFilters());
