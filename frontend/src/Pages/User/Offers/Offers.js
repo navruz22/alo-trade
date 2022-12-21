@@ -5,7 +5,7 @@ import ChatIncomingMessage from "../../../Components/OfferChat/ChatIncomingMessa
 import ChatSendingMessage from "../../../Components/OfferChat/ChatSendingMessage";
 import ChatInput from "../../../Components/OfferChat/ChatInput";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { getProductByOffer } from "../Products/productSlice";
 import { getOrderByOffer } from "../Orders/orderSlice";
 import { universalToast } from "../../../Components/ToastMessages/ToastMessages";
@@ -95,6 +95,7 @@ const Offers = () => {
   };
 
   const changeOffer = (offer) => {
+    console.log(offer);
     if (offer.order) {
       setType("order");
       setId(offer.order._id);
@@ -183,6 +184,7 @@ const Offers = () => {
         );
       }
     }
+    setOfferVisible(true);
   }, [id, type, dispatch]);
 
   useEffect(() => {

@@ -6,7 +6,7 @@ const UserProfile = ({ changeHandler, navbarExpended, toggleMenu, user }) => {
     <div className="relative ">
       <button
         onClick={changeHandler}
-        className="w-[50px] h-[50px] bg-neutral-500 rounded-full flex items-center justify-center border border-white-900"
+        className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] bg-slate-100 rounded-full flex items-center justify-center border border-white-900"
       >
         {user?.image ? (
           <img

@@ -44,7 +44,7 @@ const CategoryCarousels = () => {
       >
         {categories &&
           categories.map((category, ind) => (
-            <CategoryCard ind={ind + 1} category={category} />
+            <CategoryCard ind={ind} category={category} />
           ))}
       </Carousel>
     </div>

@@ -5,7 +5,7 @@ import { mobileNavs } from "./constants";
 
 const MobileNavbar = () => {
   return (
-    <ul class="fixed bottom-0 left-0 w-full bg-alotrade z-10 flex items-center justify-between pt-2 px-1">
+    <ul class="fixed bottom-0 left-0 w-full bg-alotrade z-10 flex items-center justify-between py-2 px-3">
       {map(mobileNavs, (nav) => (
         <li class="flex flex-col items-center">
           {nav.icon}

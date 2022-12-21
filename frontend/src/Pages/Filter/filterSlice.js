@@ -37,6 +37,16 @@ const filterSlice = createSlice({
     filterName: (state, { payload }) => {
       state.name = payload;
     },
+    clearFilters: (state) => {
+      state.tradetypes = [];
+      state.categories = [];
+      state.subcategories = [];
+      state.districts = [];
+      state.regions = [];
+      state.order = "all";
+      state.product = "all";
+      state.name = "";
+    },
   },
   extraReducers: {},
 });
@@ -50,5 +60,6 @@ export const {
   filterOrder,
   filterProduct,
   filterName,
+  clearFilters,
 } = filterSlice.actions;
 export default filterSlice.reducer;

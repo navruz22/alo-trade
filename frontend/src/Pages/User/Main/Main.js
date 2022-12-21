@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { deleteOrder, getOrders, getOrdersCount } from "../Orders/orderSlice";
 // import { map, uniqueId } from "lodash";
@@ -9,13 +8,14 @@ import UniversalModal from "../../../Components/Modal/UniversalModal";
 // import Pagination from "../../../Components/Pagination/Pagination";
 // import { useTranslation } from "react-i18next";
 // import { getTranslations } from "../../../translation";
-import bgImage from "../../../assets/background/1.png";
 import HowItWorks from "../../../Components/Tabs/HowItWorks/HowItWorks";
 import MainTabs from "../../../Components/Tabs/MainTabs/MainTabs";
 import Benefits from "../Benefits/Benefits";
 import MainCarousel from "../Carousels/MainCarousel";
 import OrderCarousel from "../Carousels/OrderCarousel";
 import CategoryCarousels from "../Carousels/CategoryCarousels";
+import { useDispatch } from "react-redux";
+import { clearFilters } from "../../Filter/filterSlice";
 
 const Main = () => {
   // const dispatch = useDispatch();
@@ -37,6 +37,8 @@ const Main = () => {
   // const [totalDatas, setTotalDatas] = useState(0);
   // const countPage = 10;
   // const { user } = userData;
+
+  const dispatch = useDispatch();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalBody, setModalBody] = useState(null);
@@ -74,6 +76,10 @@ const Main = () => {
   const handleCreateOrder = () => {
     setModalVisible(true);
   };
+
+  useEffect(() => {
+    dispatch(clearFilters());
+  }, [dispatch]);
 
   // useEffect(() => {
   //   const data = {
