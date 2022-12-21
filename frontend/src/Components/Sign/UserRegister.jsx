@@ -53,7 +53,7 @@ const UserRegister = ({
         <Input
           isDisabled={loading}
           placeholder={translations.telefon_raqam + "*"}
-          type="number"
+          type={"text"}
           value={phone}
           onChange={changeHandler}
           name="phone"

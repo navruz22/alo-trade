@@ -10,6 +10,7 @@ import { getAllregions } from "./Filter/regionsSlice";
 import { getTradeTypes } from "./Filter/tradeSlice";
 import useWindowSize from "../hooks/useWindowSize";
 import MobileNavbar from "./User/Navbar/MobileNavbar";
+import Footer from "../Components/Footer/Footer";
 
 const PageRoutes = () => {
   const dispatch = useDispatch();
@@ -40,20 +41,24 @@ const PageRoutes = () => {
     setPathName(location.pathname.split("/")[1]);
   }, [location.pathname]);
   return (
-    <section className="flex flex-col w-full h-screen max-h-screen">
-      <Navbar />
-      {width < 720 && <MobileNavbar />}
-      {/* {filterVisible && (
+    <>
+      <section className="flex flex-col w-full">
+        <Navbar />
+        {width < 720 && <MobileNavbar />}
+        {/* {filterVisible && (
         <Filter
           categories={categories}
           regions={regions}
           tradeTypes={tradetypes}
         />
       )} */}
-      <Suspense fallback={<Loader />}>
-        <Routes>{protectedRoutes()}</Routes>
-      </Suspense>
-    </section>
+        <Suspense fallback={<Loader />}>
+          <Routes>{protectedRoutes()}</Routes>
+        </Suspense>
+        {location.pathname !== "/offers" &&
+          !location.pathname.includes("profile") && <Footer />}
+      </section>
+    </>
   );
 };
 

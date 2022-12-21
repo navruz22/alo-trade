@@ -60,13 +60,13 @@ const OrderCardMain = ({
         user={user}
       />
       <CardBody title={name} description={description} />
-      <CardAdditional
+      {/* <CardAdditional
         logged={logged}
         isOrganization={isOrganization}
         position={position}
         phone={phone}
         region={region}
-      />
+      /> */}
     </div>
     // <div className="w-full shadow-md mt-5 rounded bg-white-900 flex">
     //   <div className="text-sm w-full flex flex-col justify-between ">

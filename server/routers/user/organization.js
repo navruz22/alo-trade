@@ -248,27 +248,28 @@ const getOrganizationsByFilter = async (req, res) => {
       name,
     } = req.body;
     let query = {};
-    if (tradetypes.length > 0) {
+    if (tradetypes && tradetypes.length > 0) {
       query.tradetypes = { $in: tradetypes };
     }
-    if (districts.length) {
+    if (districts && districts.length) {
       query.district = { $in: districts };
     }
-    if (regions.length) {
+    if (regions && regions.length) {
       query.region = { $in: regions };
     }
-    if (categories.length) {
+    if (categories && categories.length) {
       query.categories = { $in: categories };
     }
-    if (subcategories.length) {
+    if (subcategories && subcategories.length) {
       query.subcategories = { $in: subcategories };
     }
-    if (name.length > 0) {
+    if (name && name.length > 0) {
       query.name = new RegExp(".*" + name + ".*", "i");
     }
     const organizations = await getOrganizations({ count, page, query });
     res.status(200).json({ organizations });
   } catch (e) {
+    console.log(e);
     res.status(500).json({ message: "Ошибка в сервере..." });
   }
 };

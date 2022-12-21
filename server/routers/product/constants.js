@@ -118,6 +118,7 @@ const getProductWithId = async (id) =>
         tradetypes: product?.tradetypes,
         status: product?.status,
         organization: {
+          _id: product?.organization?._id,
           name: product?.organization?.name,
           phone: product?.organization?.phone,
           region: product?.organization?.region.name,

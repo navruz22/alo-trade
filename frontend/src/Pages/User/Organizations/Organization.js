@@ -64,6 +64,7 @@ const Organization = () => {
 
   const location = useLocation();
   const { _id } = location.state;
+  console.log(location);
 
   useEffect(() => {
     dispatch(getOrganizationById({ id: _id })).then(

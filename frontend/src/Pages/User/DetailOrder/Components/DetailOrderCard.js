@@ -10,7 +10,7 @@ const DetailOrderCard = ({ id, user }) => {
   return (
     <div
       className="
-            bg-primary
+            bg-alotrade
             rounded
             overflow-hidden
             text-center
@@ -54,7 +54,7 @@ const DetailOrderCard = ({ id, user }) => {
             h-[50px]
             text-sm
             font-medium
-            bg-white bg-opacity-20
+            bg-green-500
             placeholder-white
             text-white
             rounded
@@ -85,7 +85,7 @@ const DetailOrderCard = ({ id, user }) => {
             text-white
             rounded
             mb-6
-            bg-[#13C296]
+            bg-orange-500
             cursor-pointer
             hover:shadow-lg hover:bg-opacity-90
             transition
@@ -93,7 +93,7 @@ const DetailOrderCard = ({ id, user }) => {
             ease-in-out
         "
         >
-          Отпрваить предложение
+          Отпрaвить предложение
         </Link>
       </div>
     </div>

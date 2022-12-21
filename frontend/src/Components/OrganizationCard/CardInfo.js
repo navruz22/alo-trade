@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { IoCallOutline, IoLocationOutline } from "react-icons/io5";
 import { map } from "lodash";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PhoneIcon from "../Icons/PhoneIcon";
 
 const CardInfo = ({
@@ -16,6 +16,9 @@ const CardInfo = ({
   region,
   district,
 }) => {
+
+  const location = useLocation()
+
   const [show, setShow] = useState(false);
 
   const handleShow = () => {
@@ -35,7 +38,7 @@ const CardInfo = ({
         </div>
       </div>
 
-      <div className=" flex w-full border-t mt-3 text-sm">
+      {location.pathname !== '/' && <div className=" flex w-full border-t mt-3 text-sm">
         <p
           onClick={handleShow}
           className="w-1/2  bg-[#16a34a] text-white flex items-center justify-center py-1 hover:text-success-500"
@@ -49,7 +52,7 @@ const CardInfo = ({
         >
           {translations.koproq_malumot}
         </Link>
-      </div>
+      </div>}
     </div>
   );
 };

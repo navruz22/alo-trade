@@ -9,6 +9,7 @@ const DetailProductCard = ({ id, user }) => {
     setShow(!show);
   };
   const { logged } = useSelector((state) => state.login);
+  console.log(user);
   return (
     <div
       className="
@@ -47,6 +48,26 @@ const DetailProductCard = ({ id, user }) => {
         {user?.region}, {user?.district}
       </p>
       <div className="">
+        <Link
+          to="/organization"
+          state={{ _id: user?._id }}
+          class="
+          w-full
+            text-center
+            text-sm
+            font-medium
+            text-white
+            rounded
+            block
+            mb-6
+            cursor-pointer
+            transition
+            duration-300
+            ease-in-out
+        "
+        >
+          Подробнее
+        </Link>
         <button
           onClick={showHandler}
           className=" w-full

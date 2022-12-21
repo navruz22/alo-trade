@@ -258,9 +258,7 @@ const Offers = () => {
         </div>
         <div
           className={`h-full ${
-            offerVisible
-              ? "fixed top-0 left-0 w-full h-full z-50 pt-[50px]"
-              : "hidden"
+            offerVisible ? "fixed top-0 left-0 w-full h-full z-50" : "hidden"
           } md:w-1/2 md:relative bg-alotrade flex flex-col`}
         >
           <div className="bg-alotrade border-b border-white h-[50px] flex justify-between pl-2">
@@ -305,7 +303,7 @@ const Offers = () => {
     );
   }
   return (
-    <div className="flex flex-row h-full w-full ">
+    <div className="flex flex-row h-screen w-full ">
       <div className="max-w-[400px] min-w-[300px] w-1/4 h-full flex border-r-2 flex-col">
         <div>
           <button

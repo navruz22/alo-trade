@@ -101,7 +101,7 @@ const Organizations = () => {
   }, [dispatch, order, currentPage, countPage]);
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-white pb-[100px]">
       <div className="md:container">
         <div className="w-full block md:flex">
           <Filter

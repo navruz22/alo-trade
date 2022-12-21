@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import Footer from "./Components/Footer/Footer";
 import Loader from "./Components/Loader/Loader";
 import { getUser } from "./Pages/Sign/signSlice";
 

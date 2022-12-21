@@ -135,7 +135,7 @@ const Orders = () => {
   }, [dispatch, order, currentPage, countPage]);
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-white pb-10">
       <div className="md:container">
         <div className="w-full block md:flex">
           <Filter

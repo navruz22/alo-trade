@@ -1,16 +1,21 @@
+import { map, uniqueId } from "lodash";
 import React, { useEffect, useState } from "react";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import ImageSlider from "react-simple-image-slider";
 import SimpleImageSlider, { Slide } from "react-simple-image-slider";
+import ProductCard from "../../../Components/ProductCard/ProductCard";
 import useWindowSize from "../../../hooks/useWindowSize";
-import { getProductById } from "../Products/productSlice";
+import { getProductById, getProducts } from "../Products/productSlice";
 import DetailProductCard from "./Components/DetailProductCard";
 
 const DetailProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { product } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
+  const { logged } = useSelector((state) => state.login);
   const { width } = useWindowSize();
 
   const [imagesForSlide, setImageForSlide] = useState([]);
@@ -30,15 +35,42 @@ const DetailProduct = () => {
     dispatch(getProductById({ id }));
   }, [dispatch, id]);
 
-  console.log(product);
+  useEffect(() => {
+    const data = {
+      page: 0,
+      count: 20,
+      organization: product?.organization?._id,
+    };
+    dispatch(getProducts(data));
+    //    eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, product]);
+
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+      slidesToSlide: 4, // optional, default to 1.
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+    mobile: {
+      breakpoint: { max: 540, min: 0 },
+      items: 2,
+      slidesToSlide: 2, // optional, default to 1.
+    },
+  };
+
   return (
-    <div className="w-full bg-slate-100">
+    <div className="w-full bg-white">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-4 pt-6">
           <div className="flex justify-center md:block md:col-span-2">
             {imagesForSlide.length > 0 && (
               <SimpleImageSlider
-                width={width < 720 ? 350 : 800}
+                width={width < 720 ? 350 : 700}
                 height={width < 720 ? 180 : 450}
                 images={imagesForSlide}
                 showBullets={true}
@@ -76,6 +108,25 @@ const DetailProduct = () => {
             <DetailProductCard id={id} user={product?.organization} />
           </div>
         </div>
+      </div>
+      <div className="pt-6 pb-[60px] bg-white px-2">
+        <Carousel
+          responsive={responsive}
+          sliderClass="items-center gap-4 md:gap-4"
+          autoPlay={true}
+          autoPlaySpeed={3000}
+          removeArrowOnDeviceType={["tablet", "mobile"]}
+          infinite={true}
+        >
+          {map(products, (product) => (
+            <ProductCard
+              logged={logged}
+              key={uniqueId()}
+              product={product}
+              isProductPage={true}
+            />
+          ))}
+        </Carousel>
       </div>
     </div>
   );

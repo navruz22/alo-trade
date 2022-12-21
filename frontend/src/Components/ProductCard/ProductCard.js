@@ -89,7 +89,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   return (
     <Link
       to={`/products/${_id}`}
-      className={`w-full shadow-2xl mt-5 rounded-xl bg-white-900 bg-white border-[1px] border-[#01c2cc]`}
+      className={`w-full shadow-2xl mt-5 rounded-xl block h-[348px] md:h-[354px] bg-white border-[1px] border-[#01c2cc]`}
     >
       <div className="text-sm w-full h-full flex flex-col justify-between rounded-xl">
         <p className="pl-2 border-b my-1 flex items-center text-neutral-500 text-sm">
@@ -98,7 +98,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
             {region ? region?.name : "Respublika bo'ylab"}
           </span>
         </p>
-        <div className="flex overflow-hidden items-center justify-center bg-white rounded-t-xl">
+        <div className="flex h-[200px] items-center justify-center bg-white rounded-t-xl">
           <img
             src={images[0] ? images[0] : noImage}
             className="rounded object-contain h-[150px] md:h-[200px]"
@@ -106,6 +106,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
           />
         </div>
         {/* Card header */}
+
         <CardHeader
           logged={logged}
           user={user}
@@ -113,6 +114,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
           createdAt={createdAt}
           organization={organization}
         />
+
         <CardBody
           region={region}
           name={name}

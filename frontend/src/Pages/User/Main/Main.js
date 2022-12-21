@@ -16,7 +16,8 @@ import OrderCarousel from "../Carousels/OrderCarousel";
 import CategoryCarousels from "../Carousels/CategoryCarousels";
 import { useDispatch } from "react-redux";
 import { clearFilters } from "../../Filter/filterSlice";
-import { getAllCategories } from "../../Category/categorySlice";
+import MainProducts from "./MainProducts";
+import OrganizationCarousel from "../Carousels/OrganizationCarousel";
 
 const Main = () => {
   // const dispatch = useDispatch();
@@ -182,9 +183,11 @@ const Main = () => {
           <CategoryCarousels />
           <MainTabs handleCreateOrder={handleCreateOrder} />
           <OrderCarousel />
+          <MainProducts />
           <Benefits />
         </div>
         <HowItWorks />
+        <OrganizationCarousel />
       </div>
 
       <UniversalModal

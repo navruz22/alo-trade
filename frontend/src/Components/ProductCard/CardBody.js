@@ -11,19 +11,13 @@ const CardBody = ({
   currency,
   region,
 }) => {
-  const { width } = useWindowSize();
   const min = minPrice ? minPrice.toLocaleString("ru-RU") : 0;
   const max = maxPrice ? maxPrice.toLocaleString("ru-RU") : 0;
   return (
     <div className="px-3 py-2 rounded-b-xl">
       <div className="">
         <div className="font-amazonbold text-[12px] md:text-base font-bold">
-          <TextTruncate
-            line={width < 720 ? 3 : 2}
-            element="h3"
-            truncateText="…"
-            text={name}
-          />
+          <TextTruncate line={2} element="h3" truncateText="…" text={name} />
           {/* <h3 className="inline">{name}</h3> */}
         </div>
       </div>

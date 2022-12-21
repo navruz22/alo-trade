@@ -23,7 +23,7 @@ const SignIn = () => {
   const { loading } = useSelector((state) => state.login);
 
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState("+998");
 
   const changeHandler = (e) => {
     const name = e.target.name;

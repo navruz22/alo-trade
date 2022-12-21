@@ -17,12 +17,13 @@ import { getTranslations } from "../../../translation";
 import { useTranslation } from "react-i18next";
 import Filter from "../../Filter/Filter";
 import Pagination from "../../../Components/Pagination/Pagination";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 const Products = () => {
   const { t } = useTranslation(["common"]);
   const translations = getTranslations(t);
   const dispatch = useDispatch();
+  const location = useLocation();
   const {
     logged,
     userData: { user, organization },
@@ -90,45 +91,12 @@ const Products = () => {
   };
 
   useEffect(() => {
-    const data = {
-      page: 0,
-      count: countPage,
-      product,
-      categories,
-      subcategories,
-      tradetypes,
-      regions,
-      districts,
-      user: user?._id,
-      name,
-    };
-    setCurrentPage(0);
-    dispatch(getProducts(data));
-    dispatch(getProductsCount(data)).then(
-      ({ error, payload: { totalCount } }) => {
-        if (!error) {
-          setTotalDatas(totalCount);
-        }
-      }
-    );
-  }, [
-    dispatch,
-    product,
-    categories,
-    subcategories,
-    tradetypes,
-    regions,
-    districts,
-    user,
-    name,
-  ]);
-
-  useEffect(() => {
+    const locData = location?.state?.category?.value;
     const data = {
       page: currentPage,
       count: countPage,
       product,
-      categories,
+      categories: categories,
       subcategories,
       tradetypes,
       regions,
@@ -136,6 +104,10 @@ const Products = () => {
       user: user?._id,
       name,
     };
+
+    if (locData) {
+      data.categories = [...categories, locData];
+    }
 
     dispatch(getProducts(data));
     dispatch(getProductsCount(data)).then(
@@ -153,7 +125,7 @@ const Products = () => {
   }, [dispatch]);
 
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-white pb-[100px]">
       <div className="md:container">
         <div className="w-full block md:flex">
           <Filter

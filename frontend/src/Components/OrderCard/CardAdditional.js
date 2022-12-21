@@ -98,22 +98,26 @@ const CardAdditional = ({
         <p class="text-xs font-semibold">{region?.name}</p>
       </div>
       <div class="flex flex-row gap-2 pr-2">
-        <Link
-          to={logged ? `/orders/${id}` : "/sign-up/business"}
-          onClick={() => dispatch(getOrderById({ id }))}
-          className="bg-orange-500 text-[12px] md:text-[16px] shadow-lg shadow- shadow-orange-600 text-white cursor-pointer px-3 py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row"
-        >
-          Подробнее
-        </Link>
-        {logged && (
-          <div
-            onClick={() => handleOpenNumber()}
-            class="bg-green-500 shadow-lg text-[12px] md:text-[16px] shadow- shadow-green-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row"
-          >
-            {logged && isOrganization && position === "active"
-              ? phoneValue
-              : "Контакты"}
-          </div>
+        {position === "active" && (
+          <>
+            <Link
+              to={logged ? `/orders/${id}` : "/sign-up/business"}
+              onClick={() => dispatch(getOrderById({ id }))}
+              className="bg-orange-500 text-[12px] md:text-[16px] shadow-lg shadow- shadow-orange-600 text-white cursor-pointer px-3 py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row"
+            >
+              Подробнее
+            </Link>
+            {logged && (
+              <div
+                onClick={() => handleOpenNumber()}
+                class="bg-green-500 shadow-lg text-[12px] md:text-[16px] shadow- shadow-green-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row"
+              >
+                {logged && isOrganization && position === "active"
+                  ? phoneValue
+                  : "Контакты"}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>

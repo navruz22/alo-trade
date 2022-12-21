@@ -44,7 +44,7 @@ const Navbar = () => {
     <div
       class="
         ud-header
-        bg-[#03c1f6cc]
+        bg-alotrade
         z-40
         w-full
         flex
