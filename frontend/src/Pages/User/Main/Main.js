@@ -79,10 +79,6 @@ const Main = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllCategories());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(clearFilters());
   }, [dispatch]);
 
@@ -182,9 +178,9 @@ const Main = () => {
       </div> */}
       <MainCarousel />
       <div className="bg-white">
-        <CategoryCarousels />
-        <MainTabs handleCreateOrder={handleCreateOrder} />
         <div class="container">
+          <CategoryCarousels />
+          <MainTabs handleCreateOrder={handleCreateOrder} />
           <OrderCarousel />
           <Benefits />
         </div>

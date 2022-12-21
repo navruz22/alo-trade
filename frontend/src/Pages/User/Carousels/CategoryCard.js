@@ -14,7 +14,11 @@ const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
 
 const CategoryCard = ({ ind, category }) => {
   return (
-    <Link to="/products" state={{ category }} className="">
+    <Link
+      to="/products"
+      state={{ category }}
+      className="min-w-[100px] md:w-[250px]"
+    >
       <img src={images[ind]} alt="category" className="rounded-xl" />
     </Link>
   );

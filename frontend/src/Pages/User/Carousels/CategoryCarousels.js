@@ -1,9 +1,14 @@
-import React from "react";
+import { map } from "lodash";
+import React, { useEffect } from "react";
 import Carousel from "react-multi-carousel";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useWindowSize from "../../../hooks/useWindowSize";
+import { getAllCategories } from "../../Category/categorySlice";
 import CategoryCard from "./CategoryCard";
 
 const CategoryCarousels = () => {
+  const dispatch = useDispatch();
+  const { width } = useWindowSize();
   const { categoriesWithSubcategories: categories } = useSelector(
     (state) => state.categories
   );
@@ -26,21 +31,36 @@ const CategoryCarousels = () => {
     },
   };
 
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+
+  if (width < 720) {
+    return (
+      <div className="py-2 md:py-6 flex gap-2 overflow-x-scroll">
+        {categories &&
+          categories.length > 0 &&
+          map(categories, (category, ind) => (
+            <CategoryCard ind={ind} category={category} />
+          ))}
+      </div>
+    );
+  }
   return (
     <div className="py-2 md:py-6">
       {categories && categories.length > 0 && (
-        <Carousel
-          responsive={responsive}
-          autoPlay={true}
-          autoPlaySpeed={3000}
-          removeArrowOnDeviceType={["tablet", "mobile"]}
-          infinite={true}
-          itemClass={"px-1 md:px-4"}
-        >
-          {categories.map((category, ind) => (
-            <CategoryCard ind={ind} category={category} />
-          ))}
-        </Carousel>
+        <>
+          <div className="flex justify-between gap-4 items-center mb-4">
+            {map([...categories].slice(4), (category, ind) => (
+              <CategoryCard ind={ind} category={category} />
+            ))}
+          </div>
+          <div className="flex justify-center gap-4 items-center">
+            {map([...categories].slice(4, -1), (category, ind) => (
+              <CategoryCard ind={ind + 5} category={category} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
