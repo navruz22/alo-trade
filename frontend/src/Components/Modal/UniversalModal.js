@@ -6,6 +6,7 @@ import CreateProductModal from "./ModalBodys/CreateProductModal";
 import { useEffect, useState } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
 import ZoomImages from "./ModalBodys/ZoomImages";
+import WarningSignIn from "./ModalBodys/WarningSignIn";
 
 function UniversalModal({
   body,
@@ -25,6 +26,8 @@ function UniversalModal({
       padding: "1.25rem",
       transform: "auto",
       margin: "auto",
+      // border: "none",
+      // background: "none",
     },
     overlay: {
       background: "rgba(0, 0, 0, 0.75)",
@@ -49,11 +52,17 @@ function UniversalModal({
 
   const modalFull = {
     content: {
-      width: "100%",
-      height: "100%",
-      padding: "1rem",
+      maxWidth: "100%",
+      padding: "1.25rem",
       transform: "auto",
-      position: "fixed",
+      display: "flex",
+      justifyContent: "center",
+      alignCenter: "center",
+      border: "none",
+      background: "none",
+    },
+    overlay: {
+      background: "rgba(0, 0, 0, 0.75)",
       zIndex: "50",
     },
   };
@@ -76,6 +85,8 @@ function UniversalModal({
         );
       case "zoomImg":
         return <ZoomImages imgUrl={img} />;
+      case "warningSignIn":
+        return <WarningSignIn />;
       default:
         return "Bunday jadval topilmadi";
     }
@@ -87,7 +98,8 @@ function UniversalModal({
         body === "signup" ||
         body === "createOrder" ||
         body === "approve" ||
-        body === "createProduct"
+        body === "createProduct" ||
+        body === "warningSignIn"
           ? { ...customStyles }
           : body === "zoomImg"
           ? { ...zoomStyles }

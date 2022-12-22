@@ -216,7 +216,7 @@ const CreateOrderModal = ({ closeModal, orderId }) => {
   }, [dispatch, orderId]);
 
   return (
-    <div className="p-1">
+    <div className="p-1 bg-white">
       <div className="text-lg font-amazonbold mb-3 ">{yangi_buyurtma}</div>
       <CheckboxList
         list={tradetypes}

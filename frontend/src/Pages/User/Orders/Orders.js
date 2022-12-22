@@ -156,7 +156,7 @@ const Orders = () => {
                 if (logged) {
                   openModal("createOrder");
                 } else {
-                  navigate("/sign-up/business");
+                  openModal("warningSignIn");
                 }
               }}
               countTitle={translations.jami}

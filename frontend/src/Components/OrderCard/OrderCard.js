@@ -41,9 +41,6 @@ const OrderCard = ({
   const isOrganization = userData?.organization;
   return (
     <div class="relative pt-10 md:p-4  justify-center w-full rounded-xl group sm:flex space-x-6 bg-white shadow-slate-200 shadow-md border-[1px] hover:rounded-2xl">
-      {/* <div class="bg-red-500 shadow-lg shadow- shadow-red-600 text-white cursor-pointer px-3 py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row">
-              Disactive
-            </div> */}
       {position === "active" ? (
         <div class="absolute text-[10px] md:text-[16px] top-1 left-1 bg-green-500 shadow-lg text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-lg flex space-x-2 flex-row">
           Актуально
@@ -61,11 +58,6 @@ const OrderCard = ({
       />
       <div class="sm:w-8/12">
         <div class="flex flex-col gap-2">
-          {/* <CardHeader
-            createdAt={createdAt}
-            organization={organization}
-            user={user}
-          /> */}
           <CardBody title={name} description={description} />
           <CardAdditional
             id={_id}
@@ -82,57 +74,6 @@ const OrderCard = ({
         </div>
       </div>
     </div>
-    // <div className="w-full shadow-md mt-5 rounded bg-white-900 flex">
-    //   <div className="text-sm w-full flex flex-col justify-between ">
-    //     {/* Card header */}
-    //     <CardHeader
-    //       translations={translations}
-    //       logged={logged}
-    //       user={user}
-    //       position={position}
-    //       createdAt={createdAt}
-    //       organization={organization}
-    //     />
-    //     <CardBody
-    //       translations={translations}
-    //       region={region}
-    //       name={name}
-    //       maxPrice={maxPrice}
-    //       minPrice={minPrice}
-    //       description={description}
-    //       currency={currency}
-    //     />
-    //     {logged && (isOrganization || isCustomer) && position === "active" && (
-    //       <CardAdditional
-    //         translations={translations}
-    //         description={description}
-    //         tradetypes={tradetypes}
-    //         categories={categories}
-    //         subcategories={subcategories}
-    //         status={status}
-    //         region={region}
-    //         district={district}
-    //         orderId={_id}
-    //         images={images}
-    //         phone={phone}
-    //         organization={organization}
-    //       />
-    //     )}
-    //     {isCustomer
-    //       ? logged && (
-    //           <CardEdit
-    //             translations={translations}
-    //             editHandler={editHandler}
-    //             orderId={_id}
-    //             deleteHandler={deleteHandler}
-    //             position={position}
-    //           />
-    //         )
-    //       : logged &&
-    //         isOrganization &&
-    //         position === "active" && <CardFooter phone={phone} id={_id} />}
-    //   </div>
-    // </div>
   );
 };
 
