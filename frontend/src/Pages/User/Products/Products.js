@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import Filter from "../../Filter/Filter";
 import Pagination from "../../../Components/Pagination/Pagination";
 import { useLocation, useParams } from "react-router-dom";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 const Products = () => {
   const { t } = useTranslation(["common"]);
@@ -28,6 +29,9 @@ const Products = () => {
     logged,
     userData: { user, organization },
   } = useSelector((state) => state.login);
+
+  const { width } = useWindowSize();
+
   const { products } = useSelector((state) => state.products);
   const {
     product,
@@ -41,7 +45,7 @@ const Products = () => {
   const [productId, setProductId] = useState(null);
   const [totalDatas, setTotalDatas] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const countPage = 10;
+  const [countPage, setCountPage] = useState(width < 720 ? 20 : 15);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalBody, setModalBody] = useState(null);
@@ -130,7 +134,12 @@ const Products = () => {
     districts,
     user,
     name,
+    width,
   ]);
+
+  useEffect(() => {
+    setCountPage(width < 720 ? 20 : 15);
+  }, [width]);
 
   useEffect(() => {
     dispatch(clearProductData());
@@ -149,7 +158,6 @@ const Products = () => {
             <PageHeader
               isOrganization={!!organization}
               totalDatas={totalDatas}
-              countPage={countPage}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
               filter={filter}
@@ -173,14 +181,25 @@ const Products = () => {
                 />
               ))}
             </div>
-            {totalDatas > 0 && (
-              <div className="flex justify-center py-2">
-                <Pagination
-                  totalDatas={totalDatas}
-                  countPage={countPage}
-                  setCurrentPage={setCurrentPage}
-                  currentPage={currentPage}
-                />
+            {width > 720 ? (
+              totalDatas > 0 && (
+                <div className="flex justify-center py-2">
+                  <Pagination
+                    totalDatas={totalDatas}
+                    countPage={width < 720 ? 20 : 15}
+                    setCurrentPage={setCurrentPage}
+                    currentPage={currentPage}
+                  />
+                </div>
+              )
+            ) : (
+              <div className="w-full flex justify-center">
+                <button
+                  onClick={() => setCountPage((prev) => prev + 20)}
+                  className="bg-alotrade shadow-xl text-white rounded py-2 px-4 text-[14px]"
+                >
+                  Показать еще
+                </button>
               </div>
             )}
           </div>
@@ -199,54 +218,6 @@ const Products = () => {
         approveFunction={deleteProductById}
       />
     </div>
-    // <div className="h-full w-full bg-neutral-100 flex flex-col">
-    //   {logged ? (
-    //     <PageHeader
-    //       isOrganization={!!organization}
-    //       totalDatas={totalDatas}
-    //       countPage={countPage}
-    //       currentPage={currentPage}
-    //       setCurrentPage={setCurrentPage}
-    //       filter={filter}
-    //       count={totalDatas}
-    //       onClick={() => openModal("createProduct")}
-    //       buttonTitle="Mahsulot yaratish"
-    //       handleFilter={handleFilter}
-    //       filterData={product}
-    //       countTitle="Jami:"
-    //     />
-    //   ) : (
-    //     <MainPageHeader
-    //       totalDatas={totalDatas}
-    //       countPage={countPage}
-    //       currentPage={currentPage}
-    //       setCurrentPage={setCurrentPage}
-    //       translations={translations}
-    //     />
-    //   )}
-    //   <div className="p-4 pt-0 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 overflow-scroll">
-    //     {map(products, (product) => (
-    //       <ProductCard
-    //         logged={logged}
-    //         key={uniqueId()}
-    //         product={product}
-    //         editHandler={editHandler}
-    //         deleteHandler={deleteHandler}
-    //       />
-    //     ))}
-    //   </div>
-    //   <UniversalModal
-    //     isOpen={modalVisible}
-    //     body={modalBody}
-    //     closeModal={closeHandler}
-    //     toggleModal={toggleModal}
-    //     productId={productId}
-    //     modalBody={modalBody}
-    //     headerText="Mahsulotni o'chirish"
-    //     title="Siz rostdan ham mahsulotni o'chirmoqchimisiz?"
-    //     approveFunction={deleteProductById}
-    //   />
-    // </div>
   );
 };
 

@@ -5,6 +5,7 @@ import { getOrderById } from "../Orders/orderSlice";
 import SimpleImageSlider from "react-simple-image-slider";
 import DetailOrderCard from "./Components/DetailOrderCard";
 import useWindowSize from "../../../hooks/useWindowSize";
+import CustomSlider from "../../../Components/CustomImgSlider/CustomSlider";
 
 const DetailOrder = () => {
   const { id } = useParams();
@@ -22,23 +23,20 @@ const DetailOrder = () => {
 
   useEffect(() => {
     if (order?._id) {
-      setImageForSlide([...order.images.map((el) => ({ url: el }))]);
+      setImageForSlide([...order.images]);
     }
   }, [order]);
 
   return (
-    <div className="w-full bg-slate-100">
+    <div className="w-full bg-white">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-4 pt-6">
           <div className="flex justify-center md:block md:col-span-2">
             {imagesForSlide.length > 0 && (
-              <SimpleImageSlider
-                width={width < 720 ? 350 : 800}
-                height={width < 720 ? 180 : 450}
+              <CustomSlider
+                width={width < 720 ? "350px" : "600px"}
+                height={width < 720 ? "180px" : "400px"}
                 images={imagesForSlide}
-                showBullets={true}
-                showNavs={true}
-                style={{ backgroundPosition: "center" }}
               />
             )}
           </div>

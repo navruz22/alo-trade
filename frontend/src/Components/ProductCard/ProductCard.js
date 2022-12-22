@@ -1,8 +1,6 @@
 import React from "react";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
-import CardAdditional from "./CardAdditional";
-import CardFooter from "./CardFooter";
 import CardEdit from "./CardEdit";
 import { useSelector } from "react-redux";
 import noImage from "../../assets/images/no-image.svg";

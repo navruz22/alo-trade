@@ -42,9 +42,7 @@ const Pagination = ({ countPage, totalDatas, setCurrentPage, currentPage }) => {
           "w-[35px] h-[35px] border border-black rounded-lg text-sm text-primary-800 flex justify-center items-center hover:bg-primary-700 hover:border-primary-700 hover:text-white-900 transition ease-in-out duration-100"
         }
         activeClassName={"mr-[15px]"}
-        activeLinkClassName={
-          "border border-black bg-primary-800 text-white-900"
-        }
+        activeLinkClassName={"border border-black bg-alotrade text-white-900"}
         disabledLinkClassName={
           "bg-transparent border-black-100 text-black-100 hover:bg-transparent hover:border-black-100 hover:text-black-100"
         }

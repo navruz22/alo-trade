@@ -3,10 +3,9 @@ import ModalHeader from "./ModalHeader";
 import CreateOrderModal from "./ModalBodys/CreateOrderModal";
 import Approve from "./ModalBodys/Approve";
 import CreateProductModal from "./ModalBodys/CreateProductModal";
-import { useEffect, useState } from "react";
-import useWindowSize from "../../hooks/useWindowSize";
 import ZoomImages from "./ModalBodys/ZoomImages";
 import WarningSignIn from "./ModalBodys/WarningSignIn";
+import CallPhone from "./ModalBodys/CallPhone";
 
 function UniversalModal({
   body,
@@ -19,6 +18,7 @@ function UniversalModal({
   title,
   productId,
   img,
+  phone,
 }) {
   const customStyles = {
     content: {
@@ -28,6 +28,21 @@ function UniversalModal({
       margin: "auto",
       // border: "none",
       // background: "none",
+    },
+    overlay: {
+      background: "rgba(0, 0, 0, 0.75)",
+      zIndex: "50",
+    },
+  };
+
+  const customStyles2 = {
+    content: {
+      maxWidth: "550px",
+      transform: "auto",
+      margin: "auto",
+      marginTop: "100px",
+      border: "none",
+      background: "none",
     },
     overlay: {
       background: "rgba(0, 0, 0, 0.75)",
@@ -87,6 +102,8 @@ function UniversalModal({
         return <ZoomImages imgUrl={img} />;
       case "warningSignIn":
         return <WarningSignIn />;
+      case "phone":
+        return <CallPhone phone={phone} />;
       default:
         return "Bunday jadval topilmadi";
     }
@@ -98,11 +115,12 @@ function UniversalModal({
         body === "signup" ||
         body === "createOrder" ||
         body === "approve" ||
-        body === "createProduct" ||
-        body === "warningSignIn"
+        body === "createProduct"
           ? { ...customStyles }
           : body === "zoomImg"
           ? { ...zoomStyles }
+          : body === "phone" || body === "warningSignIn"
+          ? { ...customStyles2 }
           : { ...modalFull }
       }
       onRequestClose={closeModal || toggleModal}
