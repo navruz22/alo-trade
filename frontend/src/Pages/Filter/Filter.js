@@ -73,7 +73,6 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody }) => {
     const checked = e.target.checked;
     const filtered = filter(categoriesList, (category) => category !== value);
     const newCategories = checked ? [...filtered, value] : [...filtered];
-    console.log(newCategories);
     dispatch(filterCategories(newCategories));
   };
 

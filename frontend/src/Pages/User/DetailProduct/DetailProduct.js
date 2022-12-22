@@ -5,6 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SimpleImageSlider, { Slide } from "react-simple-image-slider";
+import CustomSlider from "../../../Components/CustomImgSlider/CustomSlider";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 import useWindowSize from "../../../hooks/useWindowSize";
 import { getProductById, getProducts } from "../Products/productSlice";
@@ -19,12 +20,17 @@ const DetailProduct = () => {
   const { width } = useWindowSize();
 
   const [imagesForSlide, setImageForSlide] = useState([]);
-  console.log(product);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
   useEffect(() => {
     if (product?._id) {
-      setImageForSlide([...product.images.map((el) => ({ url: el }))]);
+      setImageForSlide([...product.images]);
     }
-  }, [product]);
+  }, [product, id]);
+  console.log(imagesForSlide);
   useEffect(() => {
     return () => {
       setImageForSlide([]);
@@ -69,13 +75,10 @@ const DetailProduct = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-4 pt-6">
           <div className="flex justify-center md:block md:col-span-2">
             {imagesForSlide.length > 0 && (
-              <SimpleImageSlider
-                width={width < 720 ? 350 : 700}
-                height={width < 720 ? 180 : 450}
+              <CustomSlider
+                width={width < 720 ? "350px" : "600px"}
+                height={width < 720 ? "180px" : "400px"}
                 images={imagesForSlide}
-                showBullets={true}
-                showNavs={true}
-                style={{ backgroundPosition: "center" }}
               />
             )}
           </div>
@@ -112,11 +115,12 @@ const DetailProduct = () => {
       <div className="pt-6 pb-[60px] bg-white px-2">
         <Carousel
           responsive={responsive}
-          sliderClass="items-center gap-4 md:gap-4"
+          sliderClass="flex items-stretch gap-2 md:gap-4 "
           autoPlay={true}
           autoPlaySpeed={3000}
           removeArrowOnDeviceType={["tablet", "mobile"]}
           infinite={true}
+          itemClass=""
         >
           {map(products, (product) => (
             <ProductCard

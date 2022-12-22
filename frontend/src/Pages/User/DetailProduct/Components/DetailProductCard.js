@@ -9,7 +9,7 @@ const DetailProductCard = ({ id, user }) => {
     setShow(!show);
   };
   const { logged } = useSelector((state) => state.login);
-  console.log(user);
+
   return (
     <div
       className="
@@ -26,16 +26,16 @@ const DetailProductCard = ({ id, user }) => {
       {/* <h3 class="font-semibold text-white mb-2 text-2xl">
         Join our newsletter!
       </h3> */}
-      <div className="flex items-center">
+      <div className="flex items-center flex-col">
         <div className="flex justify-center p-4 pb-2">
           {user?.image ? (
             <img
               src={user?.image}
               alt={"logo"}
-              className="w-[100px] h-[100px] rounded-full bg-neutral-200"
+              className="w-[100px] h-[100px] md:w-[120px] md:h-[120px] rounded-full bg-neutral-200"
             />
           ) : (
-            <h3 className="w-[100px] h-[100px] rounded-full bg-neutral-200 flex items-center justify-center text-neutral-500 text-lg">
+            <h3 className="rounded-full bg-neutral-200 flex items-center justify-center text-neutral-500 text-lg">
               alo
             </h3>
           )}

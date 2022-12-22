@@ -5,6 +5,7 @@ import CardAdditional from "./CardAdditional";
 // import CardFooter from "./CardFooter";
 // import CardEdit from "./CardEdit";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const OrderCardMain = ({
   order,
@@ -38,7 +39,10 @@ const OrderCardMain = ({
   const phone = organization ? organization.phone : user.phone;
   const isOrganization = userData?.organization;
   return (
-    <div class="relative md:p-4 flex flex-col justify-between max-w-[680px] h-[180px] rounded-xl group  space-x-6 bg-white shadow-xl hover:rounded-2xl">
+    <Link
+      to={`/orders/${order._id}`}
+      className="relative md:p-4 flex flex-col gap-4 max-w-[680px] h-[180px] rounded-xl group  space-x-6 bg-white shadow-xl hover:rounded-2xl"
+    >
       {/* <div class="bg-red-500 shadow-lg shadow- shadow-red-600 text-white cursor-pointer px-3 py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row">
               Disactive
             </div> */}
@@ -67,7 +71,7 @@ const OrderCardMain = ({
         phone={phone}
         region={region}
       /> */}
-    </div>
+    </Link>
     // <div className="w-full shadow-md mt-5 rounded bg-white-900 flex">
     //   <div className="text-sm w-full flex flex-col justify-between ">
     //     {/* Card header */}

@@ -89,7 +89,7 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   return (
     <Link
       to={`/products/${_id}`}
-      className={`w-full shadow-2xl mt-5 rounded-xl block h-[348px] md:h-[354px] bg-white border-[1px] border-[#01c2cc]`}
+      className={`w-full shadow-2xl rounded-xl block h-full bg-white border-[1px] border-[#01c2cc]`}
     >
       <div className="text-sm w-full h-full flex flex-col justify-between rounded-xl">
         <p className="pl-2 border-b my-1 flex items-center text-neutral-500 text-sm">

@@ -118,7 +118,19 @@ const Products = () => {
       }
     );
     //    eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, product, currentPage, countPage]);
+  }, [
+    dispatch,
+    product,
+    currentPage,
+    countPage,
+    categories,
+    subcategories,
+    tradetypes,
+    regions,
+    districts,
+    user,
+    name,
+  ]);
 
   useEffect(() => {
     dispatch(clearProductData());

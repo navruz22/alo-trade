@@ -55,12 +55,12 @@ const OrganizationCarousel = () => {
       </h2>
       <Carousel
         responsive={responsive}
-        sliderClass="items-center gap-1 md:gap-[10px]"
+        sliderClass="flex items-stretch gap-1 md:gap-[10px]"
         autoPlay={true}
         autoPlaySpeed={3000}
         removeArrowOnDeviceType={["tablet", "mobile"]}
         infinite={true}
-        itemClass="pb-2"
+        itemClass=""
       >
         {map(
           organizations,
@@ -78,7 +78,7 @@ const OrganizationCarousel = () => {
           }) => (
             <div
               key={uniqueId("organization")}
-              className="bg-white-900 overflow-hidden rounded shadow-lg border-t-8 border-[#01c2cc] flex flex-col justify-between"
+              className="h-full bg-white-900 overflow-hidden rounded shadow-lg border-t-8 border-[#01c2cc] flex flex-col justify-between"
             >
               <div className="border-neutral-400 mt-2 mx-4 flex gap-1">
                 <h3 className="text-[12px] font-semibold font-amazonbold">

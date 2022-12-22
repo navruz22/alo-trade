@@ -5,6 +5,7 @@ import Approve from "./ModalBodys/Approve";
 import CreateProductModal from "./ModalBodys/CreateProductModal";
 import { useEffect, useState } from "react";
 import useWindowSize from "../../hooks/useWindowSize";
+import ZoomImages from "./ModalBodys/ZoomImages";
 
 function UniversalModal({
   body,
@@ -16,6 +17,7 @@ function UniversalModal({
   headerText,
   title,
   productId,
+  img,
 }) {
   const customStyles = {
     content: {
@@ -29,6 +31,22 @@ function UniversalModal({
       zIndex: "50",
     },
   };
+
+  const zoomStyles = {
+    content: {
+      maxWidth: "900px",
+      border: "none",
+      background: "none",
+      padding: "1.25rem",
+      transform: "auto",
+      margin: "auto",
+    },
+    overlay: {
+      background: "rgba(0, 0, 0, 0.75)",
+      zIndex: "50",
+    },
+  };
+
   const modalFull = {
     content: {
       width: "100%",
@@ -56,6 +74,8 @@ function UniversalModal({
             title={title}
           />
         );
+      case "zoomImg":
+        return <ZoomImages imgUrl={img} />;
       default:
         return "Bunday jadval topilmadi";
     }
@@ -64,8 +84,13 @@ function UniversalModal({
     <Modal
       isOpen={isOpen}
       style={
-        body === "signup" || "createOrder" || "approve"
+        body === "signup" ||
+        body === "createOrder" ||
+        body === "approve" ||
+        body === "createProduct"
           ? { ...customStyles }
+          : body === "zoomImg"
+          ? { ...zoomStyles }
           : { ...modalFull }
       }
       onRequestClose={closeModal || toggleModal}
