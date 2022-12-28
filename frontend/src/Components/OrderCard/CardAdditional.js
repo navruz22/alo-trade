@@ -22,7 +22,7 @@ const CardAdditional = ({
   const [phoneValue, setPhoneValue] = useState("Контакты");
   const [visible, setVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-  console.log(modalVisible);
+
   const handleOpenNumber = () => {
     if (!visible) {
       setPhoneValue(phone);
@@ -113,19 +113,19 @@ const CardAdditional = ({
           {position === "active" && (
             <>
               <button
-                onClick={() => (logged ? navigateToDetail() : openModal())}
+                onClick={() =>
+                  logged && isOrganization ? navigateToDetail() : openModal()
+                }
                 className="bg-orange-500 text-[12px] md:text-[16px] shadow-lg shadow- shadow-orange-600 text-white cursor-pointer px-3 py-1 text-center justify-center items-center rounded-xl flex space-x-2 flex-row"
               >
                 Подробнее
               </button>
-              {logged && (
+              {logged && isOrganization && (
                 <div
                   onClick={() => handleOpenNumber()}
                   class="bg-green-500 shadow-lg text-[12px] md:text-[16px] shadow- shadow-green-600 text-white cursor-pointer px-3 text-center justify-center items-center py-1 rounded-xl flex space-x-2 flex-row"
                 >
-                  {logged && isOrganization && position === "active"
-                    ? phoneValue
-                    : "Контакты"}
+                  {phoneValue}
                 </div>
               )}
             </>

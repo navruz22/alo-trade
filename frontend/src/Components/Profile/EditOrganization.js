@@ -66,8 +66,6 @@ const EditOrganization = () => {
     organization?.description || ""
   );
 
-  console.log(organization);
-
   const changeHandler = (e) => {
     const name = e.target.name;
     const value = e.target.value;

@@ -19,6 +19,7 @@ function UniversalModal({
   productId,
   img,
   phone,
+  typeOfWarning,
 }) {
   const customStyles = {
     content: {
@@ -101,7 +102,7 @@ function UniversalModal({
       case "zoomImg":
         return <ZoomImages imgUrl={img} />;
       case "warningSignIn":
-        return <WarningSignIn />;
+        return <WarningSignIn typeOfWarning={typeOfWarning} />;
       case "phone":
         return <CallPhone phone={phone} />;
       default:

@@ -34,7 +34,7 @@ const OrderCard = ({
     createdAt,
     organization,
   } = order;
-  console.log(position);
+
   // const isCustomer = userData?.user?._id === user?._id;
   const phone = organization ? organization.phone : user.phone;
   const isOrganization = userData?.organization;

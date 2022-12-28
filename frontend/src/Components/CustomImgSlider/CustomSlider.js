@@ -7,7 +7,6 @@ const CustomSlider = ({ width, height, images }) => {
   const [visibleModal, setVisibleModal] = useState(false);
 
   const nextSlide = () => {
-    console.log("work");
     if (images.length - 1 === index) {
       setIndex(0);
     } else {
@@ -24,7 +23,6 @@ const CustomSlider = ({ width, height, images }) => {
   };
 
   const openModal = () => {
-    console.log("work");
     setVisibleModal(true);
   };
 

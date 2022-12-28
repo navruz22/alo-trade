@@ -30,7 +30,7 @@ const DetailProduct = () => {
       setImageForSlide([...product.images]);
     }
   }, [product, id]);
-  console.log(imagesForSlide);
+
   useEffect(() => {
     return () => {
       setImageForSlide([]);
@@ -96,8 +96,7 @@ const DetailProduct = () => {
             <div className="flex items-center gap-[4px] text-[14px] font-medium">
               Поставка в город:{" "}
               <h2 className="text-[16px] font-bold">
-                {product?.region?.label},{" "}
-                {product?.region?.districts.map((el) => el.label)}
+                {product?.region?.label}, {product?.region?.districts[0].label}
               </h2>
             </div>
           </div>

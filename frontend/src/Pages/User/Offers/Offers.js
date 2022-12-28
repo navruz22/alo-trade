@@ -95,7 +95,6 @@ const Offers = () => {
   };
 
   const changeOffer = (offer) => {
-    console.log(offer);
     if (offer.order) {
       setType("order");
       setId(offer.order._id);

@@ -160,7 +160,7 @@ const Orders = () => {
                 }
               }}
               countTitle={translations.jami}
-              buttonTitle={translations.buyurtma_yaratish}
+              buttonTitle={"Создать заказ"}
               handleFilter={handleFilter}
               filterData={order}
               filter={filterData}
@@ -199,6 +199,7 @@ const Orders = () => {
         body={modalBody}
         closeModal={closeHandler}
         toggleModal={toggleModal}
+        typeOfWarning={"user"}
         orderId={orderId}
         modalBody={modalBody}
         headerText={translations.buyurtmani_ochirish}

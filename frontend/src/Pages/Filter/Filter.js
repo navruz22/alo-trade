@@ -97,7 +97,7 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody }) => {
     <div
       className={
         width < 720
-          ? `w-full h-full ease-in-out duration-200 fixed top-0 ${
+          ? `w-full h-full ease-in-out duration-200 fixed overflow-y-scroll  top-0 ${
               filterVisible ? "left-0" : "left-[-100%]"
             } z-50 bg-white`
           : "min-w-[300px] max-w-[400px] shadow bg-white"
