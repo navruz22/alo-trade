@@ -125,6 +125,9 @@ const Organization = () => {
                     {organization?.district?.label}
                   </span>
                 </p>
+                <p className="flex items-center">
+                  {organization?.address && `Адрес: ${organization?.address}`}
+                </p>
                 <h3 className="flex">
                   {savdo_turi}:
                   <p className="pl-2">
@@ -138,7 +141,7 @@ const Organization = () => {
                 <h4 className="flex items-center my-2">
                   <IoCallSharp size={19} />
                   <a href={`tel:${organization?.phone}`} className="ml-2">
-                    +{organization?.phone}
+                    {organization?.phone}
                   </a>
                 </h4>
                 {organization?.email && (

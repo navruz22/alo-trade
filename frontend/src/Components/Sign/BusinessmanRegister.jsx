@@ -34,6 +34,7 @@ const BusinessmanRegister = ({
   changeTradeTypes,
   tradeTypes,
   translations,
+  address,
 }) => {
   return (
     <div className="bg-white rounded ">
@@ -127,6 +128,15 @@ const BusinessmanRegister = ({
             />
           </div>
         </div>
+        <Input
+          placeholder={"Адрес" + "*"}
+          isDisabled={loading}
+          value={address}
+          onChange={changeHandler}
+          name="address"
+          required={true}
+          onKeyUp={enterHandler}
+        />
         <div className="mb-2">
           <h1 className="text-sm text-neutral-500 mt-4">
             {translations.savdo_turingizni_tanlang}

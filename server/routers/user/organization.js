@@ -25,6 +25,7 @@ const createOrganization = async (req, res) => {
       categories,
       subcategories,
       tradetypes,
+      address,
     } = req.body;
 
     const { error } = validateUserSignUp({
@@ -95,6 +96,7 @@ const createOrganization = async (req, res) => {
       region,
       district,
       tradetypes,
+      address,
     });
     await newOrganization.save();
 

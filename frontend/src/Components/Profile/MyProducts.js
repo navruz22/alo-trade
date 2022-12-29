@@ -12,6 +12,7 @@ import ProductCard from "../ProductCard/ProductCard";
 import Pagination from "../Pagination/Pagination";
 import UniversalModal from "../Modal/UniversalModal";
 import AddButton from "../Buttons/AddButton";
+import { universalToast } from "../ToastMessages/ToastMessages";
 
 const MyProducts = () => {
   const dispatch = useDispatch();
@@ -67,13 +68,15 @@ const MyProducts = () => {
   };
 
   const deleteProductById = () => {
-    productId &&
+    if (productId) {
       dispatch(deleteProduct({ id: productId })).then(({ error }) => {
         if (!error) {
           setModalVisible(false);
           setProductId(null);
+          universalToast("Товар успешно удален", "success");
         }
       });
+    }
   };
 
   useEffect(() => {
@@ -180,8 +183,8 @@ const MyProducts = () => {
         toggleModal={toggleModal}
         productId={productId}
         modalBody={modalBody}
-        headerText="Mahsulotni o'chirish"
-        title="Siz rostdan ham mahsulotni o'chirmoqchimisiz?"
+        headerText="Удалить товар"
+        title="Вы действительно хотите удалить товар?"
         approveFunction={deleteProductById}
       />
     </div>

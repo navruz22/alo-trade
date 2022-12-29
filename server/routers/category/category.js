@@ -5,7 +5,6 @@ const { map } = require("lodash");
 const createCategory = async (req, res) => {
   try {
     const { name, image } = req.body;
-    console.log("fff");
     const { error } = validateCategory({ name, image });
     if (error) {
       return res.status(400).json({ message: error.message });
@@ -88,6 +87,7 @@ const getCategoriesWithSubcategories = async (req, res) => {
           return {
             label: category.name,
             value: category._id,
+            image: category.image,
             subcategories: map(category.subcategories, (subcategory) => {
               return {
                 label: subcategory.name,

@@ -113,14 +113,11 @@ function UniversalModal({
     <Modal
       isOpen={isOpen}
       style={
-        body === "signup" ||
-        body === "createOrder" ||
-        body === "approve" ||
-        body === "createProduct"
+        body === "signup" || body === "createOrder" || body === "createProduct"
           ? { ...customStyles }
           : body === "zoomImg"
           ? { ...zoomStyles }
-          : body === "phone" || body === "warningSignIn"
+          : body === "phone" || body === "warningSignIn" || body === "approve"
           ? { ...customStyles2 }
           : { ...modalFull }
       }

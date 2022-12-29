@@ -53,6 +53,7 @@ const SignUp = () => {
   const [allSubcategories, setAllSubcategories] = useState([]);
   const [name, setName] = useState("");
   const [tradeTypes, setTradeTypes] = useState([]);
+  const [address, setAddress] = useState("");
 
   const clearDatas = () => {
     setFirstname("");
@@ -79,6 +80,7 @@ const SignUp = () => {
     name === "district" && setDistrict(value);
     name === "phone" && setPhone(value);
     name === "name" && setName(value.toUpperCase());
+    name === "address" && setAddress(value);
   };
 
   const selectRegion = (e) => {
@@ -145,6 +147,9 @@ const SignUp = () => {
     });
     if (email !== "") {
       data.email = email;
+    }
+    if (address !== "") {
+      data.address = address;
     }
     check && createHandler(data);
   };
@@ -266,6 +271,7 @@ const SignUp = () => {
                     tradetypes={tradetypes}
                     changeTradeTypes={changeTradeTypes}
                     tradeTypes={tradeTypes}
+                    address={address}
                   />
                 }
               />

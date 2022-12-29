@@ -6,7 +6,7 @@ function Approve({ toggleModal, approveFunction, headerText, title }) {
   const { t } = useTranslation();
   const { bekor_qilish, ochirish } = getTranslations(t);
   return (
-    <div className={"modalContent text-center"}>
+    <div className={"modalContent text-center bg-white py-6 rounded"}>
       <div className="flex items-center justify-center">
         <IoCloseCircleOutline
           className={"modalIcon text-error-500"}

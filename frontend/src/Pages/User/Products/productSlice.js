@@ -104,6 +104,7 @@ export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (body = {}, { rejectWithValue }) => {
     try {
+      console.log("work");
       const { data } = await Api.post("/product/delete", body);
       return data;
     } catch (error) {
@@ -194,10 +195,8 @@ const productSlice = createSlice({
       state.loading = true;
     },
     [deleteProduct.fulfilled]: (state, { payload: { id } }) => {
-      const productIndex = findIndex(state.products, { _id: id });
-      state.products.splice(productIndex, 1);
-      universalToast(t("Buyurtma muvaffaqqiyatli o'chirildi"), "success");
       state.loading = false;
+      state.products = [...state.products].filter((item) => item._id !== id);
     },
     [updateProductPosition.pending]: (state) => {
       state.loading = true;

@@ -94,7 +94,6 @@ const DetailProduct = () => {
               </h2>
             </div>
             <div className="flex items-center gap-[4px] text-[14px] font-medium">
-              Поставка в город:{" "}
               <h2 className="text-[16px] font-bold">
                 {product?.region?.label}, {product?.region?.districts[0].label}
               </h2>
@@ -112,6 +111,7 @@ const DetailProduct = () => {
         </div>
       </div>
       <div className="pt-6 pb-[60px] bg-white px-2">
+        <h2 className="text-[32px] font-bold mb-4">Другие товары поставщика</h2>
         <Carousel
           responsive={responsive}
           sliderClass="flex items-stretch gap-2 md:gap-4 "

@@ -180,8 +180,8 @@ const MyOrders = () => {
         toggleModal={toggleModal}
         orderId={orderId}
         modalBody={modalBody}
-        headerText={translations.buyurtmani_ochirish}
-        title={translations.siz_buyurtmani_ochirishni_xohlaysizmi}
+        headerText={"Удалить заказ"}
+        title={"Вы действительно хотите удалить заказ?"}
         approveFunction={deleteOrderById}
       />
     </div>

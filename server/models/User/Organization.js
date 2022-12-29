@@ -4,6 +4,7 @@ const organization = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, email: true, lowercase: true },
+    address: { type: String },
     image: { type: String },
     phone: { type: String, unique: true },
     user: { type: Schema.Types.ObjectId, ref: "User" },
