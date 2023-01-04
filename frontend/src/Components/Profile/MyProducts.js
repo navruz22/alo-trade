@@ -7,18 +7,19 @@ import {
   clearProductData,
 } from "../../Pages/User/Products/productSlice";
 import { map, uniqueId } from "lodash";
-import PageHeader from "../PageHeaders/PageHeader";
 import ProductCard from "../ProductCard/ProductCard";
 import Pagination from "../Pagination/Pagination";
 import UniversalModal from "../Modal/UniversalModal";
 import AddButton from "../Buttons/AddButton";
 import { universalToast } from "../ToastMessages/ToastMessages";
+import { useNavigate } from "react-router-dom";
 
 const MyProducts = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     logged,
-    userData: { user, organization },
+    userData: { user },
   } = useSelector((state) => state.login);
   const { products } = useSelector((state) => state.products);
   const {
@@ -38,9 +39,6 @@ const MyProducts = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalBody, setModalBody] = useState(null);
 
-  const [filterVisible, setFilterVisible] = useState(false);
-  const [filterBody, setFilterBody] = useState(null);
-
   const closeHandler = () => {
     setModalVisible(false);
   };
@@ -49,21 +47,9 @@ const MyProducts = () => {
     setModalVisible(!modalVisible);
   };
 
-  const openModal = (body) => {
-    setModalBody(body);
-    setModalVisible(true);
-    setProductId(null);
-  };
-
   const deleteHandler = (id) => {
     setProductId(id);
     setModalBody("approve");
-    setModalVisible(true);
-  };
-
-  const editHandler = (id) => {
-    setProductId(id);
-    setModalBody("createProduct");
     setModalVisible(true);
   };
 
@@ -148,7 +134,7 @@ const MyProducts = () => {
         <div className="w-full px-2 md:px-4">
           <div className="flex justify-end w-full">
             <AddButton
-              onClick={() => openModal("createProduct")}
+              onClick={() => navigate("/create_product")}
               title={"Создать товар"}
             />
           </div>
@@ -158,7 +144,11 @@ const MyProducts = () => {
                 logged={logged}
                 key={uniqueId()}
                 product={product}
-                editHandler={editHandler}
+                editHandler={() =>
+                  navigate("/create_product", {
+                    state: { productId: product._id },
+                  })
+                }
                 deleteHandler={deleteHandler}
               />
             ))}

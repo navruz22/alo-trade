@@ -21,6 +21,13 @@ import {
 import { getTradeTypes } from "../../Filter/tradeSlice";
 import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../../translation";
+import {
+  clearFilters,
+  filterCategories,
+  filterSubcategories,
+  filterSubcategories2,
+} from "../../Filter/filterSlice.js";
+import { getSubcategories } from "../../Category/categorySlice";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -31,6 +38,10 @@ const SignUp = () => {
   const { categoriesWithSubcategories, error: errorCategories } = useSelector(
     (state) => state.categories
   );
+  const {
+    subcategories: subcategoriesList,
+    subcategories2: subcategoriesList2,
+  } = useSelector((state) => state.filter);
   const { loading } = useSelector((state) => state.login);
   const { tradetypes } = useSelector((state) => state.trade);
   const href = window.location.href.split("/");
@@ -101,10 +112,10 @@ const SignUp = () => {
 
   const selectCategory = (e) => {
     setCategories(e);
-    let subCategories = [];
-    forEach(e, (category) => subCategories.push(...category.subcategories));
-    setAllSubcategories(subCategories);
-    filterSubcategory(e);
+    dispatch(filterSubcategories([]));
+    dispatch(filterSubcategories2([]));
+    dispatch(filterCategories([e.value]));
+    dispatch(getSubcategories({ category: e.value }));
   };
 
   const selectSubcategory = (e) => {
@@ -138,7 +149,7 @@ const SignUp = () => {
       ...data,
       url,
       categories,
-      subcategories,
+      subcategories: subcategoriesList,
       name,
       email,
       confirmPassword,
@@ -156,17 +167,14 @@ const SignUp = () => {
 
   const createHandler = (data) => {
     const Categories = map(categories, (category) => category.value);
-    const subCategories = map(
-      subcategories,
-      (subcategory) => subcategory.value
-    );
     dispatch(
       url === "sign-up"
         ? signUpUser({ ...data })
         : signUpOrganization({
             ...data,
             categories: Categories,
-            subcategories: subCategories,
+            subcategories: subcategoriesList,
+            subcategories2: subcategoriesList2,
             name,
             tradetypes: tradeTypes,
           })
@@ -174,6 +182,7 @@ const SignUp = () => {
       if (!error) {
         clearDatas();
         navigate("../");
+        dispatch(clearFilters());
       }
     });
   };

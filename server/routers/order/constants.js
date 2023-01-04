@@ -47,6 +47,7 @@ const getOrderWithId = async (id) =>
       },
     })
     .populate("subcategories", "name")
+    .populate("subcategories2", "name")
     .populate({
       path: "user",
       select: "firstname lastname phone email image region district",
@@ -105,6 +106,9 @@ const getOrderWithId = async (id) =>
           };
         }),
         subcategories: map(order?.subcategories, (subcategory) => {
+          return { label: subcategory.name, value: subcategory._id };
+        }),
+        subcategories2: map(order?.subcategories, (subcategory) => {
           return { label: subcategory.name, value: subcategory._id };
         }),
       };

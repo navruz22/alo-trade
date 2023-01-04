@@ -33,11 +33,6 @@ const PageRoutes = () => {
     pathName !== "organization";
 
   useEffect(() => {
-    dispatch(getTradeTypes());
-    dispatch(getAllCategories());
-    dispatch(getAllregions());
-  }, [dispatch]);
-  useEffect(() => {
     setPathName(location.pathname.split("/")[1]);
   }, [location.pathname]);
   return (

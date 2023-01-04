@@ -130,7 +130,6 @@ const getOrdersByFilterCount = async (req, res) => {
 const getOrderById = async (req, res) => {
   try {
     const { id } = req.body;
-    console.log(id);
 
     const order = await getOrderWithId(id);
 

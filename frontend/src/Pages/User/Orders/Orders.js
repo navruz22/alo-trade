@@ -28,6 +28,7 @@ const Orders = () => {
     order,
     categories,
     subcategories,
+    subcategories2,
     tradetypes,
     regions,
     districts,
@@ -93,6 +94,7 @@ const Orders = () => {
       order,
       categories,
       subcategories,
+      subcategories2,
       tradetypes,
       regions,
       districts,
@@ -108,7 +110,16 @@ const Orders = () => {
       }
     );
     //    eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [order, categories, subcategories, tradetypes, regions, districts, name]);
+  }, [
+    order,
+    categories,
+    subcategories,
+    subcategories2,
+    tradetypes,
+    regions,
+    districts,
+    name,
+  ]);
 
   useEffect(() => {
     const data = {
@@ -117,6 +128,7 @@ const Orders = () => {
       order,
       categories,
       subcategories,
+      subcategories2,
       tradetypes,
       regions,
       districts,
@@ -154,7 +166,7 @@ const Orders = () => {
               count={totalDatas}
               onClick={() => {
                 if (logged) {
-                  openModal("createOrder");
+                  navigate("/create_order");
                 } else {
                   openModal("warningSignIn");
                 }

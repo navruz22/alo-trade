@@ -6,6 +6,7 @@ const filterSlice = createSlice({
     tradetypes: [],
     categories: [],
     subcategories: [],
+    subcategories2: [],
     districts: [],
     regions: [],
     order: "all",
@@ -21,6 +22,9 @@ const filterSlice = createSlice({
     },
     filterSubcategories: (state, { payload }) => {
       state.subcategories = payload;
+    },
+    filterSubcategories2: (state, { payload }) => {
+      state.subcategories2 = payload;
     },
     filterDistricts: (state, { payload }) => {
       state.districts = payload;
@@ -41,6 +45,7 @@ const filterSlice = createSlice({
       state.tradetypes = [];
       state.categories = [];
       state.subcategories = [];
+      state.subcategories2 = [];
       state.districts = [];
       state.regions = [];
       state.order = "all";
@@ -56,6 +61,7 @@ export const {
   filterDistricts,
   filterRegions,
   filterSubcategories,
+  filterSubcategories2,
   filterTradeTypes,
   filterOrder,
   filterProduct,

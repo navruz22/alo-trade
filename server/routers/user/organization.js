@@ -24,6 +24,7 @@ const createOrganization = async (req, res) => {
       phone,
       categories,
       subcategories,
+      subcategories2,
       tradetypes,
       address,
     } = req.body;
@@ -48,6 +49,7 @@ const createOrganization = async (req, res) => {
       email,
       categories,
       subcategories,
+      subcategories2,
       tradetypes,
       region,
       district,
@@ -92,6 +94,7 @@ const createOrganization = async (req, res) => {
       email,
       categories,
       subcategories,
+      subcategories2,
       user: newUser._id,
       region,
       district,

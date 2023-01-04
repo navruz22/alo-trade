@@ -3,6 +3,7 @@ import { map, uniqueId } from "lodash";
 import { Navigate, Route } from "react-router-dom";
 import SignUp from "./Sign/Components/SignUp";
 import SignIn from "./Sign/Components/SignIn";
+
 // pages -->
 
 const otherRoutes = {
@@ -24,6 +25,8 @@ const CompanyReport = lazy(() =>
 );
 const DetailOrder = lazy(() => import("./User/DetailOrder/DetailOrder"));
 const DetailProduct = lazy(() => import("./User/DetailProduct/DetailProduct"));
+const CreateProduct = lazy(() => import("./CreateProduct/CreateProduct"));
+const CreateOrder = lazy(() => import("./CreateOrder/CreateOrder"));
 // <-- pages
 
 // routes -->
@@ -43,6 +46,14 @@ const userRoutes = [
   {
     path: "/products",
     element: <ProductsReport />,
+  },
+  {
+    path: "/create_product",
+    element: <CreateProduct />,
+  },
+  {
+    path: "/create_order",
+    element: <CreateOrder />,
   },
   {
     path: "/products/:id",

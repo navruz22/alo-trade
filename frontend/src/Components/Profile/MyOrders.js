@@ -153,7 +153,11 @@ const MyOrders = () => {
                 logged={logged}
                 key={uniqueId()}
                 order={order}
-                editHandler={editHandler}
+                editHandler={() =>
+                  navigate("/create_order", {
+                    state: { orderId: order._id },
+                  })
+                }
                 deleteHandler={deleteHandler}
                 updatePosition={updatePosition}
                 isProfile={true}

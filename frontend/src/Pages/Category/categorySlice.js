@@ -13,16 +13,35 @@ export const getAllCategories = createAsyncThunk(
   }
 );
 
+export const getSubcategories = createAsyncThunk(
+  "category/getSubcategories",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post(
+        "category/subcategories/getbycategory",
+        body
+      );
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
 const categorySlice = createSlice({
   name: "categories",
   initialState: {
     categoriesWithSubcategories: null,
     loading: false,
     error: null,
+    subcategories: null,
   },
   reducers: {
     clearErrorCategories: (state) => {
       state.error = null;
+    },
+    clearSubcategories: (state) => {
+      state.subcategories = null;
     },
   },
   extraReducers: {
@@ -37,8 +56,20 @@ const categorySlice = createSlice({
       state.loading = false;
       state.error = payload;
     },
+    [getSubcategories.pending]: (state) => {
+      state.loading = true;
+    },
+    [getSubcategories.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.subcategories = payload;
+    },
+    [getSubcategories.rejected]: (state, { payload }) => {
+      state.loading = false;
+      state.error = payload;
+    },
   },
 });
 
-export const { clearErrorCategories } = categorySlice.actions;
+export const { clearErrorCategories, clearSubcategories } =
+  categorySlice.actions;
 export default categorySlice.reducer;

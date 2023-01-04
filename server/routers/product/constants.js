@@ -6,6 +6,7 @@ const queryProducts = (req) => {
     product: productFilter,
     categories,
     subcategories,
+    subcategories2,
     tradetypes,
     regions,
     districts,
@@ -32,6 +33,9 @@ const queryProducts = (req) => {
   if (subcategories && subcategories.length) {
     query.subcategories = { $in: subcategories };
   }
+  if (subcategories2 && subcategories2.length) {
+    query.subcategories2 = { $in: subcategories2 };
+  }
   if (productFilter && productFilter === "my") {
     query.user = user;
   }
@@ -48,6 +52,7 @@ const getProduct = async (id) =>
     .populate("district", "name")
     .populate("categories", "name")
     .populate("subcategories", "name")
+    .populate("subcategories2", "name")
     .populate("tradetypes", "name")
     .populate("user", "firstname lastname phone email")
     .populate("organization", "name phone email");
@@ -88,6 +93,7 @@ const getProductWithId = async (id) =>
       },
     })
     .populate("subcategories", "name")
+    .populate("subcategories2", "name")
     .populate("user", "firstname lastname phone email")
     .populate({
       path: "organization",
@@ -146,6 +152,9 @@ const getProductWithId = async (id) =>
           };
         }),
         subcategories: map(product?.subcategories, (subcategory) => {
+          return { label: subcategory.name, value: subcategory._id };
+        }),
+        subcategories2: map(product?.subcategories2, (subcategory) => {
           return { label: subcategory.name, value: subcategory._id };
         }),
       };

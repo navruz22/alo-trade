@@ -8,13 +8,19 @@ const SelectButton = ({
   currentId,
   changeHeader,
   headerCheckeds,
+  checkBoxClass,
 }) => {
   const checked = headerCheckeds?.some((checked) => checked === data.value);
   return (
     <div className="flex justify-between w-full hover:bg-gray-200 ">
-      <Checkbox data={data} onChange={changeHeader} checked={checked} />
+      <Checkbox
+        data={data}
+        onChange={changeHeader}
+        checked={checked}
+        className={checkBoxClass}
+      />
       <button
-        className="w-1/2 flex pl-2 items-center text-neutral-600 justify-between text-end "
+        className=" flex pl-2 items-center text-neutral-600 justify-between text-end "
         onClick={onClick}
         name={data.value}
       >

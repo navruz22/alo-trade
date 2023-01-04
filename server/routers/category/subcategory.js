@@ -1,6 +1,6 @@
 const { validateSubcategory } = require("../../models/validators");
 const { Category, Subcategory } = require("../../models/models");
-const { forEach } = require("lodash");
+const { forEach, map } = require("lodash");
 
 const createSubcategory = async (req, res) => {
   try {
@@ -83,9 +83,25 @@ const getSubcategories = async (req, res) => {
       return res.status(400).json({ message: "Категория не найдена" });
     }
 
-    const subcategories = await Subcategory.find({ category }).select(
-      "name image"
-    );
+    const subcategories = await Subcategory.find({ category })
+      .select("name image")
+      .populate("subcategories", "name")
+      .then((subcategories) =>
+        map(subcategories, (subcategory) => {
+          return {
+            label: subcategory.name,
+            value: subcategory._id,
+            image: subcategory.image,
+            subcategories: map(subcategory.subcategories, (subcategory) => {
+              return {
+                label: subcategory.name,
+                value: subcategory._id,
+                category: subcategory._id,
+              };
+            }),
+          };
+        })
+      );
 
     res.status(200).json(subcategories);
   } catch (err) {
