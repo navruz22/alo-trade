@@ -228,10 +228,10 @@ const CreateOrder = () => {
           </div>
         )}
         <div className="container max-w-[800px]">
-          <div className="text-[28px] font-bold mb-3 text-center">
+          <div className="text-[28px] text-alotrade font-bold mb-3 text-center">
             Новый заказ
           </div>
-          <CheckboxList
+          {/* <CheckboxList
             list={tradetypes}
             checkedList={tradeTypes}
             cols={2}
@@ -239,7 +239,7 @@ const CreateOrder = () => {
             headerStyle="text-sm"
             listStyle="ml-0"
             onChange={changeTradeTypes}
-          />
+          /> */}
           <SelectRegion
             region={region}
             selectRegion={selectRegion}
@@ -258,13 +258,14 @@ const CreateOrder = () => {
             loading={loading}
             labelCategory={"Категория*"}
             openSubcategories={() => setIsVisibleFilter(!isVisibleFilter)}
+            kategoriya="Выбрать..."
           />
 
           <Input
             onKeyUp={enterHandler}
-            label="Nomi*"
+            label="Название*"
             labelStyle="font-normal"
-            placeholder="Mahsulot yoki xizmat nomi"
+            placeholder="Название товара или услуги"
             name="name"
             onChange={changeHandler}
             value={name}
@@ -274,9 +275,9 @@ const CreateOrder = () => {
             name="description"
             value={description}
             onChange={changeHandler}
-            label="Qo'shimcha ma'lumot*"
+            label="Описание*"
             labelStyle="font-normal"
-            placeholder="Izoh"
+            placeholder="Опишите подробнее"
           />
           <div className="grid grid-cols-2">
             {/*<CheckboxList*/}
@@ -290,7 +291,7 @@ const CreateOrder = () => {
               currency={currency}
               onChange={changeCurrency}
               list={currencices}
-              label="To'lov turi"
+              label="Способ оплаты"
               name={uniqueId("valyuta")}
             />
             <MinMaxPrice
@@ -306,7 +307,7 @@ const CreateOrder = () => {
           </div>
           <div>
             <SaveButton
-              title="Saqlash"
+              title="Создать"
               className="w-full mt-3"
               onClick={submitHandler}
             />

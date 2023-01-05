@@ -25,8 +25,8 @@ const CardBody = ({
       <div className="">
         <h3 className="font-amazonbold text-base text-amber-500 flex justify-between">
           {/* <span className=" hidden md:inline">Narxi:</span>{" "} */}
-          <span className="text-[12px] md:text-[16px] text-[#11ed1c] font-bold">
-            {(max && `${min} - ${max}`) || ""} {currency}
+          <span className="text-[14px] md:text-[16px] text-orange-500 font-bold">
+            {max || ""} {currency}
           </span>
         </h3>
       </div>

@@ -1,5 +1,6 @@
 import { map, uniqueId } from "lodash";
 import React, { useEffect, useState } from "react";
+import { MdOutlineErrorOutline } from "react-icons/md";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -77,7 +78,7 @@ const DetailProduct = () => {
             {imagesForSlide.length > 0 && (
               <CustomSlider
                 width={width < 720 ? "350px" : "600px"}
-                height={width < 720 ? "180px" : "400px"}
+                height={width < 720 ? "350px" : "400px"}
                 images={imagesForSlide}
               />
             )}
@@ -85,12 +86,15 @@ const DetailProduct = () => {
 
           <div className="flex flex-col gap-5 py-8">
             <div className="flex gap-[4px]">
-              <h2 className="text-[32px] font-bold">{product?.name}</h2>
+              <h2 className="text-[24px] md:text-[32px] font-bold">
+                {product?.name}
+              </h2>
             </div>
             <div className="flex flex-col text-[18px] font-medium">
               <span>Цена:</span>
               <h2 className="text-[30px] text-orange-500 font-bold">
-                {product?.minPrice} - {product?.maxPrice} {product?.currency}
+                {(product?.maxPrice).toLocaleString("ru-RU")}{" "}
+                {product?.currency}
               </h2>
             </div>
             <div className="flex items-center gap-[4px] text-[14px] font-medium">
@@ -98,12 +102,27 @@ const DetailProduct = () => {
                 {product?.region?.label}, {product?.region?.districts[0].label}
               </h2>
             </div>
+            <div className="hidden md:block mt-6 text-center bg-teal-200 p-4 rounded-xl">
+              <div className="flex justify-center">
+                <MdOutlineErrorOutline size={30} />
+              </div>
+              Для уточнения условии доставки и о наличии товара обратитесь к
+              поставщику!
+            </div>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 md:gap-2 py-[30px]">
           <div className="col-span-2 bg-white px-6 py-2 min-h-[100px] mb-4 md:mb-0">
             <h2 className="text-[32px] font-bold">Описание</h2>
             <p className="text-[14px]">{product?.description}</p>
+
+            <div className="block md:hidden text-[12px] text-center mt-6 bg-teal-200 p-4 rounded-xl">
+              <div className="flex justify-center">
+                <MdOutlineErrorOutline size={30} />
+              </div>
+              Для уточнения условии доставки и о наличии товара обратитесь к
+              поставщику!
+            </div>
           </div>
           <div className="col-span-1">
             <DetailProductCard id={id} user={product?.organization} />
@@ -111,7 +130,9 @@ const DetailProduct = () => {
         </div>
       </div>
       <div className="pt-6 pb-[60px] bg-white px-2">
-        <h2 className="text-[32px] font-bold mb-4">Другие товары поставщика</h2>
+        <h2 className="text-[21px] md:text-[32px] font-bold mb-4">
+          Другие товары поставщика
+        </h2>
         <Carousel
           responsive={responsive}
           sliderClass="flex items-stretch gap-2 md:gap-4 "

@@ -4,10 +4,10 @@ import OrderIcon from "../../../Components/Tabs/MainTabs/icons/OrderIcon";
 const Benefits = () => {
   return (
     <div className="pt-6">
-      <h2 className="md:text-[36px] text-[16px] font-bold">
-        Как помогаем бизнесу?
+      <h2 className="md:text-[36px] text-[24px] font-bold text-alotrade text-center">
+        alotrade.uz
       </h2>
-      <div className="pt-6 px-2 md:p-6 flex items-center md:flex-row flex-col gap-4 md:gap-[1%]">
+      <div className="pt-6 px-2 md:p-6 flex items-stretch md:flex-row flex-col gap-4 md:gap-[1%]">
         <div className="flex items-center gap-[15px] md:flex-[0_0_33%] border-[1px] border-alotrade p-2 md:flex-row flex-col md:p-[15px] md:mb-0 mb-[15px] bg-white rounded-xl">
           {/* <div>
             <OrderIcon className={"md:w-[50px] w-[30px] fill-black"} />

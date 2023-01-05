@@ -89,14 +89,14 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
       to={`/products/${_id}`}
       className={`w-full shadow-2xl rounded-xl block h-full bg-white border-[1px] border-[#01c2cc]`}
     >
-      <div className="text-sm w-full h-full flex flex-col justify-between rounded-xl">
+      <div className="text-sm w-full h-full flex flex-col rounded-xl">
         <p className="pl-2 border-b my-1 flex items-center text-neutral-500 text-sm">
           <IoLocationOutline className="" />
           <span className="text-[10px] md:text-[14px] ml-2">
             {region ? region?.name : "Respublika bo'ylab"}
           </span>
         </p>
-        <div className="flex h-[200px] items-center justify-center bg-white rounded-t-xl">
+        <div className="flex  items-center justify-center bg-white rounded-t-xl">
           <img
             src={images[0] ? images[0] : noImage}
             className="rounded object-contain h-[150px] md:h-[200px]"
@@ -105,13 +105,13 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
         </div>
         {/* Card header */}
 
-        <CardHeader
+        {/* <CardHeader
           logged={logged}
           user={user}
           position={position}
           createdAt={createdAt}
           organization={organization}
-        />
+        /> */}
 
         <CardBody
           region={region}

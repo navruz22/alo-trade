@@ -37,8 +37,8 @@ const CategoryCarousels = () => {
               <CategoryCard ind={ind} category={category} />
             ))}
           </div>
-          <div className="flex justify-center gap-4 items-center">
-            {map([...categories].slice(4, -1), (category, ind) => (
+          <div className="flex justify-evenly gap-4 items-center">
+            {map([...categories].slice(4), (category, ind) => (
               <CategoryCard ind={ind + 5} category={category} />
             ))}
           </div>

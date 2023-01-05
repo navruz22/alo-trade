@@ -34,6 +34,9 @@ const separateOrganization = (organization) => {
     subcategories: map(organization?.subcategories, (subcategory) => {
       return { label: subcategory.name, value: subcategory._id };
     }),
+    subcategories2: map(organization?.subcategories2, (subcategory) => {
+      return { label: subcategory.name, value: subcategory._id };
+    }),
   };
 };
 
@@ -90,6 +93,7 @@ const getOrganizationById = async (id) =>
       },
     })
     .populate("subcategories", "name")
+    .populate("subcategories2", "name")
     .then((organization) => {
       return separateOrganization(organization);
     });
@@ -129,6 +133,7 @@ const getOrganization = async (id) =>
       },
     })
     .populate("subcategories", "name")
+    .populate("subcategories2", "name")
     .populate("tradetypes", "name")
     .then((organization) => {
       return separateOrganization(organization);

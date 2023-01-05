@@ -81,9 +81,7 @@ const MainTabs = ({ handleCreateOrder }) => {
             {content === "buy" ? (
               <div className="flex md:justify-center gap-2 md:gap items-center w-full">
                 <button
-                  onClick={
-                    logged && !!organization ? handleCreateOrder : openModal
-                  }
+                  onClick={logged ? handleCreateOrder : openModal}
                   className="flex flex-col justify-center items-center drop-shadow-xl md:w-[250px] md:h-[150px] w-full h-[100px] bg-alotrade rounded-xl"
                 >
                   <OrderIcon className={iconClass} />

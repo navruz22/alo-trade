@@ -18,6 +18,7 @@ import { useDispatch } from "react-redux";
 import { clearFilters } from "../../Filter/filterSlice";
 import MainProducts from "./MainProducts";
 import OrganizationCarousel from "../Carousels/OrganizationCarousel";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   // const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const Main = () => {
   // const { user } = userData;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalBody, setModalBody] = useState(null);
@@ -76,7 +78,7 @@ const Main = () => {
   // };
 
   const handleCreateOrder = () => {
-    setModalVisible(true);
+    navigate("/create_order");
   };
 
   useEffect(() => {

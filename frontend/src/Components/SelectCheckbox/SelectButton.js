@@ -12,7 +12,7 @@ const SelectButton = ({
 }) => {
   const checked = headerCheckeds?.some((checked) => checked === data.value);
   return (
-    <div className="flex justify-between w-full hover:bg-gray-200 ">
+    <div className="group flex justify-between w-full hover:bg-alotrade mt-2">
       <Checkbox
         data={data}
         onChange={changeHeader}

@@ -84,6 +84,7 @@ const getSubcategories = async (req, res) => {
     }
 
     const subcategories = await Subcategory.find({ category })
+      .sort({ createdAt: -1 })
       .select("name image")
       .populate("subcategories", "name")
       .then((subcategories) =>

@@ -6,6 +6,7 @@ import {
   editProfileImage,
 } from "../../Pages/Sign/signSlice";
 import { filter, map, uniqueId } from "lodash";
+import { MdAddAPhoto, MdDelete } from "react-icons/md";
 
 const UploadImages = ({ images, setImages }) => {
   const dispatch = useDispatch();
@@ -39,17 +40,14 @@ const UploadImages = ({ images, setImages }) => {
   };
 
   return (
-    <div className="flex justify-between items-center">
-      <div className="flex items-center">
+    <div className="flex justify-between items-center flex-col flex-reverse">
+      <div className="flex overflow-x-auto w-full py-4">
         {map(images, (image, index) => (
-          <div
-            key={uniqueId("image")}
-            className="flex flex-col mx-2 rounded overflow-hidden "
-          >
-            <img src={image} alt="" className="w-[150px] h-[100px]" />
+          <div key={uniqueId("image")} className="flex flex-col mx-2 rounded ">
+            <img src={image} alt="" className="max-w-[150px] max-h-[150px]" />
             <div className="flex w-full justify-evenly pt-2">
               <button onClick={deleteImage} name={image}>
-                <IoTrashBinOutline
+                <MdDelete
                   size={20}
                   color="#f00"
                   className="pointer-events-none"
@@ -60,12 +58,12 @@ const UploadImages = ({ images, setImages }) => {
         ))}
       </div>
       <input ref={ref} type="file" className="hidden" onChange={handleClick} />
-      <div>
+      <div className="">
         <button
-          className="p-2 border rounded border-neutral-400 mr-2"
+          className="p-4 rounded-full border-neutral-400 mr-2"
           onClick={handleChange}
         >
-          <IoImages size={20} color="#777" />
+          <MdAddAPhoto size={80} className="text-alotrade" />
         </button>
       </div>
     </div>

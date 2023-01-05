@@ -50,8 +50,6 @@ const PageRoutes = () => {
         <Suspense fallback={<Loader />}>
           <Routes>{protectedRoutes()}</Routes>
         </Suspense>
-        {location.pathname !== "/offers" &&
-          !location.pathname.includes("profile") && <Footer />}
       </section>
     </>
   );

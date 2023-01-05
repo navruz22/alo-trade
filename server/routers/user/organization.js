@@ -143,6 +143,7 @@ const updateOrganization = async (req, res) => {
       region,
       district,
       email,
+      address,
       image,
       phone,
       categories,
@@ -155,7 +156,6 @@ const updateOrganization = async (req, res) => {
     const { error } = validateOrganization({
       name,
       phone,
-      email,
       categories,
       subcategories,
       tradetypes,
@@ -184,6 +184,7 @@ const updateOrganization = async (req, res) => {
     organization.subcategories = subcategories;
     organization.tradetypes = tradetypes;
     organization.description = description;
+    organization.address = address;
     await organization.save();
 
     const updated = await getOrganizationById(organization._id);

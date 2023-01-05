@@ -8,11 +8,14 @@ import { getTranslations, navs, toggleMenu, guestNavs } from "./constants";
 import UserProfile from "../../../Components/Navbar/UserProfile";
 import { logOut } from "../../Sign/signSlice";
 import { useTranslation } from "react-i18next";
+import LogoImg from "../../../assets/images/logo.png";
+import useWindowSize from "../../../hooks/useWindowSize";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation(["common"]);
   const translations = getTranslations(t);
+  const { width } = useWindowSize();
   const [navbarExpended, setNavbarExpended] = useState(false);
   const [navigations, setNavigations] = useState(navs);
   const changeHandler = () => {
@@ -56,9 +59,9 @@ const Navbar = () => {
           <div class="px-4 w-60 max-w-full">
             <Link
               to="/"
-              class="navbar-logo w-full block text-white text-center font-bold text-[32px] border-b-2 border-white"
+              class="navbar-logo w-full block text-white text-center font-bold text-[32px]"
             >
-              alotrade
+              <img src={LogoImg} alt="as" width={width < 720 ? 50 : 100} />
             </Link>
           </div>
           <div class="flex px-4 justify-between items-center w-full">

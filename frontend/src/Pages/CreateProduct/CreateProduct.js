@@ -228,8 +228,8 @@ const CreateProduct = () => {
           </div>
         )}
         <div className="container max-w-[800px]">
-          <div className="text-[28px] font-bold mb-3 text-center">
-            Новый товар
+          <div className="text-[28px] text-alotrade font-bold mb-3 text-center">
+            Карточка товара
           </div>
           <CheckboxList
             list={tradetypes}
@@ -258,13 +258,14 @@ const CreateProduct = () => {
             loading={loading}
             labelCategory={"Категория*"}
             openSubcategories={() => setIsVisibleFilter(!isVisibleFilter)}
+            kategoriya="Выбрать..."
           />
 
           <Input
             onKeyUp={enterHandler}
-            label="Nomi*"
+            label="Название*"
             labelStyle="font-normal"
-            placeholder="Mahsulot yoki xizmat nomi"
+            placeholder="Название товара или услуги"
             name="name"
             onChange={changeHandler}
             value={name}
@@ -274,9 +275,9 @@ const CreateProduct = () => {
             name="description"
             value={description}
             onChange={changeHandler}
-            label="Qo'shimcha ma'lumot*"
+            label="Описание*"
             labelStyle="font-normal"
-            placeholder="Izoh"
+            placeholder="Введите информацию"
           />
           <div className="grid grid-cols-2">
             {/*<CheckboxList*/}
@@ -290,7 +291,7 @@ const CreateProduct = () => {
               currency={currency}
               onChange={changeCurrency}
               list={currencices}
-              label="To'lov turi"
+              label="Способ оплаты"
               name={uniqueId("valyuta")}
             />
             <MinMaxPrice
@@ -304,10 +305,10 @@ const CreateProduct = () => {
           <div className="text-sm text-red-600 font-amazonbold text-center">
             {errors && errors}
           </div>
-          <div>
+          <div className="flex justify-center">
             <SaveButton
-              title="Saqlash"
-              className="w-full mt-3"
+              title="Создать"
+              className="w-[200px] mt-3"
               onClick={submitHandler}
             />
           </div>

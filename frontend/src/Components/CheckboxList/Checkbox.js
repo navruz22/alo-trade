@@ -9,7 +9,7 @@ const Checkbox = ({ data, onChange, checked, className }) => {
     <>
       <label
         htmlFor={id}
-        className={`${className} flex items-center text-neutral-600 text-sm cursor-pointer ml-2 w-full `}
+        className={`${className} flex items-center text-neutral-600 text-sm group-hover:text-white cursor-pointer ml-2 w-full `}
       >
         <input
           checked={checked}
@@ -19,7 +19,9 @@ const Checkbox = ({ data, onChange, checked, className }) => {
           type="checkbox"
           className="w-[1rem] h-[1rem] mr-2"
         />
-        <span className="w-full">{t(data.label)}</span>
+        <span className="w-full text-[18px] md:text-[16px] group-hover:text-white">
+          {t(data.label)}
+        </span>
       </label>
     </>
   );

@@ -16,6 +16,7 @@ import { getTranslations } from "../../translation";
 import PageHeader from "../PageHeaders/PageHeader";
 import OrderCard from "../OrderCard/OrderCard";
 import Pagination from "../Pagination/Pagination";
+import AddButton from "../Buttons/AddButton";
 
 const MyOrders = () => {
   const dispatch = useDispatch();
@@ -146,6 +147,12 @@ const MyOrders = () => {
     <div className="w-full bg-white">
       <div className="md:container">
         <div className="w-full md:px-4 flex flex-col gap-[20px] pt-4">
+          <div className="flex justify-end w-full">
+            <AddButton
+              onClick={() => navigate("/create_order")}
+              title={"Создать заявку"}
+            />
+          </div>
           <div className="px-4 flex flex-col gap-[20px]">
             {map(orders, (order) => (
               <OrderCard

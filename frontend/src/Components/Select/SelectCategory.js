@@ -39,7 +39,7 @@ const SelectCategory = ({
           onClick={openSubcategories}
           className="block w-full md:w-auto py-2 px-4 text-white bg-alotrade rounded"
         >
-          Подкатегории
+          Тип товара
         </button>
       </div>
     </div>

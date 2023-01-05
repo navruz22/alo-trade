@@ -35,11 +35,6 @@ const PageHeader = ({
 
   return (
     <div className="bg-alotrade md:bg-white w-full pt-6">
-      <div className="w-full block md:hidden">
-        <h2 className="text-center text-white text-[20px] mb-2 md:mb-0 md:text-[21px]">
-          {mainTitle}
-        </h2>
-      </div>
       <div className="flex flex-col items-center md:flex-row w-full md:justify-between md:items-center">
         <div className="flex w-full px-4 md:gap-4 md:justify-center mb-[20px] md:hidden">
           <button
@@ -82,17 +77,17 @@ const PageHeader = ({
             </button>
           )}
         </div>
-        <div className="flex w-full mb-4 md:mb-0 w-[300px] md:w-[500px]">
+        <div className="flex w-full mb-4 md:mb-0 h-[40px]">
           <input
             onKeyUp={enterHandler}
             onChange={(e) => setName(e.target.value)}
             type="text"
-            className="w-full border rounded-l-lg px-3 text-sm py-1 outline-0"
+            className="w-full border rounded-l-xl px-3 text-sm py-1 outline-0"
             placeholder={"Поиск"}
           />
           <button
             onClick={handleSearch}
-            className="w-1/5 rounded-r-lg bg-alotrade text-white border border-l-0 flex justify-center items-center"
+            className="w-1/5 rounded-r-xl bg-alotrade text-white border border-l-0 flex justify-center items-center"
           >
             <IoSearchOutline />
           </button>

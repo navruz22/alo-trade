@@ -30,7 +30,7 @@ const MainProducts = () => {
 
   return (
     <div className="md:container">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 py-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 py-4">
         {map(products, (product) => (
           <ProductCard logged={logged} key={uniqueId()} product={product} />
         ))}

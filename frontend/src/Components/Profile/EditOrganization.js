@@ -16,6 +16,13 @@ import SelectCategory from "../Select/SelectCategory";
 import { useTranslation } from "react-i18next";
 import { getTranslations } from "../../translation";
 import CompanyRegister from "../MainPageHeader/CompanyRegister";
+import Filter from "../../Pages/Filter/Filter";
+import {
+  filterCategories,
+  filterSubcategories,
+  filterSubcategories2,
+} from "../../Pages/Filter/filterSlice";
+import { getSubcategories } from "../../Pages/Category/categorySlice";
 
 const EditOrganization = () => {
   const dispatch = useDispatch();
@@ -39,6 +46,10 @@ const EditOrganization = () => {
   const { categoriesWithSubcategories } = useSelector(
     (state) => state.categories
   );
+  const {
+    subcategories: subcategoriesList,
+    subcategories2: subcategoriesList2,
+  } = useSelector((state) => state.filter);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [image, setImage] = useState(null);
   const handleChangeImage = (croppedImage) => {
@@ -65,6 +76,9 @@ const EditOrganization = () => {
   const [description, setDescription] = useState(
     organization?.description || ""
   );
+  const [address, setAddress] = useState("");
+
+  const [isVisibleFilter, setIsVisibleFilter] = useState(false);
 
   const changeHandler = (e) => {
     const name = e.target.name;
@@ -72,6 +86,7 @@ const EditOrganization = () => {
     name === "name" && setName(capitalize(value));
     name === "phone" && setPhone(value);
     name === "email" && setEmail(value);
+    name === "address" && setAddress(value);
   };
 
   const selectRegion = (e) => {
@@ -105,9 +120,11 @@ const EditOrganization = () => {
     setAllSubcategories(subCategories);
   };
   const selectCategory = (e) => {
-    setCategories(e);
-    filterAllSubcategories(e);
-    filterSubcategory(e);
+    setCategories([e]);
+    dispatch(filterSubcategories([]));
+    dispatch(filterSubcategories2([]));
+    dispatch(filterCategories([e.value]));
+    dispatch(getSubcategories({ category: e.value }));
   };
 
   const selectSubcategory = (e) => {
@@ -122,21 +139,19 @@ const EditOrganization = () => {
 
   const submitHandler = () => {
     const Categories = map(categories, (category) => category.value);
-    const subCategories = map(
-      subcategories,
-      (subcategory) => subcategory.value
-    );
     const data = {
       name,
       phone,
       region: region.value,
       district: district.value,
       categories: Categories,
-      subcategories: subCategories,
+      subcategories: subcategoriesList,
+      subcategories2: subcategoriesList2,
       tradetypes: tradeTypes,
       email,
       id: organization?._id,
       description,
+      address,
     };
     const check = checkOrganization({
       ...data,
@@ -172,8 +187,21 @@ const EditOrganization = () => {
       );
       setAllSubcategories(data);
     }
-    organization.subcategories && setSubcategories(organization.subcategories);
+    dispatch(getSubcategories({ category: organization.categories[0].value }));
+    organization?.subcategories.length > 0 &&
+      dispatch(
+        filterSubcategories([
+          ...organization.subcategories.map((el) => el.value),
+        ])
+      );
+    organization?.subcategories2.length > 0 &&
+      dispatch(
+        filterSubcategories2([
+          ...organization.subcategories2.map((el) => el.value),
+        ])
+      );
     organization.tradetypes && setTradeTypes(organization.tradetypes);
+    organization.address && setAddress(organization.address);
   };
   useEffect(() => {
     dispatch(getUser()).then(({ error, payload }) => {
@@ -189,88 +217,110 @@ const EditOrganization = () => {
   }
 
   return (
-    <div className="p-5 md:flex ">
-      <div className="md:w-1/3">
-        <ImageCrop
-          modalIsOpen={modalIsOpen}
-          setIsOpen={setIsOpen}
-          approve={handleChangeImage}
-          output={image}
-        />
-      </div>
-      <div className="w-full">
-        <div className="md:grid md:grid-cols-3 md:gap-4">
-          <Input
-            placeholder={tashkilot_nomi}
-            label={tashkilot_nomi}
-            name="name"
-            value={name}
-            onChange={changeHandler}
-            onKeyUp={enterHandler}
-          />
-          <Input
-            placeholder={telefon_raqam}
-            label={telefon_raqam}
-            name="phone"
-            value={phone}
-            onChange={changeHandler}
-            onKeyUp={enterHandler}
-          />
-          <Input
-            placeholder={Email}
-            label="Email"
-            name="email"
-            value={email}
-            onChange={changeHandler}
-            onKeyUp={enterHandler}
+    <>
+      {isVisibleFilter && (
+        <div
+          className="fixed top-0 left-0 w-full h-full z-[100] bg-black bg-opacity-50 "
+          onClick={() => setIsVisibleFilter(false)}
+        >
+          <Filter
+            onClick={() => setIsVisibleFilter(false)}
+            setFilterVisible={() => setIsVisibleFilter(false)}
           />
         </div>
-        <SelectRegion
-          region={region}
-          regions={regions}
-          selectRegion={selectRegion}
-          districts={districts}
-          district={district}
-          selectDistrict={selectDistrict}
-          loading={loading}
-          labelRegion={davlat}
-          labelDistrict={viloyat}
-        />
-        <div className="mb-2 w-full">
-          <CheckboxList
-            list={tradetypes}
-            onChange={changeTradeTypes}
-            headerText={savdo_turingizni_tanlang}
-            checkedList={tradeTypes}
-            headerStyle="text-sm text-[#777] font-normal"
-            cols={2}
+      )}
+      <div className="p-5 md:flex ">
+        <div className="md:w-1/3">
+          <ImageCrop
+            modalIsOpen={modalIsOpen}
+            setIsOpen={setIsOpen}
+            approve={handleChangeImage}
+            output={image}
           />
         </div>
-        <SelectCategory
-          kategoriya_turi={kategoriya_turi}
-          kategoriya={kategoriya}
-          categories={categories}
-          selectSubcategory={selectSubcategory}
-          subcategories={subcategories}
-          selectCategory={selectCategory}
-          loading={loading}
-          allSubcategories={allSubcategories}
-          categoriesWithSubcategories={categoriesWithSubcategories}
-        />
-        <textarea
-          value={description}
-          placeholder={tashkilot_haqida}
-          onChange={(e) => setDescription(e.target.value)}
-          className="w-full outline-0 border border-neutral-200 rounded p-2 mt-2 text-sm"
-        />
-        <SaveButton
-          isDisabled={loading}
-          title={saqlash}
-          onClick={submitHandler}
-          className="mt-3 w-full"
-        />
+        <div className="w-full">
+          <div className="md:grid md:grid-cols-3 md:gap-4">
+            <Input
+              placeholder={tashkilot_nomi}
+              label={tashkilot_nomi}
+              name="name"
+              value={name}
+              onChange={changeHandler}
+              onKeyUp={enterHandler}
+            />
+            <Input
+              placeholder={telefon_raqam}
+              label={telefon_raqam}
+              name="phone"
+              value={phone}
+              onChange={changeHandler}
+              onKeyUp={enterHandler}
+            />
+            <Input
+              placeholder={Email}
+              label="Email"
+              name="email"
+              value={email}
+              onChange={changeHandler}
+              onKeyUp={enterHandler}
+            />
+          </div>
+          <SelectRegion
+            region={region}
+            regions={regions}
+            selectRegion={selectRegion}
+            districts={districts}
+            district={district}
+            selectDistrict={selectDistrict}
+            loading={loading}
+            labelRegion={davlat}
+            labelDistrict={viloyat}
+          />
+          <Input
+            label={"Адрес"}
+            placeholder={"Адрес"}
+            name={"address"}
+            onChange={changeHandler}
+            value={address}
+            onKeyUp={enterHandler}
+          />
+          <div className="mb-2 w-full">
+            <CheckboxList
+              list={tradetypes}
+              onChange={changeTradeTypes}
+              headerText={savdo_turingizni_tanlang}
+              checkedList={tradeTypes}
+              headerStyle="text-sm text-[#777] font-normal"
+              cols={2}
+            />
+          </div>
+          <SelectCategory
+            kategoriya_turi={kategoriya_turi}
+            kategoriya={kategoriya}
+            categories={categories}
+            selectSubcategory={selectSubcategory}
+            subcategories={subcategories}
+            selectCategory={selectCategory}
+            loading={loading}
+            allSubcategories={allSubcategories}
+            categoriesWithSubcategories={categoriesWithSubcategories}
+            openSubcategories={() => setIsVisibleFilter(true)}
+          />
+          <textarea
+            value={description}
+            placeholder={tashkilot_haqida}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full outline-0 border border-neutral-200 rounded p-2 mt-2 text-sm"
+          />
+          <SaveButton
+            isDisabled={loading}
+            title={saqlash}
+            onClick={submitHandler}
+            className="mt-3 w-full"
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

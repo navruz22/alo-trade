@@ -115,11 +115,13 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
   const pageIncludeFalse =
     !location.pathname.includes("/create_product") &&
     !location.pathname.includes("/create_order") &&
-    !location.pathname.includes("/sign-up/business");
+    !location.pathname.includes("/sign-up/business") &&
+    !location.pathname.includes("/profile/organization");
   const pageIncludeTrue =
     location.pathname.includes("/create_product") ||
     location.pathname.includes("/create_order") ||
-    location.pathname.includes("/sign-up/business");
+    location.pathname.includes("/sign-up/business") ||
+    location.pathname.includes("/profile/organization");
 
   return (
     <div
@@ -129,7 +131,7 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
           ? `w-full h-full ease-in-out duration-200 fixed overflow-y-scroll  top-0 ${
               filterVisible ? "left-0" : "left-[-100%]"
             } z-50 bg-white`
-          : "min-w-[300px] max-w-[400px] shadow bg-white h-full"
+          : "min-w-[300px] max-w-[400px] shadow bg-white min-h-full"
       }
     >
       <div className="py-4">

@@ -60,7 +60,7 @@ const OrganizationCarousel = () => {
         autoPlaySpeed={3000}
         removeArrowOnDeviceType={["tablet", "mobile"]}
         infinite={true}
-        itemClass=""
+        itemClass="max-w-[300px] mb-4"
       >
         {map(
           organizations,
@@ -80,7 +80,7 @@ const OrganizationCarousel = () => {
               key={uniqueId("organization")}
               className="h-full bg-white-900 overflow-hidden rounded shadow-lg border-t-8 border-[#01c2cc] flex flex-col justify-between"
             >
-              <div className="border-neutral-400 mt-2 mx-4 flex gap-1">
+              {/* <div className="border-neutral-400 mt-2 mx-4 flex gap-1">
                 <h3 className="text-[12px] font-semibold font-amazonbold">
                   {" "}
                   {translations.savdo_turi}:
@@ -90,7 +90,7 @@ const OrganizationCarousel = () => {
                     ", "
                   )}`}
                 </h4>
-              </div>
+              </div> */}
               <CardLogo
                 logo={image}
                 name={name}

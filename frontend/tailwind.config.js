@@ -128,6 +128,7 @@ module.exports = {
     container: {
       center: true,
       padding: "16px",
+      minHeight: "100%",
     },
     extend: {
       colors: {

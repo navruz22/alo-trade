@@ -129,7 +129,7 @@ const Organization = () => {
                   {organization?.address && `Адрес: ${organization?.address}`}
                 </p>
                 <h3 className="flex">
-                  {savdo_turi}:
+                  Вид деятельности:
                   <p className="pl-2">
                     {map(organization?.tradetypes, (type) => (
                       <span key={uniqueId()} className="font-amazonbold">
@@ -139,12 +139,12 @@ const Organization = () => {
                   </p>
                 </h3>
                 <h4 className="flex items-center my-2">
-                  <IoCallSharp size={19} />
+                  <IoCallSharp size={19} className="text-green-600" />
                   <a href={`tel:${organization?.phone}`} className="ml-2">
                     {organization?.phone}
                   </a>
                 </h4>
-                {organization?.email && (
+                {/* {organization?.email && (
                   <h4 className="flex items-center my-2">
                     <MdOutlineAlternateEmail size={19} />
                     <a
@@ -154,7 +154,7 @@ const Organization = () => {
                       {organization?.email}
                     </a>
                   </h4>
-                )}
+                )} */}
               </div>
             </div>
           </div>
@@ -182,7 +182,7 @@ const Organization = () => {
           </button>
         </div>
         {content === "descr" ? (
-          <div>
+          <div className="py-6">
             <h2 className="font-bold text-[32px]">О комании</h2>
             <p className="text-[16px]">{organization?.description}</p>
           </div>

@@ -92,7 +92,7 @@ const DetailProductCard = ({ id, user }) => {
             focus:border-white"
           >
             {width > 720 ? (
-              (show && "+" + user?.phone) || (
+              user?.phone || (
                 <IoCallOutline className="text-[14px] md:text-[22px]" />
               )
             ) : (

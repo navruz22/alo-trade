@@ -28,7 +28,8 @@ const SelectCheckbox = ({
   const pageIncludeFalse =
     !location.pathname.includes("/create_product") &&
     !location.pathname.includes("/create_order") &&
-    !location.pathname.includes("/sign-up/business");
+    !location.pathname.includes("/sign-up/business") &&
+    !location.pathname.includes("/profile/organization");
   const pageIncludeTrue =
     location.pathname.includes("/create_product") ||
     location.pathname.includes("/create_order");
@@ -54,7 +55,7 @@ const SelectCheckbox = ({
               onClick={changeHandler}
               currentId={currentId}
               changeHeader={changeHeader}
-              checkBoxClass="font-bold"
+              checkBoxClass="font-semibold"
             />
             <div
               className={`pl-3 transition-all ease-in-out duration-300 ${
@@ -69,6 +70,7 @@ const SelectCheckbox = ({
                   )}
                   data={property}
                   key={uniqueId("selectCheckbox")}
+                  className="mt-2"
                 />
               ))}
             </div>

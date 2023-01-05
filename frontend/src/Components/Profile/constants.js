@@ -54,7 +54,6 @@ export const checkPassword = ({
 export const checkOrganization = ({
   name,
   phone,
-  email,
   categories,
   subcategories,
   tradetypes,
@@ -68,10 +67,6 @@ export const checkOrganization = ({
   }
   if (phone.length < 9) {
     universalToast(t("Telefon raqamni to'liq kiriting"), "warning");
-    return false;
-  }
-  if (email.length < 1) {
-    universalToast(t("Emailni kiriting"), "warning");
     return false;
   }
   if (!categories.length) {

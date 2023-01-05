@@ -22,7 +22,7 @@ const Menu = (styles) => ({
 });
 const Option = (styles, { isFocused, isSelected }) => ({
   ...styles,
-  fontSize: ".875rem",
+  fontSize: "16px",
   fontWeight: "400",
   // color: isSelected || isFocused ? '#ffffff' : '#071F45',
   // backgroundColor: isSelected ? '#0090A3' : isFocused ? '#00B4CC' : '#ffffff',
