@@ -15,48 +15,44 @@ export const checkHandler = ({
   t,
 }) => {
   if (firstname.length < 1) {
-    universalToast(t("Ismingizni kiriting"), "warning");
+    universalToast("Введите имя!", "warning");
     return false;
   }
   if (lastname.length < 1) {
-    universalToast(t("Familiyangizni kiriting"), "warning");
+    universalToast("Введите фамилию!", "warning");
     return false;
   }
   if (phone.length < 9) {
-    universalToast(t("Telefon raqamni to'liq kiriting"), "warning");
+    universalToast("Введите номер телефона полностью!", "warning");
     return false;
   }
   if (!region) {
-    universalToast(t("Viloyat tanlanmagan"), "warning");
+    universalToast("Выберите страну!", "warning");
     return false;
   }
   if (!district) {
-    universalToast(t("Tuman tanlanmagan"), "warning");
+    universalToast("Выберите регион!", "warning");
     return false;
   }
   if (password.length < 6) {
-    universalToast(
-      t("Parol kamida 6 ta belgidan iborat bo'lishi kerak", "warning")
-    );
+    universalToast("Пароль не должен быть менее 6 символов!", "warning");
     return false;
   }
   if (url === "business") {
     if (name === "") {
-      universalToast(t("Tashkilotingiz nomini kiriting"), "warning");
+      universalToast("Укажите название компании!", "warning");
       return false;
     }
     if (categories.length === 0) {
-      universalToast(
-        t("Xizmat ko'rsatish kategoriyalaringizni kiriting", "warning")
-      );
+      universalToast("Выберите категорию!", "warning");
       return false;
     }
     if (subcategories.length === 0) {
-      universalToast(t("Kategoriya turlari tanlanmagan"), "warning");
+      universalToast("Выберите подкатегорию!", "warning");
       return false;
     }
     if (tradeTypes.length === 0) {
-      universalToast(t("Savdo turlari tanlanmagan"), "warning");
+      universalToast("Выберите тип торговли!", "warning");
       return false;
     }
   }

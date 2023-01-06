@@ -306,10 +306,10 @@ const CreateOrder = () => {
           <div className="text-sm text-red-600 font-amazonbold text-center">
             {errors && errors}
           </div>
-          <div>
+          <div className="flex justify-center">
             <SaveButton
               title="Создать"
-              className="w-full mt-3"
+              className="w-[200px] mt-3"
               onClick={submitHandler}
             />
           </div>

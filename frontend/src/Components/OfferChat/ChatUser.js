@@ -1,5 +1,6 @@
 import React from "react";
 import { IoArrowDownOutline, IoArrowUpOutline } from "react-icons/io5";
+import { HiOutlineBellAlert } from "react-icons/hi2";
 
 const ChatUser = ({ offer, user, changeOffer }) => {
   const _id = user?._id;
@@ -27,25 +28,21 @@ const ChatUser = ({ offer, user, changeOffer }) => {
             IMG
           </div>
         )}
+        <p className="text-xs text-neutral-600 mt-2">
+          {new Date(createdAt).toLocaleDateString()}
+        </p>
       </div>
       <div className="ml-4 flex-1 py-4 pr-2">
         <div className="flex items-bottom justify-between">
           <p className="text-neutral-500 font-amazonbold h-6 overflow-hidden">
             {name}
           </p>
-          <p className="text-xs text-neutral-600">
-            {new Date(createdAt).toLocaleDateString()}
-          </p>
+          {isNew && <HiOutlineBellAlert className="fill-green-500" size={20} />}
         </div>
         <div className="flex justify-between items-center">
           <p className="text-neutral-500 mt-1 text-sm h-6 overflow-hidden">
             {message && message}
           </p>
-          {isNew && (
-            <p className="text-[10px] bg-green-500 px-2 text-red-600 rounded-md ">
-              new
-            </p>
-          )}
           <p className="text-xs text-neutral-600">
             {isUser ? (
               <IoArrowUpOutline size={15} className="rotate-45" />

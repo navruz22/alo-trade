@@ -14,35 +14,31 @@ export const checkRegisterOrder = ({
 }) => {
   const min = Number(minPrice);
   const max = Number(maxPrice);
-  if (tradetypes.length === 0) {
-    setErrors("Savdo turlari tanlanmagan");
-    return false;
-  }
   if (categories.length === 0) {
-    setErrors("Kategoriyalar tanlanmagan");
+    setErrors("Выберите категорию!");
     return false;
   }
   if (subcategories.length === 0) {
-    setErrors("Kategoriyalar turlari tanlanmagan");
+    setErrors("Выберите тип товара!");
     return false;
   }
   if (name.length === 0) {
-    setErrors("Mahsulot nomi kiritilmagan");
+    setErrors("Введите название заказа!");
     return false;
   }
 
   if (description.length === 0) {
-    setErrors("Mahsulot haqida ma'lumot kiritilmagan");
+    setErrors("Введите описание заказа!");
     return false;
   }
 
   if (!region) {
-    setErrors("Viloyat tanlanmagan");
+    setErrors("Выберите страну!");
     return false;
   }
 
   if (!district) {
-    setErrors("Tuman tanlanmagan");
+    setErrors("Выберите регион!");
     return false;
   }
   // if (status.length === 0) {
@@ -51,16 +47,16 @@ export const checkRegisterOrder = ({
   // }
 
   if ((min || max) && min > max) {
-    setErrors("Narxlar to'g'ri kiritilmagan");
+    setErrors("Цена указана неправильно!");
     return false;
   }
   if ((min || max) && (min < 0 || max < 0)) {
-    setErrors("Narxlar to'g'ri kiritilmagan");
+    setErrors("Цена указана неправильно!");
     return false;
   }
 
   if ((min > 0 || max > 0) && currency === null) {
-    setErrors("Valyuta tanlanmagan");
+    setErrors("Выберите валюту!");
     return false;
   }
 

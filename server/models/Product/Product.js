@@ -30,7 +30,7 @@ const Product = new Schema(
 
 const validateProduct = (product) => {
   const schema = Joi.object({
-    tradetypes: Joi.array().required(),
+    tradetypes: Joi.array(),
     region: Joi.string(),
     district: Joi.string(),
     categories: Joi.array().required(),

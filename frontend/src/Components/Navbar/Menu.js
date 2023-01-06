@@ -1,8 +1,20 @@
 import React from "react";
 import { map, uniqueId } from "lodash";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { HiOutlineBellAlert } from "react-icons/hi2";
 
 const Menu = ({ navs, translations }) => {
+  const { offers } = useSelector((state) => state.offers);
+  const {
+    userData: { user },
+  } = useSelector((state) => state.login);
+  const isNewMessage = offers.filter((offer) => {
+    const { messages } = offer;
+    const { isRead, user: chatUser } = messages;
+    const isNew = chatUser !== user?._id && !isRead;
+    return isNew && offer;
+  });
   return (
     <ul class="blcok lg:flex">
       {map(navs, (nav) => (
@@ -26,6 +38,9 @@ const Menu = ({ navs, translations }) => {
             "
           >
             {nav.name}
+            {nav?.isChat && isNewMessage.length > 0 && (
+              <HiOutlineBellAlert className="fill-yellow-400" size={15} />
+            )}
           </Link>
         </li>
       ))}

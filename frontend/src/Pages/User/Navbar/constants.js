@@ -6,7 +6,7 @@ import {
   IoPersonOutline,
   IoShare,
 } from "react-icons/io5";
-import { AiFillHome } from "react-icons/ai";
+import { AiFillHome, AiFillPlusCircle } from "react-icons/ai";
 import { RiListUnordered } from "react-icons/ri";
 import { BsFillChatRightDotsFill } from "react-icons/bs";
 import { MdProductionQuantityLimits } from "react-icons/md";
@@ -25,6 +25,7 @@ export const navs = [
     path: "/offers",
     icon: <IoShare size={20} color="white" />,
     style: "rotate-180 mr-2 mt-1",
+    isChat: true,
   },
   {
     name: "Товары",
@@ -45,31 +46,36 @@ export const mobileNavs = [
   {
     name: "Главгая",
     path: "/",
-    icon: <AiFillHome color="white" />,
+    icon: <AiFillHome size={25} color="white" />,
   },
   {
     name: "Заявки",
     path: "/orders",
-    icon: <RiListUnordered color="white" />,
+    icon: <RiListUnordered size={25} color="white" />,
     style: "mr-2",
     navStyle: "border-r",
   },
   {
-    name: "Чат",
-    path: "/offers",
-    icon: <BsFillChatRightDotsFill color="white" />,
+    // name: "Создать",
+    path: "/create_order",
+    icon: (
+      <AiFillPlusCircle
+        size={27}
+        className="relative scale-[2.5] translate-y-[-30%] text-slate-100"
+      />
+    ),
     style: "rotate-180 mr-2 mt-1",
   },
   {
     name: "Товары",
     path: "/products",
-    icon: <MdProductionQuantityLimits color="white" />,
+    icon: <MdProductionQuantityLimits size={25} color="white" />,
     style: "mr-2",
   },
   {
     name: "Поставщики",
     path: "/organizations",
-    icon: <FaWarehouse color="white" />,
+    icon: <FaWarehouse size={25} color="white" />,
     style: "mr-2",
     navStyle: "border-l",
   },

@@ -227,10 +227,7 @@ const signSlice = createSlice({
     [updateOrganization.fulfilled]: (state, { payload: { organization } }) => {
       state.loading = false;
       state.userData.organization = organization;
-      universalToast(
-        "Tashkilot muvaffaqqiyatli ma'lumotlari tahrirlandi! ",
-        "success"
-      );
+      universalToast("Данные компании успешно изменены! ", "success");
     },
     [updateOrganization.rejected]: (state, { payload }) => {
       state.loading = false;

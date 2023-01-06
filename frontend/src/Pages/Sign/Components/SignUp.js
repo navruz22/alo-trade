@@ -5,6 +5,7 @@ import {
   Outlet,
   Route,
   Routes,
+  useLocation,
   useNavigate,
 } from "react-router-dom";
 import UserRegister from "../../../Components/Sign/UserRegister";
@@ -28,10 +29,13 @@ import {
   filterSubcategories2,
 } from "../../Filter/filterSlice.js";
 import { getSubcategories } from "../../Category/categorySlice";
+import userImg from "../../../assets/images/userRegister.jpg";
+import organizationImg from "../../../assets/images/organizationRegister.jpg";
 
 const SignUp = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useTranslation(["common"]);
   const translations = getTranslations(t);
   const { regions, error: errorRegion } = useSelector((state) => state.regions);
@@ -210,7 +214,7 @@ const SignUp = () => {
         <div className="container m-auto flex lg:flex-row">
           <div className="lg:w-1/2  hidden lg:block">
             <div className="flex flex-col items-center justify-center h-full text-neutral-700">
-              <Link
+              {/* <Link
                 onClick={changeUrl}
                 name="sign-up"
                 to="/sign-up"
@@ -219,7 +223,18 @@ const SignUp = () => {
                 } `}
               >
                 {translations.buyurtmachi}
-              </Link>
+              </Link> */}
+              <div className="">
+                <img
+                  src={
+                    location.pathname.includes("sign-up/business")
+                      ? organizationImg
+                      : userImg
+                  }
+                  alt="img"
+                  width={300}
+                />
+              </div>
             </div>
           </div>
           <div className="lg:w-1/2 w-full">

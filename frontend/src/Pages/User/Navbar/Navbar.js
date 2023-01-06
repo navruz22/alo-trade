@@ -11,6 +11,8 @@ import { useTranslation } from "react-i18next";
 import LogoImg from "../../../assets/images/logo.png";
 import LogoImg2 from "../../../assets/images/logo2.png";
 import useWindowSize from "../../../hooks/useWindowSize";
+import { IoIosMail } from "react-icons/io";
+import { HiOutlineBellAlert } from "react-icons/hi2";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -26,6 +28,15 @@ const Navbar = () => {
     userData: { user },
     logged,
   } = useSelector((state) => state.login);
+
+  const { offers } = useSelector((state) => state.offers);
+  const isNewMessage = offers.filter((offer) => {
+    const { messages } = offer;
+    const { isRead, user: chatUser } = messages;
+    const isNew = chatUser !== user?._id && !isRead;
+    return isNew && offer;
+  });
+
   const closeHandler = () => {
     dispatch(logOut());
     setNavbarExpended(false);
@@ -94,7 +105,16 @@ const Navbar = () => {
                 <Menu navs={navigations} translations={translations} />
               </nav>
             </div>
-            <div class="sm:flex justify-end lg:pr-0">
+            <div class="sm:flex flex items-center justify-end lg:pr-0">
+              <Link to={"/offers"} className="block md:hidden mr-4 relative">
+                <IoIosMail size={30} color={"white"} />
+                {isNewMessage.length > 0 && (
+                  <HiOutlineBellAlert
+                    className="fill-yellow-400 absolute top-0 right-[-10%]"
+                    size={15}
+                  />
+                )}
+              </Link>
               {user ? (
                 <UserProfile
                   user={user}

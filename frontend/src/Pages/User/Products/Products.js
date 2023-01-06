@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PageHeader from "../../../Components/PageHeaders/PageHeader";
-import MainPageHeader from "../../../Components/MainPageHeader/MainPageHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { filter } from "./constants";
 import { filterProduct } from "../../Filter/filterSlice";
@@ -13,16 +12,12 @@ import {
 import UniversalModal from "../../../Components/Modal/UniversalModal";
 import { map, uniqueId } from "lodash";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
-import { getTranslations } from "../../../translation";
-import { useTranslation } from "react-i18next";
 import Filter from "../../Filter/Filter";
 import Pagination from "../../../Components/Pagination/Pagination";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import useWindowSize from "../../../hooks/useWindowSize";
 
 const Products = () => {
-  const { t } = useTranslation(["common"]);
-  const translations = getTranslations(t);
   const dispatch = useDispatch();
   const location = useLocation();
   const {

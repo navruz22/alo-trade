@@ -9,23 +9,23 @@ export const checkUser = ({
   t,
 }) => {
   if (firstname.length < 1) {
-    universalToast(t("Ismingizni kiriting"), "warning");
+    universalToast("Введите имя!", "warning");
     return false;
   }
   if (lastname.length < 1) {
-    universalToast(t("Familiyangizni kiriting"), "warning");
+    universalToast("Введите фамилию!", "warning");
     return false;
   }
   if (phone.length < 9) {
-    universalToast(t("Telefon raqamni to'liq kiriting"), "warning");
+    universalToast("Введите номер телефона полностью!", "warning");
     return false;
   }
   if (!region) {
-    universalToast(t("Viloyat tanlanmagan"), "warning");
+    universalToast("Выберите страну!", "warning");
     return false;
   }
   if (!district) {
-    universalToast(t("Tuman tanlanmagan"), "warning");
+    universalToast("Выберите регион!", "warning");
     return false;
   }
   return true;
@@ -38,14 +38,11 @@ export const checkPassword = ({
   t,
 }) => {
   if (password.length < 6 || oldPassword.length < 6) {
-    universalToast(
-      t("Parol 6 ta belgidan kam bo'lishi mumkin emas"),
-      "warning"
-    );
+    universalToast("Пароль не должен быть менее 6 символов!", "warning");
     return false;
   }
   if (password !== confirmPassword) {
-    universalToast(t("Parollar mos emas"), "warning");
+    universalToast("Неккоректный пароль!", "warning");
     return false;
   }
   return true;
@@ -62,31 +59,31 @@ export const checkOrganization = ({
   t,
 }) => {
   if (name.length < 1) {
-    universalToast(t("Tashkilot nomini kiriting"), "warning");
+    universalToast("Укажите название компании!", "warning");
     return false;
   }
   if (phone.length < 9) {
-    universalToast(t("Telefon raqamni to'liq kiriting"), "warning");
+    universalToast("Введите номер телефона полоностью!", "warning");
     return false;
   }
   if (!categories.length) {
-    universalToast(t("Kategoriya tanlanmagan"), "warning");
+    universalToast("Выберите категорию!", "warning");
     return false;
   }
   if (!subcategories.length) {
-    universalToast(t("Kategoriya turlari tanlanmagan"), "warning");
+    universalToast("Выберите подкатегорию!", "warning");
     return false;
   }
   if (!tradetypes.length) {
-    universalToast(t("Savdo turi tanlanmagan"), "warning");
+    universalToast("Выберите тип торговли!", "warning");
     return false;
   }
   if (!region) {
-    universalToast(t("Viloyat tanlanmagan"), "warning");
+    universalToast("Выберите страну!", "warning");
     return false;
   }
   if (!district) {
-    universalToast(t("Tuman tanlanmagan"), "warning");
+    universalToast("Выберите регион!", "warning");
     return false;
   }
   return true;
