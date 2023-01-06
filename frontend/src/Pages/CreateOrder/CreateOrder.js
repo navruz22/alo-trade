@@ -224,6 +224,7 @@ const CreateOrder = () => {
             <Filter
               onClick={() => setIsVisibleFilter(false)}
               setFilterVisible={() => setIsVisibleFilter(false)}
+              filterVisible={isVisibleFilter}
             />
           </div>
         )}

@@ -38,11 +38,16 @@ const SelectCheckbox = ({
   return (
     <div className="mt-3">
       <div className={isCategory ? "pb-4 px-4" : "px-4"}>
-        {!isCategory && <FilterHeader className={"mb-4"} label={headerText} />}
+        {!isCategory && (
+          <FilterHeader
+            className={"font-bold text-[21px] mt-2"}
+            label={headerText}
+          />
+        )}
         {isCategory && pageIncludeFalse && (
           <SelectInput
             options={categories}
-            placeholder={"Kategoriya tanlang..."}
+            placeholder={"Выбрать категорию..."}
             onSelect={changeCategory}
             value={categoryValue}
           />

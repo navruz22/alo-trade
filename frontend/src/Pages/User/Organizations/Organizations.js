@@ -125,7 +125,6 @@ const Organizations = () => {
               setFilterVisible={setFilterVisible}
               countTitle="Jami:"
               mainTitle={"Компании"}
-              buttonTitle={"Добавить компанию"}
               filterBtnClick={() => setFilterVisible(!filterVisible)}
             />
 

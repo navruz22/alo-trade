@@ -224,6 +224,7 @@ const CreateProduct = () => {
             <Filter
               onClick={() => setIsVisibleFilter(false)}
               setFilterVisible={() => setIsVisibleFilter(false)}
+              filterVisible={isVisibleFilter}
             />
           </div>
         )}

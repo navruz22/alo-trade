@@ -226,6 +226,7 @@ const EditOrganization = () => {
           <Filter
             onClick={() => setIsVisibleFilter(false)}
             setFilterVisible={() => setIsVisibleFilter(false)}
+            filterVisible={isVisibleFilter}
           />
         </div>
       )}

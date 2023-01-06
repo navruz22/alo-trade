@@ -172,7 +172,7 @@ const Orders = () => {
                 }
               }}
               countTitle={translations.jami}
-              buttonTitle={"Создать заказ"}
+              buttonTitle={"Создать"}
               handleFilter={handleFilter}
               filterData={order}
               filter={filterData}
