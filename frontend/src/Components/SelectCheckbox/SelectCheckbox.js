@@ -17,6 +17,7 @@ const SelectCheckbox = ({
   isCategory,
   categories,
   changeCategory,
+  categoryValue,
 }) => {
   const location = useLocation();
   const [currentId, setCurrentId] = useState(null);
@@ -36,17 +37,18 @@ const SelectCheckbox = ({
 
   return (
     <div className="mt-3">
-      <div className="pb-4 px-4">
+      <div className={isCategory ? "pb-4 px-4" : "px-4"}>
         {!isCategory && <FilterHeader className={"mb-4"} label={headerText} />}
         {isCategory && pageIncludeFalse && (
           <SelectInput
             options={categories}
             placeholder={"Kategoriya tanlang..."}
             onSelect={changeCategory}
+            value={categoryValue}
           />
         )}
       </div>
-      <div className="h-full w-full md:max-h-[500px]">
+      <div className="h-full w-full md:max-h-[500px] overflow-y-scroll no-scrollbar">
         {map(datas, (data, index) => (
           <div key={uniqueId("selectButton")}>
             <SelectButton

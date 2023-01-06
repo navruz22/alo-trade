@@ -50,7 +50,8 @@ const DetailOrder = () => {
             <div className="flex flex-col text-[18px] font-medium">
               <span>Цена:</span>
               <h2 className="text-[30px] text-orange-500 font-bold">
-                {order?.minPrice} - {order?.maxPrice} {order?.currency}
+                {(order?.maxPrice || "").toLocaleString("ru-RU")}{" "}
+                {order?.currency}
               </h2>
             </div>
             <div className="flex items-center gap-[4px] text-[14px] font-medium">

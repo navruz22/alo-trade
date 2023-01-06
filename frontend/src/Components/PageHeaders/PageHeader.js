@@ -5,6 +5,7 @@ import Pagination from "../Pagination/Pagination";
 import { IoSearchOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { filterName } from "../../Pages/Filter/filterSlice";
+import { FaFilter } from "react-icons/fa";
 
 const PageHeader = ({
   onClick,
@@ -19,6 +20,7 @@ const PageHeader = ({
   setFilterBody,
   mainTitle,
   isOrganization,
+  filterBtnClick,
 }) => {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
@@ -77,7 +79,13 @@ const PageHeader = ({
             </button>
           )}
         </div>
-        <div className="flex w-full mb-4 md:mb-0 h-[40px]">
+        <div className="flex w-full mb-4 md:mb-0 h-[40px] px-2 md:px-0">
+          <button
+            onClick={filterBtnClick}
+            className="bg-alotrade py-2 px-4 hidden md:block text-[18px] font-bold text-white rounded mr-4"
+          >
+            <FaFilter color="#fff" />
+          </button>
           <input
             onKeyUp={enterHandler}
             onChange={(e) => setName(e.target.value)}

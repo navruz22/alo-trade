@@ -205,7 +205,7 @@ const SignUp = () => {
   }, [dispatch, errorCategories]);
 
   return (
-    <div className="w-full h-screen bg-white flex flex-col overflow-scroll">
+    <div className="w-full bg-white flex flex-col">
       <div className="container m-auto">
         <div className="container m-auto flex lg:flex-row">
           <div className="lg:w-1/2  hidden lg:block">

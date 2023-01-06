@@ -9,6 +9,7 @@ import UserProfile from "../../../Components/Navbar/UserProfile";
 import { logOut } from "../../Sign/signSlice";
 import { useTranslation } from "react-i18next";
 import LogoImg from "../../../assets/images/logo.png";
+import LogoImg2 from "../../../assets/images/logo2.png";
 import useWindowSize from "../../../hooks/useWindowSize";
 
 const Navbar = () => {
@@ -61,7 +62,11 @@ const Navbar = () => {
               to="/"
               class="navbar-logo w-full block text-white text-center font-bold text-[32px]"
             >
-              <img src={LogoImg} alt="as" width={width < 720 ? 50 : 100} />
+              <img
+                src={width < 720 ? LogoImg : LogoImg2}
+                alt="as"
+                width={width < 720 ? 50 : 200}
+              />
             </Link>
           </div>
           <div class="flex px-4 justify-between items-center w-full">

@@ -231,7 +231,7 @@ const CreateProduct = () => {
           <div className="text-[28px] text-alotrade font-bold mb-3 text-center">
             Карточка товара
           </div>
-          <CheckboxList
+          {/* <CheckboxList
             list={tradetypes}
             checkedList={tradeTypes}
             cols={2}
@@ -239,7 +239,7 @@ const CreateProduct = () => {
             headerStyle="text-sm"
             listStyle="ml-0"
             onChange={changeTradeTypes}
-          />
+          /> */}
           <SelectRegion
             region={region}
             selectRegion={selectRegion}

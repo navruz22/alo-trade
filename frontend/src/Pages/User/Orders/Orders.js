@@ -179,6 +179,7 @@ const Orders = () => {
               setFilterBody={setFilterBody}
               setFilterVisible={setFilterVisible}
               mainTitle="Заявки"
+              filterBtnClick={() => setFilterVisible(!filterVisible)}
             />
             <div className="px-4 flex flex-col gap-[20px]">
               {map(orders, (order) => (

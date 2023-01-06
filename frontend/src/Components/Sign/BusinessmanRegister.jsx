@@ -49,6 +49,7 @@ const BusinessmanRegister = ({
           <Filter
             onClick={() => setIsVisibleFilter(false)}
             setFilterVisible={() => setIsVisibleFilter(false)}
+            filterVisible={isVisibleFilter}
           />
         </div>
       )}
@@ -176,7 +177,7 @@ const BusinessmanRegister = ({
                 value={categories}
                 isDisabled={loading}
                 onSelect={selectCategory}
-                closeMenuOnSelect={false}
+                closeMenuOnSelect={true}
               />
             </div>
             <div className="w-full">

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CheckboxList from "../../Components/CheckboxList/CheckboxList";
 import SelectCheckbox from "../../Components/SelectCheckbox/SelectCheckbox";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,6 +40,9 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
   const { categoriesWithSubcategories: categories, subcategories } =
     useSelector((state) => state.categories);
   const { regions } = useSelector((state) => state.regions);
+
+  const [categoryValue, setCategoryValue] = useState(null);
+
   // const changeTradeTypes = (e) => {
   //   const value = e.target.value;
   //   const checked = e.target.checked;
@@ -53,6 +56,7 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
 
   const changeCategories = (e) => {
     const value = e.value;
+    setCategoryValue(e);
     dispatch(filterSubcategories([]));
     dispatch(filterSubcategories2([]));
     dispatch(filterCategories([value]));
@@ -100,11 +104,10 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
   useEffect(() => {
     if (location?.state?.category?.value) {
       const value = location?.state?.category?.value;
-      const filtered = filter(categoriesList, (category) => category !== value);
-      const newCategories = [...filtered, value];
-      dispatch(filterCategories(newCategories));
+      changeCategories(categories.filter((el) => el.value === value)[0]);
+      dispatch(filterCategories([value]));
     }
-  }, [dispatch, location, categoriesList]);
+  }, [dispatch, location]);
 
   useEffect(() => {
     dispatch(getTradeTypes());
@@ -123,27 +126,27 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
     location.pathname.includes("/sign-up/business") ||
     location.pathname.includes("/profile/organization");
 
+  // "min-w-[300px] max-w-[400px] shadow bg-white min-h-full"
+
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className={
-        width < 720 && pageIncludeFalse
-          ? `w-full h-full ease-in-out duration-200 fixed overflow-y-scroll  top-0 ${
-              filterVisible ? "left-0" : "left-[-100%]"
-            } z-50 bg-white`
-          : "min-w-[300px] max-w-[400px] shadow bg-white min-h-full"
-      }
+      className={`${
+        width < 720 ? "w-full" : "min-w-[300px] max-w-[400px] px-2"
+      } h-full ease-in-out duration-200 fixed overflow-y-scroll no-scrollbar top-0 ${
+        filterVisible ? "left-0" : "left-[-100%]"
+      } z-50 bg-white`}
     >
       <div className="py-4">
         <div className="flex justify-end items-center mb-4 pr-4">
           {/* <h1 className="font-amazonbold text-xl tracking-widest text-secondary-medium">
             {Filter}
           </h1> */}
-          {width < 720 && (
+          {
             <button onClick={() => setFilterVisible(false)}>
               <img src={closeIcon} alt="close" width={30} />
             </button>
-          )}
+          }
         </div>
         {width < 720 ? (
           <>
@@ -168,6 +171,7 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
                   categories={categories}
                   property="subcategories"
                   isCategory={true}
+                  categoryValue={categoryValue}
                 />
               </>
             )}
@@ -193,6 +197,7 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
               categories={categories}
               property="subcategories"
               isCategory={true}
+              categoryValue={categoryValue}
             />
           </>
         )}
@@ -227,7 +232,7 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
             </>
           )
         )}
-        {width < 720 && pageIncludeFalse && (
+        {pageIncludeFalse && (
           <button
             onClick={() => setFilterVisible(false)}
             className="bg-alotrade py-2 px-4 block w-full mt-4 text-white rounded"

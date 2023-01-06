@@ -5,7 +5,6 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import SimpleImageSlider, { Slide } from "react-simple-image-slider";
 import CustomSlider from "../../../Components/CustomImgSlider/CustomSlider";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 import useWindowSize from "../../../hooks/useWindowSize";
@@ -93,7 +92,7 @@ const DetailProduct = () => {
             <div className="flex flex-col text-[18px] font-medium">
               <span>Цена:</span>
               <h2 className="text-[30px] text-orange-500 font-bold">
-                {(product?.maxPrice).toLocaleString("ru-RU")}{" "}
+                {(product?.maxPrice || "").toLocaleString("ru-RU")}{" "}
                 {product?.currency}
               </h2>
             </div>

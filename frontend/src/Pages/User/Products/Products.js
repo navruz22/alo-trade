@@ -172,8 +172,9 @@ const Products = () => {
               setFilterVisible={setFilterVisible}
               mainTitle={"Товары"}
               countTitle="Jami:"
+              filterBtnClick={() => setFilterVisible(!filterVisible)}
             />
-            <div className="grid grid-cols-2 px-2 gap-2 md:grid-cols-3 md:gap-3">
+            <div className="grid grid-cols-2 px-2 gap-2 md:grid-cols-4 md:gap-3">
               {map(products, (product) => (
                 <ProductCard
                   logged={logged}

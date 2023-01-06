@@ -126,6 +126,7 @@ const Organizations = () => {
               countTitle="Jami:"
               mainTitle={"Компании"}
               buttonTitle={"Добавить компанию"}
+              filterBtnClick={() => setFilterVisible(!filterVisible)}
             />
 
             <div className="grid grid-cols-1 px-2 gap-4 md:grid-cols-3 md:gap-3 pt-4">
