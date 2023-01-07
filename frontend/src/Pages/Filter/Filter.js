@@ -102,12 +102,12 @@ const Filter = ({ filterVisible, setFilterVisible, filterBody, onClick }) => {
   };
 
   useEffect(() => {
-    if (location?.state?.category?.value) {
+    if (location?.state?.category?.value && categories) {
       const value = location?.state?.category?.value;
       changeCategories(categories.filter((el) => el.value === value)[0]);
       dispatch(filterCategories([value]));
     }
-  }, [dispatch, location]);
+  }, [dispatch, location, categories]);
 
   useEffect(() => {
     dispatch(getTradeTypes());

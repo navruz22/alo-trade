@@ -98,7 +98,7 @@ const DetailProduct = () => {
             </div>
             <div className="flex items-center gap-[4px] text-[14px] font-medium">
               <h2 className="text-[16px] font-bold">
-                {product?.region?.label}, {product?.region?.districts[0].label}
+                {product?.region?.label}, {product?.district?.label}
               </h2>
             </div>
             <div className="hidden md:block mt-6 text-center bg-teal-200 p-4 rounded-xl">

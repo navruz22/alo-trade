@@ -57,8 +57,7 @@ const DetailOrder = () => {
             <div className="flex items-center gap-[4px] text-[14px] font-medium">
               Поставка в город:{" "}
               <h2 className="text-[16px] font-bold">
-                {order?.region?.label},{" "}
-                {order?.region?.districts.map((el) => el.label)}
+                {order?.region?.label}, {order?.district?.label}
               </h2>
             </div>
           </div>
