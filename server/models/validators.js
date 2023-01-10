@@ -10,8 +10,10 @@ const { validateOrder } = require("./Order/Order");
 const { validateProduct } = require("./Product/Product");
 const { validateOffer } = require("./Offer/Offer");
 const { validateMessage } = require("./Offer/Message");
+const { validateFavorite } = require("./Favorite/Favorite");
 
 module.exports = {
+  validateFavorite,
   validateTradeType,
   validateUserSignIn,
   validateUserSignUp,

@@ -11,8 +11,10 @@ const { Order } = require("./Order/Order");
 const { Product } = require("./Product/Product");
 const { Offer } = require("./Offer/Offer");
 const { Message } = require("./Offer/Message");
+const { Favorite } = require("./Favorite/Favorite");
 
 module.exports = {
+  Favorite,
   Product,
   TradeType,
   User,

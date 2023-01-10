@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardHeader from "./CardHeader";
 import CardBody from "./CardBody";
 import CardEdit from "./CardEdit";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import noImage from "../../assets/images/no-image.svg";
 import { Link, useLocation } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
+import { MdFavorite } from "react-icons/md";
+import {
+  addFavorite,
+  deleteFavorite,
+} from "../../Pages/User/Products/productSlice";
 
 const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
   const { userData } = useSelector((state) => state.login);
+
+  const dispatch = useDispatch();
+
   const location = useLocation();
   const {
     _id,
@@ -85,18 +93,51 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
     );
   }
   return (
-    <Link
-      to={`/products/${_id}`}
-      className={`w-full shadow-2xl rounded-xl block h-full bg-white border-[1px] border-[#01c2cc]`}
+    <div
+      className={`w-full relative shadow-2xl rounded-xl block h-full bg-white border-[1px] border-[#01c2cc]`}
     >
-      <div className="text-sm w-full h-full flex flex-col rounded-xl">
+      {logged && (
+        <button
+          className="absolute top-0 right-2 z-6"
+          onClick={() => {
+            if (product?.favorites.includes(userData.user._id)) {
+              dispatch(
+                deleteFavorite({
+                  productId: product._id,
+                  userId: userData.user._id,
+                })
+              );
+            } else {
+              dispatch(
+                addFavorite({
+                  productId: product._id,
+                  userId: userData.user._id,
+                })
+              );
+            }
+          }}
+        >
+          <MdFavorite
+            size={24}
+            className={`${
+              product?.favorites.includes(userData.user._id)
+                ? "fill-alotrade"
+                : "fill-slate-300"
+            }`}
+          />
+        </button>
+      )}
+      <Link
+        to={`/products/${_id}`}
+        className="text-sm w-full h-full flex flex-col rounded-xl"
+      >
         <p className="pl-2 border-b my-1 flex items-center text-neutral-500 text-sm">
           <IoLocationOutline className="" />
           <span className="text-[10px] md:text-[14px] ml-2">
             {region ? region?.name : "Respublika bo'ylab"}
           </span>
         </p>
-        <div className="flex  items-center justify-center bg-white rounded-t-xl">
+        <div className="flex relative items-center justify-center bg-white rounded-t-xl">
           <img
             src={images[0] ? images[0] : noImage}
             className="rounded object-contain h-[150px] md:h-[200px]"
@@ -121,8 +162,8 @@ const ProductCard = ({ product, editHandler, deleteHandler, logged }) => {
           description={description}
           currency={currency}
         />
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

@@ -137,6 +137,16 @@ const signSlice = createSlice({
     clearError: (state) => {
       state.error = null;
     },
+    addFavoriteToUser: (state, { payload: { product } }) => {
+      if (state.userData.user.favorite) {
+        state.userData.user.favorite = [
+          ...state.userData.user.favorite,
+          product._id,
+        ];
+      } else {
+        state.userData.user.favorite = [product._id];
+      }
+    },
   },
   extraReducers: {
     [signUpUser.pending]: (state) => {
@@ -236,5 +246,5 @@ const signSlice = createSlice({
   },
 });
 
-export const { clearError, logOut } = signSlice.actions;
+export const { clearError, logOut, addFavoriteToUser } = signSlice.actions;
 export default signSlice.reducer;

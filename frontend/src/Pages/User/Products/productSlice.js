@@ -3,6 +3,8 @@ import Api from "../../../Config/Api";
 import { universalToast } from "../../../Components/ToastMessages/ToastMessages";
 import { findIndex } from "lodash";
 import { useTranslation as t } from "react-i18next";
+import store from "../../../Config/store";
+import { addFavoriteToUser } from "../../Sign/signSlice";
 
 export const createProduct = createAsyncThunk(
   "products/createProduct",
@@ -104,8 +106,43 @@ export const deleteProduct = createAsyncThunk(
   "products/deleteProduct",
   async (body = {}, { rejectWithValue }) => {
     try {
-      console.log("work");
       const { data } = await Api.post("/product/delete", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const addFavorite = createAsyncThunk(
+  "products/addFavorites",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/favorite/create", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const getFavorites = createAsyncThunk(
+  "products/getFavorites",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/favorite/get", body);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+export const deleteFavorite = createAsyncThunk(
+  "products/deleteFavorite",
+  async (body = {}, { rejectWithValue }) => {
+    try {
+      const { data } = await Api.post("/favorite/delete", body);
       return data;
     } catch (error) {
       return rejectWithValue(error);
@@ -117,6 +154,7 @@ const productSlice = createSlice({
   name: "products",
   initialState: {
     products: [],
+    favorites: [],
     product: null,
     loading: false,
     error: null,
@@ -220,6 +258,53 @@ const productSlice = createSlice({
     [getProductByOffer.rejected]: (state, { payload }) => {
       state.loading = false;
       state.error = payload;
+      universalToast(payload, "error");
+    },
+    [addFavorite.pending]: (state) => {
+      state.loading = true;
+    },
+    [addFavorite.fulfilled]: (state, { payload: { userId, productId } }) => {
+      state.loading = false;
+      state.products = [...state.products].map((product) => {
+        if (product._id === productId) {
+          product.favorites = product.favorites
+            ? [...product.favorites, userId]
+            : [userId];
+        }
+        return product;
+      });
+    },
+    [addFavorite.rejected]: (state, { payload }) => {
+      state.loading = false;
+      universalToast(payload, "error");
+    },
+    [getFavorites.pending]: (state) => {
+      state.loading = true;
+    },
+    [getFavorites.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.products = payload;
+    },
+    [getFavorites.rejected]: (state, { payload }) => {
+      state.loading = false;
+      universalToast(payload, "error");
+    },
+    [deleteFavorite.pending]: (state) => {
+      state.loading = true;
+    },
+    [deleteFavorite.fulfilled]: (state, { payload: { userId, productId } }) => {
+      state.loading = false;
+      state.products = [...state.products].map((product) => {
+        if (product._id === productId) {
+          product.favorites = [...product.favorites].filter(
+            (fav) => fav !== userId
+          );
+        }
+        return product;
+      });
+    },
+    [deleteFavorite.rejected]: (state, { payload }) => {
+      state.loading = false;
       universalToast(payload, "error");
     },
   },

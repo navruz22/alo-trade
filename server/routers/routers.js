@@ -12,4 +12,5 @@ module.exports.routers = (app) => {
   app.use("/api/order", require("./order/router"));
   app.use("/api/product", require("./product/router"));
   app.use("/api/offer", require("./offer/router"));
+  app.use("/api/favorite", require("./favorite/router"));
 };

@@ -4,13 +4,14 @@ import {
   IoKeyOutline,
   IoPersonCircleOutline,
 } from "react-icons/io5";
-import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { MdFavorite, MdOutlineProductionQuantityLimits } from "react-icons/md";
 import EditUser from "../../../Components/Profile/EditUser";
 import { Navigate } from "react-router-dom";
 import EditPassword from "../../../Components/Profile/EditPassword";
 import EditOrganization from "../../../Components/Profile/EditOrganization";
 import MyProducts from "../../../Components/Profile/MyProducts";
 import MyOrders from "../../../Components/Profile/MyOrders";
+import Favorites from "./Favorites";
 
 export const menuUser = [
   {
@@ -29,6 +30,12 @@ export const menuUser = [
     path: "/profile/password",
     title: "Пароль",
     icon: <IoKeyOutline size={26} color={"#444"} />,
+    class: "rounded-none md:rounded",
+  },
+  {
+    path: "/profile/favorites",
+    title: "Избранные",
+    icon: <MdFavorite size={26} color={"#444"} />,
     class: "rounded-r-xl md:rounded",
   },
 ];
@@ -62,6 +69,12 @@ export const menuOrganization = [
     path: "/profile/password",
     title: "Пароль",
     icon: <IoKeyOutline size={26} color={"#444"} />,
+    class: "rounded-none md:rounded",
+  },
+  {
+    path: "/profile/favorites",
+    title: "Избранные",
+    icon: <MdFavorite size={26} color={"#444"} />,
     class: "rounded-r-xl md:rounded",
   },
 ];
@@ -86,6 +99,10 @@ export const routes = [
   {
     path: "/password",
     element: <EditPassword />,
+  },
+  {
+    path: "/favorites",
+    element: <Favorites />,
   },
   {
     path: "*",

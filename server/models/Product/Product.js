@@ -21,6 +21,7 @@ const Product = new Schema(
     user: { type: Schema.Types.ObjectId, ref: "User" },
     // offers: [{ type: Schema.Types.ObjectId, ref: "Offer" }],
     position: { type: String, required: true, default: "active" },
+    favorites: [{ type: Schema.Types.ObjectId, ref: "User" }],
     isArchive: { type: Boolean, default: false },
   },
   {
@@ -43,6 +44,7 @@ const validateProduct = (product) => {
     minPrice: Joi.number(),
     maxPrice: Joi.number(),
     images: Joi.array(),
+    favorites: Joi.array(),
   });
 
   return schema.validate(product);

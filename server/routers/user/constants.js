@@ -70,6 +70,7 @@ const getUserById = async (id) =>
         },
         organization: user.organization,
         type: user.organization ? "organization" : "user",
+        favorites: user?.favorites || [],
       };
     });
 

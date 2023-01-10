@@ -11,6 +11,7 @@ const user = new Schema(
     organization: { type: Schema.Types.ObjectId, ref: "Organization" },
     region: { type: Schema.Types.ObjectId, ref: "Region" },
     district: { type: Schema.Types.ObjectId, ref: "District" },
+    favorites: [{ type: Schema.Types.ObjectId, ref: "Product" }],
     isArchive: { type: Boolean, default: false },
   },
   {
@@ -28,6 +29,7 @@ function validateUserSignUp(user) {
     password: Joi.string().required(),
     region: Joi.string().required(),
     district: Joi.string().required(),
+    favorites: Joi.array(),
   });
 
   return schema.validate(user);
